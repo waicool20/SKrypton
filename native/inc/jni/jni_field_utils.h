@@ -69,16 +69,4 @@ jdouble GetStaticFieldValue<jdouble>(JNIEnv* env, jobject obj, string fieldName)
 jobject GetObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type);
 jobject GetStaticObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type);
 
-
-template<typename T>
-T* PointerFromCPointer(JNIEnv* env, jobject obj) {
-    auto CPointer = GetObjectFieldValue(env, obj, "handle", "com.waicool20.skrypton.CPointer");
-    return (T*) GetFieldValue<jlong>(env, CPointer, "handle");
-}
-
-template<typename T>
-T DeleteCPointerReference(JNIEnv* env, jobject obj) {
-    delete PointerFromCPointer<T>(env, obj);
-}
-
 #endif //SKRYPTONNATIVE_JNI_UTIL_H
