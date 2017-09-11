@@ -19,7 +19,7 @@ include(UseJava)
 
 file(GLOB_RECURSE SOURCE_FILES "src/*.c" "src/*.cpp")
 file(GLOB_RECURSE INC_FILES "inc/*.h")
-include_directories(inc inc/jni ${JNI_INCLUDE_DIRS})
+include_directories(inc inc/jni inc/jni/headers ${JNI_INCLUDE_DIRS})
 
 add_library(${CMAKE_PROJECT_NAME} SHARED ${SOURCE_FILES} ${INC_FILES} ${RESOURCES})
 add_dependencies(${CMAKE_PROJECT_NAME} JNI_Headers)
@@ -46,7 +46,7 @@ set(CLASS_SEARCH_DIR "${PARENT_DIR}/build/classes/main")
 file(GLOB_RECURSE JAVA_CLASSES "${CLASS_SEARCH_DIR}/*.class")
 
 foreach (CLASS ${JAVA_CLASSES})
-    if (NOT ${CLASS} MATCHES ".*\\$.*" AND ${CLASS} MATCHES "jni/.*")
+    if (NOT ${CLASS} MATCHES ".*\\$.*" AND ${CLASS} MATCHES "jni/objects/.*")
         STRING(REGEX REPLACE "${CLASS_SEARCH_DIR}/" "" CLASS ${CLASS})
         STRING(REGEX REPLACE "/" "." CLASS ${CLASS})
         STRING(REGEX REPLACE ".class" "" CLASS ${CLASS})
@@ -55,10 +55,14 @@ foreach (CLASS ${JAVA_CLASSES})
     endif ()
 endforeach ()
 
+if (NOT JNI_CLASSES)
+    message(FATAL_ERROR "Could not find any suitable Java classes for header generation")
+endif ()
+
 add_custom_target(
         Clean_JNI_Headers
-        COMMAND ${CMAKE_COMMAND} -E remove_directory "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni"
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni"
+        COMMAND ${CMAKE_COMMAND} -E remove_directory "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers"
 )
 
 create_javah(
@@ -66,5 +70,5 @@ create_javah(
         DEPENDS Clean_JNI_Headers
         CLASSES ${JNI_CLASSES}
         CLASSPATH ${CLASS_SEARCH_DIR}
-        OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/inc/jni
+        OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers
 )
