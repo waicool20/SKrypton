@@ -25,11 +25,6 @@ bool CheckExceptions(JNIEnv* env, bool throwToJava, function<void(JNIEnv* env, j
 
 //</editor-fold>
 
-void CheckObjNull(JNIEnv* env, const jobject &obj) {
-    if (!env) { throw std::runtime_error("JNIEnv is null"); }
-    if (!obj) { throw std::runtime_error("jobject is null"); }
-}
-
 jfieldID GetFieldID(JNIEnv* env, jobject obj, string fieldName, string type) {
     auto clazz = env->GetObjectClass(obj);
     return env->GetFieldID(clazz, fieldName.c_str(), type.c_str());
@@ -38,7 +33,6 @@ jfieldID GetFieldID(JNIEnv* env, jobject obj, string fieldName, string type) {
 //<editor-fold desc="Get(Static)ObjectFieldValue helper functions implementations">
 
 jobject GetObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type) {
-    CheckObjNull(env, obj);
     replace(type.begin(), type.end(), '.', '/');
     type.insert(0, "L");
     type.push_back(';');
@@ -46,7 +40,6 @@ jobject GetObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string t
 }
 
 optional<jobject> GetStaticObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type) {
-    CheckObjNull(env, obj);
     jclass clazz = env->GetObjectClass(obj);
     replace(type.begin(), type.end(), '.', '/');
     type.insert(0, "L");
