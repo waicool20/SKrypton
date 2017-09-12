@@ -24,12 +24,22 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonApp_initialize_1N(JNIEnv* 
 }
 
 jint Java_com_waicool20_skrypton_jni_objects_SKryptonApp_exec_1N(JNIEnv* env, jobject obj) {
-    if (app == nullptr) { app = PointerFromCPointer<SKyrptonApp>(env, obj); }
+    if (app == nullptr) {
+        auto opt = PointerFromCPointer<SKyrptonApp>(env, obj);
+        if (opt) {
+            app = opt.value();
+        } else return EXIT_FAILURE;
+    }
     return app->exec();
 }
 
 void Java_com_waicool20_skrypton_jni_objects_SKryptonApp_destroy_1N(JNIEnv* env, jobject obj) {
-    if (app == nullptr) { app = PointerFromCPointer<SKyrptonApp>(env, obj); }
+    if (app == nullptr) {
+        auto opt = PointerFromCPointer<SKyrptonApp>(env, obj);
+        if (opt) {
+            app = opt.value();
+        } else return;
+    }
     app->quit();
 }
 

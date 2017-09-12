@@ -4,7 +4,14 @@
 #include <headers.h>
 #include <jni.h>
 
-void CheckExceptions(JNIEnv* env);
+//<editor-fold desc="Exception handlers">
+
+bool CheckExceptions(JNIEnv* env);
+bool CheckExceptions(JNIEnv* env, bool throwToJava);
+bool CheckExceptions(JNIEnv* env, bool throwToJava, function<void(JNIEnv* env, jthrowable exception)> handler);
+
+//</editor-fold>
+
 void CheckObjNull(JNIEnv* env, const jobject &obj);
 jfieldID GetFieldID(JNIEnv* env, jobject obj, string fieldName, string type);
 
@@ -129,7 +136,7 @@ inline jdouble GetStaticFieldValue<jdouble>(JNIEnv* env, jobject obj, string fie
 //<editor-fold desc="Get(Static)ObjectFieldValue helper functions">
 
 jobject GetObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type);
-jobject GetStaticObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type);
+optional<jobject> GetStaticObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type);
 
 //</editor-fold>
 
