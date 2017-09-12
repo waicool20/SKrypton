@@ -16,6 +16,7 @@ object SKryptonApp : NativeInterface() {
 
     fun initalize(args: Array<String> = emptyArray()): SKryptonApp {
         handle = CPointer(initialize_N(args))
+        println("Initialized at $handle")
         return this
     }
 
