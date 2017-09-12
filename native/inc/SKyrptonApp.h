@@ -5,9 +5,10 @@
 #include <jni_utils.h>
 #include <QApplication>
 
-class SKyrptonApp: public QApplication {
+class SKyrptonApp : public QApplication {
 public:
     SKyrptonApp(int &argc, char** argv);
+    using QApplication::exec;
 };
 
 
