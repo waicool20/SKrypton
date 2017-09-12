@@ -4,69 +4,133 @@
 #include <headers.h>
 #include <jni.h>
 
+void CheckExceptions(JNIEnv* env);
 void CheckObjNull(JNIEnv* env, const jobject &obj);
+jfieldID GetFieldID(JNIEnv* env, jobject obj, string fieldName, string type);
 
-/* GetFieldValue helper template functions */
+//<editor-fold desc="GetFieldValue helper template functions">
 
 template<typename T>
-T GetFieldValue(JNIEnv* env, jobject obj, string fieldName) = delete;
+inline T GetFieldValue(JNIEnv* env, jobject obj, string fieldName) = delete;
 
 template<>
-jboolean GetFieldValue<jboolean>(JNIEnv* env, jobject obj, string fieldName);
+inline jboolean GetFieldValue<jboolean>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    return env->GetBooleanField(obj, GetFieldID(env, obj, fieldName, "Z"));
+}
 
 template<>
-jbyte GetFieldValue<jbyte>(JNIEnv* env, jobject obj, string fieldName);
+inline jbyte GetFieldValue<jbyte>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    return env->GetByteField(obj, GetFieldID(env, obj, fieldName.c_str(), "B"));
+}
 
 template<>
-jchar GetFieldValue<jchar>(JNIEnv* env, jobject obj, string fieldName);
+inline jchar GetFieldValue<jchar>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    return env->GetCharField(obj, GetFieldID(env, obj, fieldName.c_str(), "C"));
+}
 
 template<>
-jshort GetFieldValue<jshort>(JNIEnv* env, jobject obj, string fieldName);
+inline jshort GetFieldValue<jshort>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    return env->GetShortField(obj, GetFieldID(env, obj, fieldName.c_str(), "S"));
+}
 
 template<>
-jint GetFieldValue<jint>(JNIEnv* env, jobject obj, string fieldName);
+inline jint GetFieldValue<jint>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    return env->GetIntField(obj, GetFieldID(env, obj, fieldName.c_str(), "I"));
+}
 
 template<>
-jlong GetFieldValue<jlong>(JNIEnv* env, jobject obj, string fieldName);
+inline jlong GetFieldValue<jlong>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    return env->GetLongField(obj, GetFieldID(env, obj, fieldName.c_str(), "J"));
+}
 
 template<>
-jfloat GetFieldValue<jfloat>(JNIEnv* env, jobject obj, string fieldName);
+inline jfloat GetFieldValue<jfloat>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    return env->GetFloatField(obj, GetFieldID(env, obj, fieldName.c_str(), "F"));
+}
 
 template<>
-jdouble GetFieldValue<jdouble>(JNIEnv* env, jobject obj, string fieldName);
+inline jdouble GetFieldValue<jdouble>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    return env->GetDoubleField(obj, GetFieldID(env, obj, fieldName.c_str(), "D"));
+}
 
-/* GetStaticFieldValue helper template functions */
+//</editor-fold>
+
+//<editor-fold desc="GetStaticFieldValue helper template functions">
 
 template<typename T>
 T GetStaticFieldValue(JNIEnv* env, jobject obj, string fieldName) = delete;
 
 template<>
-jboolean GetStaticFieldValue<jboolean>(JNIEnv* env, jobject obj, string fieldName);
+inline jboolean GetStaticFieldValue<jboolean>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    jclass clazz = env->GetObjectClass(obj);
+    return env->GetStaticBooleanField(clazz, env->GetStaticFieldID(clazz, fieldName.c_str(), "Z"));
+}
 
 template<>
-jbyte GetStaticFieldValue<jbyte>(JNIEnv* env, jobject obj, string fieldName);
+inline jbyte GetStaticFieldValue<jbyte>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    jclass clazz = env->GetObjectClass(obj);
+    return env->GetStaticByteField(clazz, env->GetStaticFieldID(clazz, fieldName.c_str(), "B"));
+}
 
 template<>
-jchar GetStaticFieldValue<jchar>(JNIEnv* env, jobject obj, string fieldName);
+inline jchar GetStaticFieldValue<jchar>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    jclass clazz = env->GetObjectClass(obj);
+    return env->GetStaticCharField(clazz, env->GetStaticFieldID(clazz, fieldName.c_str(), "C"));
+}
 
 template<>
-jshort GetStaticFieldValue<jshort>(JNIEnv* env, jobject obj, string fieldName);
+inline jshort GetStaticFieldValue<jshort>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    jclass clazz = env->GetObjectClass(obj);
+    return env->GetStaticShortField(clazz, env->GetStaticFieldID(clazz, fieldName.c_str(), "S"));
+}
 
 template<>
-jint GetStaticFieldValue<jint>(JNIEnv* env, jobject obj, string fieldName);
+inline jint GetStaticFieldValue<jint>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    jclass clazz = env->GetObjectClass(obj);
+    return env->GetStaticIntField(clazz, env->GetStaticFieldID(clazz, fieldName.c_str(), "I"));
+}
 
 template<>
-jlong GetStaticFieldValue<jlong>(JNIEnv* env, jobject obj, string fieldName);
+inline jlong GetStaticFieldValue<jlong>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    jclass clazz = env->GetObjectClass(obj);
+    return env->GetStaticLongField(clazz, env->GetStaticFieldID(clazz, fieldName.c_str(), "J"));
+}
 
 template<>
-jfloat GetStaticFieldValue<jfloat>(JNIEnv* env, jobject obj, string fieldName);
+inline jfloat GetStaticFieldValue<jfloat>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    jclass clazz = env->GetObjectClass(obj);
+    return env->GetStaticFloatField(clazz, env->GetStaticFieldID(clazz, fieldName.c_str(), "F"));
+}
 
 template<>
-jdouble GetStaticFieldValue<jdouble>(JNIEnv* env, jobject obj, string fieldName);
+inline jdouble GetStaticFieldValue<jdouble>(JNIEnv* env, jobject obj, string fieldName) {
+    CheckObjNull(env, obj);
+    jclass clazz = env->GetObjectClass(obj);
+    return env->GetStaticDoubleField(clazz, env->GetStaticFieldID(clazz, fieldName.c_str(), "D"));
+}
 
-/* Get(Static)ObjectFieldValue helper functions */
+//</editor-fold>
+
+//<editor-fold desc="Get(Static)ObjectFieldValue helper functions">
 
 jobject GetObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type);
 jobject GetStaticObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type);
+
+//</editor-fold>
 
 #endif //SKRYPTONNATIVE_JNI_UTIL_H
