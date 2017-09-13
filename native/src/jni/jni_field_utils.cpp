@@ -1,5 +1,23 @@
 #include "jni_field_utils.h"
 
+namespace PrivateFieldUtils {
+    bool HandleFieldAccessException(JNIEnv* env, string& fieldName) {
+        if (CheckExceptions(env)) {
+            cerr << "Error while accessing field: " + fieldName << endl;
+            return true;
+        }
+        return false;
+    }
+
+    bool HandleStaticFieldAccessException(JNIEnv* env, string& fieldName) {
+        if (CheckExceptions(env)) {
+            cerr << "Error while accessing static field: " + fieldName << endl;
+            return true;
+        }
+        return false;
+    }
+}
+
 //<editor-fold desc="Exception handler implementation">
 
 bool CheckExceptions(JNIEnv* env) {
@@ -8,7 +26,7 @@ bool CheckExceptions(JNIEnv* env) {
 
 bool CheckExceptions(JNIEnv* env, bool throwToJava) {
     return CheckExceptions(env, throwToJava, [](JNIEnv* l_env, jthrowable exception) {
-        cout << "Exception occurred during JNI Operation" << endl;
+        cerr << "Exception occurred during JNI Operation" << endl;
         l_env->ExceptionDescribe();
     });
 }
@@ -25,18 +43,45 @@ bool CheckExceptions(JNIEnv* env, bool throwToJava, function<void(JNIEnv* env, j
 
 //</editor-fold>
 
-jfieldID GetFieldID(JNIEnv* env, jobject obj, string fieldName, string type) {
+optional<jfieldID> GetFieldID(JNIEnv* env, jobject obj, string fieldName, string type) {
     auto clazz = env->GetObjectClass(obj);
-    return env->GetFieldID(clazz, fieldName.c_str(), type.c_str());
+    auto id = env->GetFieldID(clazz, fieldName.c_str(), type.c_str());
+    if (CheckExceptions(env)) {
+        cerr << "Error while getting fieldID for field: " + fieldName + " with type: " + type << endl;
+        return {};
+    }
+    return { id };
+}
+
+optional<jfieldID> GetStaticFieldID(JNIEnv* env, jobject obj, string fieldName, string type) {
+    return GetStaticFieldID(env, env->GetObjectClass(obj), fieldName, type);
+}
+
+optional<jfieldID> GetStaticFieldID(JNIEnv* env, jclass clazz, string fieldName, string type) {
+    auto id = env->GetStaticFieldID(clazz, fieldName.c_str(), type.c_str());
+    if (CheckExceptions(env)) {
+        cerr << "Error while getting static fieldID for field: " + fieldName + " with type: " + type << endl;
+        return {};
+    }
+    return { id };
 }
 
 //<editor-fold desc="Get(Static)ObjectFieldValue helper functions implementations">
 
-jobject GetObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type) {
+optional<jobject> GetObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type) {
     replace(type.begin(), type.end(), '.', '/');
     type.insert(0, "L");
     type.push_back(';');
-    return env->GetObjectField(obj, GetFieldID(env, obj, fieldName.c_str(), type.c_str()));
+
+    auto field = GetFieldID(env, obj, fieldName.c_str(), type.c_str());
+    if (field) return {};
+
+    auto value = env->GetObjectField(obj, field.value());
+    if (CheckExceptions(env)) {
+        cerr << "Error while trying to access field: " + fieldName + " with type: " + type << endl;
+        return {};
+    }
+    return { value };
 }
 
 optional<jobject> GetStaticObjectFieldValue(JNIEnv* env, jobject obj, string fieldName, string type) {
@@ -45,15 +90,17 @@ optional<jobject> GetStaticObjectFieldValue(JNIEnv* env, jobject obj, string fie
     type.insert(0, "L");
     type.push_back(';');
 
-    auto errorHandler = [&](JNIEnv* l_env, jthrowable exception) {
-        cerr << "Error while trying to access field: " + fieldName + " with type: " + type << endl;
-    };
-
     auto sField = env->GetStaticFieldID(clazz, fieldName.c_str(), type.c_str());
-    if (CheckExceptions(env, false, errorHandler)) return {};
+    if (CheckExceptions(env)) {
+        cerr << "Error while getting static fieldID for field: " + fieldName + " with type: " + type << endl;
+        return {};
+    }
 
     auto value = (env->GetStaticObjectField(clazz, sField));
-    if (CheckExceptions(env, false, errorHandler)) return {};
+    if (CheckExceptions(env)) {
+        cerr << "Error while trying to access static field: " + fieldName + " with type: " + type << endl;
+        return {};
+    }
     return { value };
 }
 

@@ -30,7 +30,9 @@ jint Java_com_waicool20_skrypton_jni_objects_SKryptonApp_exec_1N(JNIEnv* env, jo
             app = opt.value();
         } else return EXIT_FAILURE;
     }
-    return app->exec();
+    auto ret = app->exec();
+    delete app;
+    return ret;
 }
 
 void Java_com_waicool20_skrypton_jni_objects_SKryptonApp_destroy_1N(JNIEnv* env, jobject obj) {
