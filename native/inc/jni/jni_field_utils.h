@@ -29,7 +29,7 @@ inline optional<T> GetFieldValue(JNIEnv* env, jobject obj, string fieldName) = d
 template<>
 inline optional<jboolean> GetFieldValue<jboolean>(JNIEnv* env, jobject obj, string fieldName) {
     auto fieldID = GetFieldID(env, obj, fieldName, "Z");
-    if (fieldID) return {};
+    if (!fieldID) return {};
     auto value = env->GetBooleanField(obj, fieldID.value());
     if (PrivateFieldUtils::HandleFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -38,7 +38,7 @@ inline optional<jboolean> GetFieldValue<jboolean>(JNIEnv* env, jobject obj, stri
 template<>
 inline optional<jbyte> GetFieldValue<jbyte>(JNIEnv* env, jobject obj, string fieldName) {
     auto fieldID = GetFieldID(env, obj, fieldName, "B");
-    if (fieldID) return {};
+    if (!fieldID) return {};
     auto value = env->GetByteField(obj, fieldID.value());
     if (PrivateFieldUtils::HandleFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -47,7 +47,7 @@ inline optional<jbyte> GetFieldValue<jbyte>(JNIEnv* env, jobject obj, string fie
 template<>
 inline optional<jchar> GetFieldValue<jchar>(JNIEnv* env, jobject obj, string fieldName) {
     auto fieldID = GetFieldID(env, obj, fieldName, "C");
-    if (fieldID) return {};
+    if (!fieldID) return {};
     auto value = env->GetCharField(obj, fieldID.value());
     if (PrivateFieldUtils::HandleFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -56,7 +56,7 @@ inline optional<jchar> GetFieldValue<jchar>(JNIEnv* env, jobject obj, string fie
 template<>
 inline optional<jshort> GetFieldValue<jshort>(JNIEnv* env, jobject obj, string fieldName) {
     auto fieldID = GetFieldID(env, obj, fieldName, "S");
-    if (fieldID) return {};
+    if (!fieldID) return {};
     auto value = env->GetShortField(obj, fieldID.value());
     if (PrivateFieldUtils::HandleFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -65,7 +65,7 @@ inline optional<jshort> GetFieldValue<jshort>(JNIEnv* env, jobject obj, string f
 template<>
 inline optional<jint> GetFieldValue<jint>(JNIEnv* env, jobject obj, string fieldName) {
     auto fieldID = GetFieldID(env, obj, fieldName, "I");
-    if (fieldID) return {};
+    if (!fieldID) return {};
     auto value = env->GetIntField(obj, fieldID.value());
     if (PrivateFieldUtils::HandleFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -74,7 +74,7 @@ inline optional<jint> GetFieldValue<jint>(JNIEnv* env, jobject obj, string field
 template<>
 inline optional<jlong> GetFieldValue<jlong>(JNIEnv* env, jobject obj, string fieldName) {
     auto fieldID = GetFieldID(env, obj, fieldName, "J");
-    if (fieldID) return {};
+    if (!fieldID) return {};
     auto value = env->GetLongField(obj, fieldID.value());
     if (PrivateFieldUtils::HandleFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -83,7 +83,7 @@ inline optional<jlong> GetFieldValue<jlong>(JNIEnv* env, jobject obj, string fie
 template<>
 inline optional<jfloat> GetFieldValue<jfloat>(JNIEnv* env, jobject obj, string fieldName) {
     auto fieldID = GetFieldID(env, obj, fieldName, "F");
-    if (fieldID) return {};
+    if (!fieldID) return {};
     auto value = env->GetFloatField(obj, fieldID.value());
     if (PrivateFieldUtils::HandleFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -92,7 +92,7 @@ inline optional<jfloat> GetFieldValue<jfloat>(JNIEnv* env, jobject obj, string f
 template<>
 inline optional<jdouble> GetFieldValue<jdouble>(JNIEnv* env, jobject obj, string fieldName) {
     auto fieldID = GetFieldID(env, obj, fieldName, "D");
-    if (fieldID) return {};
+    if (!fieldID) return {};
     auto value = env->GetDoubleField(obj, fieldID.value());
     if (PrivateFieldUtils::HandleFieldAccessException(env, fieldName)) return {};
     return { value };

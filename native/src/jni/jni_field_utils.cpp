@@ -74,7 +74,7 @@ optional<jobject> GetObjectFieldValue(JNIEnv* env, jobject obj, string fieldName
     type.push_back(';');
 
     auto field = GetFieldID(env, obj, fieldName.c_str(), type.c_str());
-    if (field) return {};
+    if (!field) return {};
 
     auto value = env->GetObjectField(obj, field.value());
     if (CheckExceptions(env)) {
