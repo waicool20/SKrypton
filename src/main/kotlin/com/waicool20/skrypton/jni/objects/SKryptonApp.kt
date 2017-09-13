@@ -16,17 +16,16 @@ object SKryptonApp : NativeInterface() {
 
     fun initalize(args: Array<String> = emptyArray()): SKryptonApp {
         handle = CPointer(initialize_N(args))
-        println("Initialized at $handle")
         return this
     }
 
     fun exec() = exec_N()
 
     override fun close() {
-        destroy_N()
+        dispose_N()
     }
 
     private external fun initialize_N(args: Array<String>): Long
     private external fun exec_N(): Int
-    private external fun destroy_N()
+    private external fun dispose_N()
 }

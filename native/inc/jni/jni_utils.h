@@ -3,5 +3,7 @@
 
 #include <jni_field_utils.h>
 #include <jni_pointer_utils.h>
+#include <jni_string_utils.h>
+
 
 #endif //SKRYPTONNATIVE_JNI_UTILS_H_H

@@ -25,10 +25,10 @@ JNIEXPORT jint JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonApp_exec_
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonApp
- * Method:    destroy_N
+ * Method:    dispose_N
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonApp_destroy_1N
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonApp_dispose_1N
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus

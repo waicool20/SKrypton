@@ -8,14 +8,8 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonApp_initialize_1N(JNIEnv* 
     argc = env->GetArrayLength(jargs);
     for (auto i = 0; i < argc; i++) {
         auto jstrObj = (jstring) env->GetObjectArrayElement(jargs, i);
-        char* c = new char[env->GetStringLength(jstrObj)];
-        auto charBuffer = env->GetStringUTFChars(jstrObj, 0);
-
-        strcpy(c, charBuffer);
-        argv.push_back(c);
-
-        env->ReleaseStringUTFChars(jstrObj, charBuffer);
-        env->DeleteLocalRef(jstrObj);
+        auto string = StringFromJstring(env, jstrObj);
+        argv.push_back(string.data());
     }
     argv.push_back(nullptr);
 
@@ -35,7 +29,7 @@ jint Java_com_waicool20_skrypton_jni_objects_SKryptonApp_exec_1N(JNIEnv* env, jo
     return ret;
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonApp_destroy_1N(JNIEnv* env, jobject obj) {
+void Java_com_waicool20_skrypton_jni_objects_SKryptonApp_dispose_1N(JNIEnv* env, jobject obj) {
     if (app == nullptr) {
         auto opt = PointerFromCPointer<SKyrptonApp>(env, obj);
         if (opt) {
