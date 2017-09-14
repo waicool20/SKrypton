@@ -65,9 +65,15 @@ add_custom_target(
         COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers"
 )
 
+if (UNIX)
+    set(GRADLE "${PARENT_DIR}/gradlew")
+else ()
+    set(GRADLE "${PARENT_DIR}/gradlew.bat")
+endif ()
+
 add_custom_target(
         CopyKotlinStdLib
-        COMMAND "${PARENT_DIR}/gradlew" native:copyKotlinStdLib
+        COMMAND "${GRADLE}" native:copyKotlinStdLib
         WORKING_DIRECTORY "${PARENT_DIR}"
 )
 
