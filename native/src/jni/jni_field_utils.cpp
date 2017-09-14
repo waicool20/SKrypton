@@ -1,4 +1,4 @@
-#include "jni_field_utils.h"
+#include <jni_utils.h>
 
 namespace PrivateFieldUtils {
     bool HandleFieldAccessException(JNIEnv* env, string& fieldName) {
@@ -17,31 +17,6 @@ namespace PrivateFieldUtils {
         return false;
     }
 }
-
-//<editor-fold desc="Exception handler implementation">
-
-bool CheckExceptions(JNIEnv* env) {
-    return CheckExceptions(env, false);
-}
-
-bool CheckExceptions(JNIEnv* env, bool throwToJava) {
-    return CheckExceptions(env, throwToJava, [](JNIEnv* l_env, jthrowable exception) {
-        cerr << "Exception occurred during JNI Operation" << endl;
-        l_env->ExceptionDescribe();
-    });
-}
-
-bool CheckExceptions(JNIEnv* env, bool throwToJava, function<void(JNIEnv* env, jthrowable exception)> handler) {
-    if (auto exception = env->ExceptionOccurred()) {
-        env->ExceptionClear();
-        handler(env, exception);
-        if (throwToJava) env->Throw(exception);
-        return true;
-    }
-    return false;
-}
-
-//</editor-fold>
 
 optional<jfieldID> GetFieldID(JNIEnv* env, jobject obj, string fieldName, string type) {
     auto clazz = env->GetObjectClass(obj);

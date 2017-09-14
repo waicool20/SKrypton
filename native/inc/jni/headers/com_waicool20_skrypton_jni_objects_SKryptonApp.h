@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonApp
+ * Method:    runOnMainThread_N
+ * Signature: (Ljava/lang/Runnable;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonApp_runOnMainThread_1N
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonApp
  * Method:    initialize_N
  * Signature: ([Ljava/lang/String;)J
  */

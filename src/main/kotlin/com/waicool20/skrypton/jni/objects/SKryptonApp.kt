@@ -22,11 +22,13 @@ object SKryptonApp : NativeInterface() {
     }
 
     fun exec() = exec_N()
+    fun runOnMainThread(action: Runnable) = runOnMainThread_N(action)
 
     override fun close() {
         dispose_N()
     }
 
+    private external fun runOnMainThread_N(action: Runnable)
     private external fun initialize_N(args: Array<String>): Long
     private external fun exec_N(): Int
     private external fun dispose_N()

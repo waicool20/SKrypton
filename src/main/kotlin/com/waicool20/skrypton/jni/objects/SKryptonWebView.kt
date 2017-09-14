@@ -15,5 +15,4 @@ class SKryptonWebView private constructor(override val handle: CPointer) : Nativ
     }
 
     private external fun dispose_N()
-
 }

@@ -10,7 +10,8 @@
 #include <com_waicool20_skrypton_jni_objects_SKryptonWebView.h>
 #include <com_waicool20_skrypton_jni_objects_SKryptonWebView_Factory.h>
 
-class SKryptonWebView : QWebEngineView {
+class SKryptonWebView : public QWebEngineView {
+    Q_OBJECT
 public:
     SKryptonWebView(string& url);
 };

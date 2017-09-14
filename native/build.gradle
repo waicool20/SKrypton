@@ -17,5 +17,5 @@ task makeNativeLibraries(type: Exec) {
     dependsOn refreshCMake
     workingDir cmakeBuildDir
     commandLine 'make'
-    args = ['install']
+    args = ['install', '-j4']
 }

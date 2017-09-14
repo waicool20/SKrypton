@@ -9,3 +9,9 @@ string StringFromJstring(JNIEnv* env, jstring& jstr) {
     return str;
 }
 
+jstring JstringFromString(JNIEnv* env, string& str) {
+    char* data = new char[str.size()];
+    strcpy(data, str.c_str());
+    return env->NewStringUTF(data);
+}
+

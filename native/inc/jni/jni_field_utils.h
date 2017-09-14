@@ -9,14 +9,6 @@ namespace PrivateFieldUtils {
     bool HandleStaticFieldAccessException(JNIEnv* env, string &fieldName);
 }
 
-//<editor-fold desc="Exception handlers">
-
-bool CheckExceptions(JNIEnv* env);
-bool CheckExceptions(JNIEnv* env, bool throwToJava);
-bool CheckExceptions(JNIEnv* env, bool throwToJava, function<void(JNIEnv* env, jthrowable exception)> handler);
-
-//</editor-fold>
-
 optional<jfieldID> GetFieldID(JNIEnv* env, jobject obj, string fieldName, string type);
 optional<jfieldID> GetStaticFieldID(JNIEnv* env, jobject obj, string fieldName, string type);
 optional<jfieldID> GetStaticFieldID(JNIEnv* env, jclass clazz, string fieldName, string type);
