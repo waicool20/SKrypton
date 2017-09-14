@@ -71,11 +71,20 @@ else ()
     set(GRADLE "${PARENT_DIR}/gradlew.bat")
 endif ()
 
-add_custom_target(
-        CopyKotlinStdLib
-        COMMAND "${GRADLE}" native:copyKotlinStdLib
-        WORKING_DIRECTORY "${PARENT_DIR}"
-)
+set(FUNCTION_CLASSES "${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib/kotlin/Function.class")
+foreach (NUM RANGE 22)
+    list(APPEND FUNCTION_CLASSES "${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib/kotlin/jvm/functions/Function${NUM}.class")
+endforeach ()
+
+foreach (FILE ${FUNCTION_CLASSES})
+    if (NOT EXISTS ${FILE})
+        execute_process(
+                COMMAND "${GRADLE}" native:copyKotlinStdLib
+                WORKING_DIRECTORY "${PARENT_DIR}"
+        )
+        break()
+    endif ()
+endforeach ()
 
 if (NOT EXISTS build/kstdlib)
     file(MAKE_DIRECTORY build/kstdlib)
@@ -83,7 +92,7 @@ endif ()
 
 create_javah(
         TARGET JNI_Headers
-        DEPENDS Clean_JNI_Headers CopyKotlinStdLib
+        DEPENDS Clean_JNI_Headers
         CLASSES ${JNI_CLASSES}
         CLASSPATH ${CLASS_SEARCH_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib
         OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers
