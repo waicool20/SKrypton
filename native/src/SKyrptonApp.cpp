@@ -16,20 +16,20 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonApp_initialize_1N(JNIEnv* 
     // Set up Global JVM References
     if (!gJvm) {
         if (env->GetJavaVM(&gJvm) < 0) {
-            ThrowNewError(env, "java.lang.Exception", "Could not set Global JVM Ref");
+            ThrowNewError(env, "Could not set Global JVM Ref");
             return {};
         }
         if (!gClassLoader) {
             auto classLoaderClass = env->FindClass("java/lang/ClassLoader");
             auto method = env->GetStaticMethodID(classLoaderClass, "getSystemClassLoader", "()Ljava/lang/ClassLoader;");
             if (CheckExceptions(env, true)) {
-                cerr << "Error getting method ID for method 'getSystemClassLoader'" << endl;
+                ThrowNewError(env, "Error getting method ID for method 'getSystemClassLoader'");
                 return {};
             }
 
             auto loader = env->CallStaticObjectMethod(classLoaderClass, method);
             if (CheckExceptions(env, true)) {
-                cerr << "Error getting classloader reference" << endl;
+                ThrowNewError(env, "Error getting classloader reference");
                 return {};
             }
             gClassLoader = env->NewGlobalRef(loader);
@@ -76,15 +76,7 @@ SKyrptonApp::SKyrptonApp(int& argc, char** argv) : QApplication(argc, argv) {}
 void SKyrptonApp::runOnMainThread(jobject obj, jobject action) {
     JNIEnv* env = GetLocalJNIEnvRef();
     auto clazz = env->GetObjectClass(action);
-    if (CheckExceptions(env, true)) {
-        cerr << "Class" << endl;
-        return;
-    }
     auto method = env->GetMethodID(clazz, "run", "()V");
-    if (CheckExceptions(env)) {
-        cerr << "Method ID" << endl;
-        return;
-    }
     env->CallVoidMethod(action, method);
     env->DeleteGlobalRef(obj);
     env->DeleteGlobalRef(action);

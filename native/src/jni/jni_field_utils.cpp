@@ -22,7 +22,7 @@ optional<jfieldID> GetFieldID(JNIEnv* env, jobject obj, string fieldName, string
     auto clazz = env->GetObjectClass(obj);
     auto id = env->GetFieldID(clazz, fieldName.c_str(), type.c_str());
     if (CheckExceptions(env)) {
-        cerr << "Error while getting fieldID for field: " + fieldName + " with type: " + type << endl;
+        cerr << LOG_PREFIX + "Error while getting fieldID for field: " + fieldName + " with type: " + type << endl;
         return {};
     }
     return { id };
@@ -35,7 +35,7 @@ optional<jfieldID> GetStaticFieldID(JNIEnv* env, jobject obj, string fieldName, 
 optional<jfieldID> GetStaticFieldID(JNIEnv* env, jclass clazz, string fieldName, string type) {
     auto id = env->GetStaticFieldID(clazz, fieldName.c_str(), type.c_str());
     if (CheckExceptions(env)) {
-        cerr << "Error while getting static fieldID for field: " + fieldName + " with type: " + type << endl;
+        cerr << LOG_PREFIX + "Error while getting static fieldID for field: " + fieldName + " with type: " + type << endl;
         return {};
     }
     return { id };
@@ -53,7 +53,7 @@ optional<jobject> GetObjectFieldValue(JNIEnv* env, jobject obj, string fieldName
 
     auto value = env->GetObjectField(obj, field.value());
     if (CheckExceptions(env)) {
-        cerr << "Error while trying to access field: " + fieldName + " with type: " + type << endl;
+        cerr << LOG_PREFIX + "Error while trying to access field: " + fieldName + " with type: " + type << endl;
         return {};
     }
     return { value };
@@ -67,13 +67,13 @@ optional<jobject> GetStaticObjectFieldValue(JNIEnv* env, jobject obj, string fie
 
     auto sField = env->GetStaticFieldID(clazz, fieldName.c_str(), type.c_str());
     if (CheckExceptions(env)) {
-        cerr << "Error while getting static fieldID for field: " + fieldName + " with type: " + type << endl;
+        cerr << LOG_PREFIX + "Error while getting static fieldID for field: " + fieldName + " with type: " + type << endl;
         return {};
     }
 
     auto value = (env->GetStaticObjectField(clazz, sField));
     if (CheckExceptions(env)) {
-        cerr << "Error while trying to access static field: " + fieldName + " with type: " + type << endl;
+        cerr << LOG_PREFIX + "Error while trying to access static field: " + fieldName + " with type: " + type << endl;
         return {};
     }
     return { value };

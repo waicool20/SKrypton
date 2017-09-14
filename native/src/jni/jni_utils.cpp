@@ -17,7 +17,7 @@ bool CheckExceptions(JNIEnv* env, bool throwToJava) {
     });
 }
 
-bool CheckExceptions(JNIEnv* env, bool throwToJava, function<void(JNIEnv* env, jthrowable exception)> handler) {
+bool CheckExceptions(JNIEnv* env, bool throwToJava, function<void(JNIEnv* l_env, jthrowable exception)> handler) {
     if (auto exception = env->ExceptionOccurred()) {
         env->ExceptionClear();
         handler(env, exception);
@@ -31,26 +31,31 @@ bool CheckExceptions(JNIEnv* env, bool throwToJava, function<void(JNIEnv* env, j
 
 //<editor-fold desc="Error throwing functions">
 
-void ThrowNewError(JNIEnv* env, jclass clazz, string& message) {
+void ThrowNewError(JNIEnv* env, jclass clazz, const string& message) {
     env->ThrowNew(clazz, message.c_str());
 }
 
-void ThrowNewError(string type, string message) {
+void ThrowNewError(const string& type, const string& message) {
     auto env = GetLocalJNIEnvRef();
     auto clazz = FindClass(type);
     if (clazz) {
         ThrowNewError(env, clazz.value(), message);
     } else {
-        cerr << "Couldn't find exception type: " + type + " . Printing message here instead:"<< endl;
-        cerr << message << endl;
+        cerr << LOG_PREFIX + "Couldn't find exception type: " + type << endl;
+        cerr << LOG_PREFIX + "Printing message here instead:" << endl;
+        cerr << LOG_PREFIX + message << endl;
     }
 }
 
-void ThrowNewError(JNIEnv* env, string type, string message) {
+void ThrowNewError(JNIEnv* env, string type, const string& message) {
     replace(type.begin(), type.end(), '.', '/');
     auto clazz = env->FindClass(type.c_str());
     if (CheckExceptions(env, true)) return;
     ThrowNewError(env, clazz, message);
+}
+
+void ThrowNewError(JNIEnv* env, const string& message) {
+    ThrowNewError(env, "java.lang.Exception", message);
 }
 
 //</editor-fold>
@@ -69,14 +74,15 @@ optional<jclass> FindClass(string name) {
     if (!gFindClassMethod) {
         gFindClassMethod = env->GetMethodID(classLoaderClass, "loadClass", "(Ljava/lang/String;)Ljava/lang/Class;");
         if (CheckExceptions(env)) {
-            cerr << "Error getting method ID for method 'loadClass'" << endl;
+            cerr << LOG_PREFIX + "Error getting method ID for method 'loadClass'" << endl;
             return {};
         }
     }
 
     auto obj = env->CallObjectMethod(gClassLoader, gFindClassMethod, JstringFromString(env, name));
     if (CheckExceptions(env)) {
-        cerr << "Call to 'loadClass' failed" << endl;
+        cerr << LOG_PREFIX + "Call to 'loadClass' on ClassLoader instance failed" << endl;
+        cerr << LOG_PREFIX + "Failed to load class: " + name << endl;
         return {};
     }
     return { (jclass) obj };
