@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="native_main" target="1.8" />
+      <module name="native_test" target="1.8" />
       <module name="SKrypton_main" target="1.8" />
       <module name="SKrypton_test" target="1.8" />
     </bytecodeTargetLevel>

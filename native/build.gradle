@@ -3,6 +3,16 @@ import java.nio.file.Paths
 
 String cmakeBuildDir = 'cmake-build-debug'
 
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
 task refreshCMake(type: Exec) {
     def file = Paths.get(getClass().protectionDomain.codeSource.location.path).resolveSibling(cmakeBuildDir)
     if (Files.notExists(file)) {
@@ -18,4 +28,16 @@ task makeNativeLibraries(type: Exec) {
     workingDir cmakeBuildDir
     commandLine 'make'
     args = ['install', '-j4']
+}
+
+
+task copyKotlinStdLib(type: Copy) {
+    into "build/kstdlib"
+    include("kotlin/jvm/functions/**/*")
+    include("kotlin/Function.class")
+    configurations.runtime.files.each {
+        if (it.name.contains("kotlin")) {
+            from zipTree(it)
+        }
+    }
 }

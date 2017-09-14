@@ -9,16 +9,11 @@ import kotlin.system.exitProcess
 fun main(args: Array<String>) {
     val app = SKryptonApp.initalize()
     val webView = SKryptonWebView.createNew("https://www.google.com")
-    //val webView1 = SKryptonWebView.createNew("https://www.google.com")
-    var i = 0
     thread {
         TimeUnit.SECONDS.sleep(2)
-        app.runOnMainThread(Runnable {
-            println("Hello")
-            i = 10
+        app.runOnMainThread {
             webView.dispose()
-            println(i)
-        })
+        }
     }
     exitProcess(app.exec())
 }

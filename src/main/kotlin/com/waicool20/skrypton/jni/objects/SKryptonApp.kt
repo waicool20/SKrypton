@@ -22,7 +22,7 @@ object SKryptonApp : NativeInterface() {
     }
 
     fun exec() = exec_N()
-    fun runOnMainThread(action: Runnable) = runOnMainThread_N(action)
+    fun runOnMainThread(action: () -> Unit) = runOnMainThread_N(Runnable { action() })
 
     override fun close() {
         dispose_N()

@@ -65,10 +65,20 @@ add_custom_target(
         COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers"
 )
 
+add_custom_target(
+        CopyKotlinStdLib
+        COMMAND "${PARENT_DIR}/gradlew" native:copyKotlinStdLib
+        WORKING_DIRECTORY "${PARENT_DIR}"
+)
+
+if (NOT EXISTS build/kstdlib)
+    file(MAKE_DIRECTORY build/kstdlib)
+endif ()
+
 create_javah(
         TARGET JNI_Headers
-        DEPENDS Clean_JNI_Headers
+        DEPENDS Clean_JNI_Headers CopyKotlinStdLib
         CLASSES ${JNI_CLASSES}
-        CLASSPATH ${CLASS_SEARCH_DIR}
+        CLASSPATH ${CLASS_SEARCH_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib
         OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers
 )
