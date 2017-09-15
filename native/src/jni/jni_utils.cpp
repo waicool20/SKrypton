@@ -88,3 +88,23 @@ optional<jclass> FindClass(string name) {
     return { (jclass) obj };
 }
 
+static jmethodID getClassMethodID = nullptr;
+static jmethodID classGetNameMethodID = nullptr;
+
+optional<string> GetClassName(JNIEnv* env, jobject obj) {
+    auto clazz = env->GetObjectClass(obj);
+    if (!getClassMethodID) {
+        getClassMethodID = env->GetMethodID(clazz, "getClass", "()Ljava/lang/Class;");
+        if (CheckExceptions(env)) return {};
+    }
+    auto objClass = env->CallObjectMethod(obj, getClassMethodID);
+
+    auto classClazz = env->GetObjectClass(objClass);
+
+    if (!classGetNameMethodID) {
+        classGetNameMethodID = env->GetMethodID(classClazz, "getName", "()Ljava/lang/String;");
+        if (CheckExceptions(env)) return {};
+    }
+    auto jstr = (jstring) env->CallObjectMethod(objClass, classGetNameMethodID);
+    return { StringFromJstring(env, jstr) };
+}

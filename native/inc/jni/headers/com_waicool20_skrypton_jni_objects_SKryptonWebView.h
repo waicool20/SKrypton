@@ -9,14 +9,6 @@ extern "C" {
 #endif
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
- * Method:    dispose_N
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_dispose_1N
-  (JNIEnv *, jobject);
-
-/*
- * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
  * Method:    load_N
  * Signature: (Ljava/lang/String;)V
  */

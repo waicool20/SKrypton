@@ -11,4 +11,7 @@ abstract class QWidget: NativeInterface() {
     private external fun show_N()
     private external fun hide_N()
     private external fun resize_N(width: Int, height: Int)
+    private external fun dispose_N()
+
+    override fun close() = dispose_N()
 }

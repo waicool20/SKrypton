@@ -31,6 +31,14 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_QWidget_hide_1N
 JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_QWidget_resize_1N
   (JNIEnv *, jobject, jint, jint);
 
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_QWidget
+ * Method:    dispose_N
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_QWidget_dispose_1N
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

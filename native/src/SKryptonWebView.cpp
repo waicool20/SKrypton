@@ -13,17 +13,6 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N(JNIE
     return (jlong) new SKryptonWebView { ref, url };
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_dispose_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
-    if (opt) {
-        SKryptonWebView* view = opt.value();
-        SKryptonApp::runOnMainThread([=] { view->close(); });
-    } else {
-        ThrowNewError("com.waicool20.skrypton.util.DisposeFailException",
-                      "Failed to dispose an instance of SKryptonWebView");
-    }
-}
-
 void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env, jobject obj, jstring jurl) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     auto url = StringFromJstring(env, jurl);

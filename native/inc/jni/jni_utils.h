@@ -29,5 +29,6 @@ void ThrowNewError(JNIEnv* env, const string& message);
 
 JNIEnv* GetLocalJNIEnvRef();
 optional<jclass> FindClass(string name);
+optional<string> GetClassName(JNIEnv* env, jobject obj);
 
 #endif //SKRYPTONNATIVE_JNI_UTILS_H_H

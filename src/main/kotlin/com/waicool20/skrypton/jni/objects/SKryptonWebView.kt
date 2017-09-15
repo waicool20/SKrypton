@@ -13,11 +13,6 @@ class SKryptonWebView(url: String) : QWidget() {
     fun load(url: URL) = load(url.toString())
     fun load(url: String) = load_N(url)
 
-    override fun close() {
-        dispose_N()
-    }
-
-    private external fun dispose_N()
     private external fun load_N(url: String)
     private external fun initialize_N(url: String): Long
 }
