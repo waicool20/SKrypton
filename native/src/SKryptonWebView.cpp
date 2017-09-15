@@ -39,5 +39,5 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env
 
 SKryptonWebView::SKryptonWebView(string& url) {
     load(QUrl { url.c_str() });
-    show();
+    //show();
 }

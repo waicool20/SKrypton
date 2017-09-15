@@ -1,10 +1,9 @@
 package com.waicool20.skrypton.jni.objects
 
 import com.waicool20.skrypton.jni.CPointer
-import com.waicool20.skrypton.jni.NativeInterface
 import java.net.URL
 
-class SKryptonWebView private constructor(override val handle: CPointer) : NativeInterface() {
+class SKryptonWebView private constructor(override val handle: CPointer) : QWidget() {
 
     companion object Factory {
         fun createNew(url: String) = SKryptonWebView(CPointer(initialize_N(url)))
