@@ -3,11 +3,11 @@ package com.waicool20.skrypton.jni.objects
 import com.waicool20.skrypton.jni.CPointer
 import java.net.URL
 
-class SKryptonWebView private constructor(override val handle: CPointer) : QWidget() {
+class SKryptonWebView(url: String) : QWidget() {
+    override val handle: CPointer
 
-    companion object Factory {
-        fun createNew(url: String) = SKryptonWebView(CPointer(initialize_N(url)))
-        private external fun initialize_N(url: String): Long
+    init {
+        handle = CPointer(initialize_N(url))
     }
 
     fun load(url: URL) = load(url.toString())
@@ -19,4 +19,5 @@ class SKryptonWebView private constructor(override val handle: CPointer) : QWidg
 
     private external fun dispose_N()
     private external fun load_N(url: String)
+    private external fun initialize_N(url: String): Long
 }

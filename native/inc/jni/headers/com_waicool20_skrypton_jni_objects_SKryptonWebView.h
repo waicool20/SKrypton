@@ -23,6 +23,14 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_d
 JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N
   (JNIEnv *, jobject, jstring);
 
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    initialize_N
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N
+  (JNIEnv *, jobject, jstring);
+
 #ifdef __cplusplus
 }
 #endif

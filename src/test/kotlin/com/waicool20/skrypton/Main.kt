@@ -8,16 +8,16 @@ import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
     val app = SKryptonApp.initalize()
-    val webView = SKryptonWebView.createNew("https://www.google.com")
+    val webView = SKryptonWebView("https://www.google.com")
+    webView.resize(1280, 720)
     webView.show()
     thread {
         TimeUnit.SECONDS.sleep(2)
         println("Loading GitHub")
         webView.load("https://www.github.com")
-        webView.resize(1280, 720)
     }
     thread {
-        TimeUnit.SECONDS.sleep(10)
+        TimeUnit.SECONDS.sleep(20)
         app.runOnMainThread {
             webView.dispose()
         }
