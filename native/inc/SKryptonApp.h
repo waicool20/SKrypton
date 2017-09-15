@@ -9,10 +9,10 @@
 
 Q_DECLARE_METATYPE(jobject)
 
-class SKyrptonApp : public QApplication {
+class SKryptonApp : public QApplication {
     Q_OBJECT
 public:
-    SKyrptonApp(int& argc, char** argv);
+    SKryptonApp(int& argc, char** argv);
     using QApplication::exec;
     Q_INVOKABLE void runOnMainThread(jobject obj, jobject action);
 };

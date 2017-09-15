@@ -1,6 +1,6 @@
-#include "SKyrptonApp.h"
+#include "SKryptonApp.h"
 
-static SKyrptonApp* app = nullptr;
+static SKryptonApp* app = nullptr;
 static int argc = 0;
 static vector<char*> argv {};
 
@@ -45,13 +45,13 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonApp_initialize_1N(JNIEnv* 
     }
     argv.push_back(nullptr);
 
-    app = new SKyrptonApp(argc, argv.data());
+    app = new SKryptonApp(argc, argv.data());
     return (jlong) app;
 }
 
 jint Java_com_waicool20_skrypton_jni_objects_SKryptonApp_exec_1N(JNIEnv* env, jobject obj) {
     if (app == nullptr) {
-        auto opt = PointerFromStaticCPointer<SKyrptonApp>(env, obj);
+        auto opt = PointerFromStaticCPointer<SKryptonApp>(env, obj);
         if (opt) {
             app = opt.value();
         } else return EXIT_FAILURE;
@@ -63,7 +63,7 @@ jint Java_com_waicool20_skrypton_jni_objects_SKryptonApp_exec_1N(JNIEnv* env, jo
 
 void Java_com_waicool20_skrypton_jni_objects_SKryptonApp_dispose_1N(JNIEnv* env, jobject obj) {
     if (app == nullptr) {
-        auto opt = PointerFromStaticCPointer<SKyrptonApp>(env, obj);
+        auto opt = PointerFromStaticCPointer<SKryptonApp>(env, obj);
         if (opt) {
             app = opt.value();
         } else return;
@@ -71,9 +71,9 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonApp_dispose_1N(JNIEnv* env,
     app->quit();
 }
 
-SKyrptonApp::SKyrptonApp(int& argc, char** argv) : QApplication(argc, argv) {}
+SKryptonApp::SKryptonApp(int& argc, char** argv) : QApplication(argc, argv) {}
 
-void SKyrptonApp::runOnMainThread(jobject obj, jobject action) {
+void SKryptonApp::runOnMainThread(jobject obj, jobject action) {
     JNIEnv* env = GetLocalJNIEnvRef();
     auto clazz = env->GetObjectClass(action);
     auto method = env->GetMethodID(clazz, "run", "()V");
