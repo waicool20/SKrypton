@@ -4,7 +4,7 @@ void Java_com_waicool20_skrypton_jni_objects_QWidget_show_1N(JNIEnv* env, jobjec
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
-        RunOnMainThread([=] { widget->show(); });
+        SKryptonApp::runOnMainThread([=] { widget->show(); });
     }
 }
 
@@ -12,7 +12,7 @@ void Java_com_waicool20_skrypton_jni_objects_QWidget_hide_1N(JNIEnv* env, jobjec
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
-        RunOnMainThread([=] { widget->hide(); });
+        SKryptonApp::runOnMainThread([=] { widget->hide(); });
     }
 }
 
@@ -20,7 +20,7 @@ void Java_com_waicool20_skrypton_jni_objects_QWidget_resize_1N(JNIEnv* env, jobj
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
-        RunOnMainThread([=] { widget->resize((int) width, (int) height); });
+        SKryptonApp::runOnMainThread([=] { widget->resize((int) width, (int) height); });
     }
 }
 

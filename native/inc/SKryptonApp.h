@@ -13,11 +13,10 @@ class SKryptonApp : public QApplication {
     Q_OBJECT
 public:
     SKryptonApp(int& argc, char** argv);
+    static void runOnMainThread(function<void()> action);
+
     using QApplication::exec;
     Q_INVOKABLE void runOnMainThread(jobject obj, jobject action);
 };
-
-void RunOnMainThread(const function<void()> action);
-
 
 #endif //SKRYPTONNATIVE_SKYRPTONAPP_H
