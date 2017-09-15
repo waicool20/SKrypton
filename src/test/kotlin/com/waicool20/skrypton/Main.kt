@@ -10,10 +10,14 @@ fun main(args: Array<String>) {
     val app = SKryptonApp.initalize()
     val webView = SKryptonWebView.createNew("https://www.google.com")
     thread {
-        TimeUnit.SECONDS.sleep(2)
+        TimeUnit.SECONDS.sleep(1)
+        println("Loading GitHub")
+        webView.load("https://www.github.com")
+    }
+    thread {
+        TimeUnit.SECONDS.sleep(10)
         app.runOnMainThread {
-            println("Loading GitHub")
-            webView.load("https://www.github.com")
+            webView.dispose()
         }
     }
     exitProcess(app.exec())

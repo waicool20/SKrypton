@@ -1,4 +1,4 @@
-#include "SKryptonWebView.h"
+#include <SKryptonWebView.h>
 
 bool initialized = false;
 
@@ -28,7 +28,10 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env
     auto url = StringFromJstring(env, jurl);
     if (opt) {
         SKryptonWebView* view = opt.value();
-        view->load(QUrl { url.c_str() });
+        RunOnMainThread([=] {
+            cout << "Loading " + url << endl;
+            view->load(QUrl { url.c_str() });
+        });
     } else {
         ThrowNewError(env, "[SKryptonWebView] Failed to load url " + url);
     }

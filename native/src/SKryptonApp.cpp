@@ -81,3 +81,10 @@ void SKryptonApp::runOnMainThread(jobject obj, jobject action) {
     env->DeleteGlobalRef(obj);
     env->DeleteGlobalRef(action);
 }
+
+void RunOnMainThread(function<void()> action) {
+    QObject s;
+    QObject::connect(&s, &QObject::destroyed, qApp, [=] {
+        action();
+    });
+}

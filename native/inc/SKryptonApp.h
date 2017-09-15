@@ -17,5 +17,7 @@ public:
     Q_INVOKABLE void runOnMainThread(jobject obj, jobject action);
 };
 
+void RunOnMainThread(const function<void()> action);
+
 
 #endif //SKRYPTONNATIVE_SKYRPTONAPP_H
