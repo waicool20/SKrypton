@@ -18,7 +18,19 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_dispose_1N(JNIEnv* 
         SKryptonWebView* view = opt.value();
         view->close();
     } else {
-        ThrowNewError("com.waicool20.skrypton.util.DisposeFailException", "Failed to dispose an instance of SKryptonWebView");
+        ThrowNewError("com.waicool20.skrypton.util.DisposeFailException",
+                      "Failed to dispose an instance of SKryptonWebView");
+    }
+}
+
+void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env, jobject obj, jstring jurl) {
+    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto url = StringFromJstring(env, jurl);
+    if (opt) {
+        SKryptonWebView* view = opt.value();
+        view->load(QUrl { url.c_str() });
+    } else {
+        ThrowNewError(env, "[SKryptonWebView] Failed to load url " + url);
     }
 }
 

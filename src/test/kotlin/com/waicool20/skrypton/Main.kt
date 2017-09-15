@@ -12,7 +12,8 @@ fun main(args: Array<String>) {
     thread {
         TimeUnit.SECONDS.sleep(2)
         app.runOnMainThread {
-            webView.dispose()
+            println("Loading GitHub")
+            webView.load("https://www.github.com")
         }
     }
     exitProcess(app.exec())

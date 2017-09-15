@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_dispose_1N
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    load_N
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N
+  (JNIEnv *, jobject, jstring);
+
 #ifdef __cplusplus
 }
 #endif

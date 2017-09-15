@@ -2,6 +2,7 @@ package com.waicool20.skrypton.jni.objects
 
 import com.waicool20.skrypton.jni.CPointer
 import com.waicool20.skrypton.jni.NativeInterface
+import java.net.URL
 
 class SKryptonWebView private constructor(override val handle: CPointer) : NativeInterface() {
 
@@ -10,9 +11,13 @@ class SKryptonWebView private constructor(override val handle: CPointer) : Nativ
         private external fun initialize_N(url: String): Long
     }
 
+    fun load(url: URL) = load(url.toString())
+    fun load(url: String) = load_N(url)
+
     override fun close() {
         dispose_N()
     }
 
     private external fun dispose_N()
+    private external fun load_N(url: String)
 }
