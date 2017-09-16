@@ -1,10 +1,8 @@
 #ifndef SKRYPTONNATIVE_JNI_UTILS_H_H
 #define SKRYPTONNATIVE_JNI_UTILS_H_H
 
+#include <headers.h>
 #include <jni.h>
-#include <jni_field_utils.h>
-#include <jni_pointer_utils.h>
-#include <jni_string_utils.h>
 
 #define LOG_PREFIX string { "[" } + __FUNCTION__ + "] "
 
@@ -30,5 +28,10 @@ void ThrowNewError(JNIEnv* env, const string& message);
 JNIEnv* GetLocalJNIEnvRef();
 optional<jclass> FindClass(string name);
 optional<string> GetClassName(JNIEnv* env, jobject obj);
+
+#include <jni_field_utils.h>
+#include <jni_pointer_utils.h>
+#include <jni_string_utils.h>
+#include <jni_method_utils.h>
 
 #endif //SKRYPTONNATIVE_JNI_UTILS_H_H

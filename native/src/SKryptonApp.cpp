@@ -20,19 +20,13 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonApp_initialize_1N(JNIEnv* 
             return {};
         }
         if (!gClassLoader) {
-            auto classLoaderClass = env->FindClass("java/lang/ClassLoader");
-            auto method = env->GetStaticMethodID(classLoaderClass, "getSystemClassLoader", "()Ljava/lang/ClassLoader;");
-            if (CheckExceptions(env, true)) {
-                ThrowNewError(env, "Error getting method ID for method 'getSystemClassLoader'");
-                return {};
-            }
+            auto loader = CallStaticMethod<jobject>(env, "java/lang/ClassLoader", "getSystemClassLoader", "()Ljava/lang/ClassLoader;");
 
-            auto loader = env->CallStaticObjectMethod(classLoaderClass, method);
-            if (CheckExceptions(env, true)) {
+            if (!loader) {
                 ThrowNewError(env, "Error getting classloader reference");
                 return {};
             }
-            gClassLoader = env->NewGlobalRef(loader);
+            gClassLoader = env->NewGlobalRef(loader.value());
         }
     }
     // ----

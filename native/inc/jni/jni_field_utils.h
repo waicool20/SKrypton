@@ -5,8 +5,8 @@
 #include <jni.h>
 
 namespace PrivateFieldUtils {
-    bool HandleFieldAccessException(JNIEnv* env, string &fieldName);
-    bool HandleStaticFieldAccessException(JNIEnv* env, string &fieldName);
+    bool HandleFieldAccessException(JNIEnv* env, string& fieldName);
+    bool HandleStaticFieldAccessException(JNIEnv* env, string& fieldName);
 }
 
 optional<jfieldID> GetFieldID(JNIEnv* env, jobject obj, string fieldName, string type);
@@ -101,7 +101,7 @@ template<>
 inline optional<jboolean> GetStaticFieldValue<jboolean>(JNIEnv* env, jobject obj, string fieldName) {
     jclass clazz = env->GetObjectClass(obj);
     auto sFieldID = GetStaticFieldID(env, clazz, fieldName, "Z");
-    if(sFieldID) return {};
+    if (sFieldID) return {};
     auto value = env->GetStaticBooleanField(clazz, sFieldID.value());
     if (PrivateFieldUtils::HandleStaticFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -111,7 +111,7 @@ template<>
 inline optional<jbyte> GetStaticFieldValue<jbyte>(JNIEnv* env, jobject obj, string fieldName) {
     jclass clazz = env->GetObjectClass(obj);
     auto sFieldID = GetStaticFieldID(env, clazz, fieldName, "B");
-    if(sFieldID) return {};
+    if (sFieldID) return {};
     auto value = env->GetStaticByteField(clazz, sFieldID.value());
     if (PrivateFieldUtils::HandleStaticFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -121,7 +121,7 @@ template<>
 inline optional<jchar> GetStaticFieldValue<jchar>(JNIEnv* env, jobject obj, string fieldName) {
     jclass clazz = env->GetObjectClass(obj);
     auto sFieldID = GetStaticFieldID(env, clazz, fieldName, "C");
-    if(sFieldID) return {};
+    if (sFieldID) return {};
     auto value = env->GetStaticCharField(clazz, sFieldID.value());
     if (PrivateFieldUtils::HandleStaticFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -131,7 +131,7 @@ template<>
 inline optional<jshort> GetStaticFieldValue<jshort>(JNIEnv* env, jobject obj, string fieldName) {
     jclass clazz = env->GetObjectClass(obj);
     auto sFieldID = GetStaticFieldID(env, clazz, fieldName, "S");
-    if(sFieldID) return {};
+    if (sFieldID) return {};
     auto value = env->GetStaticShortField(clazz, sFieldID.value());
     if (PrivateFieldUtils::HandleStaticFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -141,7 +141,7 @@ template<>
 inline optional<jint> GetStaticFieldValue<jint>(JNIEnv* env, jobject obj, string fieldName) {
     jclass clazz = env->GetObjectClass(obj);
     auto sFieldID = GetStaticFieldID(env, clazz, fieldName, "I");
-    if(sFieldID) return {};
+    if (sFieldID) return {};
     auto value = env->GetStaticIntField(clazz, sFieldID.value());
     if (PrivateFieldUtils::HandleStaticFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -151,7 +151,7 @@ template<>
 inline optional<jlong> GetStaticFieldValue<jlong>(JNIEnv* env, jobject obj, string fieldName) {
     jclass clazz = env->GetObjectClass(obj);
     auto sFieldID = GetStaticFieldID(env, clazz, fieldName, "J");
-    if(sFieldID) return {};
+    if (sFieldID) return {};
     auto value = env->GetStaticLongField(clazz, sFieldID.value());
     if (PrivateFieldUtils::HandleStaticFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -161,7 +161,7 @@ template<>
 inline optional<jfloat> GetStaticFieldValue<jfloat>(JNIEnv* env, jobject obj, string fieldName) {
     jclass clazz = env->GetObjectClass(obj);
     auto sFieldID = GetStaticFieldID(env, clazz, fieldName, "F");
-    if(sFieldID) return {};
+    if (sFieldID) return {};
     auto value = env->GetStaticFloatField(clazz, sFieldID.value());
     if (PrivateFieldUtils::HandleStaticFieldAccessException(env, fieldName)) return {};
     return { value };
@@ -171,7 +171,7 @@ template<>
 inline optional<jdouble> GetStaticFieldValue<jdouble>(JNIEnv* env, jobject obj, string fieldName) {
     jclass clazz = env->GetObjectClass(obj);
     auto sFieldID = GetStaticFieldID(env, clazz, fieldName, "D");
-    if(sFieldID) return {};
+    if (sFieldID) return {};
     auto value = env->GetStaticDoubleField(clazz, sFieldID.value());
     if (PrivateFieldUtils::HandleStaticFieldAccessException(env, fieldName)) return {};
     return { value };
