@@ -22,17 +22,50 @@ class SKryptonWebView(url: String) : QWidget() {
     fun reload() = reload_N()
     fun stop() = stop_N()
 
-    private fun loadStarted() {
-        // TODO loadStarted Listeners
+    //<editor-fold desc="Load start listener">
+
+    private val loadStartedListeners = mutableListOf<() -> Unit>()
+    private fun loadStarted() = loadStartedListeners.forEach { it() }
+
+    fun addOnLoadStartedListener(listener: () -> Unit) {
+        loadStartedListeners.add(listener)
     }
 
-    private fun loadProgress(progress: Int) {
-        // TODO loadProgress Listeners
+    fun removeOnLoadStartedListener(listener: () -> Unit) {
+        loadStartedListeners.remove(listener)
     }
 
-    private fun loadFinished(ok: Boolean) {
-        // TODO loadFinished Listeners
+    //</editor-fold>
+
+    //<editor-fold desc="Load progress listener">
+
+    private val loadProgressListeners = mutableListOf<(progress: Int) -> Unit>()
+    private fun loadProgress(progress: Int) = loadProgressListeners.forEach { it(progress) }
+
+    fun addOnLoadProgressListener(listener: (progress: Int) -> Unit) {
+        loadProgressListeners.add(listener)
     }
+
+    fun removeOnLoadProgressListener(listener: (progress: Int) -> Unit) {
+        loadProgressListeners.remove(listener)
+    }
+
+    //</editor-fold>
+
+    //<editor-fold desc="Load finished listener">
+
+    private val loadFinishedListeners = mutableListOf<(ok: Boolean) -> Unit>()
+    private fun loadFinished(ok: Boolean) = loadFinishedListeners.forEach { it(ok) }
+
+    fun addOnLoadFinishedListener(listener: (ok: Boolean) -> Unit) {
+        loadFinishedListeners.add(listener)
+    }
+
+    fun removeOnLoadFinishedListener(listener: (ok: Boolean) -> Unit) {
+        loadFinishedListeners.remove(listener)
+    }
+
+    //</editor-fold>
 
     private external fun initialize_N(url: String): Long
 
