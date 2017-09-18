@@ -25,6 +25,38 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_l
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    back_N
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_back_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    forward_N
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_forward_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    reload_N
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_reload_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    stop_N
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_stop_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
  * Method:    setZoomFactor_N
  * Signature: (D)V
  */

@@ -18,8 +18,9 @@ fun main(args: Array<String>) {
     }
     thread {
         TimeUnit.SECONDS.sleep(5)
+        webView.back()
         app.runOnMainThread {
-            webView.dispose()
+            //webView.dispose()
         }
     }
     exitProcess(app.exec())

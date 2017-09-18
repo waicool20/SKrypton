@@ -12,9 +12,12 @@
 #include <com_waicool20_skrypton_jni_objects_SKryptonWebView.h>
 
 class SKryptonWebView : public QWebEngineView {
-    Q_OBJECT
+Q_OBJECT
 public:
     SKryptonWebView(jobject jInstance, string& url);
+    void loadStarted();
+    void loadProgress(int progress);
+    void loadFinished(bool ok);
 private:
     jobject jInstance;
 };
