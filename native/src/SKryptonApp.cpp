@@ -39,6 +39,7 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonApp_initialize_1N(JNIEnv* 
     }
     argv.push_back(nullptr);
 
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     app = new SKryptonApp(argc, argv.data());
     return (jlong) app;
 }
