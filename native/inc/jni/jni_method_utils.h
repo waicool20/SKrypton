@@ -20,6 +20,7 @@ CallMethod<void*>(JNIEnv* env, jobject obj, string methodName, string signature,
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     env->CallVoidMethodV(obj, methodID, args);
     return {};
 }
@@ -32,6 +33,7 @@ CallMethod<jobject>(JNIEnv* env, jobject obj, string methodName, string signatur
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallObjectMethodV(obj, methodID, args) };
 };
 
@@ -43,6 +45,7 @@ CallMethod<jboolean>(JNIEnv* env, jobject obj, string methodName, string signatu
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallBooleanMethodV(obj, methodID, args) };
 };
 
@@ -54,6 +57,7 @@ CallMethod<jbyte>(JNIEnv* env, jobject obj, string methodName, string signature,
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallByteMethodV(obj, methodID, args) };
 };
 
@@ -65,6 +69,7 @@ CallMethod<jchar>(JNIEnv* env, jobject obj, string methodName, string signature,
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallCharMethodV(obj, methodID, args) };
 };
 
@@ -76,6 +81,7 @@ CallMethod<jshort>(JNIEnv* env, jobject obj, string methodName, string signature
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallShortMethodV(obj, methodID, args) };
 };
 
@@ -87,6 +93,7 @@ CallMethod<jint>(JNIEnv* env, jobject obj, string methodName, string signature, 
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallIntMethodV(obj, methodID, args) };
 };
 
@@ -98,6 +105,7 @@ CallMethod<jlong>(JNIEnv* env, jobject obj, string methodName, string signature,
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallLongMethodV(obj, methodID, args) };
 };
 
@@ -109,6 +117,7 @@ CallMethod<jfloat>(JNIEnv* env, jobject obj, string methodName, string signature
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallFloatMethodV(obj, methodID, args) };
 };
 
@@ -120,6 +129,7 @@ CallMethod<jdouble>(JNIEnv* env, jobject obj, string methodName, string signatur
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallDoubleMethodV(obj, methodID, args) };
 };
 
@@ -142,6 +152,7 @@ inline optional<void*> CallStaticMethod<void*>(JNIEnv* env, jclass clazz, string
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     env->CallStaticVoidMethodV(clazz, methodID, args);
     return {};
 };
@@ -153,6 +164,7 @@ CallStaticMethod<jobject>(JNIEnv* env, jclass clazz, string methodName, string s
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallStaticObjectMethodV(clazz, methodID, args) };
 };
 
@@ -163,6 +175,7 @@ CallStaticMethod<jboolean>(JNIEnv* env, jclass clazz, string methodName, string 
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallStaticBooleanMethodV(clazz, methodID, args) };
 };
 
@@ -173,6 +186,7 @@ CallStaticMethod<jbyte>(JNIEnv* env, jclass clazz, string methodName, string sig
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallStaticByteMethodV(clazz, methodID, args) };
 };
 
@@ -183,6 +197,7 @@ CallStaticMethod<jchar>(JNIEnv* env, jclass clazz, string methodName, string sig
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallStaticCharMethodV(clazz, methodID, args) };
 };
 
@@ -193,6 +208,7 @@ CallStaticMethod<jshort>(JNIEnv* env, jclass clazz, string methodName, string si
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallStaticShortMethodV(clazz, methodID, args) };
 };
 
@@ -203,6 +219,7 @@ CallStaticMethod<jint>(JNIEnv* env, jclass clazz, string methodName, string sign
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallStaticIntMethodV(clazz, methodID, args) };
 };
 
@@ -213,6 +230,7 @@ CallStaticMethod<jlong>(JNIEnv* env, jclass clazz, string methodName, string sig
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallStaticLongMethodV(clazz, methodID, args) };
 };
 
@@ -223,6 +241,7 @@ CallStaticMethod<jfloat>(JNIEnv* env, jclass clazz, string methodName, string si
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallStaticFloatMethodV(clazz, methodID, args) };
 };
 
@@ -233,6 +252,7 @@ CallStaticMethod<jdouble>(JNIEnv* env, jclass clazz, string methodName, string s
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
     va_list args;
+    va_start(args, signature);
     return { env->CallStaticDoubleMethodV(clazz, methodID, args) };
 };
 
