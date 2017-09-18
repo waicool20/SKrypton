@@ -10,9 +10,17 @@ class SKryptonWebView(url: String) : QWidget() {
         handle = CPointer(initialize_N(url))
     }
 
+    var zoomFactor: Double
+        get() = zoomFactor_N()
+        set(value) = setZoomFactor_N(value)
+
     fun load(url: URL) = load(url.toString())
     fun load(url: String) = load_N(url)
 
-    private external fun load_N(url: String)
     private external fun initialize_N(url: String): Long
+
+    private external fun load_N(url: String)
+
+    private external fun setZoomFactor_N(factor: Double)
+    private external fun zoomFactor_N(): Double
 }

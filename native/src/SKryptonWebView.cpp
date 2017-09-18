@@ -20,7 +20,27 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env
         SKryptonWebView* view = opt.value();
         SKryptonApp::runOnMainThread([=] { view->load(QUrl { url.c_str() }); });
     } else {
-        ThrowNewError(env, "[SKryptonWebView] Failed to load url " + url);
+        ThrowNewError(env, LOG_PREFIX + "Failed to load url " + url);
+    }
+}
+
+void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setZoomFactor_1N(JNIEnv* env, jobject obj, jdouble factor) {
+    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value();
+        SKryptonApp::runOnMainThread([=] { view->setZoomFactor(factor); });
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Failed to set zoom factor to " + to_string(factor));
+    }
+}
+
+jdouble Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_zoomFactor_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value();
+        return view->zoomFactor();
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Failed to get zoom factor");
     }
 }
 

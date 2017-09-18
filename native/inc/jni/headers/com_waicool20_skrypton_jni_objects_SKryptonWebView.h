@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    initialize_N
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
  * Method:    load_N
  * Signature: (Ljava/lang/String;)V
  */
@@ -17,11 +25,19 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_l
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
- * Method:    initialize_N
- * Signature: (Ljava/lang/String;)J
+ * Method:    setZoomFactor_N
+ * Signature: (D)V
  */
-JNIEXPORT jlong JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N
-  (JNIEnv *, jobject, jstring);
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setZoomFactor_1N
+  (JNIEnv *, jobject, jdouble);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    zoomFactor_N
+ * Signature: ()D
+ */
+JNIEXPORT jdouble JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_zoomFactor_1N
+  (JNIEnv *, jobject);
 
 #ifdef __cplusplus
 }
