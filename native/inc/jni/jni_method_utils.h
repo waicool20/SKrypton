@@ -13,102 +13,114 @@ template<typename T>
 inline optional<T> CallMethod(JNIEnv* env, jobject obj, string methodName, string signature, ...) = delete;
 
 template<>
+inline optional<void*>
+CallMethod<void*>(JNIEnv* env, jobject obj, string methodName, string signature, ...) {
+    auto clazz = env->GetObjectClass(obj);
+    auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
+    if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
+
+    va_list args;
+    env->CallVoidMethodV(obj, methodID, args);
+    return {};
+}
+
+template<>
 inline optional<jobject>
 CallMethod<jobject>(JNIEnv* env, jobject obj, string methodName, string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
-    auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
-    if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
+    auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
+    if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
-    return { env->CallObjectMethodV(clazz, methodID, args) };
+    return { env->CallObjectMethodV(obj, methodID, args) };
 };
 
 template<>
 inline optional<jboolean>
 CallMethod<jboolean>(JNIEnv* env, jobject obj, string methodName, string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
-    auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
-    if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
+    auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
+    if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
-    return { env->CallBooleanMethodV(clazz, methodID, args) };
+    return { env->CallBooleanMethodV(obj, methodID, args) };
 };
 
 template<>
 inline optional<jbyte>
 CallMethod<jbyte>(JNIEnv* env, jobject obj, string methodName, string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
-    auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
-    if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
+    auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
+    if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
-    return { env->CallByteMethodV(clazz, methodID, args) };
+    return { env->CallByteMethodV(obj, methodID, args) };
 };
 
 template<>
 inline optional<jchar>
 CallMethod<jchar>(JNIEnv* env, jobject obj, string methodName, string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
-    auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
-    if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
+    auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
+    if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
-    return { env->CallCharMethodV(clazz, methodID, args) };
+    return { env->CallCharMethodV(obj, methodID, args) };
 };
 
 template<>
 inline optional<jshort>
 CallMethod<jshort>(JNIEnv* env, jobject obj, string methodName, string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
-    auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
-    if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
+    auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
+    if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
-    return { env->CallShortMethodV(clazz, methodID, args) };
+    return { env->CallShortMethodV(obj, methodID, args) };
 };
 
 template<>
 inline optional<jint>
 CallMethod<jint>(JNIEnv* env, jobject obj, string methodName, string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
-    auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
-    if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
+    auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
+    if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
-    return { env->CallIntMethodV(clazz, methodID, args) };
+    return { env->CallIntMethodV(obj, methodID, args) };
 };
 
 template<>
 inline optional<jlong>
 CallMethod<jlong>(JNIEnv* env, jobject obj, string methodName, string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
-    auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
-    if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
+    auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
+    if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
-    return { env->CallLongMethodV(clazz, methodID, args) };
+    return { env->CallLongMethodV(obj, methodID, args) };
 };
 
 template<>
 inline optional<jfloat>
 CallMethod<jfloat>(JNIEnv* env, jobject obj, string methodName, string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
-    auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
-    if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
+    auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
+    if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
-    return { env->CallFloatMethodV(clazz, methodID, args) };
+    return { env->CallFloatMethodV(obj, methodID, args) };
 };
 
 template<>
 inline optional<jdouble>
 CallMethod<jdouble>(JNIEnv* env, jobject obj, string methodName, string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
-    auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
-    if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
+    auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
+    if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
 
     va_list args;
-    return { env->CallDoubleMethodV(clazz, methodID, args) };
+    return { env->CallDoubleMethodV(obj, methodID, args) };
 };
 
 //</editor-fold>

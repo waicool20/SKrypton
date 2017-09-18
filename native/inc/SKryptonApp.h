@@ -4,6 +4,7 @@
 #include <jni_utils.h>
 
 #include <QApplication>
+#include <QThread>
 
 #include <com_waicool20_skrypton_jni_objects_SKryptonApp.h>
 

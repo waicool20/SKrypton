@@ -69,9 +69,7 @@ SKryptonApp::SKryptonApp(int& argc, char** argv) : QApplication(argc, argv) {}
 
 void SKryptonApp::runOnMainThread(jobject obj, jobject action) {
     JNIEnv* env = GetLocalJNIEnvRef();
-    auto clazz = env->GetObjectClass(action);
-    auto method = env->GetMethodID(clazz, "run", "()V");
-    env->CallVoidMethod(action, method);
+    CallMethod<void*>(env, action, "run", "()V");
     env->DeleteGlobalRef(obj);
     env->DeleteGlobalRef(action);
 }
