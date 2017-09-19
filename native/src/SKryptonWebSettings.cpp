@@ -1,6 +1,30 @@
 #include <SKryptonWebSettings.h>
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetAttribute_1N(JNIEnv* env, jobject obj, jint attr) {
+jstring
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getDefaultTextEncoding_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
+    if (opt) {
+        QWebEngineSettings* settings = opt.value();
+        auto charset = settings->defaultTextEncoding().toStdString();
+        return JstringFromString(env, charset);
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not retrieve default charset");
+    }
+}
+
+void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setDefaultTextEncoding_1N(JNIEnv* env, jobject obj,
+                                                                                           jstring charset) {
+    auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
+    if (opt) {
+        QWebEngineSettings* settings = opt.value();
+        settings->setDefaultTextEncoding(QString::fromStdString(StringFromJstring(env, charset)));
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not retrieve default charset");
+    }
+}
+
+void
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetAttribute_1N(JNIEnv* env, jobject obj, jint attr) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
@@ -10,7 +34,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetAttribute_
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setAttribute_1N(JNIEnv* env, jobject obj, jint attr, jboolean enabled) {
+void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setAttribute_1N(JNIEnv* env, jobject obj, jint attr,
+                                                                                 jboolean enabled) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
@@ -20,7 +45,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setAttribute_1N
     }
 }
 
-jboolean Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_testAttribute_1N(JNIEnv* env, jobject obj, jint attr) {
+jboolean
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_testAttribute_1N(JNIEnv* env, jobject obj, jint attr) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();

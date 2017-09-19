@@ -11,7 +11,6 @@ fun main(args: Array<String>) {
     val webView = SKryptonWebView("https://www.google.com")
     webView.resize(1280, 720)
     webView.show()
-
     thread {
         TimeUnit.SECONDS.sleep(2)
         println("Loading GitHub")

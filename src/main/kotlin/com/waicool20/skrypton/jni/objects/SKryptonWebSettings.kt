@@ -3,11 +3,17 @@ package com.waicool20.skrypton.jni.objects
 import com.waicool20.skrypton.jni.CPointer
 import com.waicool20.skrypton.jni.NativeInterface
 import com.waicool20.skrypton.util.loggerFor
+import java.nio.charset.Charset
 
 
-class SKryptonWebSettings private constructor(pointer: Long): NativeInterface() {
+class SKryptonWebSettings private constructor(pointer: Long) : NativeInterface() {
     private val logger = loggerFor<SKryptonWebSettings>()
     override val handle: CPointer = CPointer(pointer)
+
+    companion object {
+        fun getDefaultSettings() = defaultSettings_N()
+        private external fun defaultSettings_N()
+    }
 
     //<editor-fold desc="Attribute member fields">
 
@@ -86,6 +92,14 @@ class SKryptonWebSettings private constructor(pointer: Long): NativeInterface() 
 
     //</editor-fold>
 
+    //<editor-fold desc="Font member fields>
+
+    var defaultTextEncoding
+        get() = Charset.forName(getDefaultTextEncoding_N())
+        set(value) = setDefaultTextEncoding_N(value.name())
+
+    //</editor-fold>
+
     enum class FontFamily {
         StandardFont, FixedFont, SerifFont,
         SansSerifFont, CursiveFont, FantasyFont,
@@ -129,6 +143,9 @@ class SKryptonWebSettings private constructor(pointer: Long): NativeInterface() 
     override fun close() {
         logger.info { "Settings cannot be disposed, dispose related WebView instead" }
     }
+
+    private external fun getDefaultTextEncoding_N(): String
+    private external fun setDefaultTextEncoding_N(string: String)
 
     private external fun resetAttribute_N(attribute: Int)
     private external fun setAttribute_N(attribute: Int, enabled: Boolean)
