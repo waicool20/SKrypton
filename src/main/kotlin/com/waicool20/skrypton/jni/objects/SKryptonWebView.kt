@@ -1,7 +1,9 @@
 package com.waicool20.skrypton.jni.objects
 
 import com.waicool20.skrypton.jni.CPointer
+import java.awt.image.BufferedImage
 import java.net.URL
+import javax.imageio.ImageIO
 
 class SKryptonWebView(url: String) : QWidget() {
     override val handle: CPointer
@@ -70,6 +72,9 @@ class SKryptonWebView(url: String) : QWidget() {
 
     //</editor-fold>
 
+    fun takeScreenshot(): BufferedImage {
+        return ImageIO.read(takeScreenshot_N().inputStream())
+    }
     //<editor-fold desc="Native functions">
 
     private external fun initialize_N(url: String): Long
@@ -86,5 +91,6 @@ class SKryptonWebView(url: String) : QWidget() {
     private external fun setZoomFactor_N(factor: Double)
     private external fun zoomFactor_N(): Double
 
+    private external fun takeScreenshot_N(): ByteArray
     //</editor-fold>
 }

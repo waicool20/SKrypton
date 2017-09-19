@@ -79,6 +79,14 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_s
 JNIEXPORT jdouble JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_zoomFactor_1N
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    takeScreenshot_N
+ * Signature: ()[B
+ */
+JNIEXPORT jbyteArray JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeScreenshot_1N
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

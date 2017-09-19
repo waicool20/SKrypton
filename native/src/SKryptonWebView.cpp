@@ -73,7 +73,8 @@ jobject Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getSettings_1N(J
     if (opt) {
         SKryptonWebView* view = opt.value();
         auto settingsPointer = (jlong) view->settings();
-        auto jSettings = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonWebSettings", "(J)V", settingsPointer);
+        auto jSettings = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonWebSettings", "(J)V",
+                                   settingsPointer);
         if (jSettings) return jSettings.value();
     }
     ThrowNewError(env, LOG_PREFIX + "Failed to retrieve settings");
@@ -97,6 +98,32 @@ jdouble Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_zoomFactor_1N(JN
         return view->zoomFactor();
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to get zoom factor");
+    }
+}
+
+jbyteArray JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeScreenshot_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value();
+        if (view->isHidden()) {
+            ThrowNewError(env, LOG_PREFIX + "Window must be showing to take screenshot");
+            return {};
+        }
+        QPixmap pixmap { view->size() };
+        auto isDone = false;
+        SKryptonApp::runOnMainThread([&pixmap, &isDone, view] {
+            view->render(&pixmap, QPoint(), QRegion(view->rect()));
+            isDone = true;
+        });
+        while(!isDone) {}
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        pixmap.save(&buffer, "PNG");
+        auto arr = env->NewByteArray(byteArray.size());
+        env->SetByteArrayRegion(arr, 0, byteArray.size() - 1, (jbyte*) byteArray.data());
+        return arr;
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Failed to take screenshot");
     }
 }
 
