@@ -14,6 +14,9 @@ class SKryptonWebView(url: String) : QWidget() {
         get() = zoomFactor_N()
         set(value) = setZoomFactor_N(value)
 
+    val settings: SKryptonWebSettings
+        get() = getSettings_N()
+
     fun load(url: URL) = load(url.toString())
     fun load(url: String) = load_N(url)
 
@@ -77,6 +80,8 @@ class SKryptonWebView(url: String) : QWidget() {
     private external fun forward_N()
     private external fun reload_N()
     private external fun stop_N()
+
+    private external fun getSettings_N(): SKryptonWebSettings
 
     private external fun setZoomFactor_N(factor: Double)
     private external fun zoomFactor_N(): Double

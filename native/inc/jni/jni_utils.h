@@ -28,6 +28,7 @@ void ThrowNewError(JNIEnv* env, const string& message);
 JNIEnv* GetLocalJNIEnvRef();
 optional<jclass> FindClass(string name);
 optional<string> GetClassName(JNIEnv* env, jobject obj);
+optional<jobject> NewObject(JNIEnv* env, string clazz, string signature, ...);
 
 #include <jni_field_utils.h>
 #include <jni_pointer_utils.h>

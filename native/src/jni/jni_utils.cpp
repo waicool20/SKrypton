@@ -108,3 +108,15 @@ optional<string> GetClassName(JNIEnv* env, jobject obj) {
     auto jstr = (jstring) env->CallObjectMethod(objClass, classGetNameMethodID);
     return { StringFromJstring(env, jstr) };
 }
+
+optional<jobject> NewObject(JNIEnv* env, string clazz, string signature, ...) {
+    auto jclazz = FindClass(clazz);
+    if (jclazz) {
+        auto constructor = env->GetMethodID(jclazz.value(), "<init>", signature.c_str());
+        if (CheckExceptions(env)) return {};
+        va_list args;
+        va_start(args, signature);
+        return { env->NewObjectV(jclazz.value(), constructor, args) };
+    }
+    return {};
+}

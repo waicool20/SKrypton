@@ -68,6 +68,17 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_stop_1N(JNIEnv* env
     }
 }
 
+jobject Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getSettings_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value();
+        auto settingsPointer = (jlong) view->settings();
+        auto jSettings = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonWebSettings", "(J)V", settingsPointer);
+        if (jSettings) return jSettings.value();
+    }
+    ThrowNewError(env, LOG_PREFIX + "Failed to retrieve settings");
+}
+
 void
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setZoomFactor_1N(JNIEnv* env, jobject obj, jdouble factor) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);

@@ -57,6 +57,14 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_s
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    getSettings_N
+ * Signature: ()Lcom/waicool20/skrypton/jni/objects/SKryptonWebSettings;
+ */
+JNIEXPORT jobject JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getSettings_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
  * Method:    setZoomFactor_N
  * Signature: (D)V
  */
