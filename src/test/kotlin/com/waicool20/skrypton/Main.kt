@@ -7,19 +7,10 @@ import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-    val app = SKryptonApp.initalize()
+    val app = SKryptonApp.initalize(remoteDebugPort = 8888)
     val webView = SKryptonWebView("https://www.google.com")
     webView.resize(1280, 720)
     webView.show()
-    webView.addOnLoadStartedListener {
-        println("Loading has started")
-    }
-    webView.addOnLoadProgressListener {
-        println("Loading in progress: $it")
-    }
-    webView.addOnLoadFinishedListener {
-        println("Loading complete: $it")
-    }
 
     thread {
         TimeUnit.SECONDS.sleep(2)
