@@ -21,8 +21,7 @@ class SKryptonWebView(url: String) : QWidget() {
             setZoomFactor_N(value)
         }
 
-    val settings: SKryptonWebSettings
-        get() = getSettings_N()
+    val settings by lazy { getSettings_N() }
 
     fun load(url: URL) = load(url.toString())
     fun load(url: String) = load_N(url)
