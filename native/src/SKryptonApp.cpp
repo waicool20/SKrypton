@@ -4,6 +4,16 @@ static SKryptonApp* app = nullptr;
 static int argc = 0;
 static vector<char*> argv {};
 
+void
+Java_com_waicool20_skrypton_jni_objects_SKryptonApp_putEnv_1N(JNIEnv* env, jobject obj, jstring key, jstring value) {
+    qputenv(StringFromJstring(env, key).c_str(), StringFromJstring(env, value).c_str());
+}
+
+jstring Java_com_waicool20_skrypton_jni_objects_SKryptonApp_getEnv_1N(JNIEnv* env, jobject obj, jstring key) {
+    auto value = qgetenv(StringFromJstring(env, key).c_str()).toStdString();
+    return JstringFromString(env, value);
+}
+
 void Java_com_waicool20_skrypton_jni_objects_SKryptonApp_runOnMainThread_1N(JNIEnv* env, jobject obj, jobject action) {
     qRegisterMetaType<jobject>();
     auto g_obj = env->NewGlobalRef(obj);
@@ -20,7 +30,8 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonApp_initialize_1N(JNIEnv* 
             return {};
         }
         if (!gClassLoader) {
-            auto loader = CallStaticMethod<jobject>(env, "java/lang/ClassLoader", "getSystemClassLoader", "()Ljava/lang/ClassLoader;");
+            auto loader = CallStaticMethod<jobject>(env, "java/lang/ClassLoader", "getSystemClassLoader",
+                                                    "()Ljava/lang/ClassLoader;");
 
             if (!loader) {
                 ThrowNewError(env, "Error getting classloader reference");

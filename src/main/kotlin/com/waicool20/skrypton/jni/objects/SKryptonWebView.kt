@@ -67,6 +67,8 @@ class SKryptonWebView(url: String) : QWidget() {
 
     //</editor-fold>
 
+    //<editor-fold desc="Native functions">
+
     private external fun initialize_N(url: String): Long
 
     private external fun load_N(url: String)
@@ -78,4 +80,6 @@ class SKryptonWebView(url: String) : QWidget() {
 
     private external fun setZoomFactor_N(factor: Double)
     private external fun zoomFactor_N(): Double
+
+    //</editor-fold>
 }

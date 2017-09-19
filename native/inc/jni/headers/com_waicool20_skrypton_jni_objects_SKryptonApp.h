@@ -9,6 +9,22 @@ extern "C" {
 #endif
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonApp
+ * Method:    putEnv_N
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonApp_putEnv_1N
+  (JNIEnv *, jobject, jstring, jstring);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonApp
+ * Method:    getEnv_N
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonApp_getEnv_1N
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonApp
  * Method:    runOnMainThread_N
  * Signature: (Ljava/lang/Runnable;)V
  */

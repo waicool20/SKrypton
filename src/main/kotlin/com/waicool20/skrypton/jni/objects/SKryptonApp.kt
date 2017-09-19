@@ -24,12 +24,26 @@ object SKryptonApp : NativeInterface() {
     fun exec() = exec_N()
     fun runOnMainThread(action: () -> Unit) = runOnMainThread_N(Runnable { action() })
 
+    //<editor-fold desc="Environment functions">
+
+    fun putEnv(key: String, value: String) = putEnv_N(key, value)
+    fun getEnv(key: String) = getEnv_N(key)
+
+    //</editor-fold>
+
     override fun close() {
         dispose_N()
     }
+
+    //<editor-fold desc="Native functions">
+
+    private external fun putEnv_N(key: String, value: String)
+    private external fun getEnv_N(key: String): String
 
     private external fun runOnMainThread_N(action: Runnable)
     private external fun initialize_N(args: Array<String>): Long
     private external fun exec_N(): Int
     private external fun dispose_N()
+
+    //</editor-fold>
 }
