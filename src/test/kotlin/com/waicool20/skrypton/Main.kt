@@ -1,6 +1,7 @@
 package com.waicool20.skrypton
 
 import com.waicool20.skrypton.jni.objects.SKryptonApp
+import com.waicool20.skrypton.jni.objects.SKryptonWebSettings
 import com.waicool20.skrypton.jni.objects.SKryptonWebView
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
@@ -11,6 +12,9 @@ fun main(args: Array<String>) {
     val webView = SKryptonWebView("https://www.google.com")
     webView.resize(1280, 720)
     webView.show()
+
+    println(webView.settings.getFontFamily(SKryptonWebSettings.FontFamily.SerifFont))
+    println(webView.settings.getFontSize(SKryptonWebSettings.FontSize.DefaultFontSize))
     thread {
         TimeUnit.SECONDS.sleep(2)
         println("Loading GitHub")

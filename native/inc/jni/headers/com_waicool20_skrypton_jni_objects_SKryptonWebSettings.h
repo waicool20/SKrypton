@@ -9,6 +9,54 @@ extern "C" {
 #endif
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebSettings
+ * Method:    getFontSize_N
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getFontSize_1N
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebSettings
+ * Method:    setFontSize_N
+ * Signature: (II)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setFontSize_1N
+  (JNIEnv *, jobject, jint, jint);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebSettings
+ * Method:    resetFontSize_N
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetFontSize_1N
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebSettings
+ * Method:    getFontFamily_N
+ * Signature: (I)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getFontFamily_1N
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebSettings
+ * Method:    setFontFamily_N
+ * Signature: (ILjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setFontFamily_1N
+  (JNIEnv *, jobject, jint, jstring);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebSettings
+ * Method:    resetFontFamily_N
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetFontFamily_1N
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebSettings
  * Method:    getDefaultTextEncoding_N
  * Signature: ()Ljava/lang/String;
  */

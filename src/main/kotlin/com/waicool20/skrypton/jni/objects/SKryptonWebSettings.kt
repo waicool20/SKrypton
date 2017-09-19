@@ -92,24 +92,24 @@ class SKryptonWebSettings private constructor(pointer: Long) : NativeInterface()
 
     //</editor-fold>
 
-    //<editor-fold desc="Font member fields>
+    //<editor-fold desc="Font stuff">
 
     var defaultTextEncoding
         get() = Charset.forName(getDefaultTextEncoding_N())
         set(value) = setDefaultTextEncoding_N(value.name())
 
-    //</editor-fold>
-
     enum class FontFamily {
         StandardFont, FixedFont, SerifFont,
         SansSerifFont, CursiveFont, FantasyFont,
-        PictographFint
+        PictographFont
     }
 
     enum class FontSize {
         MinimumFontSize, MinimumLogicalFontSize,
         DefaultFontSize, DefaultFixedFontSize
     }
+
+    //</editor-fold>
 
     enum class WebAttribute {
         AutoLoadImages,
@@ -140,9 +140,25 @@ class SKryptonWebSettings private constructor(pointer: Long) : NativeInterface()
 
     fun resetAttribute(attribute: WebAttribute) = resetAttribute_N(attribute.ordinal)
 
+    fun getFontSize(font: FontSize) = getFontSize_N(font.ordinal)
+    fun setFontSize(font: FontSize, size: Int) = setFontSize_N(font.ordinal, size)
+    fun resetFontSize(font: FontSize) = resetFontSize_N(font.ordinal)
+
+    fun getFontFamily(family: FontFamily) = getFontFamily_N(family.ordinal)
+    fun setFontFamily(whichFamily: FontFamily, family: String) = setFontFamily_N(whichFamily.ordinal, family)
+    fun resetFontFamily(family: FontFamily) = resetFontFamily_N(family.ordinal)
+
     override fun close() {
         logger.info { "Settings cannot be disposed, dispose related WebView instead" }
     }
+
+    private external fun getFontSize_N(font: Int): Int
+    private external fun setFontSize_N(font: Int, size: Int)
+    private external fun resetFontSize_N(font: Int)
+
+    private external fun getFontFamily_N(family: Int): String
+    private external fun setFontFamily_N(whichFamily: Int, family: String)
+    private external fun resetFontFamily_N(family: Int)
 
     private external fun getDefaultTextEncoding_N(): String
     private external fun setDefaultTextEncoding_N(string: String)
