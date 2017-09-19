@@ -11,8 +11,8 @@ class SKryptonWebSettings private constructor(pointer: Long) : NativeInterface()
     override val handle: CPointer = CPointer(pointer)
 
     companion object {
-        fun getDefaultSettings() = defaultSettings_N()
-        private external fun defaultSettings_N()
+        val defaults by lazy { defaultSettings_N() }
+        private external fun defaultSettings_N(): SKryptonWebSettings
     }
 
     //<editor-fold desc="Attribute member fields">

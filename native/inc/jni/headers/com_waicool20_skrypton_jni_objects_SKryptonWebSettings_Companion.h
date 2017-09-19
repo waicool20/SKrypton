@@ -10,9 +10,9 @@ extern "C" {
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebSettings_Companion
  * Method:    defaultSettings_N
- * Signature: ()V
+ * Signature: ()Lcom/waicool20/skrypton/jni/objects/SKryptonWebSettings;
  */
-JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_00024Companion_defaultSettings_1N
+JNIEXPORT jobject JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_00024Companion_defaultSettings_1N
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
