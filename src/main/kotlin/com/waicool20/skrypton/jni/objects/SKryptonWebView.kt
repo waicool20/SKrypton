@@ -14,7 +14,12 @@ class SKryptonWebView(url: String) : QWidget() {
 
     var zoomFactor: Double
         get() = zoomFactor_N()
-        set(value) = setZoomFactor_N(value)
+        set(value) {
+            require(value in 0.25..5.0) {
+                "Zoom factor must be a value from 0.25 to 5.0, given value: $value"
+            }
+            setZoomFactor_N(value)
+        }
 
     val settings: SKryptonWebSettings
         get() = getSettings_N()
@@ -75,6 +80,7 @@ class SKryptonWebView(url: String) : QWidget() {
     fun takeScreenshot(): BufferedImage {
         return ImageIO.read(takeScreenshot_N().inputStream())
     }
+
     //<editor-fold desc="Native functions">
 
     private external fun initialize_N(url: String): Long
