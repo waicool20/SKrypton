@@ -6,7 +6,7 @@ data class CPointer(val handle: Long) {
     private val logger = loggerFor<CPointer>()
 
     init {
-        logger.debug { "New $this" }
+        logger.trace { "New $this" }
     }
 }
 

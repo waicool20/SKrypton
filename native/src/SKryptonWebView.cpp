@@ -2,6 +2,49 @@
 
 static bool initialized = false;
 
+WebViewEventHandler::WebViewEventHandler(SKryptonWebView* webView) {
+    this->webView = webView;
+    this->env = GetLocalJNIEnvRef();
+}
+
+bool WebViewEventHandler::eventFilter(QObject* watched, QEvent* event) {
+    this->event(event);
+    return false;
+}
+
+//<editor-fold desc="Mouse Events">
+
+void WebViewEventHandler::mousePressEvent(QMouseEvent* event) {
+    mouseEvent(event);
+}
+
+void WebViewEventHandler::mouseReleaseEvent(QMouseEvent* event) {
+    mouseEvent(event);
+}
+
+void WebViewEventHandler::mouseDoubleClickEvent(QMouseEvent* event) {
+    mouseEvent(event);
+}
+
+void WebViewEventHandler::mouseMoveEvent(QMouseEvent* event) {
+    mouseEvent(event);
+}
+
+void WebViewEventHandler::mouseEvent(QMouseEvent* event) {
+    auto pointerLong = (jlong) event;
+    auto sMouseEvent = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonMouseEvent", "(J)V",
+                                 pointerLong);
+    if (sMouseEvent) {
+        CallMethod<void*>(env, webView->jInstance, "onMouseEvent",
+                          "(ILcom/waicool20/skrypton/jni/objects/SKryptonMouseEvent;)V", event->type(),
+                          sMouseEvent.value());
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not send mouse event to JVM instance");
+    }
+}
+
+//</editor-fold>
+
 jlong Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N(JNIEnv* env, jobject obj,
                                                                             jstring jurl) {
     if (initialized) {
@@ -10,11 +53,11 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N(JNIE
     }
     auto url = StringFromJstring(env, jurl);
     auto ref = env->NewWeakGlobalRef(obj);
-    auto app = new SKryptonWebView { ref, url };
-    app->connect(app, &QWebEngineView::loadStarted, app, &SKryptonWebView::loadStarted);
-    app->connect(app, &QWebEngineView::loadProgress, app, &SKryptonWebView::loadProgress);
-    app->connect(app, &QWebEngineView::loadFinished, app, &SKryptonWebView::loadFinished);
-    return (jlong) app;
+    auto view = new SKryptonWebView { ref, url };
+    view->connect(view, &QWebEngineView::loadStarted, view, &SKryptonWebView::loadStarted);
+    view->connect(view, &QWebEngineView::loadProgress, view, &SKryptonWebView::loadProgress);
+    view->connect(view, &QWebEngineView::loadFinished, view, &SKryptonWebView::loadFinished);
+    return (jlong) view;
 }
 
 void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env, jobject obj, jstring jurl) {
@@ -115,7 +158,7 @@ jbyteArray JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeS
             view->render(&pixmap, QPoint(), QRegion(view->rect()));
             isDone = true;
         });
-        while(!isDone) {}
+        while (!isDone) {}
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         pixmap.save(&buffer, "PNG");
@@ -127,11 +170,13 @@ jbyteArray JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeS
     }
 }
 
-SKryptonWebView::SKryptonWebView(jobject jInstance, string& url) : jInstance(jInstance) {
+SKryptonWebView::SKryptonWebView(jobject jInstance, string& url) :
+        jInstance(jInstance), webViewEventHandler(new WebViewEventHandler(this)) {
     load(QUrl { url.c_str() });
 }
 
 void SKryptonWebView::loadStarted() {
+    installWebViewEventHandler(); // Needs to be re-installed every time a new page loads
     CallMethod<void*>(GetLocalJNIEnvRef(), jInstance, "loadStarted", "()V");
 }
 
@@ -141,4 +186,13 @@ void SKryptonWebView::loadProgress(int progress) {
 
 void SKryptonWebView::loadFinished(bool ok) {
     CallMethod<void*>(GetLocalJNIEnvRef(), jInstance, "loadFinished", "(Z)V", ok);
+}
+
+void SKryptonWebView::installWebViewEventHandler() {
+    for (auto child : children()) {
+        if (QWidget* widget = dynamic_cast<QWidget*>(child)) {
+            widget->installEventFilter(webViewEventHandler);
+            break;
+        }
+    }
 }

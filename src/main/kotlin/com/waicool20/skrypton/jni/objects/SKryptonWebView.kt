@@ -1,5 +1,6 @@
 package com.waicool20.skrypton.jni.objects
 
+import com.waicool20.skrypton.enums.MouseEventType
 import com.waicool20.skrypton.jni.CPointer
 import java.awt.image.BufferedImage
 import java.net.URL
@@ -30,6 +31,8 @@ class SKryptonWebView(url: String) : QWidget() {
     fun forward() = forward_N()
     fun reload() = reload_N()
     fun stop() = stop_N()
+
+    //<editor-fold desc="Load listeners">
 
     //<editor-fold desc="Load start listener">
 
@@ -72,6 +75,25 @@ class SKryptonWebView(url: String) : QWidget() {
 
     fun removeOnLoadFinishedListener(listener: (ok: Boolean) -> Unit) {
         loadFinishedListeners.remove(listener)
+    }
+
+    //</editor-fold>
+
+    //</editor-fold>
+
+    //<editor-fold desc="Mouse listener">
+
+    private val onMouseEventListeners = mutableMapOf<MouseEventType, (event: SKryptonMouseEvent) -> Unit>()
+    private fun onMouseEvent(type: Int, event: SKryptonMouseEvent) {
+        onMouseEventListeners.filterKeys { it == MouseEventType.getForId(type) }.values.forEach { it(event) }
+    }
+
+    fun addOnMouseEventListener(type: MouseEventType, listener: (event: SKryptonMouseEvent) -> Unit) {
+        onMouseEventListeners.put(type, listener)
+    }
+
+    fun removeOnMouseEventListener(type: MouseEventType, listener: (event: SKryptonMouseEvent) -> Unit) {
+        onMouseEventListeners.remove(type, listener)
     }
 
     //</editor-fold>

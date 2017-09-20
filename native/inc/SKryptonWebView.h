@@ -6,20 +6,40 @@
 
 #include <SKryptonApp.h>
 
+#include <QtCore>
 #include <QtWebEngine>
 #include <QWebEngineView>
 
 #include <com_waicool20_skrypton_jni_objects_SKryptonWebView.h>
 
+class SKryptonWebView;
+
+class WebViewEventHandler : public QWidget{
+private:
+    SKryptonWebView* webView;
+    JNIEnv* env;
+public:
+    WebViewEventHandler(SKryptonWebView* webView);
+private:
+    bool eventFilter(QObject* watched, QEvent* event);
+    void mousePressEvent(QMouseEvent* event);
+    void mouseReleaseEvent(QMouseEvent* event);
+    void mouseDoubleClickEvent(QMouseEvent* event);
+    void mouseMoveEvent(QMouseEvent* event);
+    void mouseEvent(QMouseEvent* event);
+};
+
 class SKryptonWebView : public QWebEngineView {
 Q_OBJECT
+public:
+    jobject jInstance;
+    WebViewEventHandler* webViewEventHandler;
 public:
     SKryptonWebView(jobject jInstance, string& url);
     void loadStarted();
     void loadProgress(int progress);
     void loadFinished(bool ok);
-private:
-    jobject jInstance;
+    void installWebViewEventHandler();
 };
 
 
