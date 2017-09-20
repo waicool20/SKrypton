@@ -87,6 +87,14 @@ JNIEXPORT jdouble JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebVie
 JNIEXPORT jbyteArray JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeScreenshot_1N
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    sendEvent_N
+ * Signature: (Lcom/waicool20/skrypton/jni/objects/SKryptonEvent;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_sendEvent_1N
+  (JNIEnv *, jobject, jobject);
+
 #ifdef __cplusplus
 }
 #endif

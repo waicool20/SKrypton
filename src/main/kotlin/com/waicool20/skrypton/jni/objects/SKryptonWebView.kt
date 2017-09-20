@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage
 import java.net.URL
 import javax.imageio.ImageIO
 
-class SKryptonWebView(url: String) : QWidget() {
+class SKryptonWebView(url: String) : SKryptonWidget() {
     override val handle: CPointer
 
     init {
@@ -101,6 +101,7 @@ class SKryptonWebView(url: String) : QWidget() {
     fun takeScreenshot(): BufferedImage {
         return ImageIO.read(takeScreenshot_N().inputStream())
     }
+    fun sendEvent(event: SKryptonEvent) = sendEvent_N(event)
 
     //<editor-fold desc="Native functions">
 
@@ -119,5 +120,6 @@ class SKryptonWebView(url: String) : QWidget() {
     private external fun zoomFactor_N(): Double
 
     private external fun takeScreenshot_N(): ByteArray
+    private external fun sendEvent_N(event: SKryptonEvent)
     //</editor-fold>
 }

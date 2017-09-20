@@ -5,11 +5,10 @@ import com.waicool20.skrypton.enums.MouseButton
 import com.waicool20.skrypton.enums.MouseEventSource
 import com.waicool20.skrypton.enums.MouseEventType
 import com.waicool20.skrypton.jni.CPointer
-import com.waicool20.skrypton.jni.NativeInterface
 import java.awt.MouseInfo
 import java.awt.Point
 
-class SKryptonMouseEvent private constructor(pointer: Long) : NativeInterface() {
+class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent() {
     override val handle = CPointer(pointer)
 
     private companion object {
@@ -28,17 +27,18 @@ class SKryptonMouseEvent private constructor(pointer: Long) : NativeInterface() 
         ): Long
     }
 
+    //<editor-fold desc="Constructor">
     constructor(
             type: MouseEventType,
             localPos: Point,
             windowPos: Point = localPos,
             screenPos: Point = MouseInfo.getPointerInfo().location,
             button: MouseButton = MouseButton.NoButton,
-            buttons: MouseButton = MouseButton.NoButton,
+            buttons: MouseButton = button,
             modifiers: KeyboardModifiers = KeyboardModifiers.NoModifier,
             source: MouseEventSource = MouseEventSource.MouseEventNotSynthesized
     ) : this(initialize_N(
-            type.ordinal,
+            type.id,
             localPos.x, localPos.y,
             windowPos.x, windowPos.y,
             screenPos.x, screenPos.y,
@@ -47,6 +47,7 @@ class SKryptonMouseEvent private constructor(pointer: Long) : NativeInterface() 
             modifiers.value,
             source.ordinal
     ))
+    //</editor-fold>
 
     val x by lazy { localPos.x }
     val y by lazy { localPos.y }

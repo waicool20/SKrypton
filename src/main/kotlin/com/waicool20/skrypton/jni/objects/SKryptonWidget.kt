@@ -3,7 +3,7 @@ package com.waicool20.skrypton.jni.objects
 import com.waicool20.skrypton.jni.NativeInterface
 
 
-abstract class QWidget: NativeInterface() {
+abstract class SKryptonWidget : NativeInterface() {
     fun show() = show_N()
     fun hide() = hide_N()
     fun resize(width: Int, height: Int) = resize_N(width, height)

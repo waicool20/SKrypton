@@ -2,6 +2,8 @@
 
 static bool initialized = false;
 
+//<editor-fold desc="WebViewEventHandler">
+
 WebViewEventHandler::WebViewEventHandler(SKryptonWebView* webView) {
     this->webView = webView;
     this->env = GetLocalJNIEnvRef();
@@ -42,6 +44,8 @@ void WebViewEventHandler::mouseEvent(QMouseEvent* event) {
         ThrowNewError(env, LOG_PREFIX + "Could not send mouse event to JVM instance");
     }
 }
+
+//</editor-fold>
 
 //</editor-fold>
 
@@ -167,6 +171,23 @@ jbyteArray JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeS
         return arr;
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to take screenshot");
+    }
+}
+
+void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_sendEvent_1N(JNIEnv* env, jobject obj, jobject jEvent) {
+    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt2 = PointerFromCPointer<QEvent>(env, jEvent);
+    if (opt && opt2) {
+        SKryptonWebView* view = opt.value();
+        QEvent* event = opt2.value();
+        for (auto child : view->children()) {
+            if (QWidget* widget = dynamic_cast<QWidget*>(child)) {
+                QApplication::postEvent(widget, event);
+                break;
+            }
+        }
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Failed to pass event");
     }
 }
 
