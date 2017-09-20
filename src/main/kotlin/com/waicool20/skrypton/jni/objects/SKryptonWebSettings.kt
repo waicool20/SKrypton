@@ -1,5 +1,8 @@
 package com.waicool20.skrypton.jni.objects
 
+import com.waicool20.skrypton.enums.FontFamily
+import com.waicool20.skrypton.enums.FontSize
+import com.waicool20.skrypton.enums.WebAttribute
 import com.waicool20.skrypton.jni.CPointer
 import com.waicool20.skrypton.jni.NativeInterface
 import com.waicool20.skrypton.util.loggerFor
@@ -92,51 +95,9 @@ class SKryptonWebSettings private constructor(pointer: Long) : NativeInterface()
 
     //</editor-fold>
 
-    //<editor-fold desc="Font stuff">
-
     var defaultTextEncoding
         get() = Charset.forName(getDefaultTextEncoding_N())
         set(value) = setDefaultTextEncoding_N(value.name())
-
-    enum class FontFamily {
-        StandardFont, FixedFont, SerifFont,
-        SansSerifFont, CursiveFont, FantasyFont,
-        PictographFont
-    }
-
-    enum class FontSize {
-        MinimumFontSize, MinimumLogicalFontSize,
-        DefaultFontSize, DefaultFixedFontSize
-    }
-
-    //</editor-fold>
-
-    enum class WebAttribute {
-        AutoLoadImages,
-        JavascriptEnabled,
-        JavascriptCanOpenWindows,
-        JavascriptCanAccessClipboard,
-        LinksIncludedInFocusChain,
-        LocalStorageEnabled,
-        LocalContentCanAccessRemoteUrls,
-        XssAuditingEnabled,
-        SpatialNavigationEnabled,
-        LocalContentCanAccessFileUrls,
-        HyperlinkAuditingEnabled,
-        ScrollAnimatorEnabled,
-        ErrorPageEnabled,
-        PluginsEnabled,
-        FullScreenSupportEnabled,
-        ScreenCaptureEnabled,
-        WebGlEnabled,
-        Accelerated2dCanvasEnabled,
-        AutoLoadIconsForPage,
-        TouchIconsEnabled,
-        FocusOnNavigationEnabled,
-        PrintElementBackgrounds,
-        AllowRunningInsecureContent,
-        AllowGeolocationOnInsecureOrigins
-    }
 
     fun resetAttribute(attribute: WebAttribute) = resetAttribute_N(attribute.ordinal)
 
