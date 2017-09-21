@@ -206,6 +206,7 @@ void SKryptonWebView::loadProgress(int progress) {
 }
 
 void SKryptonWebView::loadFinished(bool ok) {
+    setWindowTitle(title());
     CallMethod<void*>(GetLocalJNIEnvRef(), jInstance, "loadFinished", "(Z)V", ok);
 }
 
