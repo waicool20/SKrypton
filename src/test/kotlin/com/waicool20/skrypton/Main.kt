@@ -17,13 +17,14 @@ fun main(args: Array<String>) {
     webView.show()
     thread {
         TimeUnit.SECONDS.sleep(2)
+        println(webView.url)
         println("Loading GitHub")
         webView.load("https://github.com/")
     }
     thread {
         TimeUnit.SECONDS.sleep(5)
         //webView.back()
-        println(webView.url)
+
         println("Sending events!")
         repeat(1) {
             webView.sendEvent(SKryptonMouseEvent(MouseEventType.MouseMove, Point(670, 400)))

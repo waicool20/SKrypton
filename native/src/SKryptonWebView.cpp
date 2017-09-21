@@ -197,9 +197,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_sendEvent_1N(JNIEnv* env
                 break;
             }
         }
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Failed to pass event");
     }
-    ThrowNewError(env, LOG_PREFIX + "Failed to pass event");
-
 }
 
 JNIEXPORT jboolean JNICALL
