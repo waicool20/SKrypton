@@ -26,10 +26,9 @@ task refreshCMake(type: Exec) {
 task makeNativeLibraries(type: Exec) {
     dependsOn refreshCMake
     workingDir cmakeBuildDir
-    commandLine 'make'
-    args = ['install', '-j4']
+    commandLine 'cmake'
+    args = ['--build', './']
 }
-
 
 task copyKotlinStdLib(type: Copy) {
     into "build/kstdlib"
