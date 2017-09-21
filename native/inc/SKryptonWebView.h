@@ -31,7 +31,8 @@ private:
 
 class SKryptonWebView : public QWebEngineView {
 Q_OBJECT
-public:
+private:
+    bool mIsLoading = true;
     jobject jInstance;
     WebViewEventHandler* webViewEventHandler;
 public:
@@ -40,6 +41,9 @@ public:
     void loadProgress(int progress);
     void loadFinished(bool ok);
     void installWebViewEventHandler();
+    bool isLoading();
+    jobject getJInstance();
+    WebViewEventHandler* getWebViewEventHandler();
 };
 
 

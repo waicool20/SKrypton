@@ -37,7 +37,7 @@ void WebViewEventHandler::mouseEvent(QMouseEvent* event) {
     auto sMouseEvent = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonMouseEvent", "(J)V",
                                  pointerLong);
     if (sMouseEvent) {
-        CallMethod<void*>(env, webView->jInstance, "onMouseEvent",
+        CallMethod<void*>(env, webView->getJInstance(), "onMouseEvent",
                           "(ILcom/waicool20/skrypton/jni/objects/SKryptonMouseEvent;)V", event->type(),
                           sMouseEvent.value());
     } else {
@@ -191,12 +191,23 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_sendEvent_1N(JNIEnv
     }
 }
 
+jboolean Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_isLoading_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value();
+        return view->isLoading();
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Failed to check if loading");
+    }
+}
+
 SKryptonWebView::SKryptonWebView(jobject jInstance, string& url) :
         jInstance(jInstance), webViewEventHandler(new WebViewEventHandler(this)) {
     load(QUrl { url.c_str() });
 }
 
 void SKryptonWebView::loadStarted() {
+    mIsLoading = true;
     installWebViewEventHandler(); // Needs to be re-installed every time a new page loads
     CallMethod<void*>(GetLocalJNIEnvRef(), jInstance, "loadStarted", "()V");
 }
@@ -206,8 +217,21 @@ void SKryptonWebView::loadProgress(int progress) {
 }
 
 void SKryptonWebView::loadFinished(bool ok) {
+    mIsLoading = false;
     setWindowTitle(title());
     CallMethod<void*>(GetLocalJNIEnvRef(), jInstance, "loadFinished", "(Z)V", ok);
+}
+
+bool SKryptonWebView::isLoading() {
+    return mIsLoading;
+}
+
+jobject SKryptonWebView::getJInstance() {
+    return jInstance;
+}
+
+WebViewEventHandler* SKryptonWebView::getWebViewEventHandler() {
+    return webViewEventHandler;
 }
 
 void SKryptonWebView::installWebViewEventHandler() {

@@ -15,25 +15,15 @@ fun main(args: Array<String>) {
     val webView = SKryptonWebView("https://www.google.com")
     webView.resize(1280, 720)
     webView.show()
-    webView.addOnMouseEventListener(MouseEventType.MouseButtonPress) {
-        println("Pressed ${it.x} ${it.y}")
-    }
-    webView.addOnMouseEventListener(MouseEventType.MouseButtonRelease) {
-        println("Released ${it.x} ${it.y}")
-    }
-    webView.addOnMouseEventListener(MouseEventType.MouseMove) {
-        println("Moved ${it.x} ${it.y}")
-    }
     thread {
         TimeUnit.SECONDS.sleep(2)
         println("Loading GitHub")
-        //webView.load("https://github.com/")
+        webView.load("https://github.com/")
     }
     thread {
         TimeUnit.SECONDS.sleep(5)
         //webView.back()
         println("Sending events!")
-
         repeat(1) {
             webView.sendEvent(SKryptonMouseEvent(MouseEventType.MouseMove, Point(670, 400)))
             webView.sendEvent(SKryptonMouseEvent(MouseEventType.MouseButtonPress, Point(670, 400), button = MouseButton.LeftButton))

@@ -57,6 +57,14 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_s
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    isLoading_N
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_isLoading_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
  * Method:    getSettings_N
  * Signature: ()Lcom/waicool20/skrypton/jni/objects/SKryptonWebSettings;
  */

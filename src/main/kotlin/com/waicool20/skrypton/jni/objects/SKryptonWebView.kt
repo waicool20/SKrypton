@@ -32,6 +32,8 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
     fun reload() = reload_N()
     fun stop() = stop_N()
 
+    fun isLoading() = isLoading_N()
+
     //<editor-fold desc="Load listeners">
 
     //<editor-fold desc="Load start listener">
@@ -113,6 +115,8 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
     private external fun forward_N()
     private external fun reload_N()
     private external fun stop_N()
+
+    private external fun isLoading_N(): Boolean
 
     private external fun getSettings_N(): SKryptonWebSettings
 
