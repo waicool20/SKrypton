@@ -8,6 +8,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getButton_1N(JNIEnv* 
         return (jlong) event->button();
     }
     ThrowNewError(env, LOG_PREFIX + "Could not get button");
+    return {};
 }
 
 JNIEXPORT jlong JNICALL
@@ -18,6 +19,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getButtons_1N(JNIEnv*
         return (jlong) event->buttons();
     }
     ThrowNewError(env, LOG_PREFIX + "Could not get buttons");
+    return {};
 }
 
 JNIEXPORT jobject JNICALL
@@ -29,6 +31,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getGlobalPos_1N(JNIEn
         if (point) return point.value();
     }
     ThrowNewError(env, LOG_PREFIX + "Could not get global pos");
+    return {};
 }
 
 JNIEXPORT jobject JNICALL
@@ -41,6 +44,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getScreenPos_1N(JNIEn
         if (point) return point.value();
     }
     ThrowNewError(env, LOG_PREFIX + "Could not get screen pos");
+    return {};
 }
 
 JNIEXPORT jobject JNICALL
@@ -52,6 +56,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getLocalPos_1N(JNIEnv
         if (point) return point.value();
     }
     ThrowNewError(env, LOG_PREFIX + "Could not get local pos");
+    return {};
 }
 
 JNIEXPORT jint JNICALL
@@ -62,6 +67,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getSource_1N(JNIEnv* 
         return (jint) event->source();
     }
     ThrowNewError(env, LOG_PREFIX + "Could not get button");
+    return {};
 }
 
 JNIEXPORT jlong JNICALL

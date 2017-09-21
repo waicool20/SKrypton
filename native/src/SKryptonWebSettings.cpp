@@ -8,6 +8,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getFontSize_1N(JNIEn
         return settings->fontSize(static_cast<QWebEngineSettings::FontSize>(font));
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not get font size");
+        return {};
     }
 }
 
@@ -43,6 +44,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getFontFamily_1N(JNI
         return JstringFromString(env, sFamily);
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not get font family");
+        return {};
     }
 }
 
@@ -77,6 +79,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_00024Companion_defau
     auto jSettings = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonWebSettings", "(J)V", settingsPointer);
     if (jSettings) return jSettings.value();
     ThrowNewError(env, LOG_PREFIX + "Could not retrieve default webview settings");
+    return {};
 }
 
 JNIEXPORT jstring JNICALL
@@ -88,6 +91,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getDefaultTextEncodi
         return JstringFromString(env, charset);
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not retrieve default charset");
+        return {};
     }
 }
 
@@ -132,8 +136,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_testAttribute_1N(JNI
     if (opt) {
         QWebEngineSettings* settings = opt.value();
         return settings->testAttribute(static_cast<QWebEngineSettings::WebAttribute>(attr));
-    } else {
-        ThrowNewError(env, LOG_PREFIX + "Failed to test attribute " + to_string(attr));
     }
+        ThrowNewError(env, LOG_PREFIX + "Failed to test attribute " + to_string(attr));
+        return {};
+
 }
 

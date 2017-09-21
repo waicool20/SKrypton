@@ -132,6 +132,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getSettings_1N(JNIEnv* e
         if (jSettings) return jSettings.value();
     }
     ThrowNewError(env, LOG_PREFIX + "Failed to retrieve settings");
+    return {};
 }
 
 JNIEXPORT void JNICALL
@@ -140,9 +141,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setZoomFactor_1N(JNIEnv*
     if (opt) {
         SKryptonWebView* view = opt.value();
         SKryptonApp::runOnMainThread([=] { view->setZoomFactor(factor); });
-    } else {
-        ThrowNewError(env, LOG_PREFIX + "Failed to set zoom factor to " + to_string(factor));
     }
+    ThrowNewError(env, LOG_PREFIX + "Failed to set zoom factor to " + to_string(factor));
+
 }
 
 JNIEXPORT jdouble JNICALL
@@ -151,9 +152,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_zoomFactor_1N(JNIEnv* en
     if (opt) {
         SKryptonWebView* view = opt.value();
         return view->zoomFactor();
-    } else {
-        ThrowNewError(env, LOG_PREFIX + "Failed to get zoom factor");
     }
+    ThrowNewError(env, LOG_PREFIX + "Failed to get zoom factor");
+    return {};
 }
 
 JNIEXPORT jbyteArray JNICALL
@@ -178,9 +179,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeScreenshot_1N(JNIEnv
         auto arr = env->NewByteArray(byteArray.size());
         env->SetByteArrayRegion(arr, 0, byteArray.size() - 1, (jbyte*) byteArray.data());
         return arr;
-    } else {
-        ThrowNewError(env, LOG_PREFIX + "Failed to take screenshot");
     }
+    ThrowNewError(env, LOG_PREFIX + "Failed to take screenshot");
+    return {};
 }
 
 JNIEXPORT void JNICALL
@@ -196,9 +197,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_sendEvent_1N(JNIEnv* env
                 break;
             }
         }
-    } else {
-        ThrowNewError(env, LOG_PREFIX + "Failed to pass event");
     }
+    ThrowNewError(env, LOG_PREFIX + "Failed to pass event");
+
 }
 
 JNIEXPORT jboolean JNICALL
@@ -207,9 +208,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_isLoading_1N(JNIEnv* env
     if (opt) {
         SKryptonWebView* view = opt.value();
         return view->isLoading();
-    } else {
-        ThrowNewError(env, LOG_PREFIX + "Failed to check if loading");
     }
+    ThrowNewError(env, LOG_PREFIX + "Failed to check if loading");
+    return {};
 }
 
 SKryptonWebView::SKryptonWebView(jobject jInstance, string& url) :
