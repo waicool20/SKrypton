@@ -86,10 +86,6 @@ foreach (FILE ${FUNCTION_CLASSES})
     endif ()
 endforeach ()
 
-if (NOT EXISTS build/kstdlib)
-    file(MAKE_DIRECTORY build/kstdlib)
-endif ()
-
 create_javah(
         TARGET JNI_Headers
         DEPENDS Clean_JNI_Headers
