@@ -1,6 +1,7 @@
 #include <SKryptonWidget.h>
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_show_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_show_1N(JNIEnv* env, jobject obj) {
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
@@ -8,7 +9,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_show_1N(JNIEnv* env,
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_hide_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_hide_1N(JNIEnv* env, jobject obj) {
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
@@ -16,7 +18,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_hide_1N(JNIEnv* env,
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_resize_1N(JNIEnv* env, jobject obj, jint width, jint height) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_resize_1N(JNIEnv* env, jobject obj, jint width, jint height) {
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
@@ -24,7 +27,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_resize_1N(JNIEnv* en
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_dispose_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_dispose_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QWidget>(env, obj);
     auto className = GetClassName(env, obj);
     if (opt) {

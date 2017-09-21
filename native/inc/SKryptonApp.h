@@ -1,6 +1,7 @@
 #ifndef SKRYPTONNATIVE_SKYRPTONAPP_H
 #define SKRYPTONNATIVE_SKYRPTONAPP_H
 
+#include <headers.h>
 #include <jni_utils.h>
 
 #include <QApplication>

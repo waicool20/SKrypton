@@ -1,6 +1,7 @@
 #include <SKryptonMouseEvent.h>
 
-jlong Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getButton_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jlong JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getButton_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QMouseEvent>(env, obj);
     if (opt) {
         QMouseEvent* event = opt.value();
@@ -9,7 +10,8 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getButton_1N(JN
     ThrowNewError(env, LOG_PREFIX + "Could not get button");
 }
 
-jlong Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getButtons_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jlong JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getButtons_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QMouseEvent>(env, obj);
     if (opt) {
         QMouseEvent* event = opt.value();
@@ -18,7 +20,8 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getButtons_1N(J
     ThrowNewError(env, LOG_PREFIX + "Could not get buttons");
 }
 
-jobject Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getGlobalPos_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jobject JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getGlobalPos_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QMouseEvent>(env, obj);
     if (opt) {
         QMouseEvent* event = opt.value();
@@ -28,7 +31,8 @@ jobject Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getGlobalPos_
     ThrowNewError(env, LOG_PREFIX + "Could not get global pos");
 }
 
-jobject Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getScreenPos_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jobject JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getScreenPos_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QMouseEvent>(env, obj);
     if (opt) {
         QMouseEvent* event = opt.value();
@@ -39,7 +43,8 @@ jobject Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getScreenPos_
     ThrowNewError(env, LOG_PREFIX + "Could not get screen pos");
 }
 
-jobject Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getLocalPos_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jobject JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getLocalPos_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QMouseEvent>(env, obj);
     if (opt) {
         QMouseEvent* event = opt.value();
@@ -49,7 +54,8 @@ jobject Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getLocalPos_1
     ThrowNewError(env, LOG_PREFIX + "Could not get local pos");
 }
 
-jint Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getSource_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getSource_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QMouseEvent>(env, obj);
     if (opt) {
         QMouseEvent* event = opt.value();
@@ -58,18 +64,18 @@ jint Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getSource_1N(JNI
     ThrowNewError(env, LOG_PREFIX + "Could not get button");
 }
 
-jlong
+JNIEXPORT jlong JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_00024Companion_initialize_1N(JNIEnv* env, jobject obj,
-                                                                                         jint e_type,
-                                                                                         jint localPosX, jint localPosY,
-                                                                                         jint windowPosX,
-                                                                                         jint windowPosY,
-                                                                                         jint screenPosX,
-                                                                                         jint screenPosY,
-                                                                                         jlong e_button,
-                                                                                         jlong e_buttons,
-                                                                                         jlong e_modifiers,
-                                                                                         jint e_source) {
+                                                                                        jint e_type,
+                                                                                        jint localPosX, jint localPosY,
+                                                                                        jint windowPosX,
+                                                                                        jint windowPosY,
+                                                                                        jint screenPosX,
+                                                                                        jint screenPosY,
+                                                                                        jlong e_button,
+                                                                                        jlong e_buttons,
+                                                                                        jlong e_modifiers,
+                                                                                        jint e_source) {
     auto type = static_cast<QEvent::Type>(e_type);
     auto localPos = QPoint { localPosX, localPosY };
     auto windowPos = QPoint { windowPosX, windowPosY };
@@ -83,7 +89,8 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_00024Companion_initia
     return (jlong) event;
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_dispose_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_dispose_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QMouseEvent>(env, obj);
     if (opt) delete opt.value();
 }

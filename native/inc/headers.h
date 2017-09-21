@@ -95,6 +95,16 @@
 #include <shared_mutex>
 #endif
 
-using namespace std;
+#include <optional>
+
+using std::cerr;
+using std::cout;
+using std::endl;
+using std::function;
+using std::forward;
+using std::optional;
+using std::string;
+using std::to_string;
+using std::vector;
 
 #endif //SKRYPTONNATIVE_HEADERS_H

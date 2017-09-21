@@ -1,6 +1,7 @@
 #include <SKryptonWebSettings.h>
 
-jint Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getFontSize_1N(JNIEnv* env, jobject obj, jint font) {
+JNIEXPORT jint JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getFontSize_1N(JNIEnv* env, jobject obj, jint font) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
@@ -10,8 +11,9 @@ jint Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getFontSize_1N(
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setFontSize_1N(JNIEnv* env, jobject obj, jint font,
-                                                                                jint size) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setFontSize_1N(JNIEnv* env, jobject obj, jint font,
+                                                                           jint size) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
@@ -21,7 +23,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setFontSize_1N(
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetFontSize_1N(JNIEnv* env, jobject obj, jint font) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetFontSize_1N(JNIEnv* env, jobject obj, jint font) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
@@ -31,7 +34,7 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetFontSize_1
     }
 }
 
-jstring
+JNIEXPORT jstring JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getFontFamily_1N(JNIEnv* env, jobject obj, jint family) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
@@ -43,7 +46,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getFontFamily_1N(JNI
     }
 }
 
-void
+JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setFontFamily_1N(JNIEnv* env, jobject obj, jint whichFamily,
                                                                              jstring family) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
@@ -56,7 +59,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setFontFamily_1N(JNI
     }
 }
 
-void
+JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetFontFamily_1N(JNIEnv* env, jobject obj, jint family) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
@@ -67,15 +70,16 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetFontFamily_1N(J
     }
 }
 
-jobject Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_00024Companion_defaultSettings_1N(JNIEnv* env,
-                                                                                                      jobject obj) {
+JNIEXPORT jobject JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_00024Companion_defaultSettings_1N(JNIEnv* env,
+                                                                                              jobject obj) {
     auto settingsPointer = (jlong) QWebEngineSettings::defaultSettings();
     auto jSettings = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonWebSettings", "(J)V", settingsPointer);
     if (jSettings) return jSettings.value();
     ThrowNewError(env, LOG_PREFIX + "Could not retrieve default webview settings");
 }
 
-jstring
+JNIEXPORT jstring JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getDefaultTextEncoding_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
@@ -87,8 +91,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_getDefaultTextEncodi
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setDefaultTextEncoding_1N(JNIEnv* env, jobject obj,
-                                                                                           jstring charset) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setDefaultTextEncoding_1N(JNIEnv* env, jobject obj,
+                                                                                      jstring charset) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
@@ -98,7 +103,7 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setDefaultTextE
     }
 }
 
-void
+JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetAttribute_1N(JNIEnv* env, jobject obj, jint attr) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
@@ -109,8 +114,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetAttribute_1N(JN
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setAttribute_1N(JNIEnv* env, jobject obj, jint attr,
-                                                                                 jboolean enabled) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setAttribute_1N(JNIEnv* env, jobject obj, jint attr,
+                                                                            jboolean enabled) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
@@ -120,7 +126,7 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setAttribute_1N
     }
 }
 
-jboolean
+JNIEXPORT jboolean JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_testAttribute_1N(JNIEnv* env, jobject obj, jint attr) {
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {

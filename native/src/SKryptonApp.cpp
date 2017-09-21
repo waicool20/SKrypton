@@ -4,17 +4,19 @@ static SKryptonApp* app = nullptr;
 static int argc = 0;
 static vector<char*> argv {};
 
-void
+JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonApp_putEnv_1N(JNIEnv* env, jobject obj, jstring key, jstring value) {
     qputenv(StringFromJstring(env, key).c_str(), StringFromJstring(env, value).c_str());
 }
 
-jstring Java_com_waicool20_skrypton_jni_objects_SKryptonApp_getEnv_1N(JNIEnv* env, jobject obj, jstring key) {
+JNIEXPORT jstring JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonApp_getEnv_1N(JNIEnv* env, jobject obj, jstring key) {
     auto value = qgetenv(StringFromJstring(env, key).c_str()).toStdString();
     return JstringFromString(env, value);
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonApp_runOnMainThread_1N(JNIEnv* env, jobject obj, jobject action) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonApp_runOnMainThread_1N(JNIEnv* env, jobject obj, jobject action) {
     qRegisterMetaType<jobject>();
     auto g_obj = env->NewGlobalRef(obj);
     auto g_action = env->NewGlobalRef(action);
@@ -22,7 +24,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonApp_runOnMainThread_1N(JNIE
                               Q_ARG(jobject, g_action));
 }
 
-jlong Java_com_waicool20_skrypton_jni_objects_SKryptonApp_initialize_1N(JNIEnv* env, jobject obj, jobjectArray jargs) {
+JNIEXPORT jlong JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonApp_initialize_1N(JNIEnv* env, jobject obj, jobjectArray jargs) {
     // Set up Global JVM References
     if (!gJvm) {
         if (env->GetJavaVM(&gJvm) < 0) {
@@ -55,7 +58,8 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonApp_initialize_1N(JNIEnv* 
     return (jlong) app;
 }
 
-jint Java_com_waicool20_skrypton_jni_objects_SKryptonApp_exec_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonApp_exec_1N(JNIEnv* env, jobject obj) {
     if (app == nullptr) {
         auto opt = PointerFromStaticCPointer<SKryptonApp>(env, obj);
         if (opt) {
@@ -67,7 +71,8 @@ jint Java_com_waicool20_skrypton_jni_objects_SKryptonApp_exec_1N(JNIEnv* env, jo
     return ret;
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonApp_dispose_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonApp_dispose_1N(JNIEnv* env, jobject obj) {
     if (app == nullptr) {
         auto opt = PointerFromStaticCPointer<SKryptonApp>(env, obj);
         if (opt) {

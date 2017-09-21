@@ -49,8 +49,9 @@ void WebViewEventHandler::mouseEvent(QMouseEvent* event) {
 
 //</editor-fold>
 
-jlong Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N(JNIEnv* env, jobject obj,
-                                                                            jstring jurl) {
+JNIEXPORT jlong JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N(JNIEnv* env, jobject obj,
+                                                                      jstring jurl) {
     if (initialized) {
         QtWebEngine::initialize();
         initialized = true;
@@ -64,7 +65,8 @@ jlong Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N(JNIE
     return (jlong) view;
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env, jobject obj, jstring jurl) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env, jobject obj, jstring jurl) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     auto url = StringFromJstring(env, jurl);
     if (opt) {
@@ -75,7 +77,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_back_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_back_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value();
@@ -85,7 +88,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_back_1N(JNIEnv* env
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_forward_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_forward_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value();
@@ -95,7 +99,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_forward_1N(JNIEnv* 
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_reload_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_reload_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value();
@@ -105,7 +110,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_reload_1N(JNIEnv* e
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_stop_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_stop_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value();
@@ -115,7 +121,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_stop_1N(JNIEnv* env
     }
 }
 
-jobject Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getSettings_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jobject JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getSettings_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value();
@@ -127,7 +134,7 @@ jobject Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getSettings_1N(J
     ThrowNewError(env, LOG_PREFIX + "Failed to retrieve settings");
 }
 
-void
+JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setZoomFactor_1N(JNIEnv* env, jobject obj, jdouble factor) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     if (opt) {
@@ -138,7 +145,8 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setZoomFactor_1N(JNIEnv*
     }
 }
 
-jdouble Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_zoomFactor_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jdouble JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_zoomFactor_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value();
@@ -148,7 +156,8 @@ jdouble Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_zoomFactor_1N(JN
     }
 }
 
-jbyteArray JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeScreenshot_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jbyteArray JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeScreenshot_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value();
@@ -174,7 +183,8 @@ jbyteArray JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeS
     }
 }
 
-void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_sendEvent_1N(JNIEnv* env, jobject obj, jobject jEvent) {
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_sendEvent_1N(JNIEnv* env, jobject obj, jobject jEvent) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     auto opt2 = PointerFromCPointer<QEvent>(env, jEvent);
     if (opt && opt2) {
@@ -191,7 +201,8 @@ void Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_sendEvent_1N(JNIEnv
     }
 }
 
-jboolean Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_isLoading_1N(JNIEnv* env, jobject obj) {
+JNIEXPORT jboolean JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_isLoading_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value();
