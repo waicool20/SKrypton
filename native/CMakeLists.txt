@@ -81,6 +81,7 @@ foreach (FILE ${FUNCTION_CLASSES})
         execute_process(
                 COMMAND "${GRADLE}" native:copyKotlinStdLib
                 WORKING_DIRECTORY "${PARENT_DIR}"
+                TIMEOUT 30
         )
         break()
     endif ()
