@@ -1,5 +1,6 @@
 import java.nio.file.Files
 import java.nio.file.Paths
+import org.gradle.internal.os.OperatingSystem
 
 String cmakeBuildDir = 'cmake-build-debug'
 
@@ -14,7 +15,11 @@ dependencies {
 }
 
 task refreshCMake(type: Exec) {
-    def file = Paths.get(getClass().protectionDomain.codeSource.location.path).resolveSibling(cmakeBuildDir)
+    def path = getClass().protectionDomain.codeSource.location.path
+    if (OperatingSystem.current().isWindows()){
+        path = path.replaceFirst("/", "")
+    }
+    def file = Paths.get(path).resolveSibling(cmakeBuildDir)
     if (Files.notExists(file)) {
         Files.createDirectory(file)
     }
