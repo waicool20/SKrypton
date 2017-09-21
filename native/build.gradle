@@ -1,3 +1,5 @@
+import org.gradle.internal.os.OperatingSystem
+
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -18,7 +20,13 @@ task refreshCMake(type: Exec) {
     if (Files.notExists(file)) Files.createDirectory(file)
     workingDir cmakeBuildDir
     commandLine 'cmake'
-    args = ['../']
+    if (OperatingSystem.current().isWindows()) {
+        String generator = "Visual Studio 15 2017"
+        if (is64Bit()) generator += " Win64"
+        args = ['-G', generator, '../']
+    } else {
+        args = ['../ ']
+    }
 }
 
 task makeNativeLibraries(type: Exec) {
@@ -37,4 +45,12 @@ task copyKotlinStdLib(type: Copy) {
             from zipTree(it)
         }
     }
+}
+
+Boolean is32Bit() {
+    return !is64Bit()
+}
+
+Boolean is64Bit() {
+    return System.getProperty("os.arch").contains("64")
 }
