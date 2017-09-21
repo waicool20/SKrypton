@@ -30,7 +30,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_resize_1N(JNIEnv* env, jo
 JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_dispose_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QWidget>(env, obj);
-    auto className = GetClassName(env, obj);
+    auto className = GetJClassName(env, obj);
     if (opt) {
         QWidget* view = opt.value();
         SKryptonApp::runOnMainThread([=] { view->close(); });
