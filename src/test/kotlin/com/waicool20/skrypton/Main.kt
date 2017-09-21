@@ -23,15 +23,14 @@ fun main(args: Array<String>) {
     thread {
         TimeUnit.SECONDS.sleep(5)
         //webView.back()
+        println(webView.url)
         println("Sending events!")
         repeat(1) {
             webView.sendEvent(SKryptonMouseEvent(MouseEventType.MouseMove, Point(670, 400)))
             webView.sendEvent(SKryptonMouseEvent(MouseEventType.MouseButtonPress, Point(670, 400), button = MouseButton.LeftButton))
             webView.sendEvent(SKryptonMouseEvent(MouseEventType.MouseButtonRelease, Point(670, 400), button = MouseButton.LeftButton))
         }
-        app.runOnMainThread {
-            //webView.dispose()
-        }
+        println(webView.url)
     }
     exitProcess(app.exec())
 }

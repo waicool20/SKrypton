@@ -213,6 +213,18 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_isLoading_1N(JNIEnv* env
     return {};
 }
 
+JNIEXPORT jstring JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_url_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value();
+        auto url = view->url().toString().toStdString();
+        return JstringFromString(env, url);
+    }
+    ThrowNewError(env, LOG_PREFIX + "Failed to check if loading");
+    return {};
+}
+
 SKryptonWebView::SKryptonWebView(jobject jInstance, string& url) :
         jInstance(jInstance), webViewEventHandler(new WebViewEventHandler(this)) {
     load(QUrl { url.c_str() });

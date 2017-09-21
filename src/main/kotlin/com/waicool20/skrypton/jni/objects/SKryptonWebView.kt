@@ -22,6 +22,9 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
             setZoomFactor_N(value)
         }
 
+    val url: String
+        get() = url_N()
+
     val settings by lazy { getSettings_N() }
 
     fun load(url: URL) = load(url.toString())
@@ -103,6 +106,7 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
     fun takeScreenshot(): BufferedImage {
         return ImageIO.read(takeScreenshot_N().inputStream())
     }
+
     fun sendEvent(event: SKryptonEvent) = sendEvent_N(event)
 
     //<editor-fold desc="Native functions">
@@ -122,6 +126,8 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     private external fun setZoomFactor_N(factor: Double)
     private external fun zoomFactor_N(): Double
+
+    private external fun url_N(): String
 
     private external fun takeScreenshot_N(): ByteArray
     private external fun sendEvent_N(event: SKryptonEvent)

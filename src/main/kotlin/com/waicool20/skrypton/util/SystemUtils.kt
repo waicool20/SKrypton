@@ -36,7 +36,7 @@ object SystemUtils {
         }
         paths.map {
             val file = it.toFile().nameWithoutExtension
-            if (OS.isWindows()) file.replaceFirst("lib", "") else file
+            if (OS.isUnix()) file.replaceFirst("lib", "") else file
         }.forEach {
             System.loadLibrary(it)
         }
