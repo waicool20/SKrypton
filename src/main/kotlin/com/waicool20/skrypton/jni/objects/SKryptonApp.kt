@@ -11,7 +11,7 @@ object SKryptonApp : NativeInterface() {
     override lateinit var handle: CPointer
 
     init {
-        val path = Paths.get("").normalize().toAbsolutePath().resolve("native/build/libSKryptonNative.so")
+        val path = Paths.get("").normalize().toAbsolutePath().resolve("native/build/libSKryptonNative")
         logger.debug { "Loading library at $path" }
         SystemUtils.loadLibrary(path)
     }

@@ -34,7 +34,10 @@ object SystemUtils {
             isAccessible = true
             set(null, null)
         }
-        paths.map { it.toFile().nameWithoutExtension.replaceFirst("lib", "") }.forEach {
+        paths.map {
+            val file = it.toFile().nameWithoutExtension
+            if (OS.isWindows()) file.replaceFirst("lib", "") else file
+        }.forEach {
             System.loadLibrary(it)
         }
     }
