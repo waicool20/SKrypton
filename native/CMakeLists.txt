@@ -97,3 +97,7 @@ create_javah(
         CLASSPATH ${CLASS_SEARCH_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib
         OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers
 )
+
+if (MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++latest")
+endif ()
