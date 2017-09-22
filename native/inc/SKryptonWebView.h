@@ -40,7 +40,7 @@ private:
     jobject jInstance;
     WebViewEventHandler* webViewEventHandler;
 public:
-    SKryptonWebView(jobject jInstance, string& url);
+    SKryptonWebView(jobject jInstance, const string& url);
     void loadStarted();
     void loadProgress(int progress);
     void loadFinished(bool ok);

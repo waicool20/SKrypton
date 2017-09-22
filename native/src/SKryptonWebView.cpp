@@ -283,7 +283,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_loadHtml_1N(JNIEnv* env,
     }
 }
 
-SKryptonWebView::SKryptonWebView(jobject jInstance, string& url) :
+SKryptonWebView::SKryptonWebView(jobject jInstance, const string& url) :
         jInstance(jInstance), webViewEventHandler(new WebViewEventHandler(this)) {
     load(QUrl { url.c_str() });
 }

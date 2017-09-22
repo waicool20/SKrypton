@@ -68,7 +68,7 @@ JNIEnv* GetLocalJNIEnvRef() {
     return env;
 }
 
-optional<jclass> FindClass(string name) {
+optional<jclass> FindClass(const string& name) {
     auto env = GetLocalJNIEnvRef();
     auto classLoaderClass = env->GetObjectClass(gClassLoader);
     if (!gFindClassMethod) {
@@ -109,7 +109,7 @@ optional<string> GetJClassName(JNIEnv* env, jobject obj) {
     return { StringFromJstring(env, jstr) };
 }
 
-optional<jobject> NewObject(JNIEnv* env, string clazz, string signature, ...) {
+optional<jobject> NewObject(JNIEnv* env, const string& clazz, const string& signature, ...) {
     auto jclazz = FindClass(clazz);
     if (jclazz) {
         auto constructor = env->GetMethodID(jclazz.value(), "<init>", signature.c_str());
