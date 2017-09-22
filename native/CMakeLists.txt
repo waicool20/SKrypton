@@ -21,7 +21,7 @@ include(UseJava)
 file(GLOB_RECURSE SOURCE_FILES "src/*.c" "src/*.cpp")
 file(GLOB_RECURSE INC_FILES "inc/*.h")
 file(GLOB_RECURSE RESOURCES "rsc/*.qrc")
-include_directories(inc inc/jni inc/jni/headers ${JNI_INCLUDE_DIRS})
+include_directories(inc inc/jni inc/webview inc/jni/headers ${JNI_INCLUDE_DIRS})
 
 add_library(${CMAKE_PROJECT_NAME} SHARED ${SOURCE_FILES} ${INC_FILES} ${RESOURCES})
 add_dependencies(${CMAKE_PROJECT_NAME} JNI_Headers)

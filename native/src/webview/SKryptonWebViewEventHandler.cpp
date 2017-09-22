@@ -1,3 +1,4 @@
+#include <SKryptonWebViewEventHandler.h>
 #include <SKryptonWebView.h>
 
 SKryptonWebViewEventHandler::SKryptonWebViewEventHandler(SKryptonWebView* webView) {
@@ -68,4 +69,3 @@ void SKryptonWebViewEventHandler::keyEvent(QKeyEvent* event) {
 }
 
 //</editor-fold>
-

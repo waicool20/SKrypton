@@ -1,3 +1,4 @@
+#include <SKryptonWebViewContainer.h>
 #include <SKryptonWebView.h>
 
 SKryptonWebViewContainer::SKryptonWebViewContainer(SKryptonWebView* webView) : webView(webView) {}
