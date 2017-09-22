@@ -5,31 +5,22 @@
 #include <jni_utils.h>
 
 #include <SKryptonApp.h>
+#include <VirtualCursor.h>
 
 #include <QtCore>
 #include <QtWebEngine>
 #include <QWebEngineView>
-#include <QOpenGLWidget>
 
 #include <com_waicool20_skrypton_jni_objects_SKryptonWebView.h>
 
 class SKryptonWebView;
 
-class VirtualCursor : public QWidget {
-private:
-    QImage* image;
-public:
-    VirtualCursor(QWidget* parent);
-protected:
-    void paintEvent(QPaintEvent* event) override;
-};
-
-class WebViewEventHandler : public QWidget {
+class SKryptonWebViewEventHandler : public QWidget {
 private:
     SKryptonWebView* webView;
     JNIEnv* env;
 public:
-    WebViewEventHandler(SKryptonWebView* webView);
+    SKryptonWebViewEventHandler(SKryptonWebView* webView);
 private:
     bool eventFilter(QObject* watched, QEvent* event);
     void mousePressEvent(QMouseEvent* event);
@@ -59,7 +50,7 @@ private:
     VirtualCursor* cursor;
     bool mIsLoading = true;
     jobject jInstance;
-    WebViewEventHandler* webViewEventHandler;
+    SKryptonWebViewEventHandler* eventHandler;
 public:
     SKryptonWebView(jobject jInstance, const string& url);
     void loadStarted();
@@ -68,7 +59,7 @@ public:
     void installWebViewEventHandler();
     bool isLoading();
     jobject getJInstance();
-    WebViewEventHandler* getWebViewEventHandler();
+    SKryptonWebViewEventHandler* getEventHandler();
     VirtualCursor* getVirtualCursor();
     SKryptonWebViewContainer* getContainer();
 };
