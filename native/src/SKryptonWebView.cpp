@@ -243,6 +243,21 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_runJavaScript_1N(JNIEnv*
     }
 }
 
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_loadHtml_1N(JNIEnv* env, jobject obj, jstring content, jstring baseUrl) {
+    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value();
+        auto qContent = QString::fromStdString(StringFromJstring(env, content));
+        auto qBaseUrl = QString::fromStdString(StringFromJstring(env, baseUrl));
+        SKryptonApp::runOnMainThread([=]{
+            view->setHtml(qContent, qBaseUrl);
+        });
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Failed to load html content");
+    }
+}
+
 SKryptonWebView::SKryptonWebView(jobject jInstance, string& url) :
         jInstance(jInstance), webViewEventHandler(new WebViewEventHandler(this)) {
     load(QUrl { url.c_str() });

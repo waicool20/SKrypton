@@ -29,6 +29,7 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     fun load(url: URL) = load(url.toString())
     fun load(url: String) = load_N(url)
+    fun loadHtml(content: String, baseUrl: String) = loadHtml_N(content, baseUrl)
 
     fun back() = back_N()
     fun forward() = forward_N()
@@ -115,6 +116,7 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
     private external fun initialize_N(url: String): Long
 
     private external fun load_N(url: String)
+    private external fun loadHtml_N(content: String, baseUrl: String)
 
     private external fun back_N()
     private external fun forward_N()

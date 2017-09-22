@@ -25,6 +25,14 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_l
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    loadHtml_N
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_loadHtml_1N
+  (JNIEnv *, jobject, jstring, jstring);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
  * Method:    back_N
  * Signature: ()V
  */
