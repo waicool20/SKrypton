@@ -225,6 +225,24 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_url_1N(JNIEnv* env, jobj
     return {};
 }
 
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_runJavaScript_1N(JNIEnv* env, jobject obj, jstring content,
+                                                                             jobject callback) {
+    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value();
+        auto qContent = QString::fromStdString(StringFromJstring(env, content));
+        auto gCallback = env->NewGlobalRef(callback);
+        view->page()->runJavaScript(qContent, [gCallback](const QVariant& v) {
+            auto localEnv = GetLocalJNIEnvRef();
+            CallMethod<void*>(localEnv, gCallback, "run", "()V");
+            localEnv->DeleteGlobalRef(gCallback);
+        });
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Failed to execute Javascript");
+    }
+}
+
 SKryptonWebView::SKryptonWebView(jobject jInstance, string& url) :
         jInstance(jInstance), webViewEventHandler(new WebViewEventHandler(this)) {
     load(QUrl { url.c_str() });

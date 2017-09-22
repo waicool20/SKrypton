@@ -24,7 +24,6 @@ fun main(args: Array<String>) {
     thread {
         TimeUnit.SECONDS.sleep(5)
         //webView.back()
-
         println("Sending events!")
         repeat(1) {
             webView.sendEvent(SKryptonMouseEvent(MouseEventType.MouseMove, Point(670, 400)))

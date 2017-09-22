@@ -97,6 +97,14 @@ JNIEXPORT jstring JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebVie
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    runJavaScript_N
+ * Signature: (Ljava/lang/String;Ljava/lang/Runnable;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_runJavaScript_1N
+  (JNIEnv *, jobject, jstring, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
  * Method:    takeScreenshot_N
  * Signature: ()[B
  */

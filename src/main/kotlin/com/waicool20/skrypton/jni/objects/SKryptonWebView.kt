@@ -103,6 +103,7 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     //</editor-fold>
 
+    fun runJavaScript(content: String, callback: () -> Unit = {}) = runJavaScript_N(content, Runnable { callback() })
     fun takeScreenshot(): BufferedImage {
         return ImageIO.read(takeScreenshot_N().inputStream())
     }
@@ -129,6 +130,7 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     private external fun url_N(): String
 
+    private external fun runJavaScript_N(content: String, callback: Runnable)
     private external fun takeScreenshot_N(): ByteArray
     private external fun sendEvent_N(event: SKryptonEvent)
     //</editor-fold>
