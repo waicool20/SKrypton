@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
         TimeUnit.SECONDS.sleep(2)
         println(webView.url)
         println("Loading GitHub")
-        webView.load("https://github.com/")
+        //webView.load("https://github.com/")
     }
     thread {
         TimeUnit.SECONDS.sleep(5)

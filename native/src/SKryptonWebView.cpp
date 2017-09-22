@@ -2,6 +2,16 @@
 
 static bool initialized = false;
 
+VirtualCursor::VirtualCursor(QWidget* parent) : QWidget { parent }, image(new QImage { ":images/cursor.png" }) {
+    setAttribute(Qt::WA_NoSystemBackground);
+    setAttribute(Qt::WA_TransparentForMouseEvents);
+    setGeometry(0, 0, image->width(), image->height());
+}
+
+void VirtualCursor::paintEvent(QPaintEvent* event) {
+    QPainter { this }.drawImage(QPointF { 0, 0 }, *image);
+}
+
 //<editor-fold desc="WebViewEventHandler">
 
 WebViewEventHandler::WebViewEventHandler(SKryptonWebView* webView) {
@@ -29,6 +39,7 @@ void WebViewEventHandler::mouseDoubleClickEvent(QMouseEvent* event) {
 }
 
 void WebViewEventHandler::mouseMoveEvent(QMouseEvent* event) {
+    webView->getVirtualCursor()->move(event->x(), event->y());
     mouseEvent(event);
 }
 
@@ -74,6 +85,8 @@ void WebViewEventHandler::keyEvent(QKeyEvent* event) {
 
 //</editor-fold>
 
+//<editor-fold desc="JNI">
+
 JNIEXPORT jlong JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N(JNIEnv* env, jobject obj,
                                                                       jstring jurl) {
@@ -87,15 +100,15 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N(JNIEnv* en
     view->connect(view, &QWebEngineView::loadStarted, view, &SKryptonWebView::loadStarted);
     view->connect(view, &QWebEngineView::loadProgress, view, &SKryptonWebView::loadProgress);
     view->connect(view, &QWebEngineView::loadFinished, view, &SKryptonWebView::loadFinished);
-    return (jlong) view;
+    return (jlong) view->getContainer();
 }
 
 JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env, jobject obj, jstring jurl) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     auto url = StringFromJstring(env, jurl);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         SKryptonApp::runOnMainThread([=] { view->load(QUrl { url.c_str() }); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to load url " + url);
@@ -104,9 +117,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env, job
 
 JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_back_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         SKryptonApp::runOnMainThread([=] { view->back(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to go back");
@@ -115,9 +128,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_back_1N(JNIEnv* env, job
 
 JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_forward_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         SKryptonApp::runOnMainThread([=] { view->back(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to go forward");
@@ -126,9 +139,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_forward_1N(JNIEnv* env, 
 
 JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_reload_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         SKryptonApp::runOnMainThread([=] { view->back(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to reload");
@@ -137,9 +150,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_reload_1N(JNIEnv* env, j
 
 JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_stop_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         SKryptonApp::runOnMainThread([=] { view->back(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to stop");
@@ -148,9 +161,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_stop_1N(JNIEnv* env, job
 
 JNIEXPORT jobject JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getSettings_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         auto settingsPointer = (jlong) view->settings();
         auto jSettings = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonWebSettings", "(J)V",
                                    settingsPointer);
@@ -162,9 +175,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getSettings_1N(JNIEnv* e
 
 JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setZoomFactor_1N(JNIEnv* env, jobject obj, jdouble factor) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         SKryptonApp::runOnMainThread([=] { view->setZoomFactor(factor); });
     }
     ThrowNewError(env, LOG_PREFIX + "Failed to set zoom factor to " + to_string(factor));
@@ -173,9 +186,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setZoomFactor_1N(JNIEnv*
 
 JNIEXPORT jdouble JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_zoomFactor_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         return view->zoomFactor();
     }
     ThrowNewError(env, LOG_PREFIX + "Failed to get zoom factor");
@@ -184,9 +197,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_zoomFactor_1N(JNIEnv* en
 
 JNIEXPORT jbyteArray JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeScreenshot_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         if (view->isHidden()) {
             ThrowNewError(env, LOG_PREFIX + "Window must be showing to take screenshot");
             return {};
@@ -211,10 +224,10 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeScreenshot_1N(JNIEnv
 
 JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_sendEvent_1N(JNIEnv* env, jobject obj, jobject jEvent) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     auto opt2 = PointerFromCPointer<QEvent>(env, jEvent);
     if (opt && opt2) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         QEvent* event = opt2.value();
         for (auto child : view->children()) {
             if (QWidget* widget = dynamic_cast<QWidget*>(child)) {
@@ -229,9 +242,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_sendEvent_1N(JNIEnv* env
 
 JNIEXPORT jboolean JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_isLoading_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         return view->isLoading();
     }
     ThrowNewError(env, LOG_PREFIX + "Failed to check if loading");
@@ -240,9 +253,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_isLoading_1N(JNIEnv* env
 
 JNIEXPORT jstring JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_url_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         auto url = view->url().toString().toStdString();
         return JstringFromString(env, url);
     }
@@ -252,10 +265,10 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_url_1N(JNIEnv* env, jobj
 
 JNIEXPORT void JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_runJavaScript_1N(JNIEnv* env, jobject obj, jstring content,
-                                                                             jobject callback) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+                                                                         jobject callback) {
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         auto qContent = QString::fromStdString(StringFromJstring(env, content));
         auto gCallback = env->NewGlobalRef(callback);
         view->page()->runJavaScript(qContent, [gCallback](const QVariant& v) {
@@ -269,13 +282,14 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_runJavaScript_1N(JNIEnv*
 }
 
 JNIEXPORT void JNICALL
-Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_loadHtml_1N(JNIEnv* env, jobject obj, jstring content, jstring baseUrl) {
-    auto opt = PointerFromCPointer<SKryptonWebView>(env, obj);
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_loadHtml_1N(JNIEnv* env, jobject obj, jstring content,
+                                                                    jstring baseUrl) {
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
-        SKryptonWebView* view = opt.value();
+        SKryptonWebView* view = opt.value()->getWebView();
         auto qContent = QString::fromStdString(StringFromJstring(env, content));
         auto qBaseUrl = QString::fromStdString(StringFromJstring(env, baseUrl));
-        SKryptonApp::runOnMainThread([=]{
+        SKryptonApp::runOnMainThread([=] {
             view->setHtml(qContent, qBaseUrl);
         });
     } else {
@@ -283,8 +297,30 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_loadHtml_1N(JNIEnv* env,
     }
 }
 
+//</editor-fold>
+
+//<editor-fold desc="SKryptonWebViewContainer">
+
+SKryptonWebViewContainer::SKryptonWebViewContainer(SKryptonWebView* webView) : webView(webView) {}
+
+SKryptonWebView* SKryptonWebViewContainer::getWebView() {
+    return webView;
+}
+
+void SKryptonWebViewContainer::resizeEvent(QResizeEvent* event) {
+    auto size = event->size();
+    webView->setGeometry(0, 0, size.width(), size.height());
+}
+
+//</editor-fold>
+
+//<editor-fold desc="SKryptonWebView">
+
 SKryptonWebView::SKryptonWebView(jobject jInstance, const string& url) :
         jInstance(jInstance), webViewEventHandler(new WebViewEventHandler(this)) {
+    auto container = new SKryptonWebViewContainer { this };
+    setParent(container);
+    cursor = new VirtualCursor { container };
     load(QUrl { url.c_str() });
 }
 
@@ -300,7 +336,7 @@ void SKryptonWebView::loadProgress(int progress) {
 
 void SKryptonWebView::loadFinished(bool ok) {
     mIsLoading = false;
-    setWindowTitle(title());
+    getContainer()->setWindowTitle(title());
     CallMethod<void*>(GetLocalJNIEnvRef(), jInstance, "loadFinished", "(Z)V", ok);
 }
 
@@ -324,3 +360,13 @@ void SKryptonWebView::installWebViewEventHandler() {
         }
     }
 }
+
+VirtualCursor* SKryptonWebView::getVirtualCursor() {
+    return cursor;
+}
+
+SKryptonWebViewContainer* SKryptonWebView::getContainer() {
+    return dynamic_cast<SKryptonWebViewContainer*>(parentWidget());
+}
+
+//</editor-fold>
