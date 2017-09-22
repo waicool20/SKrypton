@@ -20,20 +20,25 @@ task refreshCMake(type: Exec) {
     if (Files.notExists(file)) Files.createDirectory(file)
     workingDir cmakeBuildDir
     commandLine 'cmake'
+    String generator
     if (OperatingSystem.current().isWindows()) {
-        String generator = "Visual Studio 15 2017"
+        generator = "Visual Studio 15 2017"
         if (is64Bit()) generator += " Win64"
-        args = ['-G', generator, '../']
     } else {
-        args = ['../']
+        generator = "Unix Makefiles"
     }
+    args += ['-G', generator, '../']
 }
 
 task makeNativeLibraries(type: Exec) {
     dependsOn refreshCMake
     workingDir cmakeBuildDir
     commandLine 'cmake'
-    args = ['--build', './', '--target', 'install']
+    args += ['--build', './', '--target', 'install']
+    if (OperatingSystem.current().isUnix()) {
+        int threads = Runtime.runtime.availableProcessors() * 2
+        args += ['--', "-j$threads"]
+    }
 }
 
 task copyKotlinStdLib(type: Copy) {
@@ -53,4 +58,13 @@ Boolean is32Bit() {
 
 Boolean is64Bit() {
     return System.getProperty("os.arch").contains("64")
+}
+
+Boolean commandExists(String command) {
+    try {
+        Runtime.runtime.exec(command)
+        return true
+    } catch(Exception ignored) {
+        return false
+    }
 }

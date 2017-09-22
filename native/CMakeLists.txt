@@ -23,6 +23,7 @@ include_directories(inc inc/jni inc/jni/headers ${JNI_INCLUDE_DIRS})
 
 add_library(${CMAKE_PROJECT_NAME} SHARED ${SOURCE_FILES} ${INC_FILES} ${RESOURCES})
 add_dependencies(${CMAKE_PROJECT_NAME} JNI_Headers)
+set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES AUTOGEN_TARGET_DEPENDS JNI_Headers)
 target_link_libraries(${CMAKE_PROJECT_NAME}
         Qt5::Quick
         Qt5::Core
