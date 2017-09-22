@@ -1,5 +1,6 @@
 package com.waicool20.skrypton.jni.objects
 
+import com.waicool20.skrypton.enums.KeyEventType
 import com.waicool20.skrypton.enums.MouseEventType
 import com.waicool20.skrypton.jni.CPointer
 import java.awt.image.BufferedImage
@@ -100,6 +101,23 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     fun removeOnMouseEventListener(type: MouseEventType, listener: (event: SKryptonMouseEvent) -> Unit) {
         onMouseEventListeners.remove(type, listener)
+    }
+
+    //</editor-fold>
+
+    //<editor-fold desc="Key listener">
+
+    private val onKeyEventListeners = mutableMapOf<KeyEventType, (event: SKryptonKeyEvent) -> Unit>()
+    private fun onKeyEvent(type: Int, event: SKryptonKeyEvent) {
+        onKeyEventListeners.filterKeys { it == KeyEventType.getForId(type) }.values.forEach { it(event) }
+    }
+
+    fun addOnKeyEventListener(type: KeyEventType, listener: (event: SKryptonKeyEvent) -> Unit) {
+        onKeyEventListeners.put(type, listener)
+    }
+
+    fun removeOnKeyEventListener(type: KeyEventType, listener: (event: SKryptonKeyEvent) -> Unit) {
+        onKeyEventListeners.remove(type, listener)
     }
 
     //</editor-fold>

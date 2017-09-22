@@ -306,3 +306,14 @@ enum class MouseEventType(val id: Int) {
                 values().find { it.id == id } ?: error("No such event with id $id")
     }
 }
+
+enum class KeyEventType(val id: Int) {
+    KeyPress(EventType.KeyPress.id),
+    KeyRelease(EventType.KeyRelease.id),
+    ShortcutOverride(EventType.ShortcutOverride.id);
+
+    companion object {
+        fun getForId(id: Int) =
+                values().find { it.id == id } ?: error("No such event with id $id")
+    }
+}

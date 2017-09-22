@@ -1,6 +1,6 @@
 #include <jni_string_utils.h>
 
-string StringFromJstring(JNIEnv* env, jstring& jstr) {
+string StringFromJstring(JNIEnv* env, const jstring& jstr) {
     string str {};
     const char* chr = nullptr;
     if (jstr) chr = env->GetStringUTFChars(jstr, nullptr);
@@ -9,7 +9,7 @@ string StringFromJstring(JNIEnv* env, jstring& jstr) {
     return str;
 }
 
-jstring JstringFromString(JNIEnv* env, string& str) {
+jstring JstringFromString(JNIEnv* env, const string& str) {
     char* data = new char[str.size()];
     strcpy(data, str.c_str());
     return env->NewStringUTF(data);

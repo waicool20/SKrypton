@@ -27,6 +27,10 @@ private:
     void mouseDoubleClickEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void mouseEvent(QMouseEvent* event);
+
+    void keyPressEvent(QKeyEvent* event);
+    void keyReleaseEvent(QKeyEvent* event);
+    void keyEvent(QKeyEvent* event);
 };
 
 class SKryptonWebView : public QWebEngineView {

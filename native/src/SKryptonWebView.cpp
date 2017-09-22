@@ -47,6 +47,31 @@ void WebViewEventHandler::mouseEvent(QMouseEvent* event) {
 
 //</editor-fold>
 
+//<editor-fold desc="Key Events">
+
+void WebViewEventHandler::keyPressEvent(QKeyEvent* event) {
+    keyEvent(event);
+}
+
+void WebViewEventHandler::keyReleaseEvent(QKeyEvent* event) {
+    keyEvent(event);
+}
+
+void WebViewEventHandler::keyEvent(QKeyEvent* event) {
+    auto pointerLong = (jlong) event;
+    auto sMouseEvent = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonKeyEvent", "(J)V",
+                                 pointerLong);
+    if (sMouseEvent) {
+        CallMethod<void*>(env, webView->getJInstance(), "onKeyEvent",
+                          "(ILcom/waicool20/skrypton/jni/objects/SKryptonKeyEvent;)V", event->type(),
+                          sMouseEvent.value());
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not send key event to JVM instance");
+    }
+}
+
+//</editor-fold>
+
 //</editor-fold>
 
 JNIEXPORT jlong JNICALL
