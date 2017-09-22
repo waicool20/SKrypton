@@ -1,6 +1,7 @@
 package com.waicool20.skrypton.jni.objects
 
 import com.waicool20.skrypton.enums.Key
+import com.waicool20.skrypton.enums.KeyEventType
 import com.waicool20.skrypton.enums.KeyboardModifiers
 import com.waicool20.skrypton.jni.CPointer
 
@@ -20,19 +21,37 @@ class SKryptonKeyEvent private constructor(pointer: Long): SKryptonEvent() {
     }
 
     constructor(
-            type: Int,
+            type: KeyEventType,
             key: Key,
-            modifiers: KeyboardModifiers,
-            autoRepeat: Boolean,
-            count: Int
+            modifiers: KeyboardModifiers = KeyboardModifiers.NoModifier,
+            autoRepeat: Boolean = false,
+            count: Int = 1
     ): this(initialize_N(
-            type,
+            type.id,
             key.code,
             modifiers.value,
             key.code.toChar().toString(),
             autoRepeat,
             count
     ))
+
+    constructor(
+            type: KeyEventType,
+            char: Char,
+            modifiers: KeyboardModifiers = KeyboardModifiers.NoModifier,
+            autoRepeat: Boolean = false,
+            count: Int = 1
+    ): this(type, Key.getForCode(char.toLong()), modifiers, autoRepeat, count)
+
+    constructor(
+            type: KeyEventType,
+            char: String,
+            modifiers: KeyboardModifiers = KeyboardModifiers.NoModifier,
+            autoRepeat: Boolean = false,
+            count: Int = 1
+    ): this(type, char.toCharArray().first(), modifiers, autoRepeat, count) {
+        require(char.length == 1) { "Only 1 character allowed" }
+    }
 
     val key by lazy { Key.getForCode(getKey_N()) }
     val character by lazy { getChar_N() }
