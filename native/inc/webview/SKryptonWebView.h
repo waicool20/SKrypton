@@ -8,6 +8,7 @@
 #include <SKryptonWebViewEventHandler.h>
 #include <SKryptonWebViewContainer.h>
 #include <VirtualCursor.h>
+#include <WebViewHighlighter.h>
 
 #include <QtCore>
 #include <QtWebEngine>
