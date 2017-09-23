@@ -5,6 +5,7 @@ import com.waicool20.skrypton.enums.MouseEventType
 import com.waicool20.skrypton.jni.objects.SKryptonApp
 import com.waicool20.skrypton.jni.objects.SKryptonMouseEvent
 import com.waicool20.skrypton.jni.objects.SKryptonWebView
+import com.waicool20.skrypton.jni.objects.WebViewHighlighter
 import java.awt.Point
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
@@ -15,10 +16,12 @@ fun main(args: Array<String>) {
     val webView = SKryptonWebView("https://www.google.com")
     webView.resize(1280, 720)
     webView.show()
+    val highlighter = WebViewHighlighter(webView, 20, 20, 200, 200, true)
     thread {
         TimeUnit.SECONDS.sleep(2)
         println(webView.url)
         println("Loading GitHub")
+        highlighter.show()
         //webView.load("https://github.com/")
     }
     thread {
