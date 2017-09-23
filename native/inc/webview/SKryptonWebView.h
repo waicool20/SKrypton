@@ -19,6 +19,7 @@ class SKryptonWebView : public QWebEngineView {
 Q_OBJECT
 private:
     VirtualCursor* cursor;
+    bool showCursor = false;
     bool mIsLoading = true;
     jobject jInstance;
     SKryptonWebViewEventHandler* eventHandler;
@@ -32,6 +33,8 @@ public:
     jobject getJInstance();
     SKryptonWebViewEventHandler* getEventHandler();
     VirtualCursor* getVirtualCursor();
+    bool isShowingCursor();
+    void setShowCursor(bool should);
     SKryptonWebViewContainer* getContainer();
 };
 

@@ -49,6 +49,19 @@ VirtualCursor* SKryptonWebView::getVirtualCursor() {
     return cursor;
 }
 
+bool SKryptonWebView::isShowingCursor() {
+    return showCursor;
+}
+
+void SKryptonWebView::setShowCursor(bool should) {
+    showCursor = should;
+    if (should) {
+        cursor->show();
+    } else {
+        cursor->hide();
+    }
+}
+
 SKryptonWebViewContainer* SKryptonWebView::getContainer() {
     return dynamic_cast<SKryptonWebViewContainer*>(parentWidget());
 }

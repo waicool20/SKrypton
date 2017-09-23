@@ -26,7 +26,12 @@ void SKryptonWebViewEventHandler::mouseDoubleClickEvent(QMouseEvent* event) {
 }
 
 void SKryptonWebViewEventHandler::mouseMoveEvent(QMouseEvent* event) {
-    webView->getVirtualCursor()->move(event->x(), event->y());
+    if (webView->isShowingCursor()) {
+        webView->getVirtualCursor()->show();
+        webView->getVirtualCursor()->move(event->x(), event->y());
+    } else {
+        webView->getVirtualCursor()->hide();
+    }
     mouseEvent(event);
 }
 

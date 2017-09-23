@@ -28,6 +28,10 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     val settings by lazy { getSettings_N() }
 
+    var showCursor: Boolean
+        get() = isShowingCursor_N()
+        set(value) = setShowingCursor_N(value)
+
     fun load(url: URL) = load(url.toString())
     fun load(url: String) = load_N(url)
     fun loadHtml(content: String, baseUrl: String) = loadHtml_N(content, baseUrl)
@@ -147,6 +151,9 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     private external fun setZoomFactor_N(factor: Double)
     private external fun zoomFactor_N(): Double
+
+    private external fun isShowingCursor_N(): Boolean
+    private external fun setShowingCursor_N(should: Boolean)
 
     private external fun url_N(): String
 

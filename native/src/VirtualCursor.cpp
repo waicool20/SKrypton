@@ -4,6 +4,7 @@ VirtualCursor::VirtualCursor(QWidget* parent) : QWidget { parent }, image(new QI
     setAttribute(Qt::WA_NoSystemBackground);
     setAttribute(Qt::WA_TransparentForMouseEvents);
     setGeometry(0, 0, image->width(), image->height());
+    hide();
 }
 
 void VirtualCursor::paintEvent(QPaintEvent* event) {

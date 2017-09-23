@@ -97,6 +97,22 @@ JNIEXPORT jdouble JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebVie
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    isShowingCursor_N
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_isShowingCursor_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    setShowingCursor_N
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setShowingCursor_1N
+  (JNIEnv *, jobject, jboolean);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
  * Method:    url_N
  * Signature: ()Ljava/lang/String;
  */

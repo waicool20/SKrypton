@@ -211,3 +211,25 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_loadHtml_1N(JNIEnv* env,
         ThrowNewError(env, LOG_PREFIX + "Failed to load html content");
     }
 }
+
+JNIEXPORT jboolean JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_isShowingCursor_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value()->getWebView();
+        return view->isShowingCursor();
+    }
+    ThrowNewError(env, LOG_PREFIX + "Failed to check if we should show cursor");
+    return {};
+}
+
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setShowingCursor_1N(JNIEnv* env, jobject obj, jboolean should) {
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value()->getWebView();
+        view->setShowCursor(should);
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Failed to set show cursor value");
+    }
+}
