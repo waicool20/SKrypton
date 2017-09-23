@@ -10,6 +10,7 @@ private:
     QImage* image;
 public:
     VirtualCursor(QWidget* parent);
+    ~VirtualCursor();
 protected:
     void paintEvent(QPaintEvent* event) override;
 };

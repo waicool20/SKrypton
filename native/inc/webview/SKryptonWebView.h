@@ -26,6 +26,7 @@ private:
     SKryptonWebViewEventHandler* eventHandler;
 public:
     SKryptonWebView(jobject jInstance, const string& url);
+    ~SKryptonWebView();
     void loadStarted();
     void loadProgress(int progress);
     void loadFinished(bool ok);

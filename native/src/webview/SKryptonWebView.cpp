@@ -8,6 +8,11 @@ SKryptonWebView::SKryptonWebView(jobject jInstance, const string& url) :
     load(QUrl { url.c_str() });
 }
 
+SKryptonWebView::~SKryptonWebView() {
+    if (cursor->close()) delete cursor;
+    if(eventHandler->close()) delete eventHandler;
+}
+
 void SKryptonWebView::loadStarted() {
     mIsLoading = true;
     installWebViewEventHandler(); // Needs to be re-installed every time a new page loads

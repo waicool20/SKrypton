@@ -7,6 +7,10 @@ VirtualCursor::VirtualCursor(QWidget* parent) : QWidget { parent }, image(new QI
     hide();
 }
 
+VirtualCursor::~VirtualCursor() {
+    delete image;
+}
+
 void VirtualCursor::paintEvent(QPaintEvent* event) {
     QPainter { this }.drawImage(QPointF { 0, 0 }, *image);
 }
