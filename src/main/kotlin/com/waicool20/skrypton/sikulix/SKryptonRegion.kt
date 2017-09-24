@@ -14,7 +14,7 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     constructor(xPos: Int, yPos: Int, width: Int, height: Int, screen: SKryptonScreen) : this(xPos, yPos, width, height) {
         this.screen = screen
     }
-    
+
     init {
         x = xPos
         y = yPos
@@ -139,7 +139,7 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     override fun type(text: String): Int = type(text, 0)
     override fun type(text: String, modifiers: String): Int = type(text, SKryptonKeyboard.parseModifiers(modifiers))
     override fun type(text: String, modifiers: Int): Int {
-        keyboard.type(null, text, modifiers)
+        keyboard.type(center, text, modifiers)
         return 1
     }
 
