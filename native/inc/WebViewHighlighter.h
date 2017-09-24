@@ -19,6 +19,10 @@ private:
 public:
     WebViewHighlighter(SKryptonWebViewContainer* parent, int x, int y, int width, int height, bool fillColor = false,
                        int red = 0, int green = 255, int blue = 0);
+    const QColor& getColor() const;
+    void setColor(const QColor& color);
+    bool isFillColor() const;
+    void setFillColor(bool fillColor);
 protected:
     void paintEvent(QPaintEvent* event) override;
 };

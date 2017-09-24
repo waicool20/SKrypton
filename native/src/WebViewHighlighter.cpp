@@ -39,3 +39,18 @@ void WebViewHighlighter::paintEvent(QPaintEvent* event) {
     if (fillColor) painter.fillRect(0, 0, width(), height(), color.lighter(150));
 }
 
+const QColor& WebViewHighlighter::getColor() const {
+    return color;
+}
+
+void WebViewHighlighter::setColor(const QColor& color) {
+    this->color = color;
+}
+
+bool WebViewHighlighter::isFillColor() const {
+    return fillColor;
+}
+
+void WebViewHighlighter::setFillColor(bool fillColor) {
+    this->fillColor = fillColor;
+}
