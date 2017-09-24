@@ -1,12 +1,12 @@
 package com.waicool20.skrypton.sikulix.input
 
+import com.waicool20.skrypton.enums.Key
 import com.waicool20.skrypton.enums.KeyEventType
 import com.waicool20.skrypton.enums.MouseButton
 import com.waicool20.skrypton.enums.MouseEventType
 import com.waicool20.skrypton.jni.objects.SKryptonKeyEvent
 import com.waicool20.skrypton.jni.objects.SKryptonMouseEvent
 import com.waicool20.skrypton.sikulix.SKryptonScreen
-import com.waicool20.skrypton.enums.Key
 import org.sikuli.basics.AnimatorOutQuarticEase
 import org.sikuli.basics.AnimatorTimeBased
 import org.sikuli.basics.Settings
@@ -172,9 +172,16 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
     }
 
     private fun generateKeyEvent(type: KeyEventType, keyCode: Int) {
-        webView.sendEvent(SKryptonKeyEvent(
-                type = type,
-                key = Key.fromSikuliKeyCode(keyCode)
-        ))
+        if (keyCode in 32..127) {
+            webView.sendEvent(SKryptonKeyEvent(
+                    type = type,
+                    char = keyCode.toChar()
+            ))
+        } else {
+            webView.sendEvent(SKryptonKeyEvent(
+                    type = type,
+                    key = Key.fromSikuliKeyCode(keyCode)
+            ))
+        }
     }
 }

@@ -730,8 +730,9 @@ enum class Key(val code: Long) {
         )
         //</editor-fold>
 
-        fun getForCode(code: Long) =
-                values().find { it.code == code } ?: error("No such Key with code $code")
+        fun getForCode(code: Long) = values().find {
+            it.code == if (code in 97..122) code - 32 else code
+        } ?: error("No such Key with code $code")
 
         fun fromSikuliKeyCode(code: Int): Key = sikuliMappings.getOrDefault(code, Key_unknown)
 

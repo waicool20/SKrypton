@@ -27,12 +27,7 @@ class SKryptonKeyEvent private constructor(pointer: Long): SKryptonEvent() {
             autoRepeat: Boolean = false,
             count: Int = 1
     ): this(initialize_N(
-            type.id,
-            key.code,
-            modifiers.value,
-            key.code.toChar().toString(),
-            autoRepeat,
-            count
+            type.id, key.code, modifiers.value, key.code.toChar().toString(), autoRepeat, count
     ))
 
     constructor(
@@ -41,7 +36,9 @@ class SKryptonKeyEvent private constructor(pointer: Long): SKryptonEvent() {
             modifiers: KeyboardModifiers = KeyboardModifiers.NoModifier,
             autoRepeat: Boolean = false,
             count: Int = 1
-    ): this(type, Key.getForCode(char.toLong()), modifiers, autoRepeat, count)
+    ): this(initialize_N(
+            type.id, Key.getForCode(char.toLong()).code, modifiers.value, char.toString(),  autoRepeat, count
+    ))
 
     constructor(
             type: KeyEventType,
