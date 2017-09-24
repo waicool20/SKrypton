@@ -31,13 +31,13 @@ public:
     void loadProgress(int progress);
     void loadFinished(bool ok);
     void installWebViewEventHandler();
-    bool isLoading();
-    jobject getJInstance();
-    SKryptonWebViewEventHandler* getEventHandler();
-    VirtualCursor* getVirtualCursor();
-    bool isShowingCursor();
+    bool isLoading() const;
+    jobject getJInstance() const;
+    SKryptonWebViewEventHandler* getEventHandler() const;
+    VirtualCursor* getVirtualCursor() const;
+    bool isShowingCursor() const;
     void setShowCursor(bool should);
-    SKryptonWebViewContainer* getContainer();
+    SKryptonWebViewContainer* getContainer() const;
 };
 
 #endif //SKRYPTONNATIVE_SKRYPTONBROWSER_H

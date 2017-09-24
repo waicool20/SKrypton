@@ -29,17 +29,18 @@ void SKryptonWebView::loadFinished(bool ok) {
     CallMethod<void*>(GetLocalJNIEnvRef(), jInstance, "loadFinished", "(Z)V", ok);
 }
 
-bool SKryptonWebView::isLoading() {
+bool SKryptonWebView::isLoading() const {
     return mIsLoading;
 }
 
-jobject SKryptonWebView::getJInstance() {
+jobject SKryptonWebView::getJInstance() const {
     return jInstance;
 }
 
-SKryptonWebViewEventHandler* SKryptonWebView::getEventHandler() {
+SKryptonWebViewEventHandler* SKryptonWebView::getEventHandler() const {
     return eventHandler;
 }
+
 
 void SKryptonWebView::installWebViewEventHandler() {
     for (auto child : children()) {
@@ -50,11 +51,11 @@ void SKryptonWebView::installWebViewEventHandler() {
     }
 }
 
-VirtualCursor* SKryptonWebView::getVirtualCursor() {
+VirtualCursor* SKryptonWebView::getVirtualCursor() const {
     return cursor;
 }
 
-bool SKryptonWebView::isShowingCursor() {
+bool SKryptonWebView::isShowingCursor() const {
     return showCursor;
 }
 
@@ -67,6 +68,6 @@ void SKryptonWebView::setShowCursor(bool should) {
     }
 }
 
-SKryptonWebViewContainer* SKryptonWebView::getContainer() {
+SKryptonWebViewContainer* SKryptonWebView::getContainer() const {
     return dynamic_cast<SKryptonWebViewContainer*>(parentWidget());
 }

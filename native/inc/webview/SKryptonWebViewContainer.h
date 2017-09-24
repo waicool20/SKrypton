@@ -13,7 +13,7 @@ private:
     SKryptonWebView* webView;
 public:
     SKryptonWebViewContainer(SKryptonWebView* webView);
-    SKryptonWebView* getWebView();
+    SKryptonWebView* getWebView() const;
 protected:
     void resizeEvent(QResizeEvent* event) override;
 };

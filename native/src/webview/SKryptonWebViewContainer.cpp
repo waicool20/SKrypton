@@ -3,7 +3,7 @@
 
 SKryptonWebViewContainer::SKryptonWebViewContainer(SKryptonWebView* webView) : webView(webView) {}
 
-SKryptonWebView* SKryptonWebViewContainer::getWebView() {
+SKryptonWebView* SKryptonWebViewContainer::getWebView() const {
     return webView;
 }
 
