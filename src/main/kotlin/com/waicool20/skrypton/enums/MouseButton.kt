@@ -1,5 +1,8 @@
 package com.waicool20.skrypton.enums
 
+import org.sikuli.script.Mouse
+import java.awt.event.MouseEvent
+
 // Extracted from qnamespace.h
 enum class MouseButton(val value: Long) {
     NoButton(0x00000000),
@@ -42,7 +45,17 @@ enum class MouseButton(val value: Long) {
     MouseButtonMask(0xffffffff);
 
     companion object {
+        private val sikuliMappings = mapOf(
+                MouseEvent.NOBUTTON to MouseButton.NoButton,
+                Mouse.LEFT to MouseButton.LeftButton,
+                Mouse.MIDDLE to MouseButton.MiddleButton,
+                Mouse.RIGHT to MouseButton.RightButton
+        )
+
         fun getForValue(value: Long) =
                 values().find { it.value == value } ?: error("No such MouseButton with value $value")
+        fun fromSikuliButtons(buttons: Int): Set<MouseButton> {
+            return sikuliMappings.filterKeys { it and buttons != 0 }.values.toSet()
+        }
     }
 }

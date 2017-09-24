@@ -46,7 +46,7 @@ class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent() {
             if (button == MouseButton.NoButton) {
                 MouseButton.NoButton.value
             } else {
-                buttons.map { it.value }.reduce { acc, l -> acc.or(l) }
+                buttons.map { it.value }.reduce { acc, l -> acc or l }
             },
             modifiers.value,
             source.ordinal
@@ -62,7 +62,7 @@ class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent() {
     val button by lazy { MouseButton.getForValue(getButton_N()) }
     val buttons by lazy {
         val buttons = getButtons_N()
-        MouseButton.values().filter { it.value.and(buttons) == it.value }.toSet()
+        MouseButton.values().filter { it.value and buttons == it.value }.toSet()
     }
     val globalPos by lazy { getGlobalPos_N() }
     val screenPos by lazy { getScreenPos_N() }

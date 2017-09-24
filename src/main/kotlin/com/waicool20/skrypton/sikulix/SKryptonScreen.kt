@@ -1,21 +1,25 @@
 package com.waicool20.skrypton.sikulix
 
 import com.waicool20.skrypton.jni.objects.SKryptonWebView
+import com.waicool20.skrypton.sikulix.input.SKryptonRobot
 import org.sikuli.script.*
 import java.awt.Rectangle
 
 class SKryptonScreen(val webView: SKryptonWebView) : Region(), IScreen {
+    private val robot by lazy { SKryptonRobot(this) }
+
+    init {
+        isVirtual = true
+        setOtherScreen(this)
+    }
+
     override fun showTarget(location: Location?) {
         throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
     }
 
-    override fun getIdFromPoint(srcx: Int, srcy: Int): Int {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
-    }
+    override fun getIdFromPoint(srcx: Int, srcy: Int): Int = 0
 
-    override fun getRobot(): IRobot {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
-    }
+    override fun getRobot(): IRobot = robot
 
     override fun userCapture(string: String?): ScreenImage {
         throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
