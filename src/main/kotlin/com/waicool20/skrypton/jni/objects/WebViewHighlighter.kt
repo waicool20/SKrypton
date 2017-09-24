@@ -2,8 +2,12 @@ package com.waicool20.skrypton.jni.objects
 
 import com.waicool20.skrypton.jni.CPointer
 import java.awt.Color
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.schedule
 
 class WebViewHighlighter private constructor(override val handle: CPointer) : SKryptonWidget() {
+    private val timer = Timer()
 
     private companion object {
         private external fun initialize_N(
@@ -33,6 +37,13 @@ class WebViewHighlighter private constructor(override val handle: CPointer) : SK
     var fillColor: Boolean
         get() = isFillColor_N()
         set(value) = setFillColor_N(value)
+
+    fun showFor(duration: Long, unit: TimeUnit = TimeUnit.SECONDS) {
+        show()
+        timer.schedule(unit.toMillis(duration)) {
+            hide()
+        }
+    }
 
     private external fun getColor_N(): Color
     private external fun setColor_N(red: Int, green: Int, blue: Int)
