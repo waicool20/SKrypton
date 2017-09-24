@@ -1,0 +1,28 @@
+import org.gradle.internal.os.OperatingSystem
+
+static Boolean is32Bit() {
+    return !is64Bit()
+}
+
+static Boolean is64Bit() {
+    return System.getProperty("os.arch").contains("64")
+}
+
+static Boolean commandExists(String command) {
+    try {
+        Runtime.runtime.exec(command)
+        return true
+    } catch (Exception ignored) {
+        return false
+    }
+}
+
+ext {
+    ext.isLinux = OperatingSystem.current().isLinux()
+    ext.isWindows = OperatingSystem.current().isWindows()
+    ext.isMacOsX = OperatingSystem.current().isMacOsX()
+    ext.isUnix = OperatingSystem.current().isUnix()
+    ext.is32Bit = is32Bit()
+    ext.is64Bit = is64Bit()
+    ext.commandExists = this.&commandExists
+}

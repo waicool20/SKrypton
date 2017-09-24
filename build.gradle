@@ -20,6 +20,7 @@ buildscript {
     }
 }
 
+apply from: 'common.gradle'
 apply plugin: 'java'
 apply plugin: 'kotlin'
 
@@ -30,12 +31,23 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
 
+    /* sikulix */
+    compile(group: "com.sikulix", name: "sikulixapi", version: "1.1.1-SNAPSHOT") {
+        exclude group: "com.sikulix"
+        exclude module: 'jadb'
+    }
+    if (isLinux) compile(group: "com.sikulix", name: "sikulixlibslux", version: "1.1.1-SNAPSHOT")
+    if (isMacOsX) compile(group: "com.sikulix", name: "sikulixlibsmac", version: "1.1.1-SNAPSHOT")
+    if (isWindows) compile(group: "com.sikulix", name: "sikulixlibswin", version: "1.1.1-SNAPSHOT")
+
+    /* Test */
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 }
