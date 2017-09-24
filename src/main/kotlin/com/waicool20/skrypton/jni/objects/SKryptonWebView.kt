@@ -32,6 +32,12 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
         get() = isShowingCursor_N()
         set(value) = setShowingCursor_N(value)
 
+    val cursorX: Int
+        get() = getCursorX_N()
+
+    val cursorY: Int
+        get() = getCursorY_N()
+
     fun load(url: URL) = load(url.toString())
     fun load(url: String) = load_N(url)
     fun loadHtml(content: String, baseUrl: String) = loadHtml_N(content, baseUrl)
@@ -154,6 +160,9 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     private external fun isShowingCursor_N(): Boolean
     private external fun setShowingCursor_N(should: Boolean)
+
+    private external fun getCursorX_N(): Int
+    private external fun getCursorY_N(): Int
 
     private external fun url_N(): String
 

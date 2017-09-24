@@ -21,13 +21,9 @@ class SKryptonScreen(val webView: SKryptonWebView) : Region(), IScreen {
         throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
     }
 
-    override fun getID(): Int {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
-    }
+    override fun getID(): Int = webView.handle.value.toInt()
 
-    override fun getBounds(): Rectangle {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
-    }
+    override fun getBounds(): Rectangle = webView.geometry
 
     override fun capture(): ScreenImage = capture(rect)
     override fun capture(region: Region): ScreenImage = capture(region.x, region.y, region.w, region.h)

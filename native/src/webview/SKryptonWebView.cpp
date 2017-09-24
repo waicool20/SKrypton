@@ -4,12 +4,12 @@ SKryptonWebView::SKryptonWebView(jobject jInstance, const string& url) :
         jInstance(jInstance), eventHandler(new SKryptonWebViewEventHandler(this)) {
     auto container = new SKryptonWebViewContainer { this };
     setParent(container);
-    cursor = new VirtualCursor { container };
+    virtualCursor = new VirtualCursor { container };
     load(QUrl { url.c_str() });
 }
 
 SKryptonWebView::~SKryptonWebView() {
-    if (cursor->close()) delete cursor;
+    if (virtualCursor->close()) delete virtualCursor;
     if(eventHandler->close()) delete eventHandler;
 }
 
@@ -52,7 +52,7 @@ void SKryptonWebView::installWebViewEventHandler() {
 }
 
 VirtualCursor* SKryptonWebView::getVirtualCursor() const {
-    return cursor;
+    return virtualCursor;
 }
 
 bool SKryptonWebView::isShowingCursor() const {
@@ -62,9 +62,9 @@ bool SKryptonWebView::isShowingCursor() const {
 void SKryptonWebView::setShowCursor(bool should) {
     showCursor = should;
     if (should) {
-        cursor->show();
+        virtualCursor->show();
     } else {
-        cursor->hide();
+        virtualCursor->hide();
     }
 }
 

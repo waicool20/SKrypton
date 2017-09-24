@@ -113,6 +113,22 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_s
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    getCursorX_N
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getCursorX_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    getCursorY_N
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getCursorY_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
  * Method:    url_N
  * Signature: ()Ljava/lang/String;
  */
