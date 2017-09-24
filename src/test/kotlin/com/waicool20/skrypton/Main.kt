@@ -22,7 +22,7 @@ fun main(args: Array<String>) {
     thread {
         TimeUnit.SECONDS.sleep(5)
         println("Sending events!")
-        screen.click(Location(1000, 600))
+        screen.click(Location(670, 400))
     }
     exitProcess(app.exec())
 }

@@ -1,12 +1,17 @@
 package com.waicool20.skrypton.sikulix
 
 import com.waicool20.skrypton.jni.objects.SKryptonWebView
+import com.waicool20.skrypton.sikulix.input.SKryptonKeyboard
+import com.waicool20.skrypton.sikulix.input.SKryptonMouse
 import com.waicool20.skrypton.sikulix.input.SKryptonRobot
 import org.sikuli.script.*
 import java.awt.Rectangle
 
-class SKryptonScreen(val webView: SKryptonWebView) : Region(), IScreen {
-    private val robot by lazy { SKryptonRobot(this) }
+class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webView.size.width, webView.size.height), IScreen {
+    private val robot = SKryptonRobot(this)
+    val mouse = SKryptonMouse(robot)
+    val keyboard = SKryptonKeyboard(robot)
+    var clipboard = ""
 
     init {
         isVirtual = true
@@ -37,4 +42,6 @@ class SKryptonScreen(val webView: SKryptonWebView) : Region(), IScreen {
     }
 
     override fun getLastScreenImageFromScreen(): ScreenImage? = lastScreenImage
+
+    fun currentMousePosition() = Location(webView.cursorX, webView.cursorY)
 }
