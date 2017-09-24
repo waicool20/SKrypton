@@ -233,3 +233,25 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setShowingCursor_1N(JNIE
         ThrowNewError(env, LOG_PREFIX + "Failed to set show cursor value");
     }
 }
+
+JNIEXPORT jint JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getCursorX_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value()->getWebView();
+        return view->getVirtualCursor()->x();
+    }
+    ThrowNewError(env, LOG_PREFIX + "Failed to set get cursorX");
+    return {};
+}
+
+JNIEXPORT jint JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getCursorY_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value()->getWebView();
+        return view->getVirtualCursor()->y();
+    }
+    ThrowNewError(env, LOG_PREFIX + "Failed to get cursorY");
+    return {};
+}
