@@ -46,14 +46,15 @@ enum class MouseButton(val value: Long) {
 
     companion object {
         private val sikuliMappings = mapOf(
-                MouseEvent.NOBUTTON to MouseButton.NoButton,
-                Mouse.LEFT to MouseButton.LeftButton,
-                Mouse.MIDDLE to MouseButton.MiddleButton,
-                Mouse.RIGHT to MouseButton.RightButton
+                MouseEvent.NOBUTTON to NoButton,
+                Mouse.LEFT to LeftButton,
+                Mouse.MIDDLE to MiddleButton,
+                Mouse.RIGHT to RightButton
         )
 
         fun getForValue(value: Long) =
                 values().find { it.value == value } ?: error("No such MouseButton with value $value")
+
         fun fromSikuliButtons(buttons: Int): Set<MouseButton> {
             return sikuliMappings.filterKeys { it and buttons != 0 }.values.toSet()
         }
