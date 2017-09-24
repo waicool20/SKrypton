@@ -9,6 +9,22 @@ extern "C" {
 #endif
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWidget
+ * Method:    getGeometry_N
+ * Signature: ()Ljava/awt/Rectangle;
+ */
+JNIEXPORT jobject JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_getGeometry_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWidget
+ * Method:    setGeometry_N
+ * Signature: (IIII)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_setGeometry_1N
+  (JNIEnv *, jobject, jint, jint, jint, jint);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWidget
  * Method:    show_N
  * Signature: ()V
  */
@@ -22,6 +38,14 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_sh
  */
 JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_hide_1N
   (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWidget
+ * Method:    move_N
+ * Signature: (II)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_move_1N
+  (JNIEnv *, jobject, jint, jint);
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWidget
