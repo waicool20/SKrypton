@@ -16,6 +16,7 @@ abstract class SKryptonWidget : NativeInterface() {
 
     fun show() = show_N()
     fun hide() = hide_N()
+    fun isHidden() = isHidden_N()
     fun move(x: Int, y: Int) = move_N(x, y)
     fun resize(width: Int, height: Int) = resize_N(width, height)
 
@@ -24,6 +25,7 @@ abstract class SKryptonWidget : NativeInterface() {
 
     private external fun show_N()
     private external fun hide_N()
+    private external fun isHidden_N(): Boolean
     private external fun move_N(x: Int, y: Int)
     private external fun resize_N(width: Int, height: Int)
     private external fun dispose_N()

@@ -216,7 +216,7 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     override fun highlight(): Region = highlight("")
     override fun highlight(color: String): Region {
         highlighter.color = parseColor(color)
-        highlighter.show() // TODO Needs to be toggled, implement function for checking if widget is showing
+        highlighter.toggle()
         return this
     }
 

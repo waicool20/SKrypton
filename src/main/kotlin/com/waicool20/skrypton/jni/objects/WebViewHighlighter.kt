@@ -45,6 +45,14 @@ class WebViewHighlighter private constructor(override val handle: CPointer) : SK
         }
     }
 
+    fun toggle() {
+        if (isHidden()) {
+            show()
+        } else {
+            hide()
+        }
+    }
+
     private external fun getColor_N(): Color
     private external fun setColor_N(red: Int, green: Int, blue: Int)
     private external fun isFillColor_N(): Boolean

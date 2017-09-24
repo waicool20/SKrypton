@@ -41,6 +41,14 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_hi
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWidget
+ * Method:    isHidden_N
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_isHidden_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWidget
  * Method:    move_N
  * Signature: (II)V
  */
