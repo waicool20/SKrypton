@@ -7,6 +7,38 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_WebViewHighlighter
+ * Method:    getColor_N
+ * Signature: ()Ljava/awt/Color;
+ */
+JNIEXPORT jobject JNICALL Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_getColor_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_WebViewHighlighter
+ * Method:    setColor_N
+ * Signature: (III)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_setColor_1N
+  (JNIEnv *, jobject, jint, jint, jint);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_WebViewHighlighter
+ * Method:    isFillColor_N
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_isFillColor_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_WebViewHighlighter
+ * Method:    setFillColor_N
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_setFillColor_1N
+  (JNIEnv *, jobject, jboolean);
+
 #ifdef __cplusplus
 }
 #endif

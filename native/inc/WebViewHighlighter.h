@@ -10,6 +10,7 @@
 #include <QWidget>
 #include <QPainter>
 
+#include <com_waicool20_skrypton_jni_objects_WebViewHighlighter.h>
 #include <com_waicool20_skrypton_jni_objects_WebViewHighlighter_Companion.h>
 
 class WebViewHighlighter : public QWidget {

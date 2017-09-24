@@ -1,5 +1,7 @@
 #include <WebViewHighlighter.h>
 
+const int alpha = 120;
+
 JNIEXPORT jlong JNICALL
 Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_00024Companion_initialize_1N(JNIEnv* env, jobject obj,
                                                                                         jobject view,
@@ -11,7 +13,7 @@ Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_00024Companion_initia
     if (ref) {
         SKryptonWebViewContainer* container = ref.value();
         WebViewHighlighter* highlighter = nullptr;
-        SKryptonApp::runOnMainThread([&]{
+        SKryptonApp::runOnMainThread([&] {
             highlighter = new WebViewHighlighter(container, x, y, width, height, fillColor, red, green, blue);
         });
         while (!highlighter) {}
@@ -21,9 +23,65 @@ Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_00024Companion_initia
     return {};
 }
 
+JNIEXPORT jobject JNICALL
+Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_getColor_1N(JNIEnv* env, jobject obj) {
+    auto ref = PointerFromCPointer<WebViewHighlighter>(env, obj);
+    if (ref) {
+        WebViewHighlighter* highlighter = ref.value();
+        auto color = highlighter->getColor();
+        auto jColor = NewObject(env, "java.awt.Color", "(III)V", color.red(), color.green(), color.blue());
+        if (jColor) return jColor.value();
+        ThrowNewError(env, LOG_PREFIX + "Could not create java color");
+        return {};
+    }
+    ThrowNewError(env, LOG_PREFIX + "Could not get color");
+    return {};
+}
+
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_setColor_1N(JNIEnv* env, jobject obj, jint red, jint green,
+                                                                       jint blue) {
+    auto ref = PointerFromCPointer<WebViewHighlighter>(env, obj);
+    if (ref) {
+        WebViewHighlighter* highlighter = ref.value();
+        highlighter->setColor(QColor { red, green, blue, alpha });
+        SKryptonApp::runOnMainThread([=]{
+            highlighter->repaint();
+        });
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not set color");
+    }
+}
+
+JNIEXPORT jboolean JNICALL
+Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_isFillColor_1N(JNIEnv* env, jobject obj) {
+    auto ref = PointerFromCPointer<WebViewHighlighter>(env, obj);
+    if (ref) {
+        WebViewHighlighter* highlighter = ref.value();
+        return highlighter->isFillColor();
+    }
+    ThrowNewError(env, LOG_PREFIX + "Could not get if is fill color");
+    return {};
+}
+
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_setFillColor_1N(JNIEnv* env, jobject obj,
+                                                                           jboolean fillColor) {
+    auto ref = PointerFromCPointer<WebViewHighlighter>(env, obj);
+    if (ref) {
+        WebViewHighlighter* highlighter = ref.value();
+        highlighter->setFillColor(fillColor);
+        SKryptonApp::runOnMainThread([=]{
+            highlighter->repaint();
+        });
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not set if fill color");
+    }
+}
+
 WebViewHighlighter::WebViewHighlighter(SKryptonWebViewContainer* parent, int x, int y, int width, int height,
                                        bool fillColor, int red, int green, int blue) :
-        QWidget { parent }, color(QColor { red, green, blue, 120 }),
+        QWidget { parent }, color(QColor { red, green, blue, alpha }),
         fillColor(fillColor) {
     setAttribute(Qt::WA_NoSystemBackground);
     setAttribute(Qt::WA_TransparentForMouseEvents);
