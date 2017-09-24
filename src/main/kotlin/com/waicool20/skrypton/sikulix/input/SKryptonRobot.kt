@@ -1,9 +1,12 @@
 package com.waicool20.skrypton.sikulix.input
 
+import com.waicool20.skrypton.enums.KeyEventType
 import com.waicool20.skrypton.enums.MouseButton
 import com.waicool20.skrypton.enums.MouseEventType
+import com.waicool20.skrypton.jni.objects.SKryptonKeyEvent
 import com.waicool20.skrypton.jni.objects.SKryptonMouseEvent
 import com.waicool20.skrypton.sikulix.SKryptonScreen
+import com.waicool20.skrypton.enums.Key
 import org.sikuli.basics.AnimatorOutQuarticEase
 import org.sikuli.basics.AnimatorTimeBased
 import org.sikuli.basics.Settings
@@ -11,12 +14,14 @@ import org.sikuli.script.*
 import java.awt.Color
 import java.awt.Point
 import java.awt.Rectangle
+import java.awt.event.KeyEvent
 import java.util.concurrent.TimeUnit
 
 
 class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
     private var autoDelay = 100
     private var heldButtons = 0
+    private val heldKeys = mutableSetOf<Int>()
     private val webView = screen.webView
 
     //<editor-fold desc="Mouse stuff">
@@ -72,40 +77,55 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
 
     //<editor-fold desc="Keyboard stuff">
 
-    override fun keyUp(code: Int) {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
+    override fun keyUp() = heldKeys.forEach { keyUp(it) }
+    override fun keyUp(code: Int) = generateKeyEvent(KeyEventType.KeyRelease, code)
+    override fun keyUp(keys: String) = keys.toCharArray().forEach {
+        webView.sendEvent(SKryptonKeyEvent(KeyEventType.KeyRelease, it))
     }
 
-    override fun keyUp() {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
+    override fun keyDown(code: Int) = generateKeyEvent(KeyEventType.KeyPress, code)
+    override fun keyDown(keys: String) = keys.toCharArray().forEach {
+        webView.sendEvent(SKryptonKeyEvent(KeyEventType.KeyPress, it))
     }
 
-    override fun keyDown(keys: String?) {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
-    }
-
-    override fun keyDown(code: Int) {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
-    }
-
-    override fun typeChar(character: Char, mode: IRobot.KeyMode?) {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
+    override fun typeChar(character: Char, mode: IRobot.KeyMode) = when (mode) {
+        IRobot.KeyMode.PRESS_ONLY -> webView.sendEvent(SKryptonKeyEvent(KeyEventType.KeyPress, character))
+        IRobot.KeyMode.PRESS_RELEASE -> {
+            webView.sendEvent(SKryptonKeyEvent(KeyEventType.KeyPress, character))
+            webView.sendEvent(SKryptonKeyEvent(KeyEventType.KeyRelease, character))
+        }
+        IRobot.KeyMode.RELEASE_ONLY -> webView.sendEvent(SKryptonKeyEvent(KeyEventType.KeyRelease, character))
     }
 
     override fun typeKey(key: Int) {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
-    }
-
-    override fun keyUp(keys: String?) {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
+        keyUp(key)
+        keyDown(key)
     }
 
     override fun pressModifiers(modifiers: Int) {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
+        if (modifiers and KeyModifier.SHIFT != 0) keyDown(KeyEvent.VK_SHIFT)
+        if (modifiers and KeyModifier.CTRL != 0) keyDown(KeyEvent.VK_CONTROL)
+        if (modifiers and KeyModifier.ALT != 0) keyDown(KeyEvent.VK_ALT)
+        if (modifiers and KeyModifier.META != 0 || modifiers and KeyModifier.WIN != 0) {
+            if (Settings.isWindows()) {
+                keyDown(KeyEvent.VK_WINDOWS)
+            } else {
+                keyDown(KeyEvent.VK_META)
+            }
+        }
     }
 
     override fun releaseModifiers(modifiers: Int) {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
+        if (modifiers and KeyModifier.SHIFT != 0) keyUp(KeyEvent.VK_SHIFT)
+        if (modifiers and KeyModifier.CTRL != 0) keyUp(KeyEvent.VK_CONTROL)
+        if (modifiers and KeyModifier.ALT != 0) keyUp(KeyEvent.VK_ALT)
+        if (modifiers and KeyModifier.META != 0 || modifiers and KeyModifier.WIN != 0) {
+            if (Settings.isWindows()) {
+                keyUp(KeyEvent.VK_WINDOWS)
+            } else {
+                keyUp(KeyEvent.VK_META)
+            }
+        }
     }
 
     //</editor-fold>
@@ -142,10 +162,19 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
     //</editor-fold>
 
     private fun generateMouseEvent(type: MouseEventType, buttons: Int, position: Point = Point(webView.cursorX, webView.cursorY)) {
+        val sButtons = MouseButton.fromSikuliButtons(buttons)
         webView.sendEvent(SKryptonMouseEvent(
                 type = type,
                 localPos = position,
-                buttons = MouseButton.fromSikuliButtons(buttons)
+                button = sButtons.firstOrNull() ?: MouseButton.NoButton,
+                buttons = sButtons
+        ))
+    }
+
+    private fun generateKeyEvent(type: KeyEventType, keyCode: Int) {
+        webView.sendEvent(SKryptonKeyEvent(
+                type = type,
+                key = Key.fromSikuliKeyCode(keyCode)
         ))
     }
 }
