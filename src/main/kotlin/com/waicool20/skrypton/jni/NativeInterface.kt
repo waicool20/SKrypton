@@ -2,7 +2,7 @@ package com.waicool20.skrypton.jni
 
 import com.waicool20.skrypton.util.loggerFor
 
-data class CPointer(val handle: Long) {
+data class CPointer(val value: Long) {
     private val logger = loggerFor<CPointer>()
 
     init {

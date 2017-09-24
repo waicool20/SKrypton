@@ -7,7 +7,7 @@ template<typename T>
 optional<T*> PointerFromCPointer(JNIEnv* env, jobject obj) {
     auto CPointer = GetObjectFieldValue(env, obj, "handle", "com.waicool20.skrypton.jni.CPointer");
     if (CPointer) {
-        auto longPtr = GetFieldValue<jlong>(env, CPointer.value(), "handle");
+        auto longPtr = GetFieldValue<jlong>(env, CPointer.value(), "value");
         if (longPtr) return { (T*) longPtr.value() };
     }
     return {};
@@ -15,9 +15,9 @@ optional<T*> PointerFromCPointer(JNIEnv* env, jobject obj) {
 
 template<typename T>
 optional<T*> PointerFromStaticCPointer(JNIEnv* env, jobject obj) {
-    auto CPointer = GetStaticObjectFieldValue(env, obj, "handle", "com.waicool20.skrypton.jni.CPointer");
+    auto CPointer = GetStaticObjectFieldValue(env, obj, "value", "com.waicool20.skrypton.jni.CPointer");
     if (CPointer) {
-        auto longPtr = GetFieldValue<jlong>(env, CPointer.value(), "handle");
+        auto longPtr = GetFieldValue<jlong>(env, CPointer.value(), "value");
         if (longPtr) return { (T*) longPtr.value() };
     }
     return {};
