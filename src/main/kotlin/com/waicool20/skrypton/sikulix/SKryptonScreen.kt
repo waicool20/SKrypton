@@ -65,24 +65,36 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
                 logger.debug("Screenshot position 2 set (X: ${it.x} Y: ${it.y})")
             }
         }
+
+        val moveListener: (SKryptonMouseEvent) -> Unit = {
+            point1?.let { p ->
+                if (it.x > p.x && it.y > p.y) {
+                    highlighter.resize(it.x - p.x, it.y - p.y)
+                }
+            }
+        }
         webView.addOnMouseEventListener(MouseEventType.MouseButtonPress, listener)
+        webView.addOnMouseEventListener(MouseEventType.MouseMove, moveListener)
         while (point1 == null || point2 == null) {
             TimeUnit.MILLISECONDS.sleep(100)
         }
         webView.removeOnMouseEventListener(MouseEventType.MouseButtonPress, listener)
+        webView.removeOnMouseEventListener(MouseEventType.MouseMove, moveListener)
 
         val p1 = requireNotNull(point1)
         val p2 = requireNotNull(point2)
 
         val width = p2.x - p1.x
         val height = p2.y - p1.y
-        highlighter.resize(width, height)
-        highlighter.showForAndDispose(1)
 
         require(width > 0) { "Selection invalid: Negative width" }
         require(height > 0) { "Selection invalid: Negative height" }
 
-        return capture(p1.x, p1.y, width, height)
+        val image = capture(p1.x, p1.y, width, height)
+        webView.runJavaScript("alert('Screenshot taken!');") {
+            highlighter.close()
+        }
+        return image
     }
 
     override fun getID(): Int = webView.handle.value.toInt()
@@ -93,7 +105,7 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
     override fun capture(region: Region): ScreenImage = capture(region.x, region.y, region.w, region.h)
     override fun capture(x: Int, y: Int, width: Int, height: Int): ScreenImage = capture(Rectangle(x, y, width, height))
     override fun capture(rect: Rectangle): ScreenImage = with(webView.takeScreenshot()) {
-        ScreenImage(rect, this).getSub(rect)
+        ScreenImage(Rectangle(0, 0,  this.width, this.height), this).getSub(rect)
     }
 
     override fun getLastScreenImageFromScreen(): ScreenImage? = lastScreenImage
