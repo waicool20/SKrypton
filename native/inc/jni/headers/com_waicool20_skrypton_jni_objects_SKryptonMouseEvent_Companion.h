@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_Companion
  * Method:    initialize_N
- * Signature: (IIIIIIIJJJI)J
+ * Signature: (IIIJJJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_00024Companion_initialize_1N
-  (JNIEnv *, jobject, jint, jint, jint, jint, jint, jint, jint, jlong, jlong, jlong, jint);
+  (JNIEnv *, jobject, jint, jint, jint, jlong, jlong, jlong);
 
 #ifdef __cplusplus
 }

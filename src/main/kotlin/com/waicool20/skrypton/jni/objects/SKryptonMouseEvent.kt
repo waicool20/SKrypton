@@ -16,14 +16,9 @@ class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent() {
                 type: Int,
                 localPosX: Int,
                 localPosY: Int,
-                windowPosX: Int,
-                windowPosY: Int,
-                screenPosX: Int,
-                screenPosY: Int,
                 button: Long,
                 buttons: Long,
-                modifiers: Long,
-                source: Int
+                modifiers: Long
         ): Long
     }
 
@@ -31,25 +26,19 @@ class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent() {
     constructor(
             type: MouseEventType,
             localPos: Point,
-            windowPos: Point = localPos,
-            screenPos: Point = MouseInfo.getPointerInfo().location,
             button: MouseButton = MouseButton.NoButton,
             buttons: Set<MouseButton> = setOf(button),
-            modifiers: KeyboardModifiers = KeyboardModifiers.NoModifier,
-            source: MouseEventSource = MouseEventSource.MouseEventNotSynthesized
+            modifiers: KeyboardModifiers = KeyboardModifiers.NoModifier
     ) : this(initialize_N(
             type.id,
             localPos.x, localPos.y,
-            windowPos.x, windowPos.y,
-            screenPos.x, screenPos.y,
             button.value,
             if (button == MouseButton.NoButton) {
                 MouseButton.NoButton.value
             } else {
                 buttons.map { it.value }.reduce { acc, l -> acc or l }
             },
-            modifiers.value,
-            source.ordinal
+            modifiers.value
     ))
     //</editor-fold>
 

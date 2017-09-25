@@ -74,23 +74,15 @@ JNIEXPORT jlong JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_00024Companion_initialize_1N(JNIEnv* env, jobject obj,
                                                                                         jint e_type,
                                                                                         jint localPosX, jint localPosY,
-                                                                                        jint windowPosX,
-                                                                                        jint windowPosY,
-                                                                                        jint screenPosX,
-                                                                                        jint screenPosY,
                                                                                         jlong e_button,
                                                                                         jlong e_buttons,
-                                                                                        jlong e_modifiers,
-                                                                                        jint e_source) {
+                                                                                        jlong e_modifiers) {
     auto type = static_cast<QEvent::Type>(e_type);
     auto localPos = QPoint { localPosX, localPosY };
-    auto windowPos = QPoint { windowPosX, windowPosY };
-    auto screenPos = QPoint { screenPosX, screenPosY };
     auto button = static_cast<Qt::MouseButton>(e_button);
     auto buttons = static_cast<Qt::MouseButton>(e_buttons);
     auto modifiers = static_cast<Qt::KeyboardModifier>(e_modifiers);
-    auto source = static_cast<Qt::MouseEventSource>(e_source);
-    auto event = new QMouseEvent { type, localPos, windowPos, screenPos, button, buttons, modifiers, source };
+    auto event = new QMouseEvent { type, localPos, button, buttons, modifiers };
     event->setTimestamp(QDateTime::currentDateTime().toTime_t());
     return (jlong) event;
 }
