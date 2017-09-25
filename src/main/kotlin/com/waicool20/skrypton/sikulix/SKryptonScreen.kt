@@ -1,9 +1,11 @@
 package com.waicool20.skrypton.sikulix
 
 import com.waicool20.skrypton.jni.objects.SKryptonWebView
+import com.waicool20.skrypton.jni.objects.WebViewHighlighter
 import com.waicool20.skrypton.sikulix.input.SKryptonKeyboard
 import com.waicool20.skrypton.sikulix.input.SKryptonMouse
 import com.waicool20.skrypton.sikulix.input.SKryptonRobot
+import org.sikuli.basics.Settings
 import org.sikuli.script.*
 import java.awt.Rectangle
 
@@ -18,8 +20,12 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
         setOtherScreen(this)
     }
 
-    override fun showTarget(location: Location?) {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
+    override fun showTarget(location: Location) {
+        val width = 50
+        val height = 50
+        val x = location.x - width / 2
+        val y = location.y - height / 2
+        WebViewHighlighter(webView, x, y, width, height).showForAndDispose(Settings.SlowMotionDelay)
     }
 
     override fun getIdFromPoint(srcx: Int, srcy: Int): Int = 0

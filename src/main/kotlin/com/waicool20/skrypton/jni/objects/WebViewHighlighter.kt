@@ -38,10 +38,23 @@ class WebViewHighlighter private constructor(override val handle: CPointer) : SK
         get() = isFillColor_N()
         set(value) = setFillColor_N(value)
 
-    fun showFor(duration: Long, unit: TimeUnit = TimeUnit.SECONDS) {
+    fun showFor(seconds: Float, callback: () -> Unit = {}) = showFor(seconds.toDouble(), callback)
+    fun showFor(seconds: Double, callback: () -> Unit = {}) = showFor((seconds * 1000).toLong(), TimeUnit.MILLISECONDS, callback)
+    fun showFor(duration: Long, unit: TimeUnit = TimeUnit.SECONDS, callback: () -> Unit = {}) {
         show()
         timer.schedule(unit.toMillis(duration)) {
             hide()
+            callback()
+        }
+    }
+
+    fun showForAndDispose(seconds: Float, callback: () -> Unit = {}) = showForAndDispose(seconds.toDouble(), callback)
+    fun showForAndDispose(seconds: Double, callback: () -> Unit = {}) = showForAndDispose((seconds * 1000).toLong(), TimeUnit.MILLISECONDS, callback)
+    fun showForAndDispose(duration: Long, unit: TimeUnit = TimeUnit.SECONDS, callback: () -> Unit = {}) {
+        show()
+        timer.schedule(unit.toMillis(duration)) {
+            close()
+            callback()
         }
     }
 

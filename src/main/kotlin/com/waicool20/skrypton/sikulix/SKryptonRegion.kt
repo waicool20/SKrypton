@@ -226,7 +226,7 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
 
     override fun highlight(secs: Float, color: String): Region {
         highlighter.color = parseColor(color)
-        highlighter.showFor((secs * 1000).toLong(), TimeUnit.MILLISECONDS)
+        highlighter.showFor(secs)
         return this
     }
 
