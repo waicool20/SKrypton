@@ -15,16 +15,17 @@ private:
     JNIEnv* env;
 public:
     SKryptonWebViewEventHandler(SKryptonWebView* webView);
-private:
-    bool eventFilter(QObject* watched, QEvent* event);
-    void mousePressEvent(QMouseEvent* event);
-    void mouseReleaseEvent(QMouseEvent* event);
-    void mouseDoubleClickEvent(QMouseEvent* event);
-    void mouseMoveEvent(QMouseEvent* event);
+protected:
+    bool eventFilter(QObject* watched, QEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
+    void mouseDoubleClickEvent(QMouseEvent* event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
     void mouseEvent(QMouseEvent* event);
+    void wheelEvent(QWheelEvent* event) override;
 
-    void keyPressEvent(QKeyEvent* event);
-    void keyReleaseEvent(QKeyEvent* event);
+    void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent* event) override;
     void keyEvent(QKeyEvent* event);
 };
 

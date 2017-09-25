@@ -6,6 +6,7 @@ import com.waicool20.skrypton.enums.MouseButton
 import com.waicool20.skrypton.enums.MouseEventType
 import com.waicool20.skrypton.jni.objects.SKryptonKeyEvent
 import com.waicool20.skrypton.jni.objects.SKryptonMouseEvent
+import com.waicool20.skrypton.jni.objects.SKryptonWheelEvent
 import com.waicool20.skrypton.sikulix.SKryptonScreen
 import org.sikuli.basics.AnimatorOutQuarticEase
 import org.sikuli.basics.AnimatorTimeBased
@@ -15,6 +16,7 @@ import java.awt.Color
 import java.awt.Point
 import java.awt.Rectangle
 import java.awt.event.KeyEvent
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -23,6 +25,7 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
     private var heldButtons = 0
     private val heldKeys = mutableSetOf<Int>()
     private val webView = screen.webView
+    private val rng = Random()
 
     //<editor-fold desc="Mouse stuff">
 
@@ -47,7 +50,10 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
     }
 
     override fun mouseWheel(wheelAmt: Int) {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
+        webView.sendEvent(SKryptonWheelEvent(
+                wheelAmt * 16 + rng.nextInt(2) - 1, // Just some variance
+                Point(webView.cursorX, webView.cursorY)
+        ))
     }
 
     override fun smoothMove(dest: Location) =

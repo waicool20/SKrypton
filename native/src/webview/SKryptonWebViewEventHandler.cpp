@@ -37,14 +37,24 @@ void SKryptonWebViewEventHandler::mouseMoveEvent(QMouseEvent* event) {
 
 void SKryptonWebViewEventHandler::mouseEvent(QMouseEvent* event) {
     auto pointerLong = (jlong) event;
-    auto sMouseEvent = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonMouseEvent", "(J)V",
-                                 pointerLong);
+    auto sMouseEvent = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonMouseEvent", "(J)V", pointerLong);
     if (sMouseEvent) {
         CallMethod<void*>(env, webView->getJInstance(), "onMouseEvent",
                           "(ILcom/waicool20/skrypton/jni/objects/SKryptonMouseEvent;)V", event->type(),
                           sMouseEvent.value());
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not send mouse event to JVM instance");
+    }
+}
+
+void SKryptonWebViewEventHandler::wheelEvent(QWheelEvent* event) {
+    auto pointerLong = (jlong) event;
+    auto sWheelEvent = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonWheelEvent", "(J)V", pointerLong);
+    if (sWheelEvent) {
+        CallMethod<void*>(env, webView->getJInstance(), "onWheelEvent",
+                          "(Lcom/waicool20/skrypton/jni/objects/SKryptonWheelEvent;)V", sWheelEvent.value());
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not send wheel event to JVM instance");
     }
 }
 

@@ -115,6 +115,23 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     //</editor-fold>
 
+    //<editor-fold desc="Wheel listener">
+
+    private val onWheelEventListeners = mutableListOf<(event: SKryptonWheelEvent) -> Unit>()
+    private fun onWheelEvent(event: SKryptonWheelEvent) {
+        onWheelEventListeners.forEach { it(event) }
+    }
+
+    fun addOnWheelEventListener(listener: (event: SKryptonWheelEvent) -> Unit) {
+        onWheelEventListeners.add(listener)
+    }
+
+    fun removeOnWheelEventListener(listener: (event: SKryptonWheelEvent) -> Unit) {
+        onWheelEventListeners.remove(listener)
+    }
+
+    //</editor-fold>
+
     //<editor-fold desc="Key listener">
 
     private val onKeyEventListeners = mutableMapOf<KeyEventType, (event: SKryptonKeyEvent) -> Unit>()
