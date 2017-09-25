@@ -98,57 +98,6 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     //</editor-fold>
 
-    //<editor-fold desc="Mouse listener">
-
-    private val onMouseEventListeners = mutableMapOf<MouseEventType, (event: SKryptonMouseEvent) -> Unit>()
-    private fun onMouseEvent(type: Int, event: SKryptonMouseEvent) {
-        onMouseEventListeners.filterKeys { it == MouseEventType.getForId(type) }.values.forEach { it(event) }
-    }
-
-    fun addOnMouseEventListener(type: MouseEventType, listener: (event: SKryptonMouseEvent) -> Unit) {
-        onMouseEventListeners.put(type, listener)
-    }
-
-    fun removeOnMouseEventListener(type: MouseEventType, listener: (event: SKryptonMouseEvent) -> Unit) {
-        onMouseEventListeners.remove(type, listener)
-    }
-
-    //</editor-fold>
-
-    //<editor-fold desc="Wheel listener">
-
-    private val onWheelEventListeners = mutableListOf<(event: SKryptonWheelEvent) -> Unit>()
-    private fun onWheelEvent(event: SKryptonWheelEvent) {
-        onWheelEventListeners.forEach { it(event) }
-    }
-
-    fun addOnWheelEventListener(listener: (event: SKryptonWheelEvent) -> Unit) {
-        onWheelEventListeners.add(listener)
-    }
-
-    fun removeOnWheelEventListener(listener: (event: SKryptonWheelEvent) -> Unit) {
-        onWheelEventListeners.remove(listener)
-    }
-
-    //</editor-fold>
-
-    //<editor-fold desc="Key listener">
-
-    private val onKeyEventListeners = mutableMapOf<KeyEventType, (event: SKryptonKeyEvent) -> Unit>()
-    private fun onKeyEvent(type: Int, event: SKryptonKeyEvent) {
-        onKeyEventListeners.filterKeys { it == KeyEventType.getForId(type) }.values.forEach { it(event) }
-    }
-
-    fun addOnKeyEventListener(type: KeyEventType, listener: (event: SKryptonKeyEvent) -> Unit) {
-        onKeyEventListeners.put(type, listener)
-    }
-
-    fun removeOnKeyEventListener(type: KeyEventType, listener: (event: SKryptonKeyEvent) -> Unit) {
-        onKeyEventListeners.remove(type, listener)
-    }
-
-    //</editor-fold>
-
     fun runJavaScript(content: String, callback: () -> Unit = {}) = runJavaScript_N(content, Runnable { callback() })
     fun takeScreenshot(): BufferedImage {
         return ImageIO.read(takeScreenshot_N().inputStream())
