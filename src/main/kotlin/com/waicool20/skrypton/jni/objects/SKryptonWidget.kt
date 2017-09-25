@@ -6,7 +6,6 @@ import com.waicool20.skrypton.jni.NativeInterface
 import java.awt.Dimension
 import java.awt.Rectangle
 
-
 abstract class SKryptonWidget : NativeInterface() {
     var geometry: Rectangle
         get() = getGeometry_N()
@@ -69,6 +68,23 @@ abstract class SKryptonWidget : NativeInterface() {
 
     fun removeOnKeyEventListener(type: KeyEventType, listener: (event: SKryptonKeyEvent) -> Unit) {
         onKeyEventListeners.remove(type, listener)
+    }
+
+    //</editor-fold>
+
+    //<editor-fold desc="Resize listener">
+
+    private val onResizeEventListeners = mutableListOf<(event: SKryptonResizeEvent) -> Unit>()
+    private fun onResizeEvent(event: SKryptonResizeEvent) {
+        onResizeEventListeners.forEach { it(event) }
+    }
+
+    fun addOnResizeEventListener(listener: (event: SKryptonResizeEvent) -> Unit) {
+        onResizeEventListeners.add(listener)
+    }
+
+    fun removeOnResizeEventListener(listener: (event: SKryptonResizeEvent) -> Unit) {
+        onResizeEventListeners.remove(listener)
     }
 
     //</editor-fold>

@@ -24,6 +24,9 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
     init {
         isVirtual = true
         setOtherScreen(this)
+        webView.addOnResizeEventListener {
+            setSize(it.newSize.width, it.newSize.height)
+        }
     }
 
     override fun showTarget(location: Location) {
@@ -105,7 +108,7 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
     override fun capture(region: Region): ScreenImage = capture(region.x, region.y, region.w, region.h)
     override fun capture(x: Int, y: Int, width: Int, height: Int): ScreenImage = capture(Rectangle(x, y, width, height))
     override fun capture(rect: Rectangle): ScreenImage = with(webView.takeScreenshot()) {
-        ScreenImage(Rectangle(0, 0,  this.width, this.height), this).getSub(rect)
+        ScreenImage(Rectangle(0, 0, this.width, this.height), this).getSub(rect)
     }
 
     override fun getLastScreenImageFromScreen(): ScreenImage? = lastScreenImage

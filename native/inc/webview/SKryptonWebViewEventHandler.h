@@ -27,6 +27,8 @@ protected:
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
     void keyEvent(QKeyEvent* event);
+
+    void resizeEvent(QResizeEvent* event) override;
 };
 
 #endif //SKRYPTONNATIVE_SKRYPTONWEBVIEWEVENTHANDLER_H

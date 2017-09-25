@@ -84,3 +84,15 @@ void SKryptonWebViewEventHandler::keyEvent(QKeyEvent* event) {
 }
 
 //</editor-fold>
+
+void SKryptonWebViewEventHandler::resizeEvent(QResizeEvent* event) {
+    auto pointerLong = (jlong) event;
+    auto sMouseEvent = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonResizeEvent", "(J)V",
+                                 pointerLong);
+    if (sMouseEvent) {
+        CallMethod<void*>(env, webView->getJInstance(), "onResizeEvent",
+                          "(Lcom/waicool20/skrypton/jni/objects/SKryptonResizeEvent;)V", sMouseEvent.value());
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not send resize event to JVM instance");
+    }
+}

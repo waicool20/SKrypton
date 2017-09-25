@@ -1,7 +1,5 @@
 package com.waicool20.skrypton.jni.objects
 
-import com.waicool20.skrypton.enums.KeyEventType
-import com.waicool20.skrypton.enums.MouseEventType
 import com.waicool20.skrypton.jni.CPointer
 import java.awt.image.BufferedImage
 import java.net.URL
