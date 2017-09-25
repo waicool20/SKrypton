@@ -36,7 +36,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         Qt5::WebSockets
         ${JNI_LIBRARIES})
 
-install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/build)
+set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build)
 
 # Scan for JNI classes and generate headers
 

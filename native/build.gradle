@@ -33,7 +33,7 @@ task makeNativeLibraries(type: Exec) {
     dependsOn refreshCMake
     workingDir cmakeBuildDir
     commandLine 'cmake'
-    args += ['--build', './', '--target', 'install']
+    args += ['--build', './']
     if (isUnix) {
         int threads = Runtime.runtime.availableProcessors() * 2
         args += ['--', "-j$threads"]
