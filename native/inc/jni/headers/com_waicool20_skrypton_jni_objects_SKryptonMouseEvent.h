@@ -55,14 +55,6 @@ JNIEXPORT jobject JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonMouseE
 JNIEXPORT jint JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_getSource_1N
   (JNIEnv *, jobject);
 
-/*
- * Class:     com_waicool20_skrypton_jni_objects_SKryptonMouseEvent
- * Method:    dispose_N
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_dispose_1N
-  (JNIEnv *, jobject);
-
 #ifdef __cplusplus
 }
 #endif

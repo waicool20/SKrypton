@@ -69,13 +69,10 @@ class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent() {
     val localPos by lazy { getLocalPos_N() }
     val source by lazy { MouseEventSource.values()[getSource_N()] }
 
-    override fun close() = dispose_N()
-
     private external fun getButton_N(): Long
     private external fun getButtons_N(): Long
     private external fun getGlobalPos_N(): Point
     private external fun getScreenPos_N(): Point
     private external fun getLocalPos_N(): Point
     private external fun getSource_N(): Int
-    private external fun dispose_N()
 }

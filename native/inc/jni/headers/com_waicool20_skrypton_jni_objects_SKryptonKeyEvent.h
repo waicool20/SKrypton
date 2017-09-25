@@ -9,14 +9,6 @@ extern "C" {
 #endif
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonKeyEvent
- * Method:    dispose_N
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonKeyEvent_dispose_1N
-  (JNIEnv *, jobject);
-
-/*
- * Class:     com_waicool20_skrypton_jni_objects_SKryptonKeyEvent
  * Method:    getKey_N
  * Signature: ()J
  */

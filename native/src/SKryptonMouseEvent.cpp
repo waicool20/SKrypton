@@ -94,9 +94,3 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_00024Companion_initia
     event->setTimestamp(QDateTime::currentDateTime().toTime_t());
     return (jlong) event;
 }
-
-JNIEXPORT void JNICALL
-Java_com_waicool20_skrypton_jni_objects_SKryptonMouseEvent_dispose_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<QMouseEvent>(env, obj);
-    if (opt) delete opt.value();
-}

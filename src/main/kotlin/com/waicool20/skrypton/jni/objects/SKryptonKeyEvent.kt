@@ -54,9 +54,6 @@ class SKryptonKeyEvent private constructor(pointer: Long): SKryptonEvent() {
     val character by lazy { getChar_N() }
     val isAutoRepeat by lazy { isAutoRepeat_N() }
 
-    override fun close() = dispose_N()
-
-    private external fun dispose_N()
     private external fun getKey_N(): Long
     private external fun getChar_N(): String
     private external fun isAutoRepeat_N(): Boolean

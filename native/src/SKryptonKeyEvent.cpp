@@ -44,9 +44,3 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonKeyEvent_isAutoRepeat_1N(JNIEnv*
     ThrowNewError(env, LOG_PREFIX + "Could not get key");
     return {};
 }
-
-JNIEXPORT void JNICALL
-Java_com_waicool20_skrypton_jni_objects_SKryptonKeyEvent_dispose_1N(JNIEnv* env, jobject obj) {
-    auto opt = PointerFromCPointer<QKeyEvent>(env, obj);
-    if (opt) delete opt.value();
-}
