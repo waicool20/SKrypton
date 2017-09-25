@@ -1,15 +1,21 @@
 package com.waicool20.skrypton.sikulix
 
+import com.waicool20.skrypton.enums.MouseEventType
+import com.waicool20.skrypton.jni.objects.SKryptonMouseEvent
 import com.waicool20.skrypton.jni.objects.SKryptonWebView
 import com.waicool20.skrypton.jni.objects.WebViewHighlighter
 import com.waicool20.skrypton.sikulix.input.SKryptonKeyboard
 import com.waicool20.skrypton.sikulix.input.SKryptonMouse
 import com.waicool20.skrypton.sikulix.input.SKryptonRobot
+import com.waicool20.skrypton.util.loggerFor
 import org.sikuli.basics.Settings
 import org.sikuli.script.*
+import java.awt.Point
 import java.awt.Rectangle
+import java.util.concurrent.TimeUnit
 
 class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webView.size.width, webView.size.height), IScreen {
+    private val logger = loggerFor<SKryptonScreen>()
     private val robot = SKryptonRobot(this)
     val mouse = SKryptonMouse(robot)
     val keyboard = SKryptonKeyboard(robot)
@@ -33,7 +39,50 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
     override fun getRobot(): IRobot = robot
 
     override fun userCapture(string: String?): ScreenImage {
-        throw UnsupportedOperationException("Not Implemented") // TODO Implement this function
+        val message = string ?:
+                """
+                After you click OK, the first click selects the top left corner and the
+                second click selects the bottom right corner of the screenshot
+                """.trimIndent().replace("\n", "\\n")
+
+        var promptDone = false
+        webView.runJavaScript("alert('$message');") { promptDone = true }
+        while (!promptDone) {
+            TimeUnit.MILLISECONDS.sleep(100)
+        }
+        var point1: Point? = null
+        var point2: Point? = null
+
+        val highlighter = WebViewHighlighter(webView, 0, 0, 10, 10)
+        val listener: (SKryptonMouseEvent) -> Unit = {
+            if (point1 == null) {
+                point1 = it.localPos
+                highlighter.move(it.x, it.y)
+                highlighter.show()
+                logger.debug("Screenshot position 1 set (X: ${it.x} Y: ${it.y})")
+            } else if (point2 == null) {
+                point2 = it.localPos
+                logger.debug("Screenshot position 2 set (X: ${it.x} Y: ${it.y})")
+            }
+        }
+        webView.addOnMouseEventListener(MouseEventType.MouseButtonPress, listener)
+        while (point1 == null || point2 == null) {
+            TimeUnit.MILLISECONDS.sleep(100)
+        }
+        webView.removeOnMouseEventListener(MouseEventType.MouseButtonPress, listener)
+
+        val p1 = requireNotNull(point1)
+        val p2 = requireNotNull(point2)
+
+        val width = p2.x - p1.x
+        val height = p2.y - p1.y
+        highlighter.resize(width, height)
+        highlighter.showForAndDispose(1)
+
+        require(width > 0) { "Selection invalid: Negative width" }
+        require(height > 0) { "Selection invalid: Negative height" }
+
+        return capture(p1.x, p1.y, width, height)
     }
 
     override fun getID(): Int = webView.handle.value.toInt()
@@ -42,9 +91,9 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
 
     override fun capture(): ScreenImage = capture(rect)
     override fun capture(region: Region): ScreenImage = capture(region.x, region.y, region.w, region.h)
-    override fun capture(x: Int, y: Int, width: Int, height: Int): ScreenImage = capture(Rectangle(x, y, w, h))
+    override fun capture(x: Int, y: Int, width: Int, height: Int): ScreenImage = capture(Rectangle(x, y, width, height))
     override fun capture(rect: Rectangle): ScreenImage = with(webView.takeScreenshot()) {
-        ScreenImage(Rectangle(0, 0, width, height), this).getSub(rect)
+        ScreenImage(rect, this).getSub(rect)
     }
 
     override fun getLastScreenImageFromScreen(): ScreenImage? = lastScreenImage
