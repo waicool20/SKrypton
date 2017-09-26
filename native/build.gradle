@@ -4,7 +4,7 @@ import java.nio.file.Paths
 String cmakeBuildDir = 'cmake-build-debug'
 
 apply from: '../common.gradle'
-apply plugin: 'kotlin'
+apply plugin: 'java'
 
 repositories {
     mavenCentral()
@@ -12,6 +12,11 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+// Disable all tasks, stops gradle from generating files in build directory
+for (task in project.tasks) {
+    task.enabled = false
 }
 
 task refreshCMake(type: Exec) {
