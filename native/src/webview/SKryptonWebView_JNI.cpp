@@ -5,7 +5,7 @@ static bool initialized = false;
 JNIEXPORT jlong JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_initialize_1N(JNIEnv* env, jobject obj,
                                                                       jstring jurl) {
-    if (initialized) {
+    if (!initialized) {
         QtWebEngine::initialize();
         initialized = true;
     }
