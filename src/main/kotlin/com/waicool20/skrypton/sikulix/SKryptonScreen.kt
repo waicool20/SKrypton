@@ -12,6 +12,7 @@ import org.sikuli.basics.Settings
 import org.sikuli.script.*
 import java.awt.Point
 import java.awt.Rectangle
+import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webView.size.width, webView.size.height), IScreen {
@@ -48,14 +49,12 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
                 second click selects the bottom right corner of the screenshot
                 """.trimIndent().replace("\n", "\\n")
 
-        var promptDone = false
-        webView.runJavaScript("alert('$message');") { promptDone = true }
-        while (!promptDone) {
-            TimeUnit.MILLISECONDS.sleep(100)
-        }
+        webView.runJavaScript("alert('$message');")
+
         var point1: Point? = null
         var point2: Point? = null
 
+        val screenShotLatch = CountDownLatch(2)
         val highlighter = WebViewHighlighter(webView, 0, 0, 10, 10)
         val listener: (SKryptonMouseEvent) -> Unit = {
             if (point1 == null) {
@@ -63,9 +62,13 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
                 highlighter.move(it.x, it.y)
                 highlighter.show()
                 logger.debug("Screenshot position 1 set (X: ${it.x} Y: ${it.y})")
+                screenShotLatch.countDown()
             } else if (point2 == null) {
-                point2 = it.localPos
-                logger.debug("Screenshot position 2 set (X: ${it.x} Y: ${it.y})")
+                if (it.x > point1?.x ?: 0  && it.y > point1?.y ?: 0) {
+                    point2 = it.localPos
+                    logger.debug("Screenshot position 2 set (X: ${it.x} Y: ${it.y})")
+                    screenShotLatch.countDown()
+                }
             }
         }
 
@@ -78,9 +81,7 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
         }
         webView.addOnMouseEventListener(MouseEventType.MouseButtonPress, listener)
         webView.addOnMouseEventListener(MouseEventType.MouseMove, moveListener)
-        while (point1 == null || point2 == null) {
-            TimeUnit.MILLISECONDS.sleep(100)
-        }
+        screenShotLatch.await()
         webView.removeOnMouseEventListener(MouseEventType.MouseButtonPress, listener)
         webView.removeOnMouseEventListener(MouseEventType.MouseMove, moveListener)
 
