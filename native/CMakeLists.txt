@@ -5,17 +5,20 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt5 COMPONENTS
-        Quick
+########################################################################################
+# Find required packages
+
+find_package(Qt5 REQUIRED
+        COMPONENTS
         Core
+        Quick
         Network
         Widgets
         WebEngine
-        WebEngineWidgets
-        WebSockets)
+        WebEngineWidgets)
 
-find_package(Java)
-find_package(JNI)
+find_package(Java REQUIRED)
+find_package(JNI REQUIRED)
 include(UseJava)
 
 file(GLOB_RECURSE SOURCE_FILES "src/*.c" "src/*.cpp")
@@ -27,24 +30,19 @@ add_library(${CMAKE_PROJECT_NAME} SHARED ${SOURCE_FILES} ${INC_FILES} ${RESOURCE
 add_dependencies(${CMAKE_PROJECT_NAME} JNI_Headers)
 set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES AUTOGEN_TARGET_DEPENDS JNI_Headers)
 target_link_libraries(${CMAKE_PROJECT_NAME}
-        Qt5::Quick
         Qt5::Core
         Qt5::Network
         Qt5::Widgets
         Qt5::WebEngine
         Qt5::WebEngineWidgets
-        Qt5::WebSockets
         ${JNI_LIBRARIES})
 
-set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build)
+set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../build/libs)
 
+########################################################################################
 # Scan for JNI classes and generate headers
 
-get_filename_component(
-        PARENT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../"
-        REALPATH BASE_DIR "${CMAKE_BINARY_DIR}"
-)
-
+set(PARENT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../")
 set(CLASS_SEARCH_DIR "${PARENT_DIR}/build/classes/main")
 file(GLOB_RECURSE JAVA_CLASSES "${CLASS_SEARCH_DIR}/*.class")
 
@@ -62,11 +60,26 @@ if (NOT JNI_CLASSES)
     message(FATAL_ERROR "Could not find any suitable Java classes for header generation")
 endif ()
 
+create_javah(
+        TARGET JNI_Headers
+        DEPENDS Clean_JNI_Headers
+        CLASSES ${JNI_CLASSES}
+        CLASSPATH ${CLASS_SEARCH_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib
+        OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers
+)
+
+########################################################################################
+# Add a target to clean the JNI Headers
+
 add_custom_target(
         Clean_JNI_Headers
         COMMAND ${CMAKE_COMMAND} -E remove_directory "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers"
         COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers"
 )
+
+########################################################################################
+# Task that copies the Kotlin Standard Library Function files, this is required by
+# javah program to generate the JNI Headers. Ran automatically when generating cmake files
 
 if (UNIX)
     set(GRADLE "${PARENT_DIR}/gradlew")
@@ -90,13 +103,8 @@ foreach (FILE ${FUNCTION_CLASSES})
     endif ()
 endforeach ()
 
-create_javah(
-        TARGET JNI_Headers
-        DEPENDS Clean_JNI_Headers
-        CLASSES ${JNI_CLASSES}
-        CLASSPATH ${CLASS_SEARCH_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib
-        OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers
-)
+########################################################################################
+# Compiler flags
 
 if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++latest")
