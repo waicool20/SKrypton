@@ -40,7 +40,7 @@ task makeNativeLibraries(type: Exec) {
     commandLine 'cmake'
     args += ['--build', './']
     if (isUnix) {
-        int threads = Runtime.runtime.availableProcessors() * 2
+        int threads = Runtime.runtime.availableProcessors()
         args += ['--', "-j$threads"]
     }
 }
