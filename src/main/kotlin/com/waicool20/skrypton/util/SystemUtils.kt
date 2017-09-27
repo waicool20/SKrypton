@@ -41,7 +41,7 @@ object SystemUtils {
             }
             try {
                 System.loadLibrary(libName)
-            } catch (e: Exception) {
+            } catch (e: UnsatisfiedLinkError) {
                 System.load(it.toAbsolutePath().normalize().toString())
             }
         }
