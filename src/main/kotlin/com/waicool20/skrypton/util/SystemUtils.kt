@@ -47,15 +47,17 @@ object SystemUtils {
         }
     }
 
+    // Cache these for less reflection overhead
+    private val classLoader by lazy { ClassLoader.getSystemClassLoader() as URLClassLoader }
+    private val loaderMethod by lazy { URLClassLoader::class.java.getDeclaredMethod("addURL", URL::class.java) }
+
     fun loadJarLibrary(jar: Path) = loadJarLibrary(listOf(jar))
 
     fun loadJarLibrary(jars: List<Path>) {
-        val loader = ClassLoader.getSystemClassLoader() as URLClassLoader
         jars.map { it.toUri().toURL() }.forEach {
-            if (!loader.urLs.contains(it)) {
-                val method = URLClassLoader::class.java.getDeclaredMethod("addURL", URL::class.java)
-                method.isAccessible = true
-                method.invoke(loader, it)
+            if (!classLoader.urLs.contains(it)) {
+                loaderMethod.isAccessible = true
+                loaderMethod.invoke(classLoader, it)
             }
         }
     }
