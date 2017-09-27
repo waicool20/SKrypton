@@ -34,11 +34,16 @@ object SystemUtils {
             isAccessible = true
             set(null, null)
         }
-        paths.map {
-            val file = it.toFile().nameWithoutExtension
-            if (OS.isUnix()) file.replaceFirst("lib", "") else file
-        }.forEach {
-            System.loadLibrary(it)
+
+        paths.forEach {
+            val libName = it.fileName.toString().takeWhile { it != '.' }.let {
+                if (OS.isUnix()) it.replaceFirst("lib", "") else it
+            }
+            try {
+                System.loadLibrary(libName)
+            } catch (e: Exception) {
+                System.load(it.toAbsolutePath().normalize().toString())
+            }
         }
     }
 
