@@ -78,4 +78,4 @@ task testJar(type: ShadowJar) {
 }
 
 jar.enabled = false
-build.finalizedBy ':native:makeNativeLibraries', 'testJar'
+build.finalizedBy 'testJar'

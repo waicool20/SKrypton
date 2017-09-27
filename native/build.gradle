@@ -23,6 +23,7 @@ sourceSets.main.resources {
     srcDir 'build/resources/main'
 }
 
+jar.archiveName "SKryptonNative_${System.getProperty("os.name")}${System.getProperty("os.arch").replaceAll("[^\\d]", "")}.jar"
 jar.dependsOn 'makeNativeLibraries', 'copyQtDependencies'
 
 task refreshCMake(type: Exec) {
@@ -55,7 +56,7 @@ task copyQtDependencies(type: Exec) {
     dependsOn refreshCMake
     workingDir cmakeBuildDir
     commandLine 'cmake'
-    args += ['--build', './',  '--target', 'CopyQtDependencies']
+    args += ['--build', './', '--target', 'CopyQtDependencies']
     if (isUnix) {
         int threads = Runtime.runtime.availableProcessors()
         args += ['--', "-j$threads"]
