@@ -11,10 +11,10 @@ set(CMAKE_AUTORCC ON)
 find_package(Qt5 REQUIRED
         COMPONENTS
         Core
-        Quick
         Network
         Widgets
         WebEngine
+        WebEngineCore
         WebEngineWidgets)
 
 find_package(Java REQUIRED)
@@ -34,10 +34,14 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         Qt5::Network
         Qt5::Widgets
         Qt5::WebEngine
+        Qt5::WebEngineCore
         Qt5::WebEngineWidgets
         ${JNI_LIBRARIES})
 
-set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../build/libs)
+set(OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build/resources/main/skrypton")
+set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
+
+include(copyQt.cmake)
 
 ########################################################################################
 # Scan for JNI classes and generate headers

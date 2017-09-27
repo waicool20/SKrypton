@@ -14,10 +14,16 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
-// Disable all tasks, stops gradle from generating files in build directory
-for (task in project.tasks) {
-    task.enabled = false
+// Disable some tasks, stops gradle from generating files in build directory
+compileJava.enabled = false
+classes.enabled = false
+processResources.enabled = false
+
+sourceSets.main.resources {
+    srcDir 'build/resources/main'
 }
+
+jar.dependsOn 'makeNativeLibraries', 'copyQtDependencies'
 
 task refreshCMake(type: Exec) {
     def file = Paths.get("$projectDir").resolve(cmakeBuildDir)
@@ -39,6 +45,17 @@ task makeNativeLibraries(type: Exec) {
     workingDir cmakeBuildDir
     commandLine 'cmake'
     args += ['--build', './']
+    if (isUnix) {
+        int threads = Runtime.runtime.availableProcessors()
+        args += ['--', "-j$threads"]
+    }
+}
+
+task copyQtDependencies(type: Exec) {
+    dependsOn refreshCMake
+    workingDir cmakeBuildDir
+    commandLine 'cmake'
+    args += ['--build', './',  '--target', 'CopyQtDependencies']
     if (isUnix) {
         int threads = Runtime.runtime.availableProcessors()
         args += ['--', "-j$threads"]
