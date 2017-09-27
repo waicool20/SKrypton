@@ -95,16 +95,23 @@
 #include <shared_mutex>
 #endif
 
-#include <optional>
-
 using std::cerr;
 using std::cout;
 using std::endl;
 using std::function;
 using std::forward;
-using std::optional;
 using std::string;
 using std::to_string;
 using std::vector;
+
+#if defined(_GLIBCXX_OPTIONAL) || defined(_OPTIONAL_)
+#include <optional>
+using std::optional;
+#elif defined(_GLIBCXX_EXPERIMENTAL_OPTIONAL)
+#include <experimental/optional>
+using std::experimental::optional;
+#else
+#error No <optional> library was found
+#endif
 
 #endif //SKRYPTONNATIVE_HEADERS_H
