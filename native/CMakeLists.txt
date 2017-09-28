@@ -21,7 +21,7 @@ find_package(Java REQUIRED)
 find_package(JNI REQUIRED)
 include(UseJava)
 
-file(GLOB_RECURSE SOURCE_FILES "src/*.c" "src/*.cpp")
+file(GLOB_RECURSE SOURCE_FILES "src/main/cpp/*.c" "src/main/cpp/*.cpp")
 file(GLOB_RECURSE INC_FILES "inc/*.h")
 file(GLOB_RECURSE RESOURCES "rsc/*.qrc")
 include_directories(inc inc/jni inc/webview inc/jni/headers ${JNI_INCLUDE_DIRS})
