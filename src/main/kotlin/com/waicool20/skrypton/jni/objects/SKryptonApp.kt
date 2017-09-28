@@ -2,19 +2,46 @@ package com.waicool20.skrypton.jni.objects
 
 import com.waicool20.skrypton.jni.CPointer
 import com.waicool20.skrypton.jni.NativeInterface
+import com.waicool20.skrypton.util.OS
 import com.waicool20.skrypton.util.SystemUtils
 import com.waicool20.skrypton.util.loggerFor
-import java.lang.management.ManagementFactory
 import java.net.URLClassLoader
 import java.nio.file.Files
 import java.nio.file.Paths
-import kotlin.streams.asSequence
+import kotlin.streams.toList
 
 object SKryptonApp : NativeInterface() {
     private val logger = loggerFor<SKryptonApp>()
     private val codeSource = Paths.get(javaClass.protectionDomain.codeSource.location.toURI().path)
     val skryptonAppDir = Paths.get(System.getProperty("user.home")).resolve(".skrypton")
     override lateinit var handle: CPointer
+
+    // Load order
+    private val nativeDependencies = listOf(
+            "libicudata",
+            "libicuuc",
+            "libicui18n",
+            "libQt5Core",
+            "libQt5Gui",
+            "libQt5Widgets",
+            "libQt5Qml",
+            "libQt5Quick",
+            "libQt5QuickWidgets",
+            "libQt5Concurrent",
+            "libQt5DBus",
+            "libQt5MultimediaQuick_p",
+            "libQt5Multimedia",
+            "libQt5MultimediaWidgets",
+            "libQt5Network",
+            "libQt5OpenGL",
+            "libQt5PrintSupport",
+            "libQt5QuickTemplates2",
+            "libQt5WebEngineCore",
+            "libQt5WebEngine",
+            "libQt5WebEngineWidgets",
+            "libQt5X11Extras",
+            "libQt5XcbQpa"
+    )
 
     init {
         if (Files.notExists(skryptonAppDir)) error("Could not find SKrypton Native components folder, did you install it?")
@@ -44,9 +71,13 @@ object SKryptonApp : NativeInterface() {
                 Paths.get(System.getProperty("java.home")).resolve("lib/amd64/libjawt.so"),
                 skryptonAppDir.resolve("bin/libSKryptonNative.so")
         )
-        Files.walk(skryptonAppDir.resolve("bin/lib")).filter {
-            Files.isRegularFile(it) && it.fileName.toString().endsWith(".so.5")
-        }.asSequence().plus(toLoad).forEach {
+        val libs = Files.walk(skryptonAppDir.resolve("bin/lib"))
+                .filter { Files.isRegularFile(it) }
+                .sorted { path1, path2 ->
+                    nativeDependencies.indexOfFirst { "$path1".contains("$it${OS.libraryExtention}") } -
+                            nativeDependencies.indexOfFirst { "$path2".contains("$it${OS.libraryExtention}") }
+                }.toList()
+        libs.plus(toLoad).forEach {
             logger.debug { "Loading library at $it" }
             SystemUtils.loadLibrary(it)
         }
