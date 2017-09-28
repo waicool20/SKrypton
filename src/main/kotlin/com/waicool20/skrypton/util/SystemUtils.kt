@@ -26,8 +26,8 @@ object SystemUtils {
 
     fun loadLibrary(paths: List<Path>) {
         val separator = if (OS.isWindows()) ";" else ":"
-        val libs = System.getProperty("java.library.path").split(separator).toMutableSet()
-        libs.addAll(paths.map { it.toAbsolutePath().parent.toString() }.distinct())
+        val libs = paths.map { it.toAbsolutePath().parent.toString() }.toMutableSet()
+        libs.addAll( System.getProperty("java.library.path").split(separator).toSet())
 
         System.setProperty("java.library.path", libs.joinToString(separator))
         with(ClassLoader::class.java.getDeclaredField("sys_paths")) {
@@ -47,7 +47,6 @@ object SystemUtils {
         }
     }
 
-    // Cache these for less reflection overhead
     private val classLoader by lazy { ClassLoader.getSystemClassLoader() as URLClassLoader }
     private val loaderMethod by lazy { URLClassLoader::class.java.getDeclaredMethod("addURL", URL::class.java) }
 
