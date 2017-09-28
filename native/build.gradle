@@ -4,7 +4,8 @@ import java.nio.file.Paths
 String cmakeBuildDir = 'cmake-build-debug'
 
 apply from: '../common.gradle'
-apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 repositories {
     mavenCentral()
@@ -14,17 +15,9 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
-// Disable some tasks, stops gradle from generating files in build directory
-compileJava.enabled = false
-classes.enabled = false
-processResources.enabled = false
-
 sourceSets.main.resources {
     srcDir 'build/resources/main'
 }
-
-jar.archiveName "SKryptonNative_${System.getProperty("os.name")}${System.getProperty("os.arch").replaceAll("[^\\d]", "")}.jar"
-jar.dependsOn 'makeNativeLibraries', 'copyQtDependencies'
 
 task refreshCMake(type: Exec) {
     def file = Paths.get("$projectDir").resolve(cmakeBuildDir)
@@ -45,7 +38,7 @@ task makeNativeLibraries(type: Exec) {
     dependsOn refreshCMake
     workingDir cmakeBuildDir
     commandLine 'cmake'
-    args += ['--build', './']
+    args += ['--build', './', '--target', 'SKryptonNative']
     if (isUnix) {
         int threads = Runtime.runtime.availableProcessors()
         args += ['--', "-j$threads"]
@@ -73,3 +66,15 @@ task copyKotlinStdLib(type: Copy) {
         }
     }
 }
+
+shadowJar {
+    dependsOn 'makeNativeLibraries', 'copyQtDependencies'
+    archiveName "SKryptonNative_${System.getProperty("os.name")}${System.getProperty("os.arch").replaceAll("[^\\d]", "")}.jar"
+    classifier = null
+    version = null
+    manifest {
+        attributes 'Main-Class': 'com.waicool20.skrypton.SKryptonSetup'
+    }
+}
+build.finalizedBy shadowJar
+jar.enabled = false
