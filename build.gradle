@@ -67,7 +67,7 @@ compileTestKotlin {
 
 task testJar(type: ShadowJar) {
     classifier 'test'
-    from sourceSets.main.output.classesDir
+    from sourceSets.main.output
     from sourceSets.test.output
     configurations = [project.configurations.testRuntime]
     classifier = null

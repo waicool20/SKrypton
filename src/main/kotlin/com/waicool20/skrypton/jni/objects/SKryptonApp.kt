@@ -17,31 +17,7 @@ object SKryptonApp : NativeInterface() {
     override lateinit var handle: CPointer
 
     // Load order
-    private val nativeDependencies = listOf(
-            "libicudata",
-            "libicuuc",
-            "libicui18n",
-            "libQt5Core",
-            "libQt5Gui",
-            "libQt5Widgets",
-            "libQt5Qml",
-            "libQt5Quick",
-            "libQt5QuickWidgets",
-            "libQt5Concurrent",
-            "libQt5DBus",
-            "libQt5MultimediaQuick_p",
-            "libQt5Multimedia",
-            "libQt5MultimediaWidgets",
-            "libQt5Network",
-            "libQt5OpenGL",
-            "libQt5PrintSupport",
-            "libQt5QuickTemplates2",
-            "libQt5WebEngineCore",
-            "libQt5WebEngine",
-            "libQt5WebEngineWidgets",
-            "libQt5X11Extras",
-            "libQt5XcbQpa"
-    )
+    private val nativeDependencies = ClassLoader.getSystemClassLoader().getResourceAsStream("nativeLibraries.txt").bufferedReader().lines().toList()
 
     init {
         if (Files.notExists(skryptonAppDir)) error("Could not find SKrypton Native components folder, did you install it?")

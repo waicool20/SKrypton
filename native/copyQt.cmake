@@ -36,39 +36,15 @@ add_custom_target(CopyQtDependencies)
 ########################################################################################
 # Qt Library files
 
-set(
-        RequiredQtLibs
-        "libicuuc"
-        "libicudata"
-        "libicui18n"
-        "libQt5Concurrent"
-        "libQt5Core"
-        "libQt5DBus"
-        "libQt5Gui"
-        "libQt5MultimediaQuick_p"
-        "libQt5Multimedia"
-        "libQt5MultimediaWidgets"
-        "libQt5Network"
-        "libQt5OpenGL"
-        "libQt5PrintSupport"
-        "libQt5Qml"
-        "libQt5Quick"
-        "libQt5QuickTemplates2"
-        "libQt5QuickWidgets"
-        "libQt5WebEngineCore"
-        "libQt5WebEngine"
-        "libQt5WebEngineWidgets"
-        "libQt5Widgets"
-        "libQt5X11Extras"
-        "libQt5XcbQpa"
-)
+file(READ ${CMAKE_CURRENT_SOURCE_DIR}/../src/main/resources/nativeLibraries.txt RequiredQtLibs)
+string(REPLACE "\n" ";" RequiredQtLibs "${RequiredQtLibs}")
 
 foreach (_LIB ${RequiredQtLibs})
     if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         if (${_LIB} MATCHES ".*Qt5.*")
-            file(GLOB _LIB_FILES "${Qt_LibrariesPath}/${_LIB}.so.5")
+            file(GLOB _LIB_FILES "${Qt_LibrariesPath}/*${_LIB}.so.5")
         else ()
-            file(GLOB _LIB_FILES "${Qt_LibrariesPath}/${_LIB}.so.5?")
+            file(GLOB _LIB_FILES "${Qt_LibrariesPath}/*${_LIB}.so.5?")
         endif ()
     elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
         file(GLOB _LIB_FILES "${Qt_LibrariesPath}/${_LIB}*dll")
