@@ -4,16 +4,52 @@ import com.waicool20.skrypton.jni.CPointer
 import com.waicool20.skrypton.jni.NativeInterface
 import com.waicool20.skrypton.util.SystemUtils
 import com.waicool20.skrypton.util.loggerFor
+import java.lang.management.ManagementFactory
+import java.net.URLClassLoader
+import java.nio.file.Files
 import java.nio.file.Paths
+import kotlin.streams.asSequence
 
 object SKryptonApp : NativeInterface() {
     private val logger = loggerFor<SKryptonApp>()
+    private val codeSource = Paths.get(javaClass.protectionDomain.codeSource.location.toURI().path)
+    val skryptonAppDir = Paths.get(System.getProperty("user.home")).resolve(".skrypton")
     override lateinit var handle: CPointer
 
     init {
-        val path = Paths.get("").normalize().toAbsolutePath().resolve("native/build/libSKryptonNative")
-        logger.debug { "Loading library at $path" }
-        SystemUtils.loadLibrary(path)
+        if (Files.notExists(skryptonAppDir)) error("Could not find SKrypton Native components folder, did you install it?")
+        if (System.getenv("skryptonJvm").isNullOrEmpty()) {
+            val sJvm = skryptonAppDir.resolve("bin/java")
+            logger.debug("Not running under skrypton JVM")
+            logger.debug("Main class: ${SystemUtils.mainClassName}")
+            logger.debug("SKrypton JVM path: $sJvm")
+            val args = mutableListOf(sJvm.toString())
+            args += "-cp"
+            args += (ClassLoader.getSystemClassLoader() as URLClassLoader).urLs
+                    .joinToString(":") { it.toString().replace("file:", "") }
+            args += SystemUtils.mainClassName
+            logger.debug("Relaunching with command: ${args.joinToString(" ")}")
+            with(ProcessBuilder(args)) {
+                println(codeSource.parent.toFile())
+                directory(codeSource.parent.toFile())
+                inheritIO()
+                environment().put("skryptonJvm", sJvm.toString())
+                logger.debug("Launching new instance with skrypton JVM")
+                start().waitFor()
+                System.exit(0)
+            }
+            logger.debug("Running under skrypton JVM")
+        }
+        val toLoad = mutableListOf(
+                Paths.get(System.getProperty("java.home")).resolve("lib/amd64/libjawt.so"),
+                skryptonAppDir.resolve("bin/libSKryptonNative.so")
+        )
+        Files.walk(skryptonAppDir.resolve("bin/lib")).filter {
+            Files.isRegularFile(it) && it.fileName.toString().endsWith(".so.5")
+        }.asSequence().plus(toLoad).forEach {
+            logger.debug { "Loading library at $it" }
+            SystemUtils.loadLibrary(it)
+        }
     }
 
     fun initalize(args: Array<String> = emptyArray(), remoteDebugPort: Int = -1): SKryptonApp {
