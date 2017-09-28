@@ -16,6 +16,8 @@ Qt5Network
 Qt5OpenGL
 Qt5PrintSupport
 Qt5QuickTemplates2
+Qt5WebChannel
+Qt5Positioning
 Qt5WebEngineCore
 Qt5WebEngine
 Qt5WebEngineWidgets
