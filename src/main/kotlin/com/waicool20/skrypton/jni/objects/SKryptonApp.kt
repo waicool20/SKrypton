@@ -56,13 +56,6 @@ object SKryptonApp : NativeInterface() {
             }
             logger.debug("Running under skrypton JVM")
         }
-        if (OS.isLinux()) {
-            try {
-                System.loadLibrary("GL")
-            } catch (e: UnsatisfiedLinkError) {
-                logger.error("Could not load OpenGL, the program may not work!")
-            }
-        }
         val libs = Files.walk(skryptonAppDir.resolve("bin/lib"))
                 .filter { Files.isRegularFile(it) }
                 .sorted { path1, path2 ->
