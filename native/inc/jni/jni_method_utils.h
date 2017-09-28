@@ -4,17 +4,17 @@
 #include <jni_utils.h>
 
 namespace PrivateMethodUtils {
-    bool HandleMethodIDException(JNIEnv* env, jobject obj, const string& methodName, const string& signature);
+    bool HandleMethodIDException(JNIEnv* env, jobject obj, const string& methodName, const string signature);
 }
 
 //<editor-fold desc="CallMethod helper template functions">
 
 template<typename T>
-inline optional<T> CallMethod(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) = delete;
+inline optional<T> CallMethod(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) = delete;
 
 template<>
 inline optional<void*>
-CallMethod<void*>(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) {
+CallMethod<void*>(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
@@ -27,7 +27,7 @@ CallMethod<void*>(JNIEnv* env, jobject obj, const string& methodName, const stri
 
 template<>
 inline optional<jobject>
-CallMethod<jobject>(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) {
+CallMethod<jobject>(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
@@ -39,7 +39,7 @@ CallMethod<jobject>(JNIEnv* env, jobject obj, const string& methodName, const st
 
 template<>
 inline optional<jboolean>
-CallMethod<jboolean>(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) {
+CallMethod<jboolean>(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
@@ -51,7 +51,7 @@ CallMethod<jboolean>(JNIEnv* env, jobject obj, const string& methodName, const s
 
 template<>
 inline optional<jbyte>
-CallMethod<jbyte>(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) {
+CallMethod<jbyte>(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
@@ -63,7 +63,7 @@ CallMethod<jbyte>(JNIEnv* env, jobject obj, const string& methodName, const stri
 
 template<>
 inline optional<jchar>
-CallMethod<jchar>(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) {
+CallMethod<jchar>(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
@@ -75,7 +75,7 @@ CallMethod<jchar>(JNIEnv* env, jobject obj, const string& methodName, const stri
 
 template<>
 inline optional<jshort>
-CallMethod<jshort>(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) {
+CallMethod<jshort>(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
@@ -87,7 +87,7 @@ CallMethod<jshort>(JNIEnv* env, jobject obj, const string& methodName, const str
 
 template<>
 inline optional<jint>
-CallMethod<jint>(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) {
+CallMethod<jint>(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
@@ -99,7 +99,7 @@ CallMethod<jint>(JNIEnv* env, jobject obj, const string& methodName, const strin
 
 template<>
 inline optional<jlong>
-CallMethod<jlong>(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) {
+CallMethod<jlong>(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
@@ -111,7 +111,7 @@ CallMethod<jlong>(JNIEnv* env, jobject obj, const string& methodName, const stri
 
 template<>
 inline optional<jfloat>
-CallMethod<jfloat>(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) {
+CallMethod<jfloat>(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
@@ -123,7 +123,7 @@ CallMethod<jfloat>(JNIEnv* env, jobject obj, const string& methodName, const str
 
 template<>
 inline optional<jdouble>
-CallMethod<jdouble>(JNIEnv* env, jobject obj, const string& methodName, const string& signature, ...) {
+CallMethod<jdouble>(JNIEnv* env, jobject obj, const string& methodName, const string signature, ...) {
     auto clazz = env->GetObjectClass(obj);
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, obj, methodName, signature)) return {};
@@ -138,16 +138,16 @@ CallMethod<jdouble>(JNIEnv* env, jobject obj, const string& methodName, const st
 //<editor-fold desc="CallStaticMethod helper template functions">
 
 template<typename T, class... Args>
-inline optional<T> CallStaticMethod(JNIEnv* env, string type, const string& methodName, const string& signature, Args&&... args) {
+inline optional<T> CallStaticMethod(JNIEnv* env, string type, const string& methodName, const string signature, Args&&... args) {
     replace(type.begin(), type.end(), '.', '/');
     return CallStaticMethod<T>(env, env->FindClass(type.c_str()), methodName, signature, forward<Args>(args)...);
 }
 
 template<typename T>
-inline optional<T> CallStaticMethod(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) = delete;
+inline optional<T> CallStaticMethod(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) = delete;
 
 template<>
-inline optional<void*> CallStaticMethod<void*>(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) {
+inline optional<void*> CallStaticMethod<void*>(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) {
     auto methodID = env->GetMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
@@ -159,7 +159,7 @@ inline optional<void*> CallStaticMethod<void*>(JNIEnv* env, jclass clazz, const 
 
 template<>
 inline optional<jobject>
-CallStaticMethod<jobject>(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) {
+CallStaticMethod<jobject>(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) {
     auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
@@ -170,7 +170,7 @@ CallStaticMethod<jobject>(JNIEnv* env, jclass clazz, const string& methodName, c
 
 template<>
 inline optional<jboolean>
-CallStaticMethod<jboolean>(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) {
+CallStaticMethod<jboolean>(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) {
     auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
@@ -181,7 +181,7 @@ CallStaticMethod<jboolean>(JNIEnv* env, jclass clazz, const string& methodName, 
 
 template<>
 inline optional<jbyte>
-CallStaticMethod<jbyte>(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) {
+CallStaticMethod<jbyte>(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) {
     auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
@@ -192,7 +192,7 @@ CallStaticMethod<jbyte>(JNIEnv* env, jclass clazz, const string& methodName, con
 
 template<>
 inline optional<jchar>
-CallStaticMethod<jchar>(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) {
+CallStaticMethod<jchar>(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) {
     auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
@@ -203,7 +203,7 @@ CallStaticMethod<jchar>(JNIEnv* env, jclass clazz, const string& methodName, con
 
 template<>
 inline optional<jshort>
-CallStaticMethod<jshort>(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) {
+CallStaticMethod<jshort>(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) {
     auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
@@ -214,7 +214,7 @@ CallStaticMethod<jshort>(JNIEnv* env, jclass clazz, const string& methodName, co
 
 template<>
 inline optional<jint>
-CallStaticMethod<jint>(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) {
+CallStaticMethod<jint>(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) {
     auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
@@ -225,7 +225,7 @@ CallStaticMethod<jint>(JNIEnv* env, jclass clazz, const string& methodName, cons
 
 template<>
 inline optional<jlong>
-CallStaticMethod<jlong>(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) {
+CallStaticMethod<jlong>(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) {
     auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
@@ -236,7 +236,7 @@ CallStaticMethod<jlong>(JNIEnv* env, jclass clazz, const string& methodName, con
 
 template<>
 inline optional<jfloat>
-CallStaticMethod<jfloat>(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) {
+CallStaticMethod<jfloat>(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) {
     auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 
@@ -247,7 +247,7 @@ CallStaticMethod<jfloat>(JNIEnv* env, jclass clazz, const string& methodName, co
 
 template<>
 inline optional<jdouble>
-CallStaticMethod<jdouble>(JNIEnv* env, jclass clazz, const string& methodName, const string& signature, ...) {
+CallStaticMethod<jdouble>(JNIEnv* env, jclass clazz, const string& methodName, const string signature, ...) {
     auto methodID = env->GetStaticMethodID(clazz, methodName.c_str(), signature.c_str());
     if (PrivateMethodUtils::HandleMethodIDException(env, clazz, methodName, signature)) return {};
 

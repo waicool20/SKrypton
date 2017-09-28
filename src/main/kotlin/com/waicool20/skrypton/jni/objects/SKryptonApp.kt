@@ -17,7 +17,9 @@ object SKryptonApp : NativeInterface() {
     override lateinit var handle: CPointer
 
     // Load order
-    private val nativeDependencies = ClassLoader.getSystemClassLoader().getResourceAsStream("nativeLibraries.txt").bufferedReader().lines().toList()
+    private val nativeDependencies = ClassLoader.getSystemClassLoader()
+            .getResourceAsStream("nativeLibraries.txt")
+            .bufferedReader().lines().toList().filterNot { it.isNullOrEmpty() }
 
     init {
         if (Files.notExists(skryptonAppDir)) error("Could not find SKrypton Native components folder, did you install it?")
@@ -56,7 +58,7 @@ object SKryptonApp : NativeInterface() {
                     nativeDependencies.indexOfFirst { "$path1".contains("$it${OS.libraryExtention}") } -
                             nativeDependencies.indexOfFirst { "$path2".contains("$it${OS.libraryExtention}") }
                 }.toList()
-        libs.plus(skryptonAppDir.resolve("bin/libSKryptonNative.so")).forEach {
+        libs.plusElement(skryptonAppDir.resolve("bin/libSKryptonNative.so")).forEach {
             logger.debug { "Loading library at $it" }
             SystemUtils.loadLibrary(it, true)
         }
