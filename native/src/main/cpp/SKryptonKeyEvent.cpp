@@ -9,7 +9,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonKeyEvent_00024Companion_initiali
     auto type = static_cast<QEvent::Type>(e_type);
     auto modifiers = static_cast<Qt::KeyboardModifier>(e_modifiers);
     return (jlong) new QKeyEvent { type, (int) key, modifiers, QString::fromStdString(StringFromJstring(env, character)),
-                                   autoRepeat, (ushort) count };
+                                   (bool) autoRepeat, (ushort) count };
 }
 
 JNIEXPORT jlong JNICALL
