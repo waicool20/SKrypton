@@ -20,9 +20,17 @@ object SKryptonApp : NativeInterface() {
     override lateinit var handle: CPointer
 
     // Load order
-    private val nativeDependencies = ClassLoader.getSystemClassLoader()
-            .getResourceAsStream("nativeLibraries.txt")
-            .bufferedReader().lines().toList().filterNot { it.isNullOrEmpty() }
+    private val nativeDependencies = run {
+        val resourceFile = when {
+            OS.isLinux() -> "nativeLibraries-linux.txt"
+            OS.isWindows() -> "nativeLibraries-windows.txt"
+            OS.isMac() -> TODO("I don't have a mac to test this stuff yet")
+            else -> error("Unsupported system")
+        }
+        ClassLoader.getSystemClassLoader()
+                .getResourceAsStream(resourceFile)
+                .bufferedReader().lines().toList().filterNot { it.isNullOrEmpty() }
+    }
 
     init {
         if (Files.notExists(skryptonAppDir)) error("Could not find SKrypton Native components folder, did you install it?")
@@ -61,7 +69,7 @@ object SKryptonApp : NativeInterface() {
                     nativeDependencies.indexOfFirst { "$path1".contains("$it${OS.libraryExtention}") } -
                             nativeDependencies.indexOfFirst { "$path2".contains("$it${OS.libraryExtention}") }
                 }.toList()
-        libs.plusElement(skryptonAppDir.resolve("bin/${if (OS.isUnix()) "lib" else ""}SKryptonNative${OS.libraryExtention}")).forEach {
+        libs.plusElement(skryptonAppDir.resolve("bin/${System.mapLibraryName("SKryptonNative")}")).forEach {
             logger.debug { "Loading library at $it" }
             SystemUtils.loadLibrary(it, true)
         }

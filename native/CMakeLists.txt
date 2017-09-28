@@ -43,7 +43,19 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 set(OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build/resources/main/skrypton")
 set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
-include(copyQt.cmake)
+########################################################################################
+# Copy library tasks
+
+include(cmake/copyQt-common.cmake)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    include(cmake/copyQt-linux.cmake)
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    include(cmake/copyQt-windows.cmake)
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    message(FATAL_ERROR "Can't test mac stuff yet ¯\\_(ツ)_/¯")
+else ()
+    message(FATAL_ERROR "Unsupported system")
+endif ()
 
 ########################################################################################
 # Check for require headers

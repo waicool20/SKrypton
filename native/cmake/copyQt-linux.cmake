@@ -1,57 +1,14 @@
 ########################################################################################
-# Try and find the Qt paths
-
-find_program(QTDIAG qtdiag)
-if (NOT QTDIAG)
-    message(FATAL_ERROR "Could not find qtdiag executable, is it on PATH?")
-endif ()
-message(STATUS "------------------ Checking Qt environment ------------------")
-execute_process(COMMAND "${QTDIAG}" OUTPUT_VARIABLE QTDIAG_OUT)
-
-string(REPLACE "\n" ";" QTDIAG_OUT "${QTDIAG_OUT}")
-
-set(Qt_Paths "PrefixPath" "DocumentationPath" "HeadersPath" "LibrariesPath"
-        "LibraryExecutablesPath" "BinariesPath" "PluginsPath" "ImportsPath"
-        "Qml2ImportsPath" "ArchDataPath" "DataPath" "TranslationsPath" "ExamplesPath"
-        "TestsPath" "SettingsPath")
-
-foreach (_STRING ${QTDIAG_OUT})
-    string(STRIP ${_STRING} _STRIPPED)
-    foreach (_PATH ${Qt_Paths})
-        if (${_STRIPPED} MATCHES "${_PATH}: (.+)")
-            string(REGEX REPLACE ".+: (.+)" "\\1" "Qt_${_PATH}" ${_STRIPPED})
-        endif ()
-    endforeach ()
-endforeach ()
-
-foreach (_PATH ${Qt_Paths})
-    message(STATUS "[Qt] Found ${_PATH} at: ${Qt_${_PATH}}")
-endforeach ()
-message(STATUS "-------------------------------------------------------------")
-
-########################################################################################
-# Target that copies everything
-add_custom_target(CopyQtDependencies)
-
-########################################################################################
 # Qt Library files
 
-file(READ ${CMAKE_CURRENT_SOURCE_DIR}/../src/main/resources/nativeLibraries.txt RequiredQtLibs)
+file(READ ${CMAKE_CURRENT_SOURCE_DIR}/../src/main/resources/nativeLibraries-linux.txt RequiredQtLibs)
 string(REPLACE "\n" ";" RequiredQtLibs "${RequiredQtLibs}")
 
 foreach (_LIB ${RequiredQtLibs})
-    if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-        if (${_LIB} MATCHES ".*Qt5.*")
-            file(GLOB _LIB_FILES "${Qt_LibrariesPath}/*${_LIB}.so.5")
-        else ()
-            file(GLOB _LIB_FILES "${Qt_LibrariesPath}/*${_LIB}.so.5?")
-        endif ()
-    elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-        file(GLOB _LIB_FILES "${Qt_LibrariesPath}/${_LIB}*dll")
-    elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-        file(GLOB _LIB_FILES "${Qt_LibrariesPath}/${_LIB}*dylib")
+    if (${_LIB} MATCHES ".*Qt5.*")
+        file(GLOB _LIB_FILES "${Qt_LibrariesPath}/*${_LIB}.so.5")
     else ()
-        message(FATAL_ERROR "Unsupported system")
+        file(GLOB _LIB_FILES "${Qt_LibrariesPath}/*${_LIB}.so.5?")
     endif ()
 
     if (NOT _LIB_FILES)
