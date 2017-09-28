@@ -55,7 +55,7 @@ object SKryptonApp : NativeInterface() {
                 }.toList()
         libs.plus(toLoad).forEach {
             logger.debug { "Loading library at $it" }
-            SystemUtils.loadLibrary(it)
+            SystemUtils.loadLibrary(it, true)
         }
     }
 

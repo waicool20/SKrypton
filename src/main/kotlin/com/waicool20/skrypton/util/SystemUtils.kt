@@ -22,27 +22,31 @@ import java.net.URLClassLoader
 import java.nio.file.Path
 
 object SystemUtils {
-    fun loadLibrary(path: Path) = loadLibrary(listOf(path))
+    fun loadLibrary(path: Path, loadDirectly: Boolean = false) = loadLibrary(listOf(path), loadDirectly)
 
-    fun loadLibrary(paths: List<Path>) {
-        val separator = if (OS.isWindows()) ";" else ":"
-        val libs = paths.map { it.toAbsolutePath().parent.toString() }.toMutableSet()
-        libs.addAll( System.getProperty("java.library.path").split(separator).toSet())
+    fun loadLibrary(paths: List<Path>, loadDirectly: Boolean = false) {
+        if (loadDirectly) {
+            paths.forEach { System.load(it.toAbsolutePath().normalize().toString()) }
+        } else {
+            val separator = if (OS.isWindows()) ";" else ":"
+            val libs = paths.map { it.toAbsolutePath().parent.toString() }.toMutableSet()
+            libs.addAll(System.getProperty("java.library.path").split(separator).toSet())
 
-        System.setProperty("java.library.path", libs.joinToString(separator))
-        with(ClassLoader::class.java.getDeclaredField("sys_paths")) {
-            isAccessible = true
-            set(null, null)
-        }
-
-        paths.forEach {
-            val libName = it.fileName.toString().takeWhile { it != '.' }.let {
-                if (OS.isUnix()) it.replaceFirst("lib", "") else it
+            System.setProperty("java.library.path", libs.joinToString(separator))
+            with(ClassLoader::class.java.getDeclaredField("sys_paths")) {
+                isAccessible = true
+                set(null, null)
             }
-            try {
-                System.loadLibrary(libName)
-            } catch (e: UnsatisfiedLinkError) {
-                System.load(it.toAbsolutePath().normalize().toString())
+
+            paths.forEach {
+                try {
+                    val libName = it.fileName.toString().takeWhile { it != '.' }.let {
+                        if (OS.isUnix()) it.replaceFirst("lib", "") else it
+                    }
+                    System.loadLibrary(libName)
+                } catch (e: UnsatisfiedLinkError) {
+                    System.load(it.toAbsolutePath().normalize().toString())
+                }
             }
         }
     }
