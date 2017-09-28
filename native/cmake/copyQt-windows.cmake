@@ -25,6 +25,26 @@ foreach (_LIB ${RequiredQtLibs})
 endforeach ()
 
 ########################################################################################
+# OpenGL needs to be copied too
+
+
+find_library(_EGL "EGL" PATHS "${Qt_LibrariesPath}" "${Qt_BinariesPath}")
+if (_EGL)
+    get_filename_component(_EGL_NAME ${_EGL} NAME)
+    set(_IN_FILE "${_EGL}")
+    set(_OUT_DIR "${OUTPUT_DIR}/lib")
+    file(TO_NATIVE_PATH ${_IN_FILE} _IN_FILE)
+    file(TO_NATIVE_PATH "${_OUT_DIR}/${_EGL_NAME}" _OUT_DIR)
+    add_custom_command(
+            TARGET CopyQtDependencies PRE_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_IN_FILE}" "${_OUT_DIR}"
+            COMMENT "[COPY EGL] ${_IN_FILE} to ${_OUT_DIR}"
+    )
+else ()
+    message(FATAL_ERROR "Could not find EGL library file")
+endif ()
+
+########################################################################################
 # Qt Plugin files
 
 set(

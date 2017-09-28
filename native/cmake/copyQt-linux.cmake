@@ -27,6 +27,27 @@ foreach (_LIB ${RequiredQtLibs})
 endforeach ()
 
 ########################################################################################
+# OpenGL needs to be copied too
+
+find_library(_EGL
+        NAMES "EGL" "libEGL.so" "libEGL.so.1"
+        PATHS "${Qt_LibrariesPath}" "${Qt_BinariesPath}"
+        "/usr/lib" "/usr/local/lib" "/usr/lib/x86_64-linux-gnu/"
+        PATH_SUFFIXES "mesa-egl")
+if (_EGL)
+    get_filename_component(_EGL_NAME ${_EGL} NAME)
+    set(_IN_FILE "${_EGL}")
+    set(_OUT_DIR "${OUTPUT_DIR}/lib")
+    add_custom_command(
+            TARGET CopyQtDependencies PRE_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_IN_FILE}" "${_OUT_DIR}/${_EGL_NAME}"
+            COMMENT "[COPY EGL] ${_IN_FILE} to ${_OUT_DIR}"
+    )
+else ()
+    message(FATAL_ERROR "Could not find EGL library file")
+endif ()
+
+########################################################################################
 # Qt Plugin files
 
 set(
