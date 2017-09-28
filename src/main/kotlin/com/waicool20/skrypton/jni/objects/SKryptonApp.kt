@@ -12,7 +12,10 @@ import kotlin.streams.toList
 
 object SKryptonApp : NativeInterface() {
     private val logger = loggerFor<SKryptonApp>()
-    private val codeSource = Paths.get(javaClass.protectionDomain.codeSource.location.toURI().path)
+    private val codeSource = run {
+        val source = javaClass.protectionDomain.codeSource.location.toURI().path
+        Paths.get(if (OS.isWindows()) source.replaceFirst("[/|\\\\]".toRegex(), "") else source)
+    }
     val skryptonAppDir = Paths.get(System.getProperty("user.home")).resolve(".skrypton")
     override lateinit var handle: CPointer
 
@@ -58,7 +61,7 @@ object SKryptonApp : NativeInterface() {
                     nativeDependencies.indexOfFirst { "$path1".contains("$it${OS.libraryExtention}") } -
                             nativeDependencies.indexOfFirst { "$path2".contains("$it${OS.libraryExtention}") }
                 }.toList()
-        libs.plusElement(skryptonAppDir.resolve("bin/libSKryptonNative.so")).forEach {
+        libs.plusElement(skryptonAppDir.resolve("bin/${if (OS.isUnix()) "lib" else ""}SKryptonNative${OS.libraryExtention}")).forEach {
             logger.debug { "Loading library at $it" }
             SystemUtils.loadLibrary(it, true)
         }
