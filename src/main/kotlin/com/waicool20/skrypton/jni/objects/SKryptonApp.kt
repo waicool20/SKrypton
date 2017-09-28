@@ -43,17 +43,20 @@ object SKryptonApp : NativeInterface() {
             }
             logger.debug("Running under skrypton JVM")
         }
-        val toLoad = mutableListOf(
-                Paths.get(System.getProperty("java.home")).resolve("lib/amd64/libjawt.so"),
-                skryptonAppDir.resolve("bin/libSKryptonNative.so")
-        )
+        if (OS.isLinux()) {
+            try {
+                System.loadLibrary("GL")
+            } catch (e: UnsatisfiedLinkError) {
+                logger.error("Could not load OpenGL, the program may not work!")
+            }
+        }
         val libs = Files.walk(skryptonAppDir.resolve("bin/lib"))
                 .filter { Files.isRegularFile(it) }
                 .sorted { path1, path2 ->
                     nativeDependencies.indexOfFirst { "$path1".contains("$it${OS.libraryExtention}") } -
                             nativeDependencies.indexOfFirst { "$path2".contains("$it${OS.libraryExtention}") }
                 }.toList()
-        libs.plus(toLoad).forEach {
+        libs.plus(skryptonAppDir.resolve("bin/libSKryptonNative.so")).forEach {
             logger.debug { "Loading library at $it" }
             SystemUtils.loadLibrary(it, true)
         }
