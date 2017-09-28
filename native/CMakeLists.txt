@@ -46,11 +46,37 @@ set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY 
 include(copyQt.cmake)
 
 ########################################################################################
-# Scan for JNI classes and generate headers
+# Task that copies the Kotlin Standard Library Function files, this is required by
+# javah program to generate the JNI Headers. Ran automatically when generating cmake files
 
 set(PARENT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../")
 set(CLASS_SEARCH_DIR "${PARENT_DIR}/build/classes/main")
 file(GLOB_RECURSE JAVA_CLASSES "${CLASS_SEARCH_DIR}/*.class")
+
+if (UNIX)
+    set(GRADLE "${PARENT_DIR}/gradlew")
+else ()
+    set(GRADLE "${PARENT_DIR}/gradlew.bat")
+endif ()
+
+set(FUNCTION_CLASSES "${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib/kotlin/Function.class")
+foreach (_NUM RANGE 22)
+    list(APPEND FUNCTION_CLASSES "${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib/kotlin/jvm/functions/Function${_NUM}.class")
+endforeach ()
+
+foreach (_FILE ${FUNCTION_CLASSES})
+    if (NOT EXISTS ${_FILE})
+        execute_process(
+                COMMAND "${GRADLE}" native:copyKotlinStdLib
+                WORKING_DIRECTORY "${PARENT_DIR}"
+                TIMEOUT 30
+        )
+        break()
+    endif ()
+endforeach ()
+
+########################################################################################
+# Scan for JNI classes and generate headers
 
 foreach (_CLASS ${JAVA_CLASSES})
     if (NOT ${_CLASS} MATCHES ".*\\$.*" AND ${_CLASS} MATCHES "jni/objects/.*")
@@ -89,32 +115,6 @@ foreach (_HEADER ${_HEADERS})
             COMMAND ${CMAKE_COMMAND} -E remove ${_HEADER}
             COMMENT "Cleaning ${_HEADER}"
     )
-endforeach ()
-
-########################################################################################
-# Task that copies the Kotlin Standard Library Function files, this is required by
-# javah program to generate the JNI Headers. Ran automatically when generating cmake files
-
-if (UNIX)
-    set(GRADLE "${PARENT_DIR}/gradlew")
-else ()
-    set(GRADLE "${PARENT_DIR}/gradlew.bat")
-endif ()
-
-set(FUNCTION_CLASSES "${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib/kotlin/Function.class")
-foreach (_NUM RANGE 22)
-    list(APPEND FUNCTION_CLASSES "${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib/kotlin/jvm/functions/Function${_NUM}.class")
-endforeach ()
-
-foreach (_FILE ${FUNCTION_CLASSES})
-    if (NOT EXISTS ${_FILE})
-        execute_process(
-                COMMAND "${GRADLE}" native:copyKotlinStdLib
-                WORKING_DIRECTORY "${PARENT_DIR}"
-                TIMEOUT 30
-        )
-        break()
-    endif ()
 endforeach ()
 
 ########################################################################################
