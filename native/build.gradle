@@ -13,10 +13,11 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 }
 
 sourceSets.main.resources {
-    srcDir 'build/resources/main'
+    srcDirs 'build/resources/main', 'src/main/resources'
 }
 
 task refreshCMake(type: Exec) {
@@ -73,8 +74,9 @@ shadowJar {
     classifier = null
     version = null
     manifest {
-        attributes 'Main-Class': 'com.waicool20.skrypton.SKryptonSetup'
+        attributes 'Main-Class': 'com.waicool20.skrypton.SKryptonSetupKt'
     }
 }
+
 build.finalizedBy shadowJar
 jar.enabled = false
