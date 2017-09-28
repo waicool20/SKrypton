@@ -46,6 +46,22 @@ set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY 
 include(copyQt.cmake)
 
 ########################################################################################
+# Check for require headers
+
+include(CheckIncludeFileCXX)
+set(RequiredHeaders "optional")
+
+foreach (_HEADER ${RequiredHeaders})
+    CHECK_INCLUDE_FILE_CXX("${_HEADER}" HasHeader)
+    if (HasHeader)
+        message(STATUS "[HEADER] Found header: ${_HEADER}")
+    else ()
+        message(FATAL_ERROR "[HEADER] Could not find required header: ${_HEADER}")
+    endif ()
+endforeach ()
+message(STATUS "-------------------------------------------------------------")
+
+########################################################################################
 # Task that copies the Kotlin Standard Library Function files, this is required by
 # javah program to generate the JNI Headers. Ran automatically when generating cmake files
 

@@ -5,7 +5,7 @@ find_program(QTDIAG qtdiag)
 if (NOT QTDIAG)
     message(FATAL_ERROR "Could not find qtdiag executable, is it on PATH?")
 endif ()
-message("------------------ Checking Qt environment ------------------")
+message(STATUS "------------------ Checking Qt environment ------------------")
 execute_process(COMMAND "${QTDIAG}" OUTPUT_VARIABLE QTDIAG_OUT)
 
 string(REPLACE "\n" ";" QTDIAG_OUT "${QTDIAG_OUT}")
@@ -27,7 +27,7 @@ endforeach ()
 foreach (_PATH ${Qt_Paths})
     message(STATUS "[Qt] Found ${_PATH} at: ${Qt_${_PATH}}")
 endforeach ()
-message("-------------------------------------------------------------")
+message(STATUS "-------------------------------------------------------------")
 
 ########################################################################################
 # Target that copies everything
