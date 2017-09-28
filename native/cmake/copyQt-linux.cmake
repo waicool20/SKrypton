@@ -30,7 +30,7 @@ endforeach ()
 # OpenGL needs to be copied too
 
 find_library(_EGL
-        NAMES "EGL" "libEGL.so" "libEGL.so.1"
+        NAMES "EGL" "libEGL" "libEGL.so" "libEGL.so.1"
         PATHS "${Qt_LibrariesPath}" "${Qt_BinariesPath}"
         "/usr/lib" "/usr/local/lib" "/usr/lib/x86_64-linux-gnu/"
         PATH_SUFFIXES "mesa-egl")
