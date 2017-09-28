@@ -38,6 +38,7 @@ add_custom_target(CopyQtDependencies)
 
 set(
         RequiredQtLibs
+        "libicuuc"
         "libicudata"
         "libicui18n"
         "libQt5Concurrent"
@@ -50,7 +51,10 @@ set(
         "libQt5Network"
         "libQt5OpenGL"
         "libQt5PrintSupport"
+        "libQt5Qml"
+        "libQt5Quick"
         "libQt5QuickTemplates2"
+        "libQt5QuickWidgets"
         "libQt5WebEngineCore"
         "libQt5WebEngine"
         "libQt5WebEngineWidgets"
@@ -62,9 +66,9 @@ set(
 foreach (_LIB ${RequiredQtLibs})
     if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         if (${_LIB} MATCHES ".*Qt5.*")
-            file(GLOB _LIB_FILES "${Qt_LibrariesPath}/${_LIB}*so.5")
+            file(GLOB _LIB_FILES "${Qt_LibrariesPath}/${_LIB}.so.5")
         else ()
-            file(GLOB _LIB_FILES "${Qt_LibrariesPath}/${_LIB}*so.5?")
+            file(GLOB _LIB_FILES "${Qt_LibrariesPath}/${_LIB}.so.5?")
         endif ()
     elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
         file(GLOB _LIB_FILES "${Qt_LibrariesPath}/${_LIB}*dll")
