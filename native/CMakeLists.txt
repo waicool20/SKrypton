@@ -27,8 +27,8 @@ file(GLOB_RECURSE RESOURCES "rsc/*.qrc")
 include_directories(inc inc/jni inc/webview inc/jni/headers ${JNI_INCLUDE_DIRS})
 
 add_library(${CMAKE_PROJECT_NAME} SHARED ${SOURCE_FILES} ${INC_FILES} ${RESOURCES})
-add_dependencies(${CMAKE_PROJECT_NAME} JNI_Headers)
-set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES AUTOGEN_TARGET_DEPENDS JNI_Headers)
+#add_dependencies(${CMAKE_PROJECT_NAME} JNIHeaders)
+#set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES AUTOGEN_TARGET_DEPENDS JNIHeaders)
 target_link_libraries(${CMAKE_PROJECT_NAME}
         Qt5::Core
         Qt5::Network
@@ -50,13 +50,13 @@ set(PARENT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../")
 set(CLASS_SEARCH_DIR "${PARENT_DIR}/build/classes/main")
 file(GLOB_RECURSE JAVA_CLASSES "${CLASS_SEARCH_DIR}/*.class")
 
-foreach (CLASS ${JAVA_CLASSES})
-    if (NOT ${CLASS} MATCHES ".*\\$.*" AND ${CLASS} MATCHES "jni/objects/.*")
-        STRING(REGEX REPLACE "${CLASS_SEARCH_DIR}/" "" CLASS ${CLASS})
-        STRING(REGEX REPLACE "/" "." CLASS ${CLASS})
-        STRING(REGEX REPLACE ".class" "" CLASS ${CLASS})
-        list(APPEND JNI_CLASSES ${CLASS})
-        message(STATUS "[JAVAH] Will generate headers for class: \"${CLASS}\"")
+foreach (_CLASS ${JAVA_CLASSES})
+    if (NOT ${_CLASS} MATCHES ".*\\$.*" AND ${_CLASS} MATCHES "jni/objects/.*")
+        STRING(REGEX REPLACE "${CLASS_SEARCH_DIR}/" "" _CLASS ${_CLASS})
+        STRING(REGEX REPLACE "/" "." _CLASS ${_CLASS})
+        STRING(REGEX REPLACE ".class" "" _CLASS ${_CLASS})
+        list(APPEND JNI_CLASSES ${_CLASS})
+        message(STATUS "[JAVAH] Will generate headers for class: \"${_CLASS}\"")
     endif ()
 endforeach ()
 
@@ -65,21 +65,29 @@ if (NOT JNI_CLASSES)
 endif ()
 
 create_javah(
-        TARGET JNI_Headers
-        DEPENDS Clean_JNI_Headers
+        TARGET JNIHeaders
         CLASSES ${JNI_CLASSES}
         CLASSPATH ${CLASS_SEARCH_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib
         OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers
 )
+# Using add_dependencies instead of the DEPENDS in create_javah as that always triggers
+# CleanJNIHeaders for some reason
+
+add_dependencies(JNIHeaders CleanJNIHeaders)
 
 ########################################################################################
 # Add a target to clean the JNI Headers
 
-add_custom_target(
-        Clean_JNI_Headers
-        COMMAND ${CMAKE_COMMAND} -E remove_directory "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers"
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers"
-)
+file(GLOB_RECURSE _HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/inc/jni/headers/*.h")
+
+add_custom_target(CleanJNIHeaders)
+foreach (_HEADER ${_HEADERS})
+    add_custom_command(
+            TARGET CleanJNIHeaders PRE_BUILD
+            COMMAND ${CMAKE_COMMAND} -E remove ${_HEADER}
+            COMMENT "Cleaning ${_HEADER}"
+    )
+endforeach ()
 
 ########################################################################################
 # Task that copies the Kotlin Standard Library Function files, this is required by
@@ -92,12 +100,12 @@ else ()
 endif ()
 
 set(FUNCTION_CLASSES "${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib/kotlin/Function.class")
-foreach (NUM RANGE 22)
-    list(APPEND FUNCTION_CLASSES "${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib/kotlin/jvm/functions/Function${NUM}.class")
+foreach (_NUM RANGE 22)
+    list(APPEND FUNCTION_CLASSES "${CMAKE_CURRENT_SOURCE_DIR}/build/kstdlib/kotlin/jvm/functions/Function${_NUM}.class")
 endforeach ()
 
-foreach (FILE ${FUNCTION_CLASSES})
-    if (NOT EXISTS ${FILE})
+foreach (_FILE ${FUNCTION_CLASSES})
+    if (NOT EXISTS ${_FILE})
         execute_process(
                 COMMAND "${GRADLE}" native:copyKotlinStdLib
                 WORKING_DIRECTORY "${PARENT_DIR}"
