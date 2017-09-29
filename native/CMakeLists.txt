@@ -58,20 +58,11 @@ else ()
 endif ()
 
 ########################################################################################
-# Check for require headers
+# Check compiler standard
 
-include(CheckIncludeFileCXX)
-set(RequiredHeaders "optional")
-
-foreach (_HEADER ${RequiredHeaders})
-    CHECK_INCLUDE_FILE_CXX("${_HEADER}" HasHeader)
-    if (HasHeader)
-        message(STATUS "[HEADER] Found header: ${_HEADER}")
-    else ()
-        message(FATAL_ERROR "[HEADER] Could not find required header: ${_HEADER}")
-    endif ()
-endforeach ()
-message(STATUS "-------------------------------------------------------------")
+if (NOT "${CMAKE_CXX_COMPILE_FEATURES}" MATCHES "cxx_std_17")
+    message(FATAL_ERROR "Compiler does not support c++17 standards.")
+endif ()
 
 ########################################################################################
 # Task that copies the Kotlin Standard Library Function files, this is required by
