@@ -43,6 +43,14 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 set(OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build/resources/main/skrypton")
 set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
+if (MSVC)
+    add_custom_command(
+            TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:${CMAKE_PROJECT_NAME}>" "${OUTPUT_DIR}"
+            COMMENT "[COPY DLL] $<TARGET_FILE:${CMAKE_PROJECT_NAME}> to ${OUTPUT_DIR}"
+    )
+endif ()
+
 ########################################################################################
 # Copy library tasks
 
