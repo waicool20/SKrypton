@@ -70,13 +70,23 @@ task copyKotlinStdLib(type: Copy) {
 
 shadowJar {
     dependsOn 'makeNativeLibraries', 'copyQtDependencies'
-    String bitness;
+    String bitness
+    String os
     if (is64Bit) {
         bitness = "64"
     } else {
         bitness = "32"
     }
-    archiveName "SKryptonNative_${System.getProperty("os.name")}${bitness}.jar"
+    if (isLinux) {
+        os = "Linux"
+    } else if(isWindows) {
+        os = "Windows"
+    } else if(isMacOsX) {
+        os = "MacOsX"
+    } else {
+        os = "Unknown"
+    }
+    archiveName "SKryptonNative_${os}${bitness}.jar"
     classifier = null
     version = null
     manifest {
