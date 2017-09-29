@@ -41,8 +41,7 @@ object SKryptonApp : NativeInterface() {
             logger.debug("SKrypton JVM path: $sJvm")
             val args = mutableListOf(sJvm.toString())
             args += "-cp"
-            args += (ClassLoader.getSystemClassLoader() as URLClassLoader).urLs
-                    .joinToString(":") { it.toString().replace("file:", "") }
+            args += System.getProperty("java.class.path")
             args += SystemUtils.mainClassName
             logger.debug("Relaunching with command: ${args.joinToString(" ")}")
             with(ProcessBuilder(args)) {
