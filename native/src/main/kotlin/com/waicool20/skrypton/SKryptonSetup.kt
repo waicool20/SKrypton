@@ -18,7 +18,7 @@ object SKryptonSetup {
 
     fun start() {
         logger.debug("Starting setup")
-        Files.createDirectories(skryptonAppDir)
+        if (Files.notExists(skryptonAppDir)) Files.createDirectories(skryptonAppDir)
         val javaName = if (OS.isUnix()) "java" else "java.exe"
         copy(javaHome.resolve("bin/$javaName"), skryptonAppDir.resolve("bin/java"), true)
         if (OS.isUnix()) symlink(javaHome.resolve("lib"), skryptonAppDir.resolve("lib"))

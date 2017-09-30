@@ -1,0 +1,106 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+import java.nio.file.Files
+import java.nio.file.Paths
+
+buildscript {
+    repositories.jcenter()
+    dependencies.classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
+String cmakeBuildDebugDir = 'cmake-build-debug'
+String cmakeBuildReleaseDir = 'cmake-build-release'
+int threads = Runtime.runtime.availableProcessors()
+
+//<editor-fold desc="Debug Tasks">
+
+task buildDebug {
+    group 'builddebug'
+    dependsOn 'refreshCMakeRelease', 'makeNativeLibrariesDebug', 'copyQtDependenciesDebug'
+}
+
+task refreshCMakeDebug(type: Exec) {
+    group 'builddebug'
+    def file = Paths.get("$projectDir").resolve(cmakeBuildDebugDir)
+    if (Files.notExists(file)) Files.createDirectory(file)
+    workingDir cmakeBuildDebugDir
+    commandLine 'cmake'
+    args += ['-DCMAKE_BUILD_TYPE=Debug', '-G', "CodeBlocks - Unix Makefiles", '../']
+}
+
+task makeNativeLibrariesDebug(type: Exec) {
+    group 'builddebug'
+    dependsOn refreshCMakeDebug
+    workingDir cmakeBuildDebugDir
+    commandLine 'cmake'
+    args += ['--build', './', '--target', 'SKryptonNative', '--', "-j$threads"]
+}
+
+task copyQtDependenciesDebug(type: Exec) {
+    group 'builddebug'
+    dependsOn refreshCMakeDebug
+    shouldRunAfter makeNativeLibrariesDebug
+    workingDir cmakeBuildDebugDir
+    commandLine 'cmake'
+    args += ['--build', './', '--target', 'CopyQtDependencies']
+}
+
+task nativeJarDebug(type: ShadowJar) {
+    group 'builddebug'
+    dependsOn 'makeNativeLibrariesDebug', 'copyQtDependenciesDebug'
+    archiveName "SKryptonNative_${osName}64_Debug.jar"
+    classifier = null
+    version = null
+    manifest {
+        attributes 'Main-Class': 'com.waicool20.skrypton.SKryptonSetupKt'
+    }
+}
+//</editor-fold>
+
+//<editor-fold desc="Release Tasks">
+
+task buildRelease {
+    group 'buildrelease'
+    dependsOn 'refreshCMakeRelease', 'makeNativeLibrariesRelease', 'copyQtDependenciesRelease'
+}
+
+task refreshCMakeRelease(type: Exec) {
+    group 'buildrelease'
+    def file = Paths.get("$projectDir").resolve(cmakeBuildReleaseDir)
+    if (Files.notExists(file)) Files.createDirectory(file)
+    workingDir cmakeBuildReleaseDir
+    commandLine 'cmake'
+    args += ['-DCMAKE_BUILD_TYPE=Release', '-G', "CodeBlocks - Unix Makefiles", '../']
+}
+
+task makeNativeLibrariesRelease(type: Exec) {
+    group 'buildrelease'
+    dependsOn refreshCMakeRelease
+    workingDir cmakeBuildReleaseDir
+    commandLine 'cmake'
+    args += ['--build', './', '--target', 'SKryptonNative', '--', "-j$threads"]
+}
+
+task copyQtDependenciesRelease(type: Exec) {
+    group 'buildrelease'
+    dependsOn refreshCMakeRelease
+    shouldRunAfter makeNativeLibrariesRelease
+    workingDir cmakeBuildReleaseDir
+    commandLine 'cmake'
+    args += ['--build', './', '--target', 'CopyQtDependencies']
+}
+
+task nativeJarRelease(type: ShadowJar) {
+    group 'buildrelease'
+    dependsOn 'makeNativeLibrariesRelease', 'copyQtDependenciesRelease'
+    archiveName "SKryptonNative_${osName}64_Release.jar"
+    classifier = null
+    version = null
+    manifest {
+        attributes 'Main-Class': 'com.waicool20.skrypton.SKryptonSetupKt'
+    }
+}
+
+//</editor-fold>

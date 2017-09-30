@@ -120,5 +120,5 @@ endforeach ()
 add_custom_command(
         TARGET CopyQtDependencies PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/qtconf" "${OUTPUT_DIR}"
-        COMMENT "[COPY CONF] {CMAKE_SOURCE_DIR}/qtconf to ${OUTPUT_DIR}"
+        COMMENT "[COPY CONF] ${CMAKE_SOURCE_DIR}/qtconf to ${OUTPUT_DIR}"
 )

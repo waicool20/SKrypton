@@ -1,8 +1,3 @@
-import java.nio.file.Files
-import java.nio.file.Paths
-
-String cmakeBuildDir = 'cmake-build-debug'
-
 apply from: '../common.gradle'
 apply plugin: 'kotlin'
 apply plugin: 'com.github.johnrengelman.shadow'
@@ -20,43 +15,6 @@ sourceSets.main.resources {
     srcDirs 'build/resources/main', 'src/main/resources'
 }
 
-task refreshCMake(type: Exec) {
-    def file = Paths.get("$projectDir").resolve(cmakeBuildDir)
-    if (Files.notExists(file)) Files.createDirectory(file)
-    workingDir cmakeBuildDir
-    commandLine 'cmake'
-    String generator
-    if (isWindows) {
-        generator = "Visual Studio 15 2017"
-        if (is64Bit) generator += " Win64"
-    } else {
-        generator = "Unix Makefiles"
-    }
-    args += ['-G', generator, '../']
-}
-
-task makeNativeLibraries(type: Exec) {
-    dependsOn refreshCMake
-    workingDir cmakeBuildDir
-    commandLine 'cmake'
-    args += ['--build', './', '--target', 'SKryptonNative']
-    if (isUnix) {
-        int threads = Runtime.runtime.availableProcessors()
-        args += ['--', "-j$threads"]
-    }
-}
-
-task copyQtDependencies(type: Exec) {
-    dependsOn refreshCMake
-    workingDir cmakeBuildDir
-    commandLine 'cmake'
-    args += ['--build', './', '--target', 'CopyQtDependencies']
-    if (isUnix) {
-        int threads = Runtime.runtime.availableProcessors()
-        args += ['--', "-j$threads"]
-    }
-}
-
 task copyKotlinStdLib(type: Copy) {
     into "build/kstdlib"
     include("kotlin/jvm/functions/**/*")
@@ -68,31 +26,15 @@ task copyKotlinStdLib(type: Copy) {
     }
 }
 
-shadowJar {
-    dependsOn 'makeNativeLibraries', 'copyQtDependencies'
-    String bitness
-    String os
-    if (is64Bit) {
-        bitness = "64"
-    } else {
-        bitness = "32"
-    }
-    if (isLinux) {
-        os = "Linux"
-    } else if(isWindows) {
-        os = "Windows"
-    } else if(isMacOsX) {
-        os = "MacOsX"
-    } else {
-        os = "Unknown"
-    }
-    archiveName "SKryptonNative_${os}${bitness}.jar"
-    classifier = null
-    version = null
-    manifest {
-        attributes 'Main-Class': 'com.waicool20.skrypton.SKryptonSetupKt'
-    }
+if (isLinux) {
+    apply from: 'linux-build.gradle'
+} else if (isWindows) {
+    apply from: 'windows-build.gradle'
+} else if (isMacOsX) {
+    // Can't test this yet
+} else {
+    throw new Exception("Unsupported system")
 }
 
-build.finalizedBy shadowJar
+build.finalizedBy nativeJarDebug, nativeJarRelease
 jar.enabled = false
