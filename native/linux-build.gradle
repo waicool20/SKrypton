@@ -49,6 +49,8 @@ task copyQtDependenciesDebug(type: Exec) {
 
 task nativeJarDebug(type: ShadowJar) {
     group 'builddebug'
+    from sourceSets.main.output
+    from sourceSets.debug.output
     dependsOn 'makeNativeLibrariesDebug', 'copyQtDependenciesDebug'
     archiveName "SKryptonNative_${osName}64_Debug.jar"
     classifier = null
@@ -94,6 +96,8 @@ task copyQtDependenciesRelease(type: Exec) {
 
 task nativeJarRelease(type: ShadowJar) {
     group 'buildrelease'
+    from sourceSets.main.output
+    from sourceSets.release.output
     dependsOn 'makeNativeLibrariesRelease', 'copyQtDependenciesRelease'
     archiveName "SKryptonNative_${osName}64_Release.jar"
     classifier = null

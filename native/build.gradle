@@ -11,8 +11,15 @@ dependencies {
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 }
 
-sourceSets.main.resources {
-    srcDirs 'build/resources/main', 'src/main/resources'
+sourceSets {
+    release {
+        resources.srcDir 'build/resources/release'
+        compileClasspath += sourceSets.main.runtimeClasspath
+    }
+    debug {
+        resources.srcDir 'build/resources/debug'
+        compileClasspath += sourceSets.main.runtimeClasspath
+    }
 }
 
 task copyKotlinStdLib(type: Copy) {

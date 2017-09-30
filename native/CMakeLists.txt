@@ -40,7 +40,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         Qt5::WebEngineWidgets
         ${JNI_LIBRARIES})
 
-set(OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build/resources/main/skrypton")
+string(TOLOWER ${CMAKE_BUILD_TYPE} _BUILD_TYPE)
+set(OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/${_BUILD_TYPE}/resources")
 set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
 if (MSVC)
