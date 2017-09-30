@@ -43,5 +43,5 @@ if (isLinux) {
     throw new Exception("Unsupported system")
 }
 
-build.finalizedBy nativeJarDebug, nativeJarRelease
+build.finalizedBy nativeJarRelease
 jar.enabled = false
