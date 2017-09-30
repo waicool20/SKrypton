@@ -27,7 +27,7 @@ endforeach ()
 ########################################################################################
 # OpenGL needs to be copied too
 
-set(CMAKE_FIND_LIBRARY_SUFFIXES "*.dll")
+set(CMAKE_FIND_LIBRARY_SUFFIXES ".dll")
 find_library(_EGL
         NAMES "EGL" "libEGL" "libEGL.dll"
         PATHS "${Qt_BinariesPath}")
