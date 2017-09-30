@@ -33,6 +33,7 @@ task refreshCMakeDebug(type: Exec) {
 task makeNativeLibrariesDebug(type: Exec) {
     group 'builddebug'
     dependsOn refreshCMakeDebug
+    shouldRunAfter processDebugResources
     workingDir cmakeBuildDebugDir
     commandLine 'cmake'
     args += ['--build', './', '--target', 'SKryptonNative', '--', "-j$threads"]
@@ -49,8 +50,10 @@ task copyQtDependenciesDebug(type: Exec) {
 
 task nativeJarDebug(type: ShadowJar) {
     group 'builddebug'
+    classifier 'debug'
     from sourceSets.main.output
     from sourceSets.debug.output
+    configurations = [project.configurations.compile]
     dependsOn 'makeNativeLibrariesDebug', 'copyQtDependenciesDebug'
     archiveName "SKryptonNative_${osName}64_Debug.jar"
     classifier = null
@@ -80,6 +83,7 @@ task refreshCMakeRelease(type: Exec) {
 task makeNativeLibrariesRelease(type: Exec) {
     group 'buildrelease'
     dependsOn refreshCMakeRelease
+    shouldRunAfter processReleaseResources
     workingDir cmakeBuildReleaseDir
     commandLine 'cmake'
     args += ['--build', './', '--target', 'SKryptonNative', '--', "-j$threads"]
@@ -96,8 +100,10 @@ task copyQtDependenciesRelease(type: Exec) {
 
 task nativeJarRelease(type: ShadowJar) {
     group 'buildrelease'
+    classifier 'release'
     from sourceSets.main.output
     from sourceSets.release.output
+    configurations = [project.configurations.compile]
     dependsOn 'makeNativeLibrariesRelease', 'copyQtDependenciesRelease'
     archiveName "SKryptonNative_${osName}64_Release.jar"
     classifier = null

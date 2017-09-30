@@ -41,7 +41,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
         ${JNI_LIBRARIES})
 
 string(TOLOWER ${CMAKE_BUILD_TYPE} _BUILD_TYPE)
-set(OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/${_BUILD_TYPE}/resources")
+set(OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build/resources/${_BUILD_TYPE}/skrypton")
 set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
 if (MSVC)

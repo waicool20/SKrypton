@@ -44,7 +44,7 @@ if (_EGL)
             COMMENT "[COPY OPENGL] ${_IN_FILE} to ${_OUT_DIR}"
     )
 else ()
-    message(FATAL_ERROR "Could not find EGL library file")
+    message(FATAL_ERROR "Could not find EGL library file, libEGL is a required component.")
 endif ()
 
 find_library(_GLES
@@ -62,7 +62,7 @@ if (_GLES)
             COMMENT "[COPY OPENGL] ${_IN_FILE} to ${_OUT_DIR}"
     )
 else ()
-    message(FATAL_ERROR "Could not find EGL library file")
+    message(FATAL_ERROR "Could not find GLES library file, libGLESv2 is a required component.")
 endif ()
 
 ########################################################################################
