@@ -41,7 +41,25 @@ if (_EGL)
     add_custom_command(
             TARGET CopyQtDependencies PRE_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_IN_FILE}" "${_OUT_DIR}/${_EGL_NAME}"
-            COMMENT "[COPY EGL] ${_IN_FILE} to ${_OUT_DIR}"
+            COMMENT "[COPY OPENGL] ${_IN_FILE} to ${_OUT_DIR}"
+    )
+else ()
+    message(FATAL_ERROR "Could not find EGL library file")
+endif ()
+
+find_library(_GLES
+        NAMES "GLESv2" "libGLESv2" "libGLESv2.so" "libGLESv2.so.2"
+        PATHS "${Qt_LibrariesPath}" "${Qt_BinariesPath}"
+        "/usr/lib" "/usr/local/lib" "/usr/lib/x86_64-linux-gnu/"
+        PATH_SUFFIXES "mesa-egl")
+if (_GLES)
+    get_filename_component(_GLES_NAME ${_GLES} NAME)
+    set(_IN_FILE "${_GLES}")
+    set(_OUT_DIR "${OUTPUT_DIR}/lib")
+    add_custom_command(
+            TARGET CopyQtDependencies PRE_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_IN_FILE}" "${_OUT_DIR}/${_GLES_NAME}"
+            COMMENT "[COPY OPENGL] ${_IN_FILE} to ${_OUT_DIR}"
     )
 else ()
     message(FATAL_ERROR "Could not find EGL library file")
