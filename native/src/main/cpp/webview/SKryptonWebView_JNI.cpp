@@ -120,12 +120,20 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_takeScreenshot_1N(JNIEnv
             return {};
         }
         QPixmap pixmap { view->size() };
-        auto isDone = std::make_shared<bool>(new bool(false));
-        SKryptonApp::runOnMainThread([&pixmap, isDone, view] {
+
+        std::mutex mutex;
+        std::condition_variable cv;
+
+        auto isDone = false;
+        SKryptonApp::runOnMainThread([&pixmap, &isDone, view, &cv] {
             view->render(&pixmap, QPoint(), QRegion(view->rect()));
-            *isDone = true;
+            isDone = true;
+            cv.notify_one();
         });
-        while (!*isDone) {}
+
+        std::unique_lock<std::mutex> lock(mutex);
+        cv.wait(lock, [&]{ return isDone; });
+
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         pixmap.save(&buffer, "PNG");
