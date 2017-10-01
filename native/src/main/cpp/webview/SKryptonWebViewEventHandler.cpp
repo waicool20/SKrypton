@@ -1,8 +1,10 @@
 #include <SKryptonWebViewEventHandler.h>
 #include <SKryptonWebView.h>
 
-SKryptonWebViewEventHandler::SKryptonWebViewEventHandler(SKryptonWebView* webView) :
-        webView(webView), env(GetLocalJNIEnvRef()) {}
+SKryptonWebViewEventHandler::SKryptonWebViewEventHandler(SKryptonWebView* webView): webView(webView), env(GetLocalJNIEnvRef()){
+    this->webView = webView;
+    this->env = GetLocalJNIEnvRef();
+}
 
 bool SKryptonWebViewEventHandler::eventFilter(QObject* watched, QEvent* event) {
     this->event(event);
