@@ -59,9 +59,10 @@ object SKryptonApp : NativeInterface() {
         val libs = Files.walk(skryptonAppDir.resolve("bin/lib"))
                 .filter { Files.isRegularFile(it) && "${it.fileName}".dropWhile { it != '.' }.contains(OS.libraryExtention) }
                 .sorted { path1, path2 ->
-                    nativeDependencies.indexOfFirst { "$path1".contains("$it${OS.libraryExtention}") } -
-                            nativeDependencies.indexOfFirst { "$path2".contains("$it${OS.libraryExtention}") }
+                    nativeDependencies.indexOfFirst { "${path1.fileName}".contains(it) } -
+                            nativeDependencies.indexOfFirst { "${path2.fileName}".contains(it) }
                 }.toList()
+        println(libs)
         libs.plusElement(skryptonAppDir.resolve("bin/${System.mapLibraryName("SKryptonNative")}")).forEach {
             logger.debug { "Loading library at $it" }
             SystemUtils.loadLibrary(it, true)
