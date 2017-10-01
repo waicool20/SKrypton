@@ -20,7 +20,7 @@ object SKryptonSetup {
         logger.debug("Starting setup")
         if (Files.notExists(skryptonAppDir)) Files.createDirectories(skryptonAppDir)
         val javaName = if (OS.isUnix()) "java" else "java.exe"
-        copy(javaHome.resolve("bin/$javaName"), skryptonAppDir.resolve("bin/java"), true)
+        copy(javaHome.resolve("bin/$javaName"), skryptonAppDir.resolve("bin/$javaName"), true)
         if (OS.isUnix()) symlink(javaHome.resolve("lib"), skryptonAppDir.resolve("lib"))
         if (codeSource.endsWith(".jar")) {
             val jarURI = URI.create("jar:file:$codeSource")

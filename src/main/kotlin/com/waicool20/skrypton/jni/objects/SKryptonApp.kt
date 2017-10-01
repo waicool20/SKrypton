@@ -35,7 +35,8 @@ object SKryptonApp : NativeInterface() {
     init {
         if (Files.notExists(skryptonAppDir)) error("Could not find SKrypton Native components folder, did you install it?")
         if (System.getenv("skryptonJvm").isNullOrEmpty()) {
-            val sJvm = skryptonAppDir.resolve("bin/java")
+            val javaName = if (OS.isUnix()) "java" else "java.exe"
+            val sJvm = skryptonAppDir.resolve("bin/$javaName")
             logger.debug("Not running under skrypton JVM")
             logger.debug("Main class: ${SystemUtils.mainClassName}")
             logger.debug("SKrypton JVM path: $sJvm")
