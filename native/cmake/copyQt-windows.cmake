@@ -76,15 +76,21 @@ set(
 )
 
 foreach (_QtPlugin ${RequiredQtPlugins})
-    set(_IN_FILE "${Qt_PluginsPath}/${_QtPlugin}")
-    set(_OUT_DIR "${OUTPUT_DIR}/plugins")
-    file(TO_NATIVE_PATH ${_IN_FILE} _IN_FILE)
-    file(TO_NATIVE_PATH "${_OUT_DIR}/${_QtPlugin}" _OUT_DIR)
-    add_custom_command(
-            TARGET CopyQtDependencies PRE_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_directory "${_IN_FILE}" "${_OUT_DIR}"
-            COMMENT "[COPY PLUGIN] ${_IN_FILE} to ${_OUT_DIR}"
-    )
+
+    file(GLOB _PLUGIN_FILES "${Qt_PluginsPath}/${_QtPlugin}/*.dll")
+
+    foreach (_PLUGIN_FILE ${_PLUGIN_FILES})
+        get_filename_component(_PLUGIN_FILE_NAME ${_PLUGIN_FILE} NAME)
+        set(_IN_FILE "${_PLUGIN_FILE}")
+        set(_OUT_DIR "${OUTPUT_DIR}/plugins/${_QtPlugin}/")
+        file(TO_NATIVE_PATH ${_IN_FILE} _IN_FILE)
+        file(TO_NATIVE_PATH "${_OUT_DIR}/${_PLUGIN_FILE_NAME}" _OUT_DIR)
+        add_custom_command(
+                TARGET CopyQtDependencies PRE_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_IN_FILE}" "${_OUT_DIR}"
+                COMMENT "[COPY PLUGIN] ${_IN_FILE} to ${_OUT_DIR}"
+        )
+    endforeach ()
 endforeach ()
 
 ########################################################################################
