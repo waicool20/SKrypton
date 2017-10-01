@@ -1,5 +1,7 @@
+d3dcompiler_47
 libGLESv2
 libEGL
+opengl32sw
 
 Qt5Core
 Qt5Gui

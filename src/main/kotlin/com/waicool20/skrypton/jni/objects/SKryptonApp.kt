@@ -62,7 +62,6 @@ object SKryptonApp : NativeInterface() {
                     nativeDependencies.indexOfFirst { "${path1.fileName}".contains(it) } -
                             nativeDependencies.indexOfFirst { "${path2.fileName}".contains(it) }
                 }.toList()
-        println(libs)
         libs.plusElement(skryptonAppDir.resolve("bin/${System.mapLibraryName("SKryptonNative")}")).forEach {
             logger.debug { "Loading library at $it" }
             SystemUtils.loadLibrary(it, true)
