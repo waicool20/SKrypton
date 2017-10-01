@@ -43,6 +43,9 @@ object SKryptonApp : NativeInterface() {
             val args = mutableListOf(sJvm.toString())
             args += "-cp"
             args += System.getProperty("java.class.path")
+                    .split("[:|;]".toRegex()).joinToString(if (OS.isWindows()) ";" else ":") {
+                Paths.get(it).toAbsolutePath().normalize().toString()
+            }
             args += SystemUtils.mainClassName
             logger.debug("Relaunching with command: ${args.joinToString(" ")}")
             with(ProcessBuilder(args)) {
