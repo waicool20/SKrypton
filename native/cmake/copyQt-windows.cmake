@@ -7,6 +7,11 @@ string(REPLACE "\n" ";" RequiredQtLibs "${RequiredQtLibs}")
 foreach (_LIB ${RequiredQtLibs})
     file(GLOB _LIB_FILES "${Qt_BinariesPath}/${_LIB}.dll")
 
+    if (${CMAKE_BUILD_TYPE} MATCHES "Debug")
+        file(GLOB _LIBD_FILES "${Qt_BinariesPath}/${_LIB}d.dll")
+        list(APPEND _LIB_FILES "${_LIBD_FILES}")
+    endif ()
+
     if (NOT _LIB_FILES)
         message(FATAL_ERROR "No library files were found for \"${_LIB}\"")
     endif ()
@@ -97,6 +102,9 @@ endforeach ()
 # Qt LibExec files
 
 set(RequiredQtLibExecFiles "QtWebEngineProcess.exe")
+if (${CMAKE_BUILD_TYPE} MATCHES "Debug")
+    list(APPEND RequiredQtLibExecFiles "QtWebEngineProcessd.exe")
+endif ()
 
 foreach (_QtLibExecFile ${RequiredQtLibExecFiles})
     set(_IN_FILE "${Qt_LibraryExecutablesPath}/${_QtLibExecFile}")

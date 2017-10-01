@@ -45,9 +45,10 @@ set(OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build/resources/${_BUILD_TYPE}/skryp
 set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
 if (MSVC)
+    file(TO_NATIVE_PATH "${OUTPUT_DIR}" _OUT_DIR)
     add_custom_command(
             TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:${CMAKE_PROJECT_NAME}>" "${OUTPUT_DIR}/"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:${CMAKE_PROJECT_NAME}>" "${_OUT_DIR}"
             COMMENT "[COPY DLL] $<TARGET_FILE:${CMAKE_PROJECT_NAME}> to ${OUTPUT_DIR}"
     )
 endif ()
