@@ -73,7 +73,6 @@ set(
         "imageformats"
         "platforms"
         "printsupport"
-        "xcbglintegrations"
 )
 
 foreach (_QtPlugin ${RequiredQtPlugins})
@@ -91,11 +90,11 @@ endforeach ()
 ########################################################################################
 # Qt LibExec files
 
-set(RequiredQtLibExecFiles "QtWebEngineProcess.exe" "QtWebEngineProcessd.exe")
+set(RequiredQtLibExecFiles "QtWebEngineProcess.exe")
 
 foreach (_QtLibExecFile ${RequiredQtLibExecFiles})
     set(_IN_FILE "${Qt_LibraryExecutablesPath}/${_QtLibExecFile}")
-    set(_OUT_DIR "${OUTPUT_DIR}/libexec")
+    set(_OUT_DIR "${OUTPUT_DIR}/lib")
     file(TO_NATIVE_PATH ${_IN_FILE} _IN_FILE)
     file(TO_NATIVE_PATH "${_OUT_DIR}/${_QtLibExecFile}" _OUT_DIR)
     add_custom_command(
@@ -142,10 +141,10 @@ endforeach ()
 ########################################################################################
 # Qt Conf files
 
-file(TO_NATIVE_PATH "${CMAKE_SOURCE_DIR}/qtconf" CONF_FILES)
+file(TO_NATIVE_PATH "${CMAKE_SOURCE_DIR}/rsc/qt.conf" CONF_FILES)
 file(TO_NATIVE_PATH ${OUTPUT_DIR} _OUT_DIR)
 add_custom_command(
         TARGET CopyQtDependencies PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory "${CONF_FILES}" "${_OUT_DIR}"
-        COMMENT "[COPY CONF] {CMAKE_SOURCE_DIR}/qtconf to ${_OUT_DIR}"
+        COMMENT "[COPY CONF] {CMAKE_SOURCE_DIR}/rsc/qt.conf to ${_OUT_DIR}"
 )

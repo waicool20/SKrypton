@@ -94,7 +94,7 @@ set(RequiredQtLibExecFiles "QtWebEngineProcess")
 
 foreach (_QtLibExecFile ${RequiredQtLibExecFiles})
     set(_IN_FILE "${Qt_LibraryExecutablesPath}/${_QtLibExecFile}")
-    set(_OUT_DIR "${OUTPUT_DIR}/libexec")
+    set(_OUT_DIR "${OUTPUT_DIR}/lib")
     add_custom_command(
             TARGET CopyQtDependencies PRE_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_IN_FILE}" "${_OUT_DIR}/${_QtLibExecFile}"
@@ -137,6 +137,6 @@ endforeach ()
 
 add_custom_command(
         TARGET CopyQtDependencies PRE_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/qtconf" "${OUTPUT_DIR}"
-        COMMENT "[COPY CONF] ${CMAKE_SOURCE_DIR}/qtconf to ${OUTPUT_DIR}"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/rsc/qt.conf" "${OUTPUT_DIR}"
+        COMMENT "[COPY CONF] ${CMAKE_SOURCE_DIR}/rsc/qt.conf to ${OUTPUT_DIR}"
 )
