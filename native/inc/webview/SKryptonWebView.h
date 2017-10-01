@@ -19,11 +19,11 @@
 class SKryptonWebView : public QWebEngineView {
 Q_OBJECT
 private:
-    VirtualCursor* virtualCursor;
+    VirtualCursor* virtualCursor = nullptr;
     bool showCursor = false;
     bool mIsLoading = true;
-    jobject jInstance;
-    SKryptonWebViewEventHandler* eventHandler;
+    jobject jInstance = nullptr;
+    SKryptonWebViewEventHandler* eventHandler = nullptr;
 public:
     SKryptonWebView(jobject jInstance, const string& url);
     ~SKryptonWebView();

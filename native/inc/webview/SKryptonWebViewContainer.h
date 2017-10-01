@@ -10,7 +10,7 @@ class SKryptonWebView;
 
 class SKryptonWebViewContainer : public QWidget {
 private:
-    SKryptonWebView* webView;
+    SKryptonWebView* webView = nullptr;
 public:
     SKryptonWebViewContainer(SKryptonWebView* webView);
     SKryptonWebView* getWebView() const;

@@ -7,7 +7,7 @@
 
 class VirtualCursor : public QWidget {
 private:
-    QImage* image;
+    QImage* image = nullptr;
 public:
     VirtualCursor(QWidget* parent);
     ~VirtualCursor();

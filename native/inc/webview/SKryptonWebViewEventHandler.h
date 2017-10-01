@@ -11,8 +11,8 @@ class SKryptonWebView;
 
 class SKryptonWebViewEventHandler : public QWidget {
 private:
-    SKryptonWebView* webView;
-    JNIEnv* env;
+    SKryptonWebView* webView = nullptr;
+    JNIEnv* env = nullptr;
 public:
     SKryptonWebViewEventHandler(SKryptonWebView* webView);
 protected:
