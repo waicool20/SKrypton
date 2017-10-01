@@ -145,6 +145,6 @@ file(TO_NATIVE_PATH "${CMAKE_SOURCE_DIR}/rsc/qt.conf" CONF_FILES)
 file(TO_NATIVE_PATH ${OUTPUT_DIR} _OUT_DIR)
 add_custom_command(
         TARGET CopyQtDependencies PRE_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory "${CONF_FILES}" "${_OUT_DIR}"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CONF_FILES}" "${_OUT_DIR}"
         COMMENT "[COPY CONF] {CMAKE_SOURCE_DIR}/rsc/qt.conf to ${_OUT_DIR}"
 )

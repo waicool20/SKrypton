@@ -137,6 +137,6 @@ endforeach ()
 
 add_custom_command(
         TARGET CopyQtDependencies PRE_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/rsc/qt.conf" "${OUTPUT_DIR}"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_SOURCE_DIR}/rsc/qt.conf" "${OUTPUT_DIR}"
         COMMENT "[COPY CONF] ${CMAKE_SOURCE_DIR}/rsc/qt.conf to ${OUTPUT_DIR}"
 )
