@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
     webView.showCursor = true
     val screen = SKryptonScreen(webView)
     thread {
-        TimeUnit.SECONDS.sleep(3)
+        TimeUnit.SECONDS.sleep(8)
         println("Sending events!")
         screen.click("ok1.png")
         TimeUnit.SECONDS.sleep(1)
