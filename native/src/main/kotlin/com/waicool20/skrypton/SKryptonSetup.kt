@@ -28,21 +28,27 @@ object SKryptonSetup {
             (FileSystems.newFileSystem(jarURI, env)).use { fs ->
                 Files.walk(fs.getPath("/skrypton"))
                         .filter { it.nameCount > 1 }
-                        .forEach(SKryptonSetup::copyResource)
+                        .forEach { copyResource(it) }
             }
         } else {
             // For use in IDE
-            Files.walk(Paths.get("native/build/resources/main/skrypton"))
-                    .filter { it.nameCount > 1 }
-                    .forEach(SKryptonSetup::copyResource)
+            val releaseResources = Paths.get("native/build/resources/release/skrypton")
+            val debugResources = Paths.get("native/build/resources/debug/skrypton")
+            when {
+                Files.exists(releaseResources) -> Files.walk(releaseResources)
+                        .filter { it.nameCount > 5 }.forEach { copyResource(it, 5) }
+                Files.exists(debugResources) -> Files.walk(debugResources)
+                        .filter { it.nameCount > 5 }.forEach { copyResource(it, 5) }
+                else -> error("No resource files were found")
+            }
         }
         logger.debug("Installing SikuliX libraries")
         ImagePath.getBundleFolder()
         logger.debug("Done!")
     }
 
-    private fun copyResource(resource: Path) {
-        val dest = skryptonAppDir.resolve("${resource.subpath(1, resource.nameCount)}")
+    private fun copyResource(resource: Path, dropElements: Int = 1) {
+        val dest = skryptonAppDir.resolve("${resource.subpath(dropElements, resource.nameCount)}")
         copy(resource, dest)
         if (OS.isUnix()) {
             val perms = Files.getPosixFilePermissions(dest).toMutableSet()
@@ -52,7 +58,7 @@ object SKryptonSetup {
     }
 
     private fun <T> copy(source: T, target: Path, overwrite: Boolean = false) {
-        if (Files.notExists(target)) {
+        if (Files.notExists(target) || overwrite) {
             Files.createDirectories(target.parent)
             when (source) {
                 is Path -> {
@@ -71,7 +77,7 @@ object SKryptonSetup {
                         Files.copy(source, target)
                     }
                 }
-                else -> throw IllegalArgumentException()
+                else -> error("Can only copy from Path or InputStream object")
             }
         }
     }
