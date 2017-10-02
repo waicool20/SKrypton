@@ -25,7 +25,8 @@ class WelcomeView : View() {
                 textAlignment = TextAlignment.CENTER
                 text = """
                 The installer will install native component files required
-                for the SKrypton library to run properly.
+                for the SKrypton library to run properly. This will
+                overwrite any existing files.
 
                 The files will be installed to:
                 """.trimIndent()

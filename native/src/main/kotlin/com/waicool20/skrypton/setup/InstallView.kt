@@ -86,7 +86,7 @@ class InstallView : View() {
     }
 
     private fun copyResources(rootPath: Path, dropElements: Int) {
-        val jobs = Files.walk(rootPath).filter { it.nameCount > dropElements }
+        val jobs = Files.walk(rootPath).filter { it.nameCount > dropElements && !Files.isDirectory(it)}
                 .map { it to skryptonAppDir.resolve("${it.subpath(dropElements, it.nameCount)}") }.toList()
 
         jobs.forEachIndexed { index, (source, dest) ->
@@ -103,28 +103,18 @@ class InstallView : View() {
         }
     }
 
-    private fun <T> copy(source: T, target: Path, overwrite: Boolean = false) {
-        if (Files.notExists(target) || overwrite) {
-            Files.createDirectories(target.parent)
-            when (source) {
-                is Path -> {
-                    logger.debug("[COPY] $source to $target")
-                    if (overwrite) {
-                        Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
-                    } else {
-                        Files.copy(source, target)
-                    }
-                }
-                is InputStream -> {
-                    logger.debug("[COPY] $target")
-                    if (overwrite) {
-                        Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
-                    } else {
-                        Files.copy(source, target)
-                    }
-                }
-                else -> error("Can only copy from Path or InputStream object")
+    private fun <T> copy(source: T, target: Path) {
+        Files.createDirectories(target.parent)
+        when (source) {
+            is Path -> {
+                logger.debug("[COPY] $source to $target")
+                Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
             }
+            is InputStream -> {
+                logger.debug("[COPY] $target")
+                Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
+            }
+            else -> error("Can only copy from Path or InputStream object")
         }
     }
 }
