@@ -12,16 +12,12 @@ fun main(args: Array<String>) {
 
 object SKryptonSetup {
     val logger = LoggerFactory.getLogger(SKryptonSetup::class.java)
-    val javaHome = Paths.get(System.getProperty("java.home"))
     val skryptonAppDir = Paths.get(System.getProperty("user.home")).resolve(".skrypton")
     val codeSource = javaClass.protectionDomain.codeSource.location.toURI().path
 
     fun start() {
         logger.debug("Starting setup")
         if (Files.notExists(skryptonAppDir)) Files.createDirectories(skryptonAppDir)
-        val javaName = if (OS.isUnix()) "java" else "java.exe"
-        copy(javaHome.resolve("bin/$javaName"), skryptonAppDir.resolve("bin/$javaName"), true)
-        if (OS.isUnix()) symlink(javaHome.resolve("lib"), skryptonAppDir.resolve("lib"))
         if (codeSource.endsWith(".jar")) {
             val jarURI = URI.create("jar:file:$codeSource")
             val env = mapOf(
@@ -43,7 +39,7 @@ object SKryptonSetup {
     }
 
     private fun copyResource(resource: Path) {
-        val dest = skryptonAppDir.resolve("bin/${resource.subpath(1, resource.nameCount)}")
+        val dest = skryptonAppDir.resolve("${resource.subpath(1, resource.nameCount)}")
         copy(resource, dest)
         if (OS.isUnix()) {
             val perms = Files.getPosixFilePermissions(dest).toMutableSet()
@@ -74,14 +70,6 @@ object SKryptonSetup {
                 }
                 else -> throw IllegalArgumentException()
             }
-        }
-    }
-
-    private fun symlink(source: Path, target: Path) {
-        if (Files.notExists(target)) {
-            Files.createDirectories(target.parent)
-            Files.createSymbolicLink(target, source)
-            logger.debug("[SYMLINK] $target to $source")
         }
     }
 }

@@ -34,38 +34,13 @@ object SKryptonApp : NativeInterface() {
 
     init {
         if (Files.notExists(skryptonAppDir)) error("Could not find SKrypton Native components folder, did you install it?")
-        if (System.getenv("skryptonJvm").isNullOrEmpty()) {
-            val javaName = if (OS.isUnix()) "java" else "java.exe"
-            val sJvm = skryptonAppDir.resolve("bin/$javaName")
-            logger.debug("Not running under skrypton JVM")
-            logger.debug("Main class: ${SystemUtils.mainClassName}")
-            logger.debug("SKrypton JVM path: $sJvm")
-            val args = mutableListOf(sJvm.toString())
-            args += "-cp"
-            args += System.getProperty("java.class.path")
-                    .split("[:|;]".toRegex()).joinToString(if (OS.isWindows()) ";" else ":") {
-                Paths.get(it).toAbsolutePath().normalize().toString()
-            }
-            args += SystemUtils.mainClassName
-            logger.debug("Relaunching with command: ${args.joinToString(" ")}")
-            with(ProcessBuilder(args)) {
-                println(codeSource.parent.toFile())
-                directory(codeSource.parent.toFile())
-                inheritIO()
-                environment().put("skryptonJvm", sJvm.toString())
-                logger.debug("Launching new instance with skrypton JVM")
-                start().waitFor()
-                System.exit(0)
-            }
-            logger.debug("Running under skrypton JVM")
-        }
-        val libs = Files.walk(skryptonAppDir.resolve("bin/lib"))
+        val libs = Files.walk(skryptonAppDir.resolve("lib"))
                 .filter { Files.isRegularFile(it) && "${it.fileName}".dropWhile { it != '.' }.contains(OS.libraryExtention) }
                 .sorted { path1, path2 ->
                     nativeDependencies.indexOfFirst { "${path1.fileName}".contains(it) } -
                             nativeDependencies.indexOfFirst { "${path2.fileName}".contains(it) }
                 }.toList()
-        libs.plusElement(skryptonAppDir.resolve("bin/${System.mapLibraryName("SKryptonNative")}")).forEach {
+        libs.plusElement(skryptonAppDir.resolve(System.mapLibraryName("SKryptonNative"))).forEach {
             logger.debug { "Loading library at $it" }
             SystemUtils.loadLibrary(it, true)
         }
