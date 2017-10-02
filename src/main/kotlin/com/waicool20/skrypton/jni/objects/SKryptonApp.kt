@@ -23,7 +23,7 @@ object SKryptonApp : NativeInterface() {
             else -> error("Unsupported system")
         }
         ClassLoader.getSystemClassLoader()
-                .getResourceAsStream(resourceFile)
+                .getResourceAsStream("com/waicool20/skrypton/resources/$resourceFile")
                 .bufferedReader().lines().toList().filterNot { it.isNullOrEmpty() }
     }
 

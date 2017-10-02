@@ -1,7 +1,7 @@
 ########################################################################################
 # Qt Library files
 
-file(READ ${CMAKE_CURRENT_SOURCE_DIR}/../src/main/resources/nativeLibraries-linux.txt RequiredQtLibs)
+file(READ ${CMAKE_CURRENT_SOURCE_DIR}/../src/main/resources/com/waicool20/skrypton/resources/nativeLibraries-linux.txt RequiredQtLibs)
 string(REPLACE "\n" ";" RequiredQtLibs "${RequiredQtLibs}")
 
 foreach (_LIB ${RequiredQtLibs})
