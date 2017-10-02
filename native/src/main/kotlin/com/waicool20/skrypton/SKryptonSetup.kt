@@ -1,5 +1,6 @@
 package com.waicool20.skrypton
 
+import org.sikuli.script.ImagePath
 import org.slf4j.LoggerFactory
 import java.io.InputStream
 import java.net.URI
@@ -35,6 +36,8 @@ object SKryptonSetup {
                     .filter { it.nameCount > 1 }
                     .forEach(SKryptonSetup::copyResource)
         }
+        logger.debug("Installing SikuliX libraries")
+        ImagePath.getBundleFolder()
         logger.debug("Done!")
     }
 

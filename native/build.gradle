@@ -4,11 +4,21 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 repositories {
     mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+
+    /* sikulix */
+    compile(group: "com.sikulix", name: "sikulixapi", version: "1.1.1-SNAPSHOT") {
+        exclude group: "com.sikulix"
+        exclude module: 'jadb'
+    }
+    if (isLinux) compile(group: "com.sikulix", name: "sikulixlibslux", version: "1.1.1-SNAPSHOT")
+    if (isMacOsX) compile(group: "com.sikulix", name: "sikulixlibsmac", version: "1.1.1-SNAPSHOT")
+    if (isWindows) compile(group: "com.sikulix", name: "sikulixlibswin", version: "1.1.1-SNAPSHOT")
 }
 
 sourceSets {

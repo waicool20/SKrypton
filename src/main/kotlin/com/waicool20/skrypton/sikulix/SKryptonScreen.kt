@@ -13,7 +13,6 @@ import org.sikuli.script.*
 import java.awt.Point
 import java.awt.Rectangle
 import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
 
 class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webView.size.width, webView.size.height), IScreen {
     private val logger = loggerFor<SKryptonScreen>()
@@ -64,7 +63,7 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
                 logger.debug("Screenshot position 1 set (X: ${it.x} Y: ${it.y})")
                 screenShotLatch.countDown()
             } else if (point2 == null) {
-                if (it.x > point1?.x ?: 0  && it.y > point1?.y ?: 0) {
+                if (it.x > point1?.x ?: 0 && it.y > point1?.y ?: 0) {
                     point2 = it.localPos
                     logger.debug("Screenshot position 2 set (X: ${it.x} Y: ${it.y})")
                     screenShotLatch.countDown()
