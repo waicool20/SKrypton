@@ -5,7 +5,6 @@ import com.waicool20.skrypton.enums.MouseButton
 import com.waicool20.skrypton.enums.MouseEventSource
 import com.waicool20.skrypton.enums.MouseEventType
 import com.waicool20.skrypton.jni.CPointer
-import java.awt.MouseInfo
 import java.awt.Point
 
 class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent() {

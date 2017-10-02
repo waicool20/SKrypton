@@ -6,17 +6,17 @@ import com.waicool20.skrypton.enums.KeyboardModifiers
 import com.waicool20.skrypton.jni.CPointer
 
 
-class SKryptonKeyEvent private constructor(pointer: Long): SKryptonEvent() {
+class SKryptonKeyEvent private constructor(pointer: Long) : SKryptonEvent() {
     override val handle = CPointer(pointer)
 
     private companion object {
         private external fun initialize_N(
-            type: Int,
-            key: Long,
-            modifiers: Long,
-            character: String,
-            autoRepeat: Boolean,
-            count: Int
+                type: Int,
+                key: Long,
+                modifiers: Long,
+                character: String,
+                autoRepeat: Boolean,
+                count: Int
         ): Long
     }
 
@@ -26,7 +26,7 @@ class SKryptonKeyEvent private constructor(pointer: Long): SKryptonEvent() {
             modifiers: KeyboardModifiers = KeyboardModifiers.NoModifier,
             autoRepeat: Boolean = false,
             count: Int = 1
-    ): this(initialize_N(
+    ) : this(initialize_N(
             type.id, key.code, modifiers.value, key.code.toChar().toString(), autoRepeat, count
     ))
 
@@ -36,8 +36,8 @@ class SKryptonKeyEvent private constructor(pointer: Long): SKryptonEvent() {
             modifiers: KeyboardModifiers = KeyboardModifiers.NoModifier,
             autoRepeat: Boolean = false,
             count: Int = 1
-    ): this(initialize_N(
-            type.id, Key.getForCode(char.toLong()).code, modifiers.value, char.toString(),  autoRepeat, count
+    ) : this(initialize_N(
+            type.id, Key.getForCode(char.toLong()).code, modifiers.value, char.toString(), autoRepeat, count
     ))
 
     constructor(
@@ -46,7 +46,7 @@ class SKryptonKeyEvent private constructor(pointer: Long): SKryptonEvent() {
             modifiers: KeyboardModifiers = KeyboardModifiers.NoModifier,
             autoRepeat: Boolean = false,
             count: Int = 1
-    ): this(type, char.toCharArray().first(), modifiers, autoRepeat, count) {
+    ) : this(type, char.toCharArray().first(), modifiers, autoRepeat, count) {
         require(char.length == 1) { "Only 1 character allowed" }
     }
 

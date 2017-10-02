@@ -6,7 +6,6 @@ import org.sikuli.script.*
 import java.awt.Color
 import java.awt.Rectangle
 import java.awt.event.KeyEvent
-import java.util.concurrent.TimeUnit
 
 open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Region(), SikuliInterface {
     constructor(region: Region, screen: SKryptonScreen) : this(region.x, region.y, region.w, region.h, screen)

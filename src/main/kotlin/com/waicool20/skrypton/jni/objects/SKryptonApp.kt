@@ -5,17 +5,12 @@ import com.waicool20.skrypton.jni.NativeInterface
 import com.waicool20.skrypton.util.OS
 import com.waicool20.skrypton.util.SystemUtils
 import com.waicool20.skrypton.util.loggerFor
-import java.net.URLClassLoader
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.streams.toList
 
 object SKryptonApp : NativeInterface() {
     private val logger = loggerFor<SKryptonApp>()
-    private val codeSource = run {
-        val source = javaClass.protectionDomain.codeSource.location.toURI().path
-        Paths.get(if (OS.isWindows()) source.replaceFirst("[/|\\\\]".toRegex(), "") else source)
-    }
     val skryptonAppDir = Paths.get(System.getProperty("user.home")).resolve(".skrypton")
     override lateinit var handle: CPointer
 
