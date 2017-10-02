@@ -43,5 +43,6 @@ if (isLinux) {
     throw new Exception("Unsupported system")
 }
 
+build.dependsOn copyKotlinStdLib
 build.finalizedBy nativeJarRelease
 jar.enabled = false
