@@ -6,9 +6,9 @@ if (NOT QTDIAG)
     message(FATAL_ERROR "Could not find qtdiag executable, is it on PATH?")
 endif ()
 message(STATUS "------------------ Checking Qt environment ------------------")
-execute_process(COMMAND "${QTDIAG}" OUTPUT_VARIABLE QTDIAG_OUT)
+execute_process(COMMAND "${QTDIAG}" "--platform" "minimal" OUTPUT_VARIABLE QTDIAG_OUTPUT)
 
-string(REPLACE "\n" ";" QTDIAG_OUT "${QTDIAG_OUT}")
+string(REPLACE "\n" ";" QTDIAG_OUT "${QTDIAG_OUTPUT}")
 
 set(Qt_Paths "PrefixPath" "DocumentationPath" "HeadersPath" "LibrariesPath"
         "LibraryExecutablesPath" "BinariesPath" "PluginsPath" "ImportsPath"
@@ -25,6 +25,9 @@ foreach (_STRING ${QTDIAG_OUT})
 endforeach ()
 
 foreach (_PATH ${Qt_Paths})
+    if ("${Qt_${_PATH}}" STREQUAL "")
+        message(FATAL_ERROR "Could not get path for ${_PATH}\n${QTDIAG_OUTPUT}")
+    endif ()
     message(STATUS "[Qt] Found ${_PATH} at: ${Qt_${_PATH}}")
 endforeach ()
 message(STATUS "-------------------------------------------------------------")

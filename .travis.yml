@@ -1,0 +1,34 @@
+dist: trusty
+sudo: require
+
+branches:
+  only:
+    - master
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-7
+      - g++-7
+      - libgles2-mesa
+      - libegl1-mesa
+
+install:
+  - wget -O qt.run http://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run
+  - wget -O qt-non-interactive.qs https://gist.github.com/waicool20/f5d00e90e3186fb09404f609ea5f078d/raw/
+  - chmod +x qt.run
+  - ./qt.run --script ./qt-non-interactive.qs --platform minimal --verbose
+  - wget https://cmake.org/files/v3.9/cmake-3.9.2-Linux-x86_64.sh
+  - sudo sh cmake-3.9.2-Linux-x86_64.sh -- --skip-license --prefix=/usr
+
+before_script:
+  - export CC=/usr/bin/gcc-7
+  - export CXX=/usr/bin/g++-7
+  - export CMAKE_PREFIX_PATH=~/Qt/5.9.1/gcc_64/
+  - export PATH=$PATH:~/Qt/5.9.1/gcc_64/bin/
+
+script:
+  - cd $TRAVIS_BUILD_DIR
+  - ./gradlew build

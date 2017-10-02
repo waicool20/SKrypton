@@ -8,7 +8,7 @@ foreach (_LIB ${RequiredQtLibs})
     if (${_LIB} MATCHES ".*Qt5.*")
         file(GLOB _LIB_FILES "${Qt_LibrariesPath}/*${_LIB}.so.5")
     else ()
-        file(GLOB _LIB_FILES "${Qt_LibrariesPath}/*${_LIB}.so.5?")
+        file(GLOB _LIB_FILES "${Qt_LibrariesPath}/*${_LIB}.so")
     endif ()
 
     if (NOT _LIB_FILES)
