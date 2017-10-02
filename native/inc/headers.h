@@ -21,7 +21,7 @@
 #include <cstring>
 #include <ctime>
 
-#if __cplusplus >= 201103L
+#if __cplusplus >= 201103L || _MSVC_LANG >= 201103L
 #include <ccomplex>
 #include <cfenv>
 #include <cinttypes>
@@ -68,7 +68,8 @@
 #include <valarray>
 #include <vector>
 
-#if __cplusplus >= 201103L
+#if __cplusplus >= 201103L || _MSVC_LANG >= 201103L
+
 #include <array>
 #include <atomic>
 #include <chrono>
@@ -91,7 +92,7 @@
 #include <unordered_set>
 #endif
 
-#if __cplusplus >= 201402L
+#if __cplusplus >= 201402L || _MSVC_LANG >= 201402L
 #include <shared_mutex>
 #endif
 
