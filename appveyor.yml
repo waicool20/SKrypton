@@ -1,6 +1,14 @@
 version: 1.0.0-{build}
 image: Visual Studio 2017
+
 environment:
   CMAKE_PREFIX_PATH: C:\Qt\5.9.1\msvc2017_64
+
 build_script:
 - cmd: ./gradlew.bat build
+
+artifacts:
+- path: native\build\libs\*.jar
+  name: SKryptonNative_Windows64_Release
+- path: build\libs\*.jar
+  name: SKrypton
