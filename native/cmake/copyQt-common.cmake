@@ -13,7 +13,7 @@ string(REPLACE "\n" ";" QTDIAG_OUT "${QTDIAG_OUTPUT}")
 set(Qt_Paths "PrefixPath" "DocumentationPath" "HeadersPath" "LibrariesPath"
         "LibraryExecutablesPath" "BinariesPath" "PluginsPath" "ImportsPath"
         "Qml2ImportsPath" "ArchDataPath" "DataPath" "TranslationsPath" "ExamplesPath"
-        "TestsPath" "SettingsPath")
+        "TestsPath")
 
 foreach (_STRING ${QTDIAG_OUT})
     string(STRIP ${_STRING} _STRIPPED)
