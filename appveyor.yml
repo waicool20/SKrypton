@@ -5,7 +5,7 @@ environment:
   CMAKE_PREFIX_PATH: C:\Qt\5.9.1\msvc2017_64
 
 build_script:
-- cmd: ./gradlew.bat build
+- cmd: .\gradlew.bat build
 
 artifacts:
 - path: native\build\libs\*.jar
