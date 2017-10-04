@@ -46,6 +46,11 @@ interface SikuliInterface {
     fun getLastMatches(): Iterator<SKryptonMatch>
 
     fun offset(loc: Location?): SKryptonRegion
+    fun grow(l: Int, r: Int, t: Int, b: Int): SKryptonRegion
+    fun grow(w: Int, h: Int): SKryptonRegion
+    fun grow(range: Int): SKryptonRegion
+    fun grow(): SKryptonRegion
+    
     fun above(): SKryptonRegion
     fun below(): SKryptonRegion
     fun left(): SKryptonRegion
@@ -56,7 +61,7 @@ interface SikuliInterface {
     fun left(width: Int): SKryptonRegion
     fun right(width: Int): SKryptonRegion
 
-    /* Search operations */
+    //<editor-fold desc="Search operations">
 
     fun <PSI : Any?> find(target: PSI): SKryptonMatch?
     fun <PSI : Any?> findAll(target: PSI): Iterator<SKryptonMatch>
@@ -67,7 +72,9 @@ interface SikuliInterface {
     fun <PSI : Any?> exists(target: PSI): SKryptonMatch?
     fun <PSI : Any?> exists(target: PSI, timeout: Double): SKryptonMatch?
 
-    //<editor-fold desc="Mouse and KeyboardActions">
+    //</editor-fold>
+
+    //<editor-fold desc="Mouse and Keyboard Actions">
     fun click(): Int
 
     fun <PFRML : Any?> click(target: PFRML): Int

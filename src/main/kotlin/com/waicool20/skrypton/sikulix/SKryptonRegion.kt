@@ -77,6 +77,11 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
             super.getLastMatches().asSequence().toList().map { SKryptonMatch(it, skryptonScreen()) }.iterator()
 
     override fun offset(loc: Location?) = SKryptonRegion(super.offset(loc), skryptonScreen())
+    override fun grow(l: Int, r: Int, t: Int, b: Int) = SKryptonRegion(super.grow(l, r, t, b), skryptonScreen())
+    override fun grow(w: Int, h: Int) = SKryptonRegion(super.grow(w, h), skryptonScreen())
+    override fun grow(range: Int) = SKryptonRegion(super.grow(range), skryptonScreen())
+    override fun grow() = SKryptonRegion(super.grow(), skryptonScreen())
+
     override fun above() = SKryptonRegion(super.above(), skryptonScreen())
     override fun below() = SKryptonRegion(super.below(), skryptonScreen())
     override fun left() = SKryptonRegion(super.left(), skryptonScreen())
@@ -87,7 +92,7 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     override fun left(width: Int) = SKryptonRegion(super.left(width), skryptonScreen())
     override fun right(width: Int) = SKryptonRegion(super.right(width), skryptonScreen())
 
-    /* Search operations */
+    //<editor-fold desc="Search operations">
 
     override fun <PSI : Any?> find(target: PSI) = super.find(target)?.let { SKryptonMatch(it, skryptonScreen()) }
     override fun <PSI : Any?> findAll(target: PSI) =
@@ -99,7 +104,9 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     override fun <PSI : Any?> exists(target: PSI) = super.exists(target)?.let { SKryptonMatch(it, skryptonScreen()) }
     override fun <PSI : Any?> exists(target: PSI, timeout: Double) = super.exists(target, timeout)?.let { SKryptonMatch(it, skryptonScreen()) }
 
-    //<editor-fold desc="Mouse and KeyboardActions">
+    //</editor-fold>
+
+    //<editor-fold desc="Mouse and Keyboard Actions">
     override fun click(): Int = click(center, 0)
 
     override fun <PFRML : Any?> click(target: PFRML): Int = click(target, 0)
@@ -286,4 +293,8 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
         }
         return Color.RED
     }
+
+    //<editor-fold desc="Unsupported"
+
+    //</editor-fold>
 }
