@@ -37,7 +37,7 @@ import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
     ImagePath.add(ClassLoader.getSystemClassLoader().getResource("images"))
-    val app = SKryptonApp.initalize(remoteDebugPort = 8888)
+    val app = SKryptonApp.initialize(args, remoteDebugPort = 8888)
     val webView = SKryptonWebView("http://www.onemotion.com/flash/sketch-paint/")
     webView.settings.pluginsEnabled = true
     webView.resize(1280, 720)

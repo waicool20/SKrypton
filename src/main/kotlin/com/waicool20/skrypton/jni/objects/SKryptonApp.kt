@@ -65,7 +65,7 @@ object SKryptonApp : NativeInterface() {
         }
     }
 
-    fun initalize(args: Array<String> = emptyArray(), remoteDebugPort: Int = -1): SKryptonApp {
+    fun initialize(args: Array<String> = emptyArray(), remoteDebugPort: Int = -1): SKryptonApp {
         if (remoteDebugPort in 0..65535) {
             putEnv("QTWEBENGINE_REMOTE_DEBUGGING", remoteDebugPort.toString())
         }
