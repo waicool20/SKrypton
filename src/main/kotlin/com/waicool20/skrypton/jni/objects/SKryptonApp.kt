@@ -32,6 +32,7 @@ import com.waicool20.skrypton.util.loggerFor
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.streams.toList
+import kotlin.system.exitProcess
 
 object SKryptonApp : NativeInterface() {
     private val logger = loggerFor<SKryptonApp>()
@@ -65,15 +66,23 @@ object SKryptonApp : NativeInterface() {
         }
     }
 
-    fun initialize(args: Array<String> = emptyArray(), remoteDebugPort: Int = -1): SKryptonApp {
+    fun initialize(args: Array<String> = emptyArray(),
+                   remoteDebugPort: Int = -1,
+                   action: SKryptonApp.() -> Unit = {}
+                   ): SKryptonApp {
         if (remoteDebugPort in 0..65535) {
             putEnv("QTWEBENGINE_REMOTE_DEBUGGING", remoteDebugPort.toString())
         }
         handle = CPointer(initialize_N(args))
+        this.action()
         return this
     }
 
-    fun exec() = exec_N()
+    fun exec(exit: Boolean = false): Int {
+        val exitCode = exec_N()
+        if (exit) exitProcess(exitCode)
+        return exitCode
+    }
     fun runOnMainThread(action: () -> Unit) = runOnMainThread_N(Runnable { action() })
 
     //<editor-fold desc="Environment functions">
