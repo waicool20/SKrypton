@@ -31,7 +31,7 @@ import java.awt.Color
 import java.awt.Rectangle
 import java.awt.event.KeyEvent
 
-open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Region(), SikuliInterface {
+open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Region(), ISikuliRegion {
     constructor(region: Region, screen: SKryptonScreen) : this(region.x, region.y, region.w, region.h, screen)
     constructor(rect: Rectangle, screen: SKryptonScreen) : this(rect.x, rect.y, rect.width, rect.height, screen)
     constructor(xPos: Int, yPos: Int, width: Int, height: Int, screen: SKryptonScreen) : this(xPos, yPos, width, height) {

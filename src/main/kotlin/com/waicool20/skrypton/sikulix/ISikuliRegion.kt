@@ -28,7 +28,7 @@ import org.sikuli.script.Location
 import org.sikuli.script.Region
 import java.awt.Rectangle
 
-interface SikuliInterface {
+interface ISikuliRegion {
     fun setLocation(loc: Location): SKryptonRegion
 
     fun setROI()
