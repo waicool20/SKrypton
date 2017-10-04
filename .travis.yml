@@ -15,6 +15,15 @@ addons:
       - libgles2-mesa
       - libegl1-mesa
 
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
 install:
   - wget -O qt.run http://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run
   - wget -O qt-non-interactive.qs https://gist.github.com/waicool20/f5d00e90e3186fb09404f609ea5f078d/raw/
