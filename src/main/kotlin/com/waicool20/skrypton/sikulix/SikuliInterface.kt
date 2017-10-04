@@ -25,7 +25,6 @@
 package com.waicool20.skrypton.sikulix
 
 import org.sikuli.script.Location
-import org.sikuli.script.Region
 import java.awt.Rectangle
 
 interface SikuliInterface {
@@ -33,7 +32,7 @@ interface SikuliInterface {
 
     fun setROI()
     fun setROI(rect: Rectangle)
-    fun setROI(region: Region)
+    fun setROI(region: SKryptonRegion)
     fun setROI(X: Int, Y: Int, W: Int, H: Int)
 
     fun getCenter(): Location
@@ -50,6 +49,9 @@ interface SikuliInterface {
     fun grow(w: Int, h: Int): SKryptonRegion
     fun grow(range: Int): SKryptonRegion
     fun grow(): SKryptonRegion
+    
+    fun union(region: SKryptonRegion): SKryptonRegion
+    fun intersection(region: SKryptonRegion): SKryptonRegion
     
     fun above(): SKryptonRegion
     fun below(): SKryptonRegion
@@ -135,13 +137,13 @@ interface SikuliInterface {
     //</editor-fold>
 
     //<editor-fold desc="Highlight Action">
-    fun highlight(): Region
+    fun highlight(): SKryptonRegion
 
-    fun highlight(color: String): Region
-    fun highlight(secs: Int): Region
-    fun highlight(secs: Float): Region
-    fun highlight(secs: Int, color: String): Region
-    fun highlight(secs: Float, color: String): Region
+    fun highlight(color: String): SKryptonRegion
+    fun highlight(secs: Int): SKryptonRegion
+    fun highlight(secs: Float): SKryptonRegion
+    fun highlight(secs: Int, color: String): SKryptonRegion
+    fun highlight(secs: Float, color: String): SKryptonRegion
 
     //</editor-fold>
 

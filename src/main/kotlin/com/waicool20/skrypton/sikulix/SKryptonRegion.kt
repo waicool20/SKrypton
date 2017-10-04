@@ -58,7 +58,7 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
 
     override fun setROI() = setROI(screen.bounds)
     override fun setROI(rect: Rectangle) = with(rect) { setROI(x, y, width, height) }
-    override fun setROI(region: Region) = with(region) { setROI(x, y, w, h) }
+    override fun setROI(region: SKryptonRegion) = with(region) { setROI(x, y, w, h) }
     override fun setROI(X: Int, Y: Int, W: Int, H: Int) {
         x = X
         y = Y
@@ -81,6 +81,9 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     override fun grow(w: Int, h: Int) = SKryptonRegion(super.grow(w, h), skryptonScreen())
     override fun grow(range: Int) = SKryptonRegion(super.grow(range), skryptonScreen())
     override fun grow() = SKryptonRegion(super.grow(), skryptonScreen())
+
+    override fun union(region: SKryptonRegion) = SKryptonRegion(super.union(region), skryptonScreen())
+    override fun intersection(region: SKryptonRegion) = SKryptonRegion(super.intersection(region), skryptonScreen())
 
     override fun above() = SKryptonRegion(super.above(), skryptonScreen())
     override fun below() = SKryptonRegion(super.below(), skryptonScreen())
@@ -243,18 +246,18 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     //<editor-fold desc="Highlight Action">
     private val highlighter by lazy { WebViewHighlighter(skryptonScreen().webView, x, y, width, height) }
 
-    override fun highlight(): Region = highlight("")
-    override fun highlight(color: String): Region {
+    override fun highlight() = highlight("")
+    override fun highlight(color: String): SKryptonRegion {
         highlighter.color = parseColor(color)
         highlighter.toggle()
         return this
     }
 
-    override fun highlight(secs: Int): Region = highlight(secs, "")
-    override fun highlight(secs: Float): Region = highlight(secs, "")
-    override fun highlight(secs: Int, color: String): Region = highlight(secs.toFloat(), color)
+    override fun highlight(secs: Int) = highlight(secs, "")
+    override fun highlight(secs: Float) = highlight(secs, "")
+    override fun highlight(secs: Int, color: String) = highlight(secs.toFloat(), color)
 
-    override fun highlight(secs: Float, color: String): Region {
+    override fun highlight(secs: Float, color: String): SKryptonRegion {
         highlighter.color = parseColor(color)
         highlighter.showFor(secs)
         return this
