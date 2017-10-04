@@ -60,6 +60,8 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
     val cursorY: Int
         get() = getCursorY_N()
 
+    //<editor-fold desc="Navigation">
+
     fun load(url: URL) = load(url.toString())
     fun load(url: String) = load_N(url)
     fun loadHtml(content: String, baseUrl: String) = loadHtml_N(content, baseUrl)
@@ -70,6 +72,8 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
     fun stop() = stop_N()
 
     fun isLoading() = isLoading_N()
+
+    //</editor-fold>
 
     //<editor-fold desc="Load listeners">
 
@@ -158,4 +162,8 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
     private external fun takeScreenshot_N(): ByteArray
     private external fun sendEvent_N(event: SKryptonEvent)
     //</editor-fold>
+}
+
+fun SKryptonApp.webView(url: String, action: SKryptonWebView.() -> Unit = {}): SKryptonWebView {
+    return SKryptonWebView(url).apply { action() }
 }

@@ -25,9 +25,7 @@
 package com.waicool20.skrypton.sikulix
 
 import com.waicool20.skrypton.enums.MouseEventType
-import com.waicool20.skrypton.jni.objects.SKryptonMouseEvent
-import com.waicool20.skrypton.jni.objects.SKryptonWebView
-import com.waicool20.skrypton.jni.objects.WebViewHighlighter
+import com.waicool20.skrypton.jni.objects.*
 import com.waicool20.skrypton.sikulix.input.SKryptonKeyboard
 import com.waicool20.skrypton.sikulix.input.SKryptonMouse
 import com.waicool20.skrypton.sikulix.input.SKryptonRobot
@@ -138,4 +136,22 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
     override fun getLastScreenImageFromScreen(): ScreenImage? = lastScreenImage
 
     fun currentMousePosition() = Location(webView.cursorX, webView.cursorY)
+}
+
+fun SKryptonApp.screen(url: String,
+                       showCursor: Boolean = true,
+                       width: Int = 1280,
+                       height: Int = 720,
+                       action: SKryptonScreen.() -> Unit = {}
+): SKryptonScreen {
+    val webView = SKryptonWebView(url).also {
+        it.showCursor = showCursor
+        it.resize(width, height)
+        it.show()
+    }
+    return webView.screen { action() }
+}
+
+fun SKryptonWebView.screen(action: SKryptonScreen.() -> Unit = {}): SKryptonScreen {
+    return SKryptonScreen(this).apply { action() }
 }
