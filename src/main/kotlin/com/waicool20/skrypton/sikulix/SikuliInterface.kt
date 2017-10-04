@@ -66,52 +66,52 @@ interface SikuliInterface {
 
     //<editor-fold desc="Search operations">
 
-    fun <PSI : Any?> find(target: PSI): SKryptonMatch?
-    fun <PSI : Any?> findAll(target: PSI): Iterator<SKryptonMatch>
+    fun <PSI : Any> find(target: PSI): SKryptonMatch
+    fun <PSI : Any> findAll(target: PSI): Iterator<SKryptonMatch>
 
-    fun <PSI : Any?> wait(target: PSI): SKryptonMatch
-    fun <PSI : Any?> wait(target: PSI, timeout: Double): SKryptonMatch?
+    fun <PSI : Any> wait(target: PSI): SKryptonMatch
+    fun <PSI : Any> wait(target: PSI, timeout: Double): SKryptonMatch?
 
-    fun <PSI : Any?> exists(target: PSI): SKryptonMatch?
-    fun <PSI : Any?> exists(target: PSI, timeout: Double): SKryptonMatch?
+    fun <PSI : Any> exists(target: PSI): SKryptonMatch?
+    fun <PSI : Any> exists(target: PSI, timeout: Double): SKryptonMatch?
 
     //</editor-fold>
 
     //<editor-fold desc="Mouse and Keyboard Actions">
     fun click(): Int
 
-    fun <PFRML : Any?> click(target: PFRML): Int
-    fun <PFRML : Any?> click(target: PFRML, modifiers: Int): Int
+    fun <PFRML : Any> click(target: PFRML): Int
+    fun <PFRML : Any> click(target: PFRML, modifiers: Int): Int
 
     fun doubleClick(): Int
-    fun <PFRML : Any?> doubleClick(target: PFRML): Int
-    fun <PFRML : Any?> doubleClick(target: PFRML, modifiers: Int): Int
+    fun <PFRML : Any> doubleClick(target: PFRML): Int
+    fun <PFRML : Any> doubleClick(target: PFRML, modifiers: Int): Int
 
     fun rightClick(): Int
-    fun <PFRML : Any?> rightClick(target: PFRML): Int
-    fun <PFRML : Any?> rightClick(target: PFRML, modifiers: Int): Int
+    fun <PFRML : Any> rightClick(target: PFRML): Int
+    fun <PFRML : Any> rightClick(target: PFRML, modifiers: Int): Int
 
     fun hover(): Int
-    fun <PFRML : Any?> hover(target: PFRML): Int
+    fun <PFRML : Any> hover(target: PFRML): Int
 
-    fun <PFRML : Any?> dragDrop(target: PFRML): Int
-    fun <PFRML : Any?> dragDrop(t1: PFRML, t2: PFRML): Int
+    fun <PFRML : Any> dragDrop(target: PFRML): Int
+    fun <PFRML : Any> dragDrop(t1: PFRML, t2: PFRML): Int
 
-    fun <PFRML : Any?> drag(target: PFRML): Int
+    fun <PFRML : Any> drag(target: PFRML): Int
 
-    fun <PFRML : Any?> dropAt(target: PFRML): Int
+    fun <PFRML : Any> dropAt(target: PFRML): Int
 
     fun type(text: String): Int
     fun type(text: String, modifiers: String): Int
     fun type(text: String, modifiers: Int): Int
 
-    fun <PFRML : Any?> type(target: PFRML, text: String): Int
-    fun <PFRML : Any?> type(target: PFRML, text: String, modifiers: String): Int
-    fun <PFRML : Any?> type(target: PFRML, text: String, modifiers: Int): Int
+    fun <PFRML : Any> type(target: PFRML, text: String): Int
+    fun <PFRML : Any> type(target: PFRML, text: String, modifiers: String): Int
+    fun <PFRML : Any> type(target: PFRML, text: String, modifiers: Int): Int
 
 
     fun paste(text: String): Int
-    fun <PFRML : Any?> paste(target: PFRML, text: String): Int
+    fun <PFRML : Any> paste(target: PFRML, text: String): Int
     //</editor-fold>
 
     //<editor-fold desc="Low-level Mouse and Keyboard Actions">
@@ -123,11 +123,11 @@ interface SikuliInterface {
 
     fun mouseMove(): Int
     fun mouseMove(xoff: Int, yoff: Int): Int
-    fun <PFRML : Any?> mouseMove(target: PFRML): Int
+    fun <PFRML : Any> mouseMove(target: PFRML): Int
 
     fun wheel(direction: Int, steps: Int): Int
-    fun <PFRML : Any?> wheel(target: PFRML, direction: Int, steps: Int): Int
-    fun <PFRML : Any?> wheel(target: PFRML, direction: Int, steps: Int, stepDelay: Int): Int
+    fun <PFRML : Any> wheel(target: PFRML, direction: Int, steps: Int): Int
+    fun <PFRML : Any> wheel(target: PFRML, direction: Int, steps: Int, stepDelay: Int): Int
 
     fun keyDown(keycode: Int)
     fun keyDown(keys: String)
@@ -148,5 +148,5 @@ interface SikuliInterface {
 
     //</editor-fold>
 
-    fun <PSIMRL> getLocationFromTarget(target: PSIMRL): Location?
+    fun <PSIMRL: Any> getLocationFromTarget(target: PSIMRL): Location
 }
