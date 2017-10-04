@@ -149,4 +149,11 @@ interface SikuliInterface {
     //</editor-fold>
 
     fun <PSIMRL: Any> getLocationFromTarget(target: PSIMRL): Location
+
+    //<editor-fold desc="Kotlin operator overloads">
+
+    operator fun plus(region: Region): SKryptonRegion
+    operator fun compareTo(region: Region): Int
+
+    //</editor-fold>
 }

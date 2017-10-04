@@ -294,6 +294,13 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
         return Color.RED
     }
 
+    //<editor-fold desc="Kotlin operator overloads">
+
+    override operator fun plus(region: Region) = union(region)
+    override operator fun compareTo(region: Region) = (w * h) - region.let { it.w * it.h }
+
+    //</editor-fold>
+
     //<editor-fold desc="Unsupported"
 
     //</editor-fold>
