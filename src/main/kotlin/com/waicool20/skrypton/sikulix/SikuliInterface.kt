@@ -25,6 +25,7 @@
 package com.waicool20.skrypton.sikulix
 
 import org.sikuli.script.Location
+import org.sikuli.script.Region
 import java.awt.Rectangle
 
 interface SikuliInterface {
@@ -32,7 +33,7 @@ interface SikuliInterface {
 
     fun setROI()
     fun setROI(rect: Rectangle)
-    fun setROI(region: SKryptonRegion)
+    fun setROI(region: Region)
     fun setROI(X: Int, Y: Int, W: Int, H: Int)
 
     fun getCenter(): Location
@@ -50,8 +51,8 @@ interface SikuliInterface {
     fun grow(range: Int): SKryptonRegion
     fun grow(): SKryptonRegion
     
-    fun union(region: SKryptonRegion): SKryptonRegion
-    fun intersection(region: SKryptonRegion): SKryptonRegion
+    fun union(region: Region): SKryptonRegion
+    fun intersection(region: Region): SKryptonRegion
     
     fun above(): SKryptonRegion
     fun below(): SKryptonRegion

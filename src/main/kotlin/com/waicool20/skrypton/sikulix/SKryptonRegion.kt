@@ -58,7 +58,7 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
 
     override fun setROI() = setROI(screen.bounds)
     override fun setROI(rect: Rectangle) = with(rect) { setROI(x, y, width, height) }
-    override fun setROI(region: SKryptonRegion) = with(region) { setROI(x, y, w, h) }
+    override fun setROI(region: Region) = with(region) { setROI(x, y, w, h) }
     override fun setROI(X: Int, Y: Int, W: Int, H: Int) {
         x = X
         y = Y
@@ -82,8 +82,8 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     override fun grow(range: Int) = SKryptonRegion(super.grow(range), skryptonScreen())
     override fun grow() = SKryptonRegion(super.grow(), skryptonScreen())
 
-    override fun union(region: SKryptonRegion) = SKryptonRegion(super.union(region), skryptonScreen())
-    override fun intersection(region: SKryptonRegion) = SKryptonRegion(super.intersection(region), skryptonScreen())
+    override fun union(region: Region) = SKryptonRegion(super.union(region), skryptonScreen())
+    override fun intersection(region: Region) = SKryptonRegion(super.intersection(region), skryptonScreen())
 
     override fun above() = SKryptonRegion(super.above(), skryptonScreen())
     override fun below() = SKryptonRegion(super.below(), skryptonScreen())
