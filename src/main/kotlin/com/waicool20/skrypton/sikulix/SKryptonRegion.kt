@@ -113,52 +113,61 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     override fun click(): Int = click(center, 0)
 
     override fun <PFRML : Any> click(target: PFRML): Int = click(target, 0)
-    override fun <PFRML : Any> click(target: PFRML, modifiers: Int): Int =
-            try {
-                mouse.click(getLocationFromTarget(target), Mouse.LEFT, modifiers)
-                1
-            } catch (e: FindFailed) {
-                0
-            }
-
+    override fun <PFRML : Any> click(target: PFRML, modifiers: Int): Int = try {
+        mouse.click(getLocationFromTarget(target), Mouse.LEFT, modifiers)
+        1
+    } catch (e: FindFailed) {
+        0
+    }
 
     override fun doubleClick(): Int = doubleClick(center, 0)
     override fun <PFRML : Any> doubleClick(target: PFRML): Int = doubleClick(target, 0)
-    override fun <PFRML : Any> doubleClick(target: PFRML, modifiers: Int): Int =
-            try {
-                mouse.doubleClick(getLocationFromTarget(target), Mouse.LEFT, modifiers)
-                1
-            } catch (e: FindFailed) {
-                0
-            }
-
+    override fun <PFRML : Any> doubleClick(target: PFRML, modifiers: Int): Int = try {
+        mouse.doubleClick(getLocationFromTarget(target), Mouse.LEFT, modifiers)
+        1
+    } catch (e: FindFailed) {
+        0
+    }
 
     override fun rightClick(): Int = rightClick(center, 0)
     override fun <PFRML : Any> rightClick(target: PFRML): Int = rightClick(target, 0)
-    override fun <PFRML : Any> rightClick(target: PFRML, modifiers: Int): Int =
-            try {
-                mouse.click(getLocationFromTarget(target), Mouse.RIGHT, modifiers)
-                1
-            } catch (e: FindFailed) {
-                0
-            }
+    override fun <PFRML : Any> rightClick(target: PFRML, modifiers: Int): Int = try {
+        mouse.click(getLocationFromTarget(target), Mouse.RIGHT, modifiers)
+        1
+    } catch (e: FindFailed) {
+        0
+    }
 
     override fun hover(): Int = hover(center)
-    override fun <PFRML : Any> hover(target: PFRML): Int =
-            try {
-                mouse.moveTo(getLocationFromTarget(target))
-                1
-            } catch (e: FindFailed) {
-                0
-            }
+    override fun <PFRML : Any> hover(target: PFRML): Int = try {
+        mouse.moveTo(getLocationFromTarget(target))
+        1
+    } catch (e: FindFailed) {
+        0
+    }
 
     override fun <PFRML : Any> dragDrop(target: PFRML): Int = lastMatch?.let { dragDrop(it, target) } ?: 0
 
-    override fun <PFRML : Any> dragDrop(t1: PFRML, t2: PFRML): Int = mouse.dragDrop(getLocationFromTarget(t1), getLocationFromTarget(t2))
+    override fun <PFRML : Any> dragDrop(t1: PFRML, t2: PFRML): Int = try {
+        mouse.dragDrop(getLocationFromTarget(t1), getLocationFromTarget(t2))
+        1
+    } catch (e: FindFailed) {
+        0
+    }
 
-    override fun <PFRML : Any> drag(target: PFRML): Int = mouse.drag(getLocationFromTarget(target))
+    override fun <PFRML : Any> drag(target: PFRML): Int = try {
+        mouse.drag(getLocationFromTarget(target))
+        1
+    } catch (e: FindFailed) {
+        0
+    }
 
-    override fun <PFRML : Any> dropAt(target: PFRML): Int = mouse.dropAt(getLocationFromTarget(target))
+    override fun <PFRML : Any> dropAt(target: PFRML): Int = try {
+        mouse.dropAt(getLocationFromTarget(target))
+        1
+    } catch (e: FindFailed) {
+        0
+    }
 
     override fun type(text: String): Int = type(text, 0)
     override fun type(text: String, modifiers: String): Int = type(text, SKryptonKeyboard.parseModifiers(modifiers))
@@ -171,13 +180,12 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     override fun <PFRML : Any> type(target: PFRML, text: String, modifiers: String): Int =
             type(target, text, SKryptonKeyboard.parseModifiers(modifiers))
 
-    override fun <PFRML : Any> type(target: PFRML, text: String, modifiers: Int): Int =
-            try {
-                keyboard.type(getLocationFromTarget(target), text, modifiers)
-                1
-            } catch (e: FindFailed) {
-                0
-            }
+    override fun <PFRML : Any> type(target: PFRML, text: String, modifiers: Int): Int = try {
+        keyboard.type(getLocationFromTarget(target), text, modifiers)
+        1
+    } catch (e: FindFailed) {
+        0
+    }
 
 
     override fun paste(text: String): Int {
@@ -210,13 +218,12 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
 
     override fun mouseMove(): Int = lastMatch?.let { mouseMove(it) } ?: 0
     override fun mouseMove(xoff: Int, yoff: Int): Int = mouseMove(Location(x + xoff, y + yoff))
-    override fun <PFRML : Any> mouseMove(target: PFRML): Int =
-            try {
-                mouse.moveTo(getLocationFromTarget(target))
-                1
-            } catch (e: FindFailed) {
-                0
-            }
+    override fun <PFRML : Any> mouseMove(target: PFRML): Int = try {
+        mouse.moveTo(getLocationFromTarget(target))
+        1
+    } catch (e: FindFailed) {
+        0
+    }
 
     override fun wheel(direction: Int, steps: Int): Int = wheel(skryptonScreen().currentMousePosition(), direction, steps)
     override fun <PFRML : Any> wheel(target: PFRML, direction: Int, steps: Int): Int = wheel(target, direction, steps, Mouse.WHEEL_STEP_DELAY)
