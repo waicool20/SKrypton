@@ -52,6 +52,9 @@ ext {
     ext.is64Bit = is64Bit()
     ext.commandExists = this.&commandExists
 
+    ext.cmakeBuildDebugDir = 'cmake-build-debug'
+    ext.cmakeBuildReleaseDir = 'cmake-build-release'
+
     if (currentOS.isLinux()) {
         ext.osName = "Linux"
     } else if(currentOS.isWindows()) {

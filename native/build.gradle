@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 /*
  * The MIT License (MIT)
  *
@@ -26,10 +28,17 @@ apply from: '../common.gradle'
 apply plugin: 'kotlin'
 apply plugin: 'com.github.johnrengelman.shadow'
 
+group 'com.waicool20'
+version '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
+
+String mainClass = 'com.waicool20.skrypton.setup.SKryptonSetupKt'
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -78,6 +87,67 @@ if (isLinux) {
     throw new Exception("Unsupported system")
 }
 
-build.dependsOn copyKotlinStdLib
+//<editor-fold desc="Debug builds">
+
+task buildDebug {
+    group 'builddebug'
+    dependsOn 'refreshCMakeRelease', 'makeNativeLibrariesDebug', 'copyQtDependenciesDebug'
+}
+
+task nativeJarDebug(type: ShadowJar) {
+    group 'builddebug'
+    from sourceSets.main.output
+    from sourceSets.debug.output
+    configurations = [project.configurations.compile]
+    dependsOn 'makeNativeLibrariesDebug', 'copyQtDependenciesDebug'
+    archiveName "skryptonnative-${osName.toLowerCase()}64-debug.jar"
+    manifest {
+        attributes 'Main-Class': mainClass
+    }
+}
+
+task copyQtDependenciesDebug(type: Exec) {
+    group 'builddebug'
+    dependsOn refreshCMakeDebug
+    shouldRunAfter makeNativeLibrariesDebug
+    workingDir cmakeBuildDebugDir
+    commandLine 'cmake'
+    args += ['--build', './', '--target', 'CopyQtDependencies']
+}
+
+//</editor-fold>
+
+//<editor-fold desc="Release builds">
+
+task buildRelease {
+    group 'buildrelease'
+    dependsOn 'refreshCMakeRelease', 'makeNativeLibrariesRelease', 'copyQtDependenciesRelease'
+}
+
+task nativeJarRelease(type: ShadowJar) {
+    group 'buildrelease'
+    from sourceSets.main.output
+    from sourceSets.release.output
+    configurations = [project.configurations.compile]
+    dependsOn 'makeNativeLibrariesRelease', 'copyQtDependenciesRelease'
+    archiveName "skryptonnative-${osName.toLowerCase()}64.jar"
+    manifest {
+        attributes 'Main-Class': mainClass
+    }
+}
+
+task copyQtDependenciesRelease(type: Exec) {
+    group 'buildrelease'
+    dependsOn refreshCMakeRelease
+    shouldRunAfter makeNativeLibrariesRelease
+    workingDir cmakeBuildReleaseDir
+    commandLine 'cmake'
+    args += ['--build', './', '--target', 'CopyQtDependencies']
+}
+
+//</editor-fold>
+
+refreshCMakeDebug.dependsOn copyKotlinStdLib
+refreshCMakeRelease.dependsOn copyKotlinStdLib
 build.finalizedBy nativeJarRelease
 jar.enabled = false

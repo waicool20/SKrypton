@@ -55,7 +55,7 @@ apply plugin: 'java'
 apply plugin: 'kotlin'
 
 group 'com.waicool20'
-version '1.0-SNAPSHOT'
+version '1.0.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -86,17 +86,25 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+shadowJar {
+    archiveName "skrypton-api.jar"
+    include("com/waicool20/skrypton/**")
+}
+
 task testJar(type: ShadowJar) {
-    classifier 'test'
     from sourceSets.main.output
     from sourceSets.test.output
     configurations = [project.configurations.testRuntime]
-    classifier = null
-    version = null
+    archiveName 'skrypton-test.jar'
     manifest {
         attributes 'Main-Class': 'com.waicool20.skrypton.MainKt'
     }
 }
 
 jar.enabled = false
-build.finalizedBy 'testJar'
+build.finalizedBy shadowJar, ':native:nativeJarRelease'
+
+task buildAll {
+    group 'build'
+    dependsOn 'build', 'testJar', ':native:nativeJarDebug'
+}
