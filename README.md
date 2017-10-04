@@ -1,6 +1,15 @@
 # SKrypton [![Build Status](https://travis-ci.org/waicool20/SKrypton.svg?branch=master)](https://travis-ci.org/waicool20/SKrypton) [![Build status](https://ci.appveyor.com/api/projects/status/ymrghyv7oas5q2iu?svg=true)](https://ci.appveyor.com/project/waicool20/skrypton)
 
-A browser automation library that uses the SikuliX framework but doesn't grab the mouse
+A browser automation library that uses the SikuliX framework but doesn't grab the mouse.
+
+This library uses QtWebEngine as its backbone for displaying webpages, therefore apart from SikuliX 
+this project also has its own set of native components which need to be pre-installed. The library
+utilizes JNI to bridge between the native and JVM side. 
+
+The library works by providing its own sub-classes of Region, Match and Screen (Just prefixed with
+SKrypton) Each SKryptonScreen instance has its own virtual mouse, keyboard and clipboard. Therefore
+each can be controlled independently from each other and the desktop. To aid debugging, a virtual 
+mouse indicator (Visibility can be toggled) has been added.
 
 # Installation and Usage
 
