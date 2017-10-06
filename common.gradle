@@ -43,6 +43,12 @@ static Boolean commandExists(String command) {
     }
 }
 
+static String getPublishAPIKey() {
+    String key = System.getenv("PUBLISH_API_KEY")
+    if (key == null) println("Publishing API key not found, it might not be set.")
+    return key
+}
+
 ext {
     ext.isLinux = currentOS.isLinux()
     ext.isWindows = currentOS.isWindows()
@@ -54,6 +60,8 @@ ext {
 
     ext.cmakeBuildDebugDir = 'cmake-build-debug'
     ext.cmakeBuildReleaseDir = 'cmake-build-release'
+
+    ext.publishApiKey = getPublishAPIKey()
 
     if (currentOS.isLinux()) {
         ext.osName = "Linux"

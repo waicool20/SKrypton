@@ -29,6 +29,7 @@ buildscript {
 
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -37,6 +38,7 @@ buildscript {
 
 plugins {
     id 'com.github.johnrengelman.shadow' version '1.2.4'
+    id "com.jfrog.artifactory" version "4.5.2"
 }
 
 allprojects {
@@ -53,8 +55,9 @@ allprojects {
 apply from: 'common.gradle'
 apply plugin: 'java'
 apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
 
-group 'com.waicool20'
+group 'com.waicool20.skrypton'
 version '1.0.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -87,7 +90,8 @@ compileTestKotlin {
 }
 
 shadowJar {
-    archiveName "skrypton-api.jar"
+    classifier ""
+    archiveName "${name}.jar"
     include("com/waicool20/skrypton/**")
 }
 
@@ -102,9 +106,50 @@ task testJar(type: ShadowJar) {
 }
 
 jar.enabled = false
-build.finalizedBy shadowJar, ':native:nativeJarRelease'
+build.finalizedBy shadowJar, ':skrypton-native:nativeJarRelease'
 
 task buildAll {
     group 'build'
-    dependsOn 'build', 'testJar', ':native:nativeJarDebug'
+    dependsOn 'build', 'testJar', ':skrypton-native:nativeJarDebug'
 }
+
+//<editor-fold desc="Publishing">
+
+if (publishApiKey == null || publishApiKey.isEmpty()) {
+    tasks.findAll { it.group == 'publishing' }.each {
+        it.enabled = false
+    }
+}
+
+publishing {
+    publications {
+        apiJar(MavenPublication) {
+            artifact shadowJar
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'https://oss.jfrog.org/artifactory/'
+    publish {
+        repository {
+            repoKey = 'oss-snapshot-local'
+            username = "waicool20"
+            password = publishApiKey
+            maven = true
+        }
+        defaults {
+            publications('apiJar')
+            publishArtifacts = true
+            properties = ['qa.level': 'basic', 'dev.team': 'core']
+            publishPom = true
+        }
+    }
+    resolve {
+        repoKey = 'jcenter'
+    }
+}
+
+publish.dependsOn 'artifactoryPublish'
+
+//</editor-fold>

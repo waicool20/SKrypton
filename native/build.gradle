@@ -27,8 +27,10 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 apply from: '../common.gradle'
 apply plugin: 'kotlin'
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
 
-group 'com.waicool20'
+group 'com.waicool20.skrypton'
 version '1.0.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -96,11 +98,12 @@ task buildDebug {
 
 task nativeJarDebug(type: ShadowJar) {
     group 'builddebug'
+    classifier ""
     from sourceSets.main.output
     from sourceSets.debug.output
     configurations = [project.configurations.compile]
     dependsOn 'makeNativeLibrariesDebug', 'copyQtDependenciesDebug'
-    archiveName "skryptonnative-${osName.toLowerCase()}64-debug.jar"
+    archiveName "${name}-${osName.toLowerCase()}64-debug.jar"
     manifest {
         attributes 'Main-Class': mainClass
     }
@@ -126,11 +129,12 @@ task buildRelease {
 
 task nativeJarRelease(type: ShadowJar) {
     group 'buildrelease'
+    classifier ""
     from sourceSets.main.output
     from sourceSets.release.output
     configurations = [project.configurations.compile]
     dependsOn 'makeNativeLibrariesRelease', 'copyQtDependenciesRelease'
-    archiveName "skryptonnative-${osName.toLowerCase()}64.jar"
+    archiveName "${name}-${osName.toLowerCase()}64.jar"
     manifest {
         attributes 'Main-Class': mainClass
     }
@@ -151,3 +155,45 @@ refreshCMakeDebug.dependsOn copyKotlinStdLib
 refreshCMakeRelease.dependsOn copyKotlinStdLib
 build.finalizedBy nativeJarRelease
 jar.enabled = false
+
+//<editor-fold  desc="Publishing">
+
+// Skip publish task if api key is not provided
+if (publishApiKey == null || publishApiKey.isEmpty()) {
+    tasks.findAll { it.group == 'publishing' }.each {
+        it.enabled = false
+    }
+}
+
+publishing {
+    publications {
+        nativeReleaseJar(MavenPublication) {
+            artifact nativeJarRelease
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'https://oss.jfrog.org/artifactory/'
+    publish {
+        repository {
+            repoKey = 'oss-snapshot-local'
+            username = "waicool20"
+            password = publishApiKey
+            maven = true
+        }
+        defaults {
+            publications('nativeReleaseJar')
+            publishArtifacts = true
+            properties = ['qa.level': 'basic', 'dev.team': 'core']
+            publishPom = true
+        }
+    }
+    resolve {
+        repoKey = 'jcenter'
+    }
+}
+
+publish.dependsOn 'artifactoryPublish'
+
+//</editor-fold>

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-rootProject.name = 'SKrypton'
-
+rootProject.name = 'skrypton-api'
 include 'native'
+project(":native").name = "skrypton-native"
 
