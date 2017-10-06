@@ -37,6 +37,39 @@ dependencies {
 }
 ```
 
+Quick start (Kotlin API):
+
+```kotlin
+fun main(args: Array<String>) {
+    /* Initialize the SKryptonApp instance with the args from the command line
+       Since SKryptonApp is chromium based, we can enable DevTools on port 8888
+       and access it through localhost:8888 */
+    SKryptonApp.initialize(args, remoteDebugPort = 8888) {
+        // Initialize a screen with the given URL
+        screen("https://github.com/waicool20/SKrypton") {
+            // Click coordinates X: 100 Y: 100
+            // This is from the SikuliX API, refer to these docs for more info:
+            // https://sikulix-2014.readthedocs.io/en/latest/region.html
+            click(Location(100, 100))
+        }
+        // Initialize a screen with the given URL, width and height
+        screen("https://github.com/waicool20/SKrypton", width = 800, height = 600) {
+            // Type "Hello World!" into the screen.
+            // This is from the SikuliX API, refer to these docs for more info:
+            // https://sikulix-2014.readthedocs.io/en/latest/region.html        
+            type("Hello World!") 
+        }
+        // Initialize a screen that doesn't show the virtual cursor
+        screen("https://github.com/waicool20/SKrypton", showCursor = false) {
+            // Move mouse to X: 100 Y: 100 but don't click
+            // This is from the SikuliX API, refer to these docs for more info:
+            // https://sikulix-2014.readthedocs.io/en/latest/region.html
+            hover(Location(100, 100))
+        }        
+    }.exec(true) // Finally execute the SKryptonApp instance
+}
+```
+
 # Build instructions
 
 Prerequisites:
