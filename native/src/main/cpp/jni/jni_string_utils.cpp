@@ -10,8 +10,6 @@ string StringFromJstring(JNIEnv* env, jstring jstr) {
 }
 
 jstring JstringFromString(JNIEnv* env, const string& str) {
-    char* data = new char[str.size()];
-    strcpy(data, str.c_str());
-    return env->NewStringUTF(data);
+    return env->NewStringUTF(str.c_str());
 }
 
