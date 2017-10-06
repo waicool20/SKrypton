@@ -1,43 +1,40 @@
 dist: trusty
 sudo: require
-
 branches:
   only:
-    - master
-
+  - master
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - gcc-7
-      - g++-7
-      - libgles2-mesa
-      - libegl1-mesa
-
+    - gcc-7
+    - g++-7
+    - libgles2-mesa
+    - libegl1-mesa
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 install:
-  - wget -O qt.run http://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run
-  - wget -O qt-non-interactive.qs https://gist.github.com/waicool20/f5d00e90e3186fb09404f609ea5f078d/raw/
-  - chmod +x qt.run
-  - ./qt.run --script ./qt-non-interactive.qs --platform minimal --verbose
-  - wget https://cmake.org/files/v3.9/cmake-3.9.2-Linux-x86_64.sh
-  - sudo sh cmake-3.9.2-Linux-x86_64.sh -- --skip-license --prefix=/usr
-
+- wget -O qt.run http://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run
+- wget -O qt-non-interactive.qs https://gist.github.com/waicool20/f5d00e90e3186fb09404f609ea5f078d/raw/
+- chmod +x qt.run
+- "./qt.run --script ./qt-non-interactive.qs --platform minimal --verbose"
+- wget https://cmake.org/files/v3.9/cmake-3.9.2-Linux-x86_64.sh
+- sudo sh cmake-3.9.2-Linux-x86_64.sh -- --skip-license --prefix=/usr
 before_script:
-  - export CC=/usr/bin/gcc-7
-  - export CXX=/usr/bin/g++-7
-  - export CMAKE_PREFIX_PATH=~/Qt/5.9.1/gcc_64/
-  - export PATH=$PATH:~/Qt/5.9.1/gcc_64/bin/
-
+- export CC=/usr/bin/gcc-7
+- export CXX=/usr/bin/g++-7
+- export CMAKE_PREFIX_PATH=~/Qt/5.9.1/gcc_64/
+- export PATH=$PATH:~/Qt/5.9.1/gcc_64/bin/
 script:
-  - cd $TRAVIS_BUILD_DIR
-  - ./gradlew build
+- cd $TRAVIS_BUILD_DIR
+- "./gradlew build"
+- "./gradlew publish"
+env:
+  matrix:
+    secure: oxrBKU7V1rPOeu8hZAKmj0t4ji1gu/VdoA6c5UWejHqprApsexhLiXdSEtlNXkQixZh67y2JQaZyhIogA7CasH4Ok3hpExKV70j6Wq7hvOi/4Cbxval0QFwXBDs56WcmFrKZGFbYeLBHMEvz5ReT/oB2Ck34nHISqDBgxS6Oj+K4UMyd+kFpu0I/K8IOAcWPpX8lxxnWl9vIqIqLKQNE1wDOK5OAkI3ONO+xHVcbFDqraWyrPG4PP5tba0q+05ykCHBoMRoK3tK2xE6ylUy1qRDbQdWTPwlj4cXEagwuotruTP6+7sRJXS966YVZj5msI0Xx+AWOh2p4nMEVQjxixrqJndYTeaDHdtB06maQrszyvKpSSAi8GeybrU7LPgaEXLRX6bUWqiLci9a3YX42xTEw9EfxEfJIF6Fmjxws+XT4ZozgiDpdUAPawfL7u0UX3GJMKqjM60a1EqGsfTKfeZyuZA4plXFuMeCDUQ0g3KlpIIt+2AR26zby87RyJkeAWUUHfTp7xaxQKXqqlCWguYvlhh+VKau7GtpZpR1gzN/xktkdz2fGjG+aiTSddhQvPrEtHwr8YwdK2ejv9O6bHHDV/FZ2ExrTR2uHdtP0eL4eZeV/mIu1+/j2QdcGRXbmYr4x96cKsQK/JwFFR2SarYBKUoUBfpa/ILW1sJ+qEb0=
