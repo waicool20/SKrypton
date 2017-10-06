@@ -91,7 +91,7 @@ compileTestKotlin {
 
 shadowJar {
     classifier ""
-    archiveName "${name}.jar"
+    archiveName "${rootProject.name}.jar"
     include("com/waicool20/skrypton/**")
 }
 
@@ -125,6 +125,34 @@ publishing {
     publications {
         apiJar(MavenPublication) {
             artifact shadowJar
+            pom.withXml {
+                asNode().with {
+                    appendNode('name', rootProject.name)
+                    appendNode('description', 'A browser automation library that uses SikuliX and doesn\'t grab grab your mouse')
+                    appendNode('url', 'https://github.com/waicool20/SKrypton')
+                    appendNode('packaging', 'jar')
+                    appendNode('licenses').with {
+                        appendNode('license').with {
+                            appendNode('name', 'The MIT License (MIT)')
+                            appendNode('url', 'http://opensource.org/licenses/MIT')
+                        }
+                    }
+                    appendNode('developers').with {
+                        appendNode('developer').with {
+                            appendNode('name', 'waicool20')
+                            appendNode('email', 'waicool20@gmail.com')
+                            appendNode('organization', 'waicool20')
+                            appendNode('organizationUrl', 'https://www.waicool20.com')
+                            appendNode('timezone', 'UTC_OFFSET')
+                        }
+                    }
+                    appendNode('scm').with {
+                        appendNode('url', 'https://github.com/waicool20/SKrypton')
+                        appendNode('connection', 'scm:git:git://github.com/waicool20/SKrypton.git')
+                        appendNode('developerConnection', 'scm:git:ssh://github.com/waicool20/SKrypton.git')
+                    }
+                }
+            }
         }
     }
 }

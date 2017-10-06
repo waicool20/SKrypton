@@ -35,6 +35,8 @@ version '1.0.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+String artifactName = "${name}-${osName.toLowerCase()}64"
+
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
@@ -103,7 +105,7 @@ task nativeJarDebug(type: ShadowJar) {
     from sourceSets.debug.output
     configurations = [project.configurations.compile]
     dependsOn 'makeNativeLibrariesDebug', 'copyQtDependenciesDebug'
-    archiveName "${name}-${osName.toLowerCase()}64-debug.jar"
+    archiveName "${artifactName}-debug.jar"
     manifest {
         attributes 'Main-Class': mainClass
     }
@@ -134,7 +136,7 @@ task nativeJarRelease(type: ShadowJar) {
     from sourceSets.release.output
     configurations = [project.configurations.compile]
     dependsOn 'makeNativeLibrariesRelease', 'copyQtDependenciesRelease'
-    archiveName "${name}-${osName.toLowerCase()}64.jar"
+    archiveName "${artifactName}.jar"
     manifest {
         attributes 'Main-Class': mainClass
     }
@@ -168,7 +170,36 @@ if (publishApiKey == null || publishApiKey.isEmpty()) {
 publishing {
     publications {
         nativeReleaseJar(MavenPublication) {
+            artifactId artifactName
             artifact nativeJarRelease
+            pom.withXml {
+                asNode().with {
+                    appendNode('name', artifactName)
+                    appendNode('description', 'A browser automation library that uses SikuliX and doesn\'t grab grab your mouse')
+                    appendNode('url', 'https://github.com/waicool20/SKrypton')
+                    appendNode('packaging', 'jar')
+                    appendNode('licenses').with {
+                        appendNode('license').with {
+                            appendNode('name', 'The MIT License (MIT)')
+                            appendNode('url', 'http://opensource.org/licenses/MIT')
+                        }
+                    }
+                    appendNode('developers').with {
+                        appendNode('developer').with {
+                            appendNode('name', 'waicool20')
+                            appendNode('email', 'waicool20@gmail.com')
+                            appendNode('organization', 'waicool20')
+                            appendNode('organizationUrl', 'https://www.waicool20.com')
+                            appendNode('timezone', 'UTC_OFFSET')
+                        }
+                    }
+                    appendNode('scm').with {
+                        appendNode('url', 'https://github.com/waicool20/SKrypton')
+                        appendNode('connection', 'scm:git:git://github.com/waicool20/SKrypton.git')
+                        appendNode('developerConnection', 'scm:git:ssh://github.com/waicool20/SKrypton.git')
+                    }
+                }
+            }
         }
     }
 }
