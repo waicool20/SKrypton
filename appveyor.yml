@@ -7,13 +7,18 @@ environment:
     secure: +mjQC37Gn054BdTkcJSxPlzPt5eJ9DRdQuxJOvPJr8paGGSjC890jMM/zHoomRezwPU3WEO1tPF0qdd6/FiNN3Bz702wpCW7zWcWWD4gRRk=
 
 build_script:
-- cmd: >-
-    .\gradlew.bat build
-
-    .\gradlew.bat :skrypton-native:publish
+- cmd: .\gradlew.bat build
 
 artifacts:
 - path: native\build\libs\*.jar
   name: SKryptonNative_Windows64_Release
 - path: build\libs\*.jar
   name: SKrypton
+
+for:
+-
+  branches:
+    only:
+      - master
+  deploy_script:
+  - cmd: .\gradlew.bat :skrypton-native:publish
