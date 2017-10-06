@@ -13,15 +13,19 @@ mouse indicator (Visibility can be toggled) has been added.
 
 # Installation and Usage
 
+I just want to run a SKrypton program!:
+
 - Requires [Java JRE 8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) installed
 - SKrypton Native components (Installable Jar, just double click and follow instructions)
     - [Windows 64-bit](https://oss.jfrog.org/artifactory/oss-snapshot-local/com/waicool20/skrypton/skrypton-native-windows64)
     - [Linux 64-bit](https://oss.jfrog.org/artifactory/oss-snapshot-local/com/waicool20/skrypton/skrypton-native-linux64)
     - I don't own a Mac, so no builds for it yet sorry.
 
+Developing with the API:
+
 No official build has been released yet, [but snapshots are available here](https://oss.jfrog.org/artifactory/oss-snapshot-local/com/waicool20/skrypton/skrypton-api) 
 
-To include the library api in your project you can add this line to your `build.gradle` file,
+To include the library API in your project you can add this snippet to your `build.gradle` file,
 replace `DATE_AND_BUILD` with a specific snapshot (Take a look in the link above and get the latest one)
 
 ```
