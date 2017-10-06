@@ -50,13 +50,13 @@ dependencies {
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 
     /* sikulix */
-    compile(group: "com.sikulix", name: "sikulixapi", version: "1.1.1-SNAPSHOT") {
+    compile(group: "com.sikulix", name: "sikulixapi", version: "1.1.2-SNAPSHOT") {
         exclude group: "com.sikulix"
         exclude module: 'jadb'
     }
-    if (isLinux) compile(group: "com.sikulix", name: "sikulixlibslux", version: "1.1.1-SNAPSHOT")
-    if (isMacOsX) compile(group: "com.sikulix", name: "sikulixlibsmac", version: "1.1.1-SNAPSHOT")
-    if (isWindows) compile(group: "com.sikulix", name: "sikulixlibswin", version: "1.1.1-SNAPSHOT")
+    if (isLinux) compile(group: "com.sikulix", name: "sikulixlibslux", version: "1.1.2-SNAPSHOT")
+    if (isMacOsX) compile(group: "com.sikulix", name: "sikulixlibsmac", version: "1.1.2-SNAPSHOT")
+    if (isWindows) compile(group: "com.sikulix", name: "sikulixlibswin", version: "1.1.2-SNAPSHOT")
 }
 
 sourceSets {

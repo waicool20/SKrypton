@@ -72,7 +72,7 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
 
     /* sikulix */
-    compile(group: "com.sikulix", name: "sikulixapi", version: "1.1.1-SNAPSHOT") {
+    compile(group: "com.sikulix", name: "sikulixapi", version: "1.1.2-SNAPSHOT") {
         exclude group: "com.sikulix"
         exclude module: 'jadb'
     }
