@@ -13,7 +13,7 @@ mouse indicator (Visibility can be toggled) has been added.
 
 # Installation and Usage
 
-I just want to run a SKrypton program!:
+### I just want to run a SKrypton program!:
 
 - Requires [Java JRE 8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) installed
 - SKrypton Native components (Installable Jar, just double click and follow instructions)
@@ -21,7 +21,7 @@ I just want to run a SKrypton program!:
     - [Linux 64-bit](https://oss.jfrog.org/artifactory/oss-snapshot-local/com/waicool20/skrypton/skrypton-native-linux64)
     - I don't own a Mac, so no builds for it yet sorry.
 
-Developing with the API:
+### Developing with the API:
 
 No official build has been released yet, [but snapshots are available here](https://oss.jfrog.org/artifactory/oss-snapshot-local/com/waicool20/skrypton/skrypton-api) 
 
@@ -72,7 +72,7 @@ fun main(args: Array<String>) {
 
 # Build instructions
 
-Prerequisites:
+### Prerequisites:
 
 Common:
 - [Java JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
@@ -91,6 +91,7 @@ Windows:
 - [MSVC 2017](https://www.visualstudio.com/downloads/)
 
 ---
+### Actually building the project:
 
 Linux:
 ```bash
