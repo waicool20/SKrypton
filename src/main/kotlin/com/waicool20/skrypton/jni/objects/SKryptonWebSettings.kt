@@ -134,7 +134,7 @@ class SKryptonWebSettings private constructor(pointer: Long) : NativeInterface()
     fun resetFontFamily(family: FontFamily) = resetFontFamily_N(family.ordinal)
 
     override fun close() {
-        logger.info { "Settings cannot be disposed, dispose related WebView instead" }
+        logger.error { "Settings cannot be disposed, dispose related WebView instead" }
     }
 
     private external fun getFontSize_N(font: Int): Int
