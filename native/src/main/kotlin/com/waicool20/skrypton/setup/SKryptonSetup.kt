@@ -29,7 +29,11 @@ import tornadofx.*
 import java.nio.file.Paths
 
 fun main(args: Array<String>) {
-    Application.launch(SKryptonSetup::class.java, *args)
+    if (args.contains("--silent")) {
+        Installer.silentInstall()
+    } else {
+        Application.launch(SKryptonSetup::class.java, *args)
+    }
 }
 
 class SKryptonSetup : App(WelcomeView::class) {

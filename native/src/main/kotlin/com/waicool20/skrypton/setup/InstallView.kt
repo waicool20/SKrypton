@@ -49,10 +49,6 @@ class InstallView : View() {
     private val progressTextArea by fxid<TextArea>()
     private val progressBar by fxid<ProgressBar>()
 
-    private val logger = LoggerFactory.getLogger(javaClass)
-    private val skryptonAppDir = SKryptonSetup.skryptonAppDir
-    private val codeSource = javaClass.protectionDomain.codeSource.location.toURI().path
-
     init {
         title = "SKrypton Native components installer"
         val textOutputStream = object : OutputStream() {
@@ -79,66 +75,20 @@ class InstallView : View() {
     }
 
     private fun startInstall() {
-        if (Files.notExists(skryptonAppDir)) {
-            Platform.runLater { progressText.text = "[CREATE] $skryptonAppDir" }
-            Files.createDirectories(skryptonAppDir)
+        Installer.createDirectories {
+            Platform.runLater { progressText.text = "[CREATE] $it" }
         }
-        if (codeSource.endsWith(".jar")) {
-            val jarURI = URI.create("jar:file:$codeSource")
-            val env = mapOf(
-                    "create" to "false",
-                    "encoding" to "UTF-8"
-            )
-            (FileSystems.newFileSystem(jarURI, env)).use { fs ->
-                copyResources(fs.getPath("/skrypton"), 1)
-            }
-        } else {
-            // For use in IDE
-            val releaseResources = Paths.get("native/build/resources/release/skrypton")
-            val debugResources = Paths.get("native/build/resources/debug/skrypton")
-            when {
-                Files.exists(releaseResources) -> copyResources(releaseResources, 5)
-                Files.exists(debugResources) -> copyResources(debugResources, 5)
-                else -> error("No resource files were found")
-            }
-        }
-        Platform.runLater { progressText.text = "[INSTALL] SikuliX libraries" }
-        logger.debug("Installing SikuliX libraries")
-        ImagePath.getBundleFolder()
-        Platform.runLater { progressText.text = "All done!" }
-        logger.debug("All done!")
-    }
 
-    private fun copyResources(rootPath: Path, dropElements: Int) {
-        val jobs = Files.walk(rootPath).filter { it.nameCount > dropElements && !Files.isDirectory(it)}
-                .map { it to skryptonAppDir.resolve("${it.subpath(dropElements, it.nameCount)}") }.toList()
-
-        jobs.forEachIndexed { index, (source, dest) ->
+        Installer.copySKryptonLibs { file, index, total ->
             Platform.runLater {
-                progressText.text = "[COPY] ${source.fileName}"
-                progressBar.progress = index / jobs.size.toDouble()
-            }
-            copy(source, dest)
-            if (OS.isUnix()) {
-                val perms = Files.getPosixFilePermissions(dest).toMutableSet()
-                perms.addAll(listOf(PosixFilePermission.OWNER_EXECUTE))
-                Files.setPosixFilePermissions(dest, perms)
+                progressText.text = "[COPY] $file"
+                progressBar.progress = index / total.toDouble()
             }
         }
-    }
 
-    private fun <T> copy(source: T, target: Path) {
-        Files.createDirectories(target.parent)
-        when (source) {
-            is Path -> {
-                logger.debug("[COPY] $source to $target")
-                Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
-            }
-            is InputStream -> {
-                logger.debug("[COPY] $target")
-                Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
-            }
-            else -> error("Can only copy from Path or InputStream object")
-        }
+        Platform.runLater { progressText.text = "[INSTALL] SikuliX libraries" }
+        Installer.installSikuliXLibs()
+        Platform.runLater { progressText.text = "All done!" }
+        Installer.cleanup()
     }
 }
