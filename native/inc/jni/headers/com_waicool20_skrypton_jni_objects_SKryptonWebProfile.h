@@ -23,6 +23,70 @@ JNIEXPORT jstring JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebPro
 JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setCachePath_1N
   (JNIEnv *, jobject, jstring);
 
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    getHttpAcceptLanguage_N
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getHttpAcceptLanguage_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    setHttpAcceptLanguage_N
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setHttpAcceptLanguage_1N
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    getHttpCacheMaxSize_N
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getHttpCacheMaxSize_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    setHttpCacheMaxSize_N
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setHttpCacheMaxSize_1N
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    getHttpCacheType_N
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getHttpCacheType_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    setHttpCacheType_N
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setHttpCacheType_1N
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    getHttpUserAgent_N
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getHttpUserAgent_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    setHttpUserAgent_N
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setHttpUserAgent_1N
+  (JNIEnv *, jobject, jstring);
+
 #ifdef __cplusplus
 }
 #endif

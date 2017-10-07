@@ -24,6 +24,7 @@
 
 package com.waicool20.skrypton.jni.objects
 
+import com.waicool20.skrypton.enums.HttpCacheType
 import com.waicool20.skrypton.jni.CPointer
 import com.waicool20.skrypton.jni.NativeInterface
 import com.waicool20.skrypton.util.loggerFor
@@ -42,11 +43,30 @@ class SKryptonWebProfile private constructor(pointer: Long) : NativeInterface() 
     var cachePath: Path
         get() = Paths.get(getCachePath_N())
         set(value) = setCachePath_N(value.toString())
-
+    var httpAcceptLanguage: String
+        get() = getHttpAcceptLanguage_N()
+        set(value) = setHttpAcceptLanguage_N(value)
+    var httpCacheMaxSize: Int
+        get() = getHttpCacheMaxSize_N()
+        set(value) = setHttpCacheMaxSize_N(value)
+    var httpCacheType: HttpCacheType
+        get() = HttpCacheType.values()[getHttpCacheType_N()]
+        set(value) = setHttpCacheType_N(value.ordinal)
+    var httpUserAgent: String
+        get() = getHttpUserAgent_N()
+        set(value) = setHttpUserAgent_N(value)
     //<editor-fold desc="Native functions">
 
     private external fun getCachePath_N(): String
     private external fun setCachePath_N(path: String)
+    private external fun getHttpAcceptLanguage_N(): String
+    private external fun setHttpAcceptLanguage_N(language: String)
+    private external fun getHttpCacheMaxSize_N(): Int
+    private external fun setHttpCacheMaxSize_N(size: Int)
+    private external fun getHttpCacheType_N(): Int
+    private external fun setHttpCacheType_N(type: Int)
+    private external fun getHttpUserAgent_N(): String
+    private external fun setHttpUserAgent_N(agent: String)
 
     //</editor-fold>
     override fun close() {

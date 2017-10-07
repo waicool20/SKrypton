@@ -14,12 +14,10 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getCachePath_1N(JNIEn
     auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
     if (opt) {
         QWebEngineProfile* profile = opt.value();
-        auto path = profile->cachePath().toStdString();
-        return JstringFromString(env, path);
-    } else {
-        ThrowNewError(env, LOG_PREFIX + "Could not get cache path");
-        return {};
+        return JstringFromString(env, profile->cachePath().toStdString());
     }
+    ThrowNewError(env, LOG_PREFIX + "Could not get cache path");
+    return {};
 }
 
 JNIEXPORT void JNICALL
@@ -30,6 +28,95 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setCachePath_1N(JNIEn
         profile->setCachePath(QString::fromStdString(StringFromJstring(env, path)));
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not set cache path");
+    }
+}
+
+JNIEXPORT jstring JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getHttpAcceptLanguage_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        return JstringFromString(env, profile->httpAcceptLanguage().toStdString());
+    }
+    ThrowNewError(env, LOG_PREFIX + "Could not get Http Accept-Language");
+    return {};
+}
+
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setHttpAcceptLanguage_1N(JNIEnv* env, jobject obj, jstring language) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        profile->setHttpAcceptLanguage(QString::fromStdString(StringFromJstring(env, language)));
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not set Http Accept-Language");
+    }
+}
+
+JNIEXPORT jint JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getHttpCacheMaxSize_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        return profile->httpCacheMaximumSize();
+    }
+    ThrowNewError(env, LOG_PREFIX + "Could not get Http cache maximum size");
+    return {};
+}
+
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setHttpCacheMaxSize_1N(JNIEnv* env, jobject obj, jint size) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        profile->setHttpCacheMaximumSize(size);
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not set Http cache maximum size");
+    }
+}
+
+JNIEXPORT jint JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getHttpCacheType_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        return profile->httpCacheType();
+    }
+    ThrowNewError(env, LOG_PREFIX + "Could not get Http cache type");
+    return {};
+}
+
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setHttpCacheType_1N(JNIEnv* env, jobject obj, jint e_HttpCacheType) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        auto type = static_cast<QWebEngineProfile::HttpCacheType>(e_HttpCacheType);
+        profile->setHttpCacheType(type);
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not set Http cache type");
+    }
+}
+
+JNIEXPORT jstring JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getHttpUserAgent_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        return JstringFromString(env, profile->httpUserAgent().toStdString());
+    }
+    ThrowNewError(env, LOG_PREFIX + "Could not get Http user agent");
+    return {};
+}
+
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setHttpUserAgent_1N(JNIEnv* env, jobject obj, jstring agent) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        profile->setHttpUserAgent(QString::fromStdString(StringFromJstring(env, agent)));
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not set Http user agent");
     }
 }
 
