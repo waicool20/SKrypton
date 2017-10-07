@@ -46,7 +46,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_forward_1N(JNIEnv* env, 
     auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value()->getWebView();
-        SKryptonApp::runOnMainThread([=] { view->back(); });
+        SKryptonApp::runOnMainThread([=] { view->forward(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to go forward");
     }
@@ -57,7 +57,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_reload_1N(JNIEnv* env, j
     auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value()->getWebView();
-        SKryptonApp::runOnMainThread([=] { view->back(); });
+        SKryptonApp::runOnMainThread([=] { view->reload(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to reload");
     }
@@ -68,7 +68,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_stop_1N(JNIEnv* env, job
     auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value()->getWebView();
-        SKryptonApp::runOnMainThread([=] { view->back(); });
+        SKryptonApp::runOnMainThread([=] { view->stop(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to stop");
     }
@@ -182,7 +182,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_url_1N(JNIEnv* env, jobj
         auto url = view->url().toString().toStdString();
         return JstringFromString(env, url);
     }
-    ThrowNewError(env, LOG_PREFIX + "Failed to check if loading");
+    ThrowNewError(env, LOG_PREFIX + "Failed to get url");
     return {};
 }
 
