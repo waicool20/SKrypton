@@ -91,9 +91,23 @@ void SKryptonApp::runOnMainThread(jobject obj, jobject action) {
     env->DeleteGlobalRef(action);
 }
 
-void SKryptonApp::runOnMainThread(function<void()> action) {
+void SKryptonApp::runOnMainThread(const function<void()> &action) {
     QObject s;
-    QObject::connect(&s, &QObject::destroyed, qApp, [=] {
-        action();
-    });
+    QObject::connect(&s, &QObject::destroyed, qApp, action);
 }
+
+void SKryptonApp::runOnMainThreadBlocking(const function<void()> &action) {
+    std::mutex mutex;
+    std::condition_variable cv;
+
+    auto isDone = false;
+    runOnMainThread([&] {
+        action();
+        isDone = true;
+        cv.notify_one();
+    });
+
+    std::unique_lock<std::mutex> lock(mutex);
+    cv.wait(lock, [&]{ return isDone; });
+}
+
