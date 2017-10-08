@@ -137,8 +137,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_testAttribute_1N(JNI
         QWebEngineSettings* settings = opt.value();
         return settings->testAttribute(static_cast<QWebEngineSettings::WebAttribute>(attr));
     }
-        ThrowNewError(env, LOG_PREFIX + "Failed to test attribute " + to_string(attr));
-        return {};
-
+    ThrowNewError(env, LOG_PREFIX + "Failed to test attribute " + to_string(attr));
+    return {};
 }
 

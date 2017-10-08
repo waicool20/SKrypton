@@ -87,6 +87,70 @@ JNIEXPORT jstring JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebPro
 JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setHttpUserAgent_1N
   (JNIEnv *, jobject, jstring);
 
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    getPersistentCookiesPolicy_N
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getPersistentCookiesPolicy_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    setPersistentCookiesPolicy_N
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setPersistentCookiesPolicy_1N
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    getPersistentStoragePath_N
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getPersistentStoragePath_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    setPersistentStoragePath_N
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setPersistentStoragePath_1N
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    isSpellCheckEnabled_N
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_isSpellCheckEnabled_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    setSpellCheckEnabled_N
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setSpellCheckEnabled_1N
+  (JNIEnv *, jobject, jboolean);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    getSpellCheckLanguages_N
+ * Signature: ()[Ljava/lang/String;
+ */
+JNIEXPORT jobjectArray JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getSpellCheckLanguages_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    setSpellCheckLanguages_N
+ * Signature: ([Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setSpellCheckLanguages_1N
+  (JNIEnv *, jobject, jobjectArray);
+
 #ifdef __cplusplus
 }
 #endif

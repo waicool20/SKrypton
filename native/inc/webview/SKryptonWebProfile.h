@@ -3,6 +3,7 @@
 
 #include <headers.h>
 #include <jni_utils.h>
+#include <SKryptonApp.h>
 
 #include <QWebEngineProfile>
 

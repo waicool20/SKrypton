@@ -25,6 +25,7 @@
 package com.waicool20.skrypton.jni.objects
 
 import com.waicool20.skrypton.enums.HttpCacheType
+import com.waicool20.skrypton.enums.PersistentCookiesPolicy
 import com.waicool20.skrypton.jni.CPointer
 import com.waicool20.skrypton.jni.NativeInterface
 import com.waicool20.skrypton.util.loggerFor
@@ -55,6 +56,18 @@ class SKryptonWebProfile private constructor(pointer: Long) : NativeInterface() 
     var httpUserAgent: String
         get() = getHttpUserAgent_N()
         set(value) = setHttpUserAgent_N(value)
+    var persistentCookiesPolicy: PersistentCookiesPolicy
+        get() = PersistentCookiesPolicy.values()[getPersistentCookiesPolicy_N()]
+        set(value) = setPersistentCookiesPolicy_N(value.ordinal)
+    var persistentStoragePath: Path
+        get() = Paths.get(getPersistentStoragePath_N())
+        set(value) = setPersistentStoragePath_N(value.toString())
+    var spellCheckEnabled: Boolean
+        get() = isSpellCheckEnabled_N()
+        set(value) = setSpellCheckEnabled_N(value)
+    var spellCheckLanguages: Array<String>
+        get() = getSpellCheckLanguages_N()
+        set(value) = setSpellCheckLanguages_N(value)
     //<editor-fold desc="Native functions">
 
     private external fun getCachePath_N(): String
@@ -67,6 +80,14 @@ class SKryptonWebProfile private constructor(pointer: Long) : NativeInterface() 
     private external fun setHttpCacheType_N(type: Int)
     private external fun getHttpUserAgent_N(): String
     private external fun setHttpUserAgent_N(agent: String)
+    private external fun getPersistentCookiesPolicy_N(): Int
+    private external fun setPersistentCookiesPolicy_N(policy: Int)
+    private external fun getPersistentStoragePath_N(): String
+    private external fun setPersistentStoragePath_N(path: String)
+    private external fun isSpellCheckEnabled_N(): Boolean
+    private external fun setSpellCheckEnabled_N(enable: Boolean)
+    private external fun getSpellCheckLanguages_N(): Array<String>
+    private external fun setSpellCheckLanguages_N(languages: Array<String>)
 
     //</editor-fold>
     override fun close() {
