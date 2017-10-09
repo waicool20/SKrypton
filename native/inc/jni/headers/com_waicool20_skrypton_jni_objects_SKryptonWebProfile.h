@@ -151,6 +151,30 @@ JNIEXPORT jobjectArray JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonW
 JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setSpellCheckLanguages_1N
   (JNIEnv *, jobject, jobjectArray);
 
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    clearAllVisitedLinks_N
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_clearAllVisitedLinks_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    clearHttpCache_N
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_clearHttpCache_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    clearVisitedLinks
+ * Signature: ([Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_clearVisitedLinks
+  (JNIEnv *, jobject, jobjectArray);
+
 #ifdef __cplusplus
 }
 #endif

@@ -41,6 +41,8 @@ class SKryptonWebProfile private constructor(pointer: Long) : NativeInterface() 
         private external fun defaultProfile_N(): SKryptonWebProfile
     }
 
+    //<editor-fold desc="Member values">
+
     var cachePath: Path
         get() = Paths.get(getCachePath_N())
         set(value) = setCachePath_N(value.toString())
@@ -68,6 +70,13 @@ class SKryptonWebProfile private constructor(pointer: Long) : NativeInterface() 
     var spellCheckLanguages: Array<String>
         get() = getSpellCheckLanguages_N()
         set(value) = setSpellCheckLanguages_N(value)
+
+    //</editor-fold>
+
+    fun clearAllVisitedLinks() = clearAllVisitedLinks_N()
+    fun clearHttpCache() = clearHttpCache_N()
+    fun clearVisitedLinks(urls: List<String>) = clearVisitedLinks(urls.toTypedArray())
+
     //<editor-fold desc="Native functions">
 
     private external fun getCachePath_N(): String
@@ -88,6 +97,10 @@ class SKryptonWebProfile private constructor(pointer: Long) : NativeInterface() 
     private external fun setSpellCheckEnabled_N(enable: Boolean)
     private external fun getSpellCheckLanguages_N(): Array<String>
     private external fun setSpellCheckLanguages_N(languages: Array<String>)
+
+    private external fun clearAllVisitedLinks_N()
+    private external fun clearHttpCache_N()
+    private external fun clearVisitedLinks(urls: Array<String>)
 
     //</editor-fold>
     override fun close() {

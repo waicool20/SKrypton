@@ -231,3 +231,41 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setSpellCheckLanguage
     }
 }
 
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_clearAllVisitedLinks_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        profile->clearAllVisitedLinks();
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not clear all visited links");
+    }
+}
+
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_clearHttpCache_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        profile->clearHttpCache();
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not clear http cache");
+    }
+}
+
+JNIEXPORT void JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_clearVisitedLinks(JNIEnv* env, jobject obj, jobjectArray urls){
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        QList<QUrl> list {};
+        for(int i = 0; i < env->GetArrayLength(urls); i++) {
+            auto url = QUrl { QString::fromStdString(StringFromJstring(env, (jstring) env->GetObjectArrayElement(urls, i))) };
+            list.append(url);
+        }
+        profile->clearVisitedLinks(list);
+    } else {
+        ThrowNewError(env, LOG_PREFIX + "Could not clear visited links");
+    }
+}
+

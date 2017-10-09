@@ -6,6 +6,7 @@
 #include <SKryptonApp.h>
 
 #include <QWebEngineProfile>
+#include <QUrl>
 
 #include <com_waicool20_skrypton_jni_objects_SKryptonWebProfile.h>
 #include <com_waicool20_skrypton_jni_objects_SKryptonWebProfile_Companion.h>
