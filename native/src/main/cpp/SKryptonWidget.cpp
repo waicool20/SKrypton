@@ -18,7 +18,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_setGeometry_1N(JNIEnv* en
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
-        SKryptonApp::runOnMainThread([=] { widget->setGeometry(x, y, width, height); });
+        SKryptonApp::runOnMainThreadAsync([&] { widget->setGeometry(x, y, width, height); });
     }
 }
 
@@ -27,7 +27,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_show_1N(JNIEnv* env, jobj
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
-        SKryptonApp::runOnMainThread([=] { widget->show(); });
+        SKryptonApp::runOnMainThreadAsync([&] { widget->show(); });
     }
 }
 
@@ -36,7 +36,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_hide_1N(JNIEnv* env, jobj
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
-        SKryptonApp::runOnMainThread([=] { widget->hide(); });
+        SKryptonApp::runOnMainThreadAsync([&] { widget->hide(); });
     }
 }
 
@@ -55,7 +55,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_move_1N(JNIEnv* env, jobj
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
-        SKryptonApp::runOnMainThread([=] { widget->move(x, y); });
+        SKryptonApp::runOnMainThreadAsync([&] { widget->move(x, y); });
     }
 }
 
@@ -64,7 +64,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_resize_1N(JNIEnv* env, jo
     auto ref = PointerFromCPointer<QWidget>(env, obj);
     if (ref) {
         QWidget* widget = ref.value();
-        SKryptonApp::runOnMainThread([=] { widget->resize((int) width, (int) height); });
+        SKryptonApp::runOnMainThreadAsync([&] { widget->resize((int) width, (int) height); });
     }
 }
 
@@ -74,7 +74,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWidget_dispose_1N(JNIEnv* env, j
     auto className = GetJClassName(env, obj);
     if (opt) {
         QWidget* view = opt.value();
-        SKryptonApp::runOnMainThread([=] { view->close(); });
+        SKryptonApp::runOnMainThreadAsync([&] { view->close(); });
     } else {
         ThrowNewError("com.waicool20.skrypton.util.DisposeFailException",
                       "Failed to dispose an instance: " + className.value_or("Could not get Class information"));

@@ -13,7 +13,7 @@ Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_00024Companion_initia
     if (ref) {
         SKryptonWebViewContainer* container = ref.value();
         WebViewHighlighter* highlighter = nullptr;
-        SKryptonApp::runOnMainThread([&] {
+        SKryptonApp::runOnMainThreadAsync([&] {
             highlighter = new WebViewHighlighter(container, x, y, width, height, fillColor, red, green, blue);
         });
         while (!highlighter) {}
@@ -45,7 +45,7 @@ Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_setColor_1N(JNIEnv* e
     if (ref) {
         WebViewHighlighter* highlighter = ref.value();
         highlighter->setColor(QColor { red, green, blue, alpha });
-        SKryptonApp::runOnMainThread([=]{
+        SKryptonApp::runOnMainThreadAsync([&] {
             highlighter->repaint();
         });
     } else {
@@ -71,7 +71,7 @@ Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_setFillColor_1N(JNIEn
     if (ref) {
         WebViewHighlighter* highlighter = ref.value();
         highlighter->setFillColor(fillColor);
-        SKryptonApp::runOnMainThread([=]{
+        SKryptonApp::runOnMainThreadAsync([&] {
             highlighter->repaint();
         });
     } else {

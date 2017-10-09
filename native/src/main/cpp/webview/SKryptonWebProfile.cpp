@@ -223,7 +223,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_setSpellCheckLanguage
             auto str = StringFromJstring(env, (jstring) env->GetObjectArrayElement(languages, i));
             list.append(QString::fromStdString(str));
         }
-        SKryptonApp::runOnMainThreadBlocking([&]{
+        SKryptonApp::runOnMainThread([&] {
             profile->setSpellCheckLanguages(list);
         });
     } else {
