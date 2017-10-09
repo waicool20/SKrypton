@@ -25,6 +25,12 @@
 package com.waicool20.skrypton.enums
 
 // Extracted from qnamespace.h
+/**
+ * Represents a keyboard modifier, see [here](http://doc.qt.io/qt-5/qt.html#KeyboardModifier-enum)
+ * for more information.
+ *
+ * @property value A unique value assigned to the enum
+ */
 enum class KeyboardModifiers(val value: Long) {
     NoModifier(0x00000000),
     ShiftModifier(0x02000000),

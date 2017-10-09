@@ -319,6 +319,10 @@ private enum class EventType(val id: Int) {
     MaxUser(65535)
 }
 
+/**
+ * Represents a type of a Mouse Event, see [here](http://doc.qt.io/qt-5/qevent.html#Type-enum)
+ * for more information.
+ */
 enum class MouseEventType(val id: Int) {
     MouseButtonPress(EventType.MouseButtonPress.id),
     MouseButtonRelease(EventType.MouseButtonRelease.id),
@@ -326,17 +330,35 @@ enum class MouseEventType(val id: Int) {
     MouseMove(EventType.MouseMove.id);
 
     companion object {
+        /**
+         * Finds a [MouseEventType] with the given id.
+         *
+         * @param id The numerical ID of the event.
+         * @return [MouseEventType]
+         * @throws IllegalStateException If no event with the requested ID was found.
+         */
         fun getForId(id: Int) =
                 values().find { it.id == id } ?: error("No such event with id $id")
     }
 }
 
+/**
+ * Represents a type of Key Event, see [here](http://doc.qt.io/qt-5/qevent.html#Type-enum)
+ * for more information.
+ */
 enum class KeyEventType(val id: Int) {
     KeyPress(EventType.KeyPress.id),
     KeyRelease(EventType.KeyRelease.id),
     ShortcutOverride(EventType.ShortcutOverride.id);
 
     companion object {
+        /**
+         * Finds a KeyEventType with the given id.
+         *
+         * @param id The numerical ID of the event.
+         * @return [KeyEventType]
+         * @throws IllegalStateException If no event with the requested ID was found.
+         */
         fun getForId(id: Int) =
                 values().find { it.id == id } ?: error("No such event with id $id")
     }

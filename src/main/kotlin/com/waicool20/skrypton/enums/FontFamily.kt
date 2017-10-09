@@ -24,6 +24,10 @@
 
 package com.waicool20.skrypton.enums
 
+/**
+ * Represents a font family, see [here](http://doc.qt.io/qt-5/qwebenginesettings.html#FontFamily-enum)
+ * for more information.
+ */
 enum class FontFamily {
     StandardFont,
     FixedFont,

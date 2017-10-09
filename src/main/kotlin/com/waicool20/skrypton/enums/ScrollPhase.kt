@@ -24,6 +24,10 @@
 
 package com.waicool20.skrypton.enums
 
+/**
+ * Represents the phase of scrolling, see [here](http://doc.qt.io/qt-5/qt.html#ScrollPhase-enum)
+ * for more information.
+ */
 enum class ScrollPhase {
     NoScrollPhase,
     ScrollBegin,

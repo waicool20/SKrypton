@@ -24,6 +24,10 @@
 
 package com.waicool20.skrypton.enums
 
+/**
+ * Represents a font size, see [here](http://doc.qt.io/qt-5/qwebenginesettings.html#FontSize-enum)
+ * for more information.
+ */
 enum class FontSize {
     MinimumFontSize,
     MinimumLogicalFontSize,

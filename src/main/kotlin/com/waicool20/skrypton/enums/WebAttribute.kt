@@ -24,6 +24,11 @@
 
 package com.waicool20.skrypton.enums
 
+/**
+ * Represents different kinds of settings for a [com.waicool20.skrypton.jni.objects.SKryptonWebSettings]
+ * to use, see [here](http://doc.qt.io/qt-5/qwebenginesettings.html#WebAttribute-enum) for more
+ * information.
+ */
 enum class WebAttribute {
     AutoLoadImages,
     JavascriptEnabled,

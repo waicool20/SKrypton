@@ -24,6 +24,10 @@
 
 package com.waicool20.skrypton.enums
 
+/**
+ * Represents the caching type a [com.waicool20.skrypton.jni.objects.SKryptonWebProfile] should use,
+ * see [here](https://doc.qt.io/qt-5/qwebengineprofile.html#HttpCacheType-enum) for more information.
+ */
 enum class HttpCacheType {
     MemoryHttpCache,
     DiskHttpCache,

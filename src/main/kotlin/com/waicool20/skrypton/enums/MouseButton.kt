@@ -24,10 +24,17 @@
 
 package com.waicool20.skrypton.enums
 
+import com.waicool20.skrypton.enums.Key.Key_unknown
 import org.sikuli.script.Mouse
 import java.awt.event.MouseEvent
 
 // Extracted from qnamespace.h
+/**
+ * Represents a mouse button, see [here](http://doc.qt.io/qt-5/qt.html#MouseButton-enum)
+ * for more information.
+ *
+ * @property value A unique value assigned to the enum
+ */
 enum class MouseButton(val value: Long) {
     NoButton(0x00000000),
     LeftButton(0x00000001),
@@ -76,9 +83,22 @@ enum class MouseButton(val value: Long) {
                 Mouse.RIGHT to RightButton
         )
 
+        /**
+         * Finds a [MouseButton] with the given value.
+         *
+         * @param value The value to search for.
+         * @return [MouseButton]
+         * @throws IllegalStateException If no [MouseButton] was found with the given value.
+         */
         fun getForValue(value: Long) =
                 values().find { it.value == value } ?: error("No such MouseButton with value $value")
 
+        /**
+         * Gets a set of [MouseButton] given a buttons mask formed from [java.awt.event.MouseEvent].
+         *
+         * @param buttons The [java.awt.event.MouseEvent] mouse button mask.
+         * @return A [Set] of [MouseButton], may be empty.
+         */
         fun fromSikuliButtons(buttons: Int): Set<MouseButton> {
             return sikuliMappings.filterKeys { it and buttons != 0 }.values.toSet()
         }

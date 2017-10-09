@@ -24,6 +24,11 @@
 
 package com.waicool20.skrypton.enums
 
+/**
+ * Represents a policy for cookie policy, see
+ * [here](https://doc.qt.io/qt-5/qwebengineprofile.html#PersistentCookiesPolicy-enum)
+ * for more information.
+ */
 enum class PersistentCookiesPolicy {
     NoPersistentCookies,
     AllowPersistentCookies,

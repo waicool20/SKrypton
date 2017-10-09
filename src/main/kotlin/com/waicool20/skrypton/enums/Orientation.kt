@@ -24,7 +24,10 @@
 
 package com.waicool20.skrypton.enums
 
-
+/**
+ * Represents an orientation, see [here](http://doc.qt.io/qt-5/qt.html#Orientation-enum)
+ * for more information.
+ */
 enum class Orientation {
     Horizontal,
     Vertical

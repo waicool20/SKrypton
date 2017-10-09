@@ -26,7 +26,10 @@ package com.waicool20.skrypton.enums
 
 import java.awt.event.KeyEvent
 
-
+/**
+ * Represents a keyboard key, see [here](http://doc.qt.io/qt-5/qt.html#Key-enum) for more information.
+ * @property code The keyboard code which is assigned to this key.
+ */
 enum class Key(val code: Long) {
     //<editor-fold desc="Enums">
     // misc keys
@@ -754,10 +757,23 @@ enum class Key(val code: Long) {
         )
         //</editor-fold>
 
+        /**
+         * Finds a Key with the given code.
+         *
+         * @param code The code to look for
+         * @return [Key]
+         * @throws IllegalStateException If no Key with the requested code was found
+         */
         fun getForCode(code: Long) = values().find {
             it.code == if (code in 97..122) code - 32 else code
         } ?: error("No such Key with code $code")
 
+        /**
+         * Gets the corresponding [Key] from the type of [java.awt.event.KeyEvent] given.
+         *
+         * @param code The [java.awt.event.KeyEvent]
+         * @return Corresponding [Key], if no mapping was found then [Key_unknown] is returned
+         */
         fun fromSikuliKeyCode(code: Int): Key = sikuliMappings.getOrDefault(code, Key_unknown)
 
     }
