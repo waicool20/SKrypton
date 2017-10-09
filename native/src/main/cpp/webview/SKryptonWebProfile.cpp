@@ -254,18 +254,55 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_clearHttpCache_1N(JNI
 }
 
 JNIEXPORT void JNICALL
-Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_clearVisitedLinks(JNIEnv* env, jobject obj, jobjectArray urls){
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_clearVisitedLinks(JNIEnv* env, jobject obj,
+                                                                             jobjectArray urls) {
     auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
     if (opt) {
         QWebEngineProfile* profile = opt.value();
         QList<QUrl> list {};
-        for(int i = 0; i < env->GetArrayLength(urls); i++) {
-            auto url = QUrl { QString::fromStdString(StringFromJstring(env, (jstring) env->GetObjectArrayElement(urls, i))) };
+        for (int i = 0; i < env->GetArrayLength(urls); i++) {
+            auto url = QUrl {
+                    QString::fromStdString(StringFromJstring(env, (jstring) env->GetObjectArrayElement(urls, i))) };
             list.append(url);
         }
         profile->clearVisitedLinks(list);
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not clear visited links");
     }
+}
+
+JNIEXPORT jboolean JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_visitedLinksContainsUrl_1N(JNIEnv* env, jobject obj,
+                                                                                      jstring jurl) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        auto url = QUrl { QString::fromStdString(StringFromJstring(env, jurl)) };
+        return profile->visitedLinksContainsUrl(url);
+    }
+    ThrowNewError(env, LOG_PREFIX + "Could not check if visited links contains url");
+    return {};
+}
+
+JNIEXPORT jboolean JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_isOffTheRecord_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        return profile->isOffTheRecord();
+    }
+    ThrowNewError(env, LOG_PREFIX + "Could not check if profile is off the record");
+    return {};
+}
+
+JNIEXPORT jstring JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getStorageName_1N(JNIEnv* env, jobject obj) {
+    auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);
+    if (opt) {
+        QWebEngineProfile* profile = opt.value();
+        return JstringFromString(env, profile->storageName().toStdString());
+    }
+    ThrowNewError(env, LOG_PREFIX + "Could not check if profile is off the record");
+    return {};
 }
 

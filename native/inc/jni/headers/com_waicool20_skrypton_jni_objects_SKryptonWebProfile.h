@@ -175,6 +175,30 @@ JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfil
 JNIEXPORT void JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_clearVisitedLinks
   (JNIEnv *, jobject, jobjectArray);
 
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    visitedLinksContainsUrl_N
+ * Signature: (Ljava/lang/String;)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_visitedLinksContainsUrl_1N
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    isOffTheRecord_N
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_isOffTheRecord_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile
+ * Method:    getStorageName_N
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getStorageName_1N
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

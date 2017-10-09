@@ -71,11 +71,25 @@ class SKryptonWebProfile private constructor(pointer: Long) : NativeInterface() 
         get() = getSpellCheckLanguages_N()
         set(value) = setSpellCheckLanguages_N(value)
 
+    val isOffTheRecord: Boolean
+        get() = isOffTheRecord_N()
+    val storageName: String
+        get() = getStorageName_N()
+
     //</editor-fold>
 
     fun clearAllVisitedLinks() = clearAllVisitedLinks_N()
     fun clearHttpCache() = clearHttpCache_N()
     fun clearVisitedLinks(urls: List<String>) = clearVisitedLinks(urls.toTypedArray())
+
+    fun visitedLinksContainsUrl(url: String) = visitedLinksContainsUrl_N(url)
+
+    // TODO cookieStore()
+    // TODO installUrlSchemeHandler()
+    // TODO removeAllUrlSchemeHandlers()
+    // TODO removeUrlScheme()
+    // TODO removeUrlSchemeHandler() maybe?
+    // TODO getUrlSchemeHandler() maybe?
 
     //<editor-fold desc="Native functions">
 
@@ -102,6 +116,10 @@ class SKryptonWebProfile private constructor(pointer: Long) : NativeInterface() 
     private external fun clearHttpCache_N()
     private external fun clearVisitedLinks(urls: Array<String>)
 
+    private external fun visitedLinksContainsUrl_N(url: String): Boolean
+
+    private external fun isOffTheRecord_N(): Boolean
+    private external fun getStorageName_N(): String
     //</editor-fold>
     override fun close() {
         logger.error { "Profile cannot be disposed, dispose related WebView instead" }
