@@ -9,6 +9,12 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_00024Companion_defaul
     return {};
 }
 
+JNIEXPORT jlong JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_00024Companion_initialize_1N(JNIEnv* env, jobject obj,
+                                                                                        jstring jStorageName) {
+    return (jlong) new QWebEngineProfile { QString::fromStdString(StringFromJstring(env, jStorageName)) };
+}
+
 JNIEXPORT jstring JNICALL
 Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_getCachePath_1N(JNIEnv* env, jobject obj) {
     auto opt = PointerFromCPointer<QWebEngineProfile>(env, obj);

@@ -39,7 +39,10 @@ class SKryptonWebProfile private constructor(pointer: Long) : NativeInterface() 
     companion object {
         val defaults by lazy { defaultProfile_N() }
         private external fun defaultProfile_N(): SKryptonWebProfile
+        private external fun initialize_N(storageName: String): Long
     }
+
+    constructor(storageName: String): this(initialize_N(storageName))
 
     //<editor-fold desc="Member values">
 

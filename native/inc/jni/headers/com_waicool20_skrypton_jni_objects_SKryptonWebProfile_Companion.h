@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jobject JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_00024Companion_defaultProfile_1N
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebProfile_Companion
+ * Method:    initialize_N
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebProfile_00024Companion_initialize_1N
+  (JNIEnv *, jobject, jstring);
+
 #ifdef __cplusplus
 }
 #endif
