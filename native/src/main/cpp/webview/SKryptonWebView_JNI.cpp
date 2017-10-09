@@ -254,3 +254,17 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getCursorY_1N(JNIEnv* en
     ThrowNewError(env, LOG_PREFIX + "Failed to get cursorY");
     return {};
 }
+
+JNIEXPORT jobject JNICALL
+Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getProfile_1N(JNIEnv *env, jobject obj) {
+    auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
+    if (opt) {
+        SKryptonWebView* view = opt.value()->getWebView();
+        auto profilePointer = (jlong) view->page()->profile();
+        auto jSettings = NewObject(env, "com.waicool20.skrypton.jni.objects.SKryptonWebProfile", "(J)V",
+                                   profilePointer);
+        if (jSettings) return jSettings.value();
+    }
+    ThrowNewError(env, LOG_PREFIX + "Failed to retrieve profile");
+    return {};
+}

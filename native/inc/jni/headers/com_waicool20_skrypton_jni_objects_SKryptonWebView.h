@@ -129,6 +129,14 @@ JNIEXPORT jint JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_g
 
 /*
  * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
+ * Method:    getProfile_N
+ * Signature: ()Lcom/waicool20/skrypton/jni/objects/SKryptonWebProfile;
+ */
+JNIEXPORT jobject JNICALL Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_getProfile_1N
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_waicool20_skrypton_jni_objects_SKryptonWebView
  * Method:    url_N
  * Signature: ()Ljava/lang/String;
  */

@@ -60,6 +60,9 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
     val cursorY: Int
         get() = getCursorY_N()
 
+    val profile by lazy { getProfile_N() }
+    // TODO Set Profile?
+
     //<editor-fold desc="Navigation">
 
     fun load(url: URL) = load(url.toString())
@@ -155,6 +158,8 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 
     private external fun getCursorX_N(): Int
     private external fun getCursorY_N(): Int
+
+    private external fun getProfile_N(): SKryptonWebProfile
 
     private external fun url_N(): String
 
