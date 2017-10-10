@@ -105,6 +105,12 @@ task testJar(type: ShadowJar) {
     }
 }
 
+task srcJar(type: ShadowJar) {
+    classifier "sources"
+    archiveName "${rootProject.name}-sources.jar"
+    from sourceSets.main.allSource
+}
+
 jar.enabled = false
 build.finalizedBy shadowJar, ':skrypton-native:nativeJarRelease'
 
@@ -123,33 +129,44 @@ if (publishApiKey == null || publishApiKey.isEmpty()) {
 
 publishing {
     publications {
-        apiJar(MavenPublication) {
+        SKryptonAPI(MavenPublication) {
             artifact shadowJar
+            artifact srcJar
             pom.withXml {
-                asNode().with {
-                    appendNode('name', rootProject.name)
-                    appendNode('description', 'A browser automation library that uses SikuliX and doesn\'t grab grab your mouse')
-                    appendNode('url', 'https://github.com/waicool20/SKrypton')
-                    appendNode('packaging', 'jar')
-                    appendNode('licenses').with {
-                        appendNode('license').with {
-                            appendNode('name', 'The MIT License (MIT)')
-                            appendNode('url', 'http://opensource.org/licenses/MIT')
+                asNode().children().last() + {
+                    resolveStrategy = Closure.DELEGATE_FIRST
+                    name rootProject.name
+                    description "A browser automation library that uses SikuliX and doesn't grab grab your mouse"
+                    url "https://github.com/waicool20/SKrypton"
+                    packaging "jar"
+                    licenses {
+                        license {
+                            name "The MIT License (MIT)"
+                            url "http://opensource.org/licenses/MIT"
                         }
                     }
-                    appendNode('developers').with {
-                        appendNode('developer').with {
-                            appendNode('name', 'waicool20')
-                            appendNode('email', 'waicool20@gmail.com')
-                            appendNode('organization', 'waicool20')
-                            appendNode('organizationUrl', 'https://www.waicool20.com')
-                            appendNode('timezone', 'UTC_OFFSET')
+                    developers {
+                        developer {
+                            name "waicool20"
+                            email "waicool20@gmail.com"
+                            organization "waicool20"
+                            organizationUrl "https://www.waicool20.com"
+                            timezone "UTC_OFFSET"
                         }
                     }
-                    appendNode('scm').with {
-                        appendNode('url', 'https://github.com/waicool20/SKrypton')
-                        appendNode('connection', 'scm:git:git://github.com/waicool20/SKrypton.git')
-                        appendNode('developerConnection', 'scm:git:ssh://github.com/waicool20/SKrypton.git')
+                    scm {
+                        url "https://github.com/waicool20/SKrypton"
+                        connection "scm:git:git://github.com/waicool20/SKrypton.git"
+                        developerConnection "scm:git:ssh://github.com/waicool20/SKrypton.git"
+                    }
+                }
+                def deps = asNode().appendNode('dependencies')
+                configurations.compile.dependencies.each {
+                    if((it.group != null) && (it.name != null) && (it.version != null)) {
+                        def dep = deps.appendNode('dependency')
+                        dep.appendNode('groupId', it.group)
+                        dep.appendNode('artifactId', it.name)
+                        dep.appendNode('version', it.version)
                     }
                 }
             }
@@ -167,7 +184,7 @@ artifactory {
             maven = true
         }
         defaults {
-            publications('apiJar')
+            publications('SKryptonAPI')
             publishArtifacts = true
             properties = ['qa.level': 'basic', 'dev.team': 'core']
             publishPom = true
@@ -178,6 +195,7 @@ artifactory {
     }
 }
 
+artifactoryPublish.dependsOn 'srcJar'
 publish.dependsOn 'artifactoryPublish'
 
 //</editor-fold>
