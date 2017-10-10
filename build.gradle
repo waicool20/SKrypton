@@ -151,7 +151,6 @@ publishing {
                             email "waicool20@gmail.com"
                             organization "waicool20"
                             organizationUrl "https://www.waicool20.com"
-                            timezone "UTC_OFFSET"
                         }
                     }
                     scm {
