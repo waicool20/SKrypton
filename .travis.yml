@@ -33,6 +33,7 @@ script:
 - cd $TRAVIS_BUILD_DIR
 - "./gradlew build"
 deploy:
+  skip_cleanup: true
   provider: script
   script: "./gradlew publish"
   on:
