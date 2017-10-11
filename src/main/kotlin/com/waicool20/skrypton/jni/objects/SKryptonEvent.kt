@@ -24,9 +24,24 @@
 
 package com.waicool20.skrypton.jni.objects
 
+import com.waicool20.skrypton.jni.CPointer
 import com.waicool20.skrypton.jni.NativeInterface
 
-abstract class SKryptonEvent : NativeInterface() {
+/**
+ * Class that represents an event originating from SKrypton
+ *
+ * @constructor Main constructor
+ * @param pointer Native pointer value
+ */
+abstract class SKryptonEvent(pointer: Long) : NativeInterface() {
+    /**
+     * Native pointer backing this object.
+     */
+    override val handle = CPointer(pointer)
+
+    /**
+     * Disposes this event.
+     */
     override fun close() = dispose_N()
 
     private external fun dispose_N()

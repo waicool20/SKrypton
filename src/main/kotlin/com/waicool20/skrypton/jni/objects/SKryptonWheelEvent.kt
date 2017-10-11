@@ -25,12 +25,9 @@
 package com.waicool20.skrypton.jni.objects
 
 import com.waicool20.skrypton.enums.*
-import com.waicool20.skrypton.jni.CPointer
 import java.awt.Point
 
-class SKryptonWheelEvent private constructor(pointer: Long) : SKryptonEvent() {
-    override val handle = CPointer(pointer)
-
+class SKryptonWheelEvent private constructor(pointer: Long) : SKryptonEvent(pointer) {
     private companion object {
         private external fun initialize_N(
                 localPosX: Int, localPosY: Int,

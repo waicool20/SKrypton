@@ -30,9 +30,7 @@ import com.waicool20.skrypton.enums.KeyboardModifiers
 import com.waicool20.skrypton.jni.CPointer
 
 
-class SKryptonKeyEvent private constructor(pointer: Long) : SKryptonEvent() {
-    override val handle = CPointer(pointer)
-
+class SKryptonKeyEvent private constructor(pointer: Long) : SKryptonEvent(pointer) {
     private companion object {
         private external fun initialize_N(
                 type: Int,

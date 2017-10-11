@@ -28,12 +28,9 @@ import com.waicool20.skrypton.enums.KeyboardModifiers
 import com.waicool20.skrypton.enums.MouseButton
 import com.waicool20.skrypton.enums.MouseEventSource
 import com.waicool20.skrypton.enums.MouseEventType
-import com.waicool20.skrypton.jni.CPointer
 import java.awt.Point
 
-class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent() {
-    override val handle = CPointer(pointer)
-
+class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent(pointer) {
     private companion object {
         private external fun initialize_N(
                 type: Int,
