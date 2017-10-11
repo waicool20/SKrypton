@@ -70,6 +70,10 @@ fun main(args: Array<String>) {
 }
 ```
 
+# Documentation
+
+[You are welcome to checkout the API documentation over here](https://waicool20.github.io/SKrypton/skrypton-api/)
+
 # Build instructions
 
 ### Prerequisites:
@@ -118,3 +122,7 @@ API Jar and Test Jar are generated under:
 Native component Jars are generated under:
 
 > native/build/libs
+
+# License
+
+This project is licensed under the MIT license. See LICENSE.md for more details.
