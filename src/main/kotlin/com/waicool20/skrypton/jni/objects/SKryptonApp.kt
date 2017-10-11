@@ -30,13 +30,15 @@ import com.waicool20.skrypton.util.OS
 import com.waicool20.skrypton.util.SystemUtils
 import com.waicool20.skrypton.util.loggerFor
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.streams.toList
 import kotlin.system.exitProcess
 
 object SKryptonApp : NativeInterface() {
+    val APP_DIRECTORY: Path = Paths.get(System.getProperty("user.home")).resolve(".skrypton")
+
     private val logger = loggerFor<SKryptonApp>()
-    val skryptonAppDir = Paths.get(System.getProperty("user.home")).resolve(".skrypton")
     override lateinit var handle: CPointer
 
     // Load order
@@ -53,14 +55,14 @@ object SKryptonApp : NativeInterface() {
     }
 
     init {
-        if (Files.notExists(skryptonAppDir)) error("Could not find SKrypton Native components folder, did you install it?")
-        val libs = Files.walk(skryptonAppDir.resolve("lib"))
+        if (Files.notExists(APP_DIRECTORY)) error("Could not find SKrypton Native components folder, did you install it?")
+        val libs = Files.walk(APP_DIRECTORY.resolve("lib"))
                 .filter { Files.isRegularFile(it) && "${it.fileName}".dropWhile { it != '.' }.contains(OS.libraryExtention) }
                 .sorted { path1, path2 ->
                     nativeDependencies.indexOfFirst { "${path1.fileName}".contains(it) } -
                             nativeDependencies.indexOfFirst { "${path2.fileName}".contains(it) }
                 }.toList()
-        libs.plusElement(skryptonAppDir.resolve(System.mapLibraryName("SKryptonNative"))).forEach {
+        libs.plusElement(APP_DIRECTORY.resolve(System.mapLibraryName("SKryptonNative"))).forEach {
             logger.debug { "Loading library at $it" }
             SystemUtils.loadLibrary(it, true)
         }
