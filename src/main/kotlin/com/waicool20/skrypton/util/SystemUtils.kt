@@ -102,5 +102,7 @@ object OS {
     }
 }
 
+operator fun Path.div(path: String): Path = resolve(path)
+
 
 

@@ -28,6 +28,7 @@ import com.waicool20.skrypton.jni.CPointer
 import com.waicool20.skrypton.jni.NativeInterface
 import com.waicool20.skrypton.util.OS
 import com.waicool20.skrypton.util.SystemUtils
+import com.waicool20.skrypton.util.div
 import com.waicool20.skrypton.util.loggerFor
 import java.nio.file.Files
 import java.nio.file.Path
@@ -45,9 +46,13 @@ object SKryptonApp : NativeInterface() {
      * Holds a [Path] pointing to the directory used by SKrypton, this directory contains all the
      * native libraries and resources that SKrypton will use.
      */
-    val APP_DIRECTORY: Path = Paths.get(System.getProperty("user.home")).resolve(".skrypton")
+    val APP_DIRECTORY: Path = Paths.get(System.getProperty("user.home")) / ".skrypton"
 
     private val logger = loggerFor<SKryptonApp>()
+
+    /**
+     * Native pointer, initialized in [initialize].
+     */
     override lateinit var handle: CPointer
 
     // Get the load order from the nativeLibraries-<OS> file in resources
@@ -58,20 +63,21 @@ object SKryptonApp : NativeInterface() {
             OS.isMac() -> TODO("I don't have a mac to test this stuff yet")
             else -> error("Unsupported system")
         }
-        ClassLoader.getSystemClassLoader()
-                .getResourceAsStream("com/waicool20/skrypton/resources/$resourceFile")
-                .bufferedReader().lines().toList().filterNot { it.isNullOrEmpty() }
+        SKryptonApp::class.java
+                .getResourceAsStream("/com/waicool20/skrypton/resources/$resourceFile")
+                ?.bufferedReader()?.lines()?.toList()?.filterNot { it.isNullOrEmpty() }
+                ?: error("Could not read '$resourceFile' from classpath.")
     }
 
     init {
         if (Files.notExists(APP_DIRECTORY)) error("Could not find SKrypton Native components folder, did you install it?")
-        val libs = Files.walk(APP_DIRECTORY.resolve("lib"))
+        val libs = Files.walk(APP_DIRECTORY / "lib")
                 .filter { Files.isRegularFile(it) && "${it.fileName}".dropWhile { it != '.' }.contains(OS.libraryExtention) }
                 .sorted { path1, path2 ->
                     nativeDependencies.indexOfFirst { "${path1.fileName}".contains(it) } -
                             nativeDependencies.indexOfFirst { "${path2.fileName}".contains(it) }
                 }.toList()
-        libs.plusElement(APP_DIRECTORY.resolve(System.mapLibraryName("SKryptonNative"))).forEach {
+        libs.plusElement(APP_DIRECTORY / System.mapLibraryName("SKryptonNative")).forEach {
             logger.debug { "Loading library at $it" }
             SystemUtils.loadLibrary(it, true)
         }
@@ -85,12 +91,12 @@ object SKryptonApp : NativeInterface() {
      * @param remoteDebugPort The remote debug port is initialized if given a valid value from 0 to 65535
      * and that the port is not previously occupied. Default is -1 (Not initialized).
      * @param action Action to be executed with the SKryptonApp instance as its receiver.
-     * @return [SKryptonApp] instance (Can be used to chain [exec] function)
+     * @return [SKryptonApp] instance (Can be used to chain [exec] function).
      */
     fun initialize(args: Array<String> = emptyArray(),
                    remoteDebugPort: Int = -1,
                    action: SKryptonApp.() -> Unit = {}
-                   ): SKryptonApp {
+    ): SKryptonApp {
         if (remoteDebugPort in 0..65535) {
             putEnv("QTWEBENGINE_REMOTE_DEBUGGING", remoteDebugPort.toString())
         }
@@ -115,30 +121,33 @@ object SKryptonApp : NativeInterface() {
      * Executes the given action on the thread where SKryptonApp exists. This is similar to the
      * [javafx.application.Platform.runLater] method.
      *
-     * @param action Action to be executed
+     * @param action Action to be executed.
      */
     fun runOnMainThread(action: () -> Unit) = runOnMainThread_N(Runnable { action() })
 
     //<editor-fold desc="Environment functions">
 
     /**
-     * Puts an variable into the native environment, it is lost when the SKryptonApp is done executing
+     * Puts an variable into the native environment, it is lost when the SKryptonApp is done executing.
      *
-     * @param key The name of the environment variable
-     * @param value The value of the environment variable
+     * @param key The name of the environment variable.
+     * @param value The value of the environment variable.
      */
     fun putEnv(key: String, value: String) = putEnv_N(key, value)
 
     /**
-     * Gets the value of the native environment variable
+     * Gets the value of the native environment variable.
      *
-     * @param key The name of the environment variable
-     * @return The value of the environment variable
+     * @param key The name of the environment variable.
+     * @return The value of the environment variable.
      */
     fun getEnv(key: String) = getEnv_N(key)
 
     //</editor-fold>
 
+    /**
+     * Closes the SKryptonApp instance explicitly.
+     */
     override fun close() {
         dispose_N()
     }
