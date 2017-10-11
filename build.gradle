@@ -76,6 +76,9 @@ dependencies {
         exclude group: "com.sikulix"
         exclude module: 'jadb'
     }
+    if (isLinux) compile(group: "com.sikulix", name: "sikulixlibslux", version: "1.1.2-SNAPSHOT")
+    if (isMacOsX) compile(group: "com.sikulix", name: "sikulixlibsmac", version: "1.1.2-SNAPSHOT")
+    if (isWindows) compile(group: "com.sikulix", name: "sikulixlibswin", version: "1.1.2-SNAPSHOT")
 
     /* Test */
     testCompile group: 'junit', name: 'junit', version: '4.12'
@@ -92,8 +95,9 @@ compileTestKotlin {
 shadowJar {
     classifier ""
     archiveName "${rootProject.name}.jar"
-    include("com/waicool20/skrypton/**")
-    include("META-INF/**")
+    dependencies {
+        include(dependency("com.sikulix:sikulixlibs.*"))
+    }
 }
 
 task testJar(type: ShadowJar) {
