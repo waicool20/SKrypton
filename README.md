@@ -30,7 +30,10 @@ replace `DATE_AND_BUILD` with a specific snapshot (Take a look in the link above
 
 ```
 repositories {
+    // For resolving SKrypton artifacts
     maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+    // For resolving SikuliX artifacts
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 dependencies {
     compile group: 'com.waicool20.skrypton', name: 'skrypton-api', version: '1.0.0-DATE_AND_BUILD'

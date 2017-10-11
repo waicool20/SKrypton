@@ -232,6 +232,7 @@ artifactory {
     resolve {
         repoKey = 'jcenter'
     }
+    clientConfig.info.setBuildName('SKrypton-Native')
 }
 
 publish.dependsOn 'artifactoryPublish'

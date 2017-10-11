@@ -76,7 +76,7 @@ dependencies {
     /* sikulix */
     compile(group: "com.sikulix", name: "sikulixapi", version: "1.1.2-SNAPSHOT") {
         exclude group: "com.sikulix"
-        exclude module: 'jadb'
+        exclude group: 'com.github.vidstige'
     }
     if (isLinux) compile(group: "com.sikulix", name: "sikulixlibslux", version: "1.1.2-SNAPSHOT")
     if (isMacOsX) compile(group: "com.sikulix", name: "sikulixlibsmac", version: "1.1.2-SNAPSHOT")
@@ -180,6 +180,15 @@ publishing {
                         dep.appendNode('groupId', it.group)
                         dep.appendNode('artifactId', it.name)
                         dep.appendNode('version', it.version)
+                        if (it.name == "sikulixapi") {
+                            def exclusions = dep.appendNode('exclusions')
+                            def sikuliExc = exclusions.appendNode('exclusion')
+                            sikuliExc.appendNode('groupId', 'com.sikulix')
+                            sikuliExc.appendNode('artifactId', '${sikulix.libs}')
+                            def jadbExc = exclusions.appendNode('exclusion')
+                            jadbExc.appendNode('groupId', 'com.github.vidstige')
+                            jadbExc.appendNode('artifactId', 'jadb')
+                        }
                     }
                 }
             }
@@ -206,6 +215,7 @@ artifactory {
     resolve {
         repoKey = 'jcenter'
     }
+    clientConfig.info.setBuildName('SKrypton-API')
 }
 
 artifactoryPublish.dependsOn 'srcJar'
