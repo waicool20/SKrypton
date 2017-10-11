@@ -93,6 +93,7 @@ shadowJar {
     classifier ""
     archiveName "${rootProject.name}.jar"
     include("com/waicool20/skrypton/**")
+    include("META-INF/**")
 }
 
 task testJar(type: ShadowJar) {
