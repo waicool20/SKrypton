@@ -30,6 +30,9 @@ import com.waicool20.skrypton.enums.MouseEventSource
 import com.waicool20.skrypton.enums.MouseEventType
 import java.awt.Point
 
+/**
+ * An event which indicates that a mouse action occurred.
+ */
 class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent(pointer) {
     private companion object {
         private external fun initialize_N(
@@ -43,6 +46,16 @@ class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent(poin
     }
 
     //<editor-fold desc="Constructor">
+    /**
+     * Main constructor.
+     *
+     * @param type Type of mouse event.
+     * @param localPos Point object of the mouse event relative to the top-left corner of the
+     * [SKryptonWebView].
+     * @param button Button that triggered the event.
+     * @param buttons Buttons that were involved in the event.
+     * @param modifiers Modifiers that were involved in the event.
+     */
     constructor(
             type: MouseEventType,
             localPos: Point,
@@ -62,20 +75,51 @@ class SKryptonMouseEvent private constructor(pointer: Long) : SKryptonEvent(poin
     ))
     //</editor-fold>
 
+    /**
+     * x coordinates relative to the top-left corner of the [SKryptonWebView].
+     */
     val x by lazy { localPos.x }
+    /**
+     * y coordinates relative to the top-left corner of the [SKryptonWebView].
+     */
     val y by lazy { localPos.y }
 
+    /**
+     * x coordinates relative to the top-left corner of the screen.
+     */
     val globalX by lazy { globalPos.x }
+    /**
+     * y coordinates relative to the top-left corner of the screen.
+     */
     val globalY by lazy { globalPos.y }
 
+    /**
+     * Button that triggered this event.
+     */
     val button by lazy { MouseButton.getForValue(getButton_N()) }
+    /**
+     * Buttons involved in this event.
+     */
     val buttons by lazy {
         val buttons = getButtons_N()
         MouseButton.values().filter { it.value and buttons == it.value }.toSet()
     }
+
+    /**
+     * Point object relative to the top-left corner of the screen.
+     */
     val globalPos by lazy { getGlobalPos_N() }
+    /**
+     * Same as [globalPos].
+     */
     val screenPos by lazy { getScreenPos_N() }
+    /**
+     * Point object relative to the top-left corner of the [SKryptonWebView].
+     */
     val localPos by lazy { getLocalPos_N() }
+    /**
+     * Event source.
+     */
     val source by lazy { MouseEventSource.values()[getSource_N()] }
 
     private external fun getButton_N(): Long

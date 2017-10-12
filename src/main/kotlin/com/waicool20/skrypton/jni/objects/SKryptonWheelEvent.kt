@@ -27,6 +27,9 @@ package com.waicool20.skrypton.jni.objects
 import com.waicool20.skrypton.enums.*
 import java.awt.Point
 
+/**
+ * An event which indicates a mouse wheel event occurred.
+ */
 class SKryptonWheelEvent private constructor(pointer: Long) : SKryptonEvent(pointer) {
     private companion object {
         private external fun initialize_N(
@@ -38,6 +41,16 @@ class SKryptonWheelEvent private constructor(pointer: Long) : SKryptonEvent(poin
         ): Long
     }
 
+    /**
+     * Main constructor
+     *
+     * @param delta Amount of steps the mouse wheel was turned. Negative number means wheel UP.
+     * @param localPos Point object of the mouse event relative to the top-left corner of the
+     * [SKryptonWebView].
+     * @param buttons Buttons that were involved in this event
+     * @param modifiers Modifiers that were involved in this event
+     * @param orientation Orientation of the wheel event.
+     */
     constructor(
             delta: Int,
             localPos: Point,
@@ -52,22 +65,55 @@ class SKryptonWheelEvent private constructor(pointer: Long) : SKryptonEvent(poin
             orientation.ordinal + 1
     ))
 
+    /**
+     * x coordinates relative to the top-left corner of the [SKryptonWebView].
+     */
     val x by lazy { localPos.x }
+    /**
+     * y coordinates relative to the top-left corner of the [SKryptonWebView].
+     */
     val y by lazy { localPos.y }
 
+    /**
+     * x coordinates relative to the top-left corner of the screen.
+     */
     val globalX by lazy { globalPos.x }
+    /**
+     * y coordinates relative to the top-left corner of the screen.
+     */
     val globalY by lazy { globalPos.y }
 
+    /**
+     * Buttons involved in this event.
+     */
     val buttons by lazy {
         val buttons = getButtons_N()
         MouseButton.values().filter { it.value and buttons == it.value }.toSet()
     }
 
+    /**
+     * Amount of steps the mouse wheel was turned. Negative number means wheel UP.
+     */
     val delta by lazy { getDelta_N() }
+    /**
+     * Whether or not the value of [delta] was inverted.
+     */
     val isInverted by lazy { isInverted_N() }
+    /**
+     * Scrolling phase of this wheel event
+     */
     val phase by lazy { ScrollPhase.values()[getPhase_N()] }
+    /**
+     * Point object relative to the top-left corner of the screen.
+     */
     val globalPos by lazy { getGlobalPos_N() }
+    /**
+     * Point object relative to the top-left corner of the [SKryptonWebView].
+     */
     val localPos by lazy { getLocalPos_N() }
+    /**
+     * Event source.
+     */
     val source by lazy { MouseEventSource.values()[getSource_N()] }
 
     private external fun isInverted_N(): Boolean

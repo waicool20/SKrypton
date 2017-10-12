@@ -26,8 +26,17 @@ package com.waicool20.skrypton.jni.objects
 
 import java.awt.Dimension
 
+/**
+ * An event which indicates that a [SKryptonWebView] has been resized.
+ */
 class SKryptonResizeEvent private constructor(pointer: Long) : SKryptonEvent(pointer) {
+    /**
+     * Size of the [SKryptonWebView] after the event.
+     */
     val newSize = getNewSize_N()
+    /**
+     * Size of the [SKryptonWebView] before the event.
+     */
     val oldSize = getOldSize_N()
 
     private external fun getNewSize_N(): Dimension

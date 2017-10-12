@@ -29,7 +29,9 @@ import com.waicool20.skrypton.enums.KeyEventType
 import com.waicool20.skrypton.enums.KeyboardModifiers
 import com.waicool20.skrypton.jni.CPointer
 
-
+/**
+ * An event which indicates that a key action occurred.
+ */
 class SKryptonKeyEvent private constructor(pointer: Long) : SKryptonEvent(pointer) {
     private companion object {
         private external fun initialize_N(
@@ -42,6 +44,15 @@ class SKryptonKeyEvent private constructor(pointer: Long) : SKryptonEvent(pointe
         ): Long
     }
 
+    /**
+     * This constructor takes a [Key] and other parameters and constructs a [SKryptonKeyEvent].
+     *
+     * @param type Type of key event.
+     * @param key Key that was pressed in the event.
+     * @param modifiers Modifiers that were involved in the event.
+     * @param autoRepeat Whether the event was auto repeating (Long press of the key).
+     * @param count Number of times the event repeated.
+     */
     constructor(
             type: KeyEventType,
             key: Key,
@@ -52,6 +63,15 @@ class SKryptonKeyEvent private constructor(pointer: Long) : SKryptonEvent(pointe
             type.id, key.code, modifiers.value, key.code.toChar().toString(), autoRepeat, count
     ))
 
+    /**
+     * This constructor takes a [Char] and other parameters and constructs a [SKryptonKeyEvent].
+     *
+     * @param type Type of key event.
+     * @param char Character that was typed in the event.
+     * @param modifiers Modifiers that were involved in the event.
+     * @param autoRepeat Whether the event was auto repeating (Long press of the key).
+     * @param count Number of times the event repeated.
+     */
     constructor(
             type: KeyEventType,
             char: Char,
@@ -62,6 +82,17 @@ class SKryptonKeyEvent private constructor(pointer: Long) : SKryptonEvent(pointe
             type.id, Key.getForCode(char.toLong()).code, modifiers.value, char.toString(), autoRepeat, count
     ))
 
+    /**
+     * Same as [Char] constructor except that it accepts a single character [String].
+     *
+     * @param type Type of key event.
+     * @param char String that was typed in the event.
+     * @param modifiers Modifiers that were involved in the event.
+     * @param autoRepeat Whether the event was auto repeating (Long press of the key).
+     * @param count Number of times the event repeated.
+     *
+     * @throws IllegalArgumentException If [char] is not a single character.
+     */
     constructor(
             type: KeyEventType,
             char: String,
@@ -72,8 +103,19 @@ class SKryptonKeyEvent private constructor(pointer: Long) : SKryptonEvent(pointe
         require(char.length == 1) { "Only 1 character allowed" }
     }
 
+    /**
+     * The key that was involved in this event.
+     */
     val key by lazy { Key.getForCode(getKey_N()) }
+
+    /**
+     * Character string that was generated when this event occurred.
+     */
     val character by lazy { getChar_N() }
+
+    /**
+     * Whether or not the event was auto repeating (Long press of the key).
+     */
     val isAutoRepeat by lazy { isAutoRepeat_N() }
 
     private external fun getKey_N(): Long
