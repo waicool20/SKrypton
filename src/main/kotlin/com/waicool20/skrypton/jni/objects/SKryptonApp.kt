@@ -35,6 +35,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.streams.toList
 import kotlin.system.exitProcess
+import javafx.application.Platform
 
 /**
  * A singleton app instance for this library and is the main entry point for any program that wants
@@ -119,7 +120,7 @@ object SKryptonApp : NativeInterface() {
 
     /**
      * Executes the given action on the thread where SKryptonApp exists. This is similar to the
-     * [javafx.application.Platform.runLater] method.
+     * [Platform.runLater] method.
      *
      * @param action Action to be executed.
      */

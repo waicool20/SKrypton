@@ -24,8 +24,10 @@
 
 package com.waicool20.skrypton.enums
 
+import com.waicool20.skrypton.jni.objects.SKryptonMouseEvent
+
 /**
- * Represents a source in which a [com.waicool20.skrypton.jni.objects.SKryptonMouseEvent]
+ * Represents a source in which a [SKryptonMouseEvent]
  * can come from, see [here](http://doc.qt.io/qt-5/qt.html#MouseEventSource-enum)
  * for more information.
  */

@@ -100,6 +100,15 @@ dokka {
     outputFormat = 'html'
     outputDirectory = "$buildDir/javadoc"
     includes = ['docs/packages.md']
+    linkMapping {
+        dir = "src/main/kotlin"
+        url = "https://github.com/waicool20/SKrypton/tree/master/src/main/kotlin"
+        suffix = "#L"
+    }
+    externalDocumentationLink { url = new URL("https://docs.oracle.com/javase/8/docs/api/") }
+    externalDocumentationLink { url = new URL("https://docs.oracle.com/javase/8/javafx/api/") }
+    externalDocumentationLink { url = new URL("https://raiman.github.io/SikuliX-2014/javadocs/") }
+    externalDocumentationLink { url = new URL("https://www.slf4j.org/api/") }
 }
 
 shadowJar {

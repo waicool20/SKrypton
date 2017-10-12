@@ -24,5 +24,12 @@
 
 package com.waicool20.skrypton.util
 
+/**
+ * Exception thrown during initialization.
+ */
 class InitializationError(message: String) : Exception(message)
+
+/**
+ * Exception thrown when error occurs during the disposal of a native component.
+ */
 class DisposeFailException(message: String) : Exception(message)

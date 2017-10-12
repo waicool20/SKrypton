@@ -27,22 +27,93 @@ package com.waicool20.skrypton.util
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+/**
+ * Gets a [KLogger] instance for a given class.
+ */
 inline fun <reified T> loggerFor(): KLogger = KLogger(LoggerFactory.getLogger(T::class.java))
 
+/**
+ * Class that wraps a [Logger] instance, and adds logging functions which receive lambdas as their
+ * argument. These functions are lazily evaluated.
+ *
+ * @property logger [Logger] instance to wrap.
+ * @constructor Main constructor
+ * @param logger [Logger] instance to wrap.
+ */
 class KLogger(val logger: Logger) {
+    /**
+     * Just like [Logger.info]
+     *
+     * @param msg Message to log
+     */
     fun info(msg: String) = info { msg }
+
+    /**
+     * Executes given lambda and logs its result with [Logger.info].
+     * Allows lazy evaluation of logging message.
+     *
+     * @param msg Lambda to execute
+     */
     fun info(msg: () -> Any) = logger.info(msg().toString())
 
+    /**
+     * Just like [Logger.debug]
+     *
+     * @param msg Message to log
+     */
     fun debug(msg: String) = debug { msg }
+
+    /**
+     * Executes given lambda and logs its result with [Logger.debug].
+     * Allows lazy evaluation of logging message.
+     *
+     * @param msg Lambda to execute
+     */
     fun debug(msg: () -> Any) = logger.debug(msg().toString())
 
+    /**
+     * Just like [Logger.warn]
+     *
+     * @param msg Message to log
+     */
     fun warn(msg: String) = warn { msg }
+
+    /**
+     * Executes given lambda and logs its result with [Logger.warn].
+     * Allows lazy evaluation of logging message.
+     *
+     * @param msg Lambda to execute
+     */
     fun warn(msg: () -> Any) = logger.warn(msg().toString())
 
+    /**
+     * Just like [Logger.error]
+     *
+     * @param msg Message to log
+     */
     fun error(msg: String) = error { msg }
+
+    /**
+     * Executes given lambda and logs its result with [Logger.error].
+     * Allows lazy evaluation of logging message.
+     *
+     * @param msg Lambda to execute
+     */
     fun error(msg: () -> Any) = logger.error(msg().toString())
 
+    /**
+     * Just like [Logger.trace]
+     *
+     * @param msg Message to log
+     */
     fun trace(msg: String) = trace { msg }
+
+    /**
+     * Executes given lambda and logs its result with [Logger.trace].
+     * Allows lazy evaluation of logging message.
+     *
+     * @param msg Lambda to execute
+     */
     fun trace(msg: () -> Any) = logger.trace(msg().toString())
 }
 

@@ -26,9 +26,10 @@ package com.waicool20.skrypton.sikulix
 
 import org.sikuli.script.*
 import java.awt.Rectangle
+import org.sikuli.script.Region
 
 /**
- * Interfaces that copies most of the [org.sikuli.script.Region] APIs
+ * Interfaces that copies most of the [Region] APIs
  * Mainly used for allowing easy delegation of [SKryptonMatch] functions to [SKryptonRegion].
  * See [here](http://doc.sikuli.org/region.html) for more information.
  */

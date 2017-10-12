@@ -31,9 +31,42 @@ import java.awt.Color
 import java.awt.Rectangle
 import java.awt.event.KeyEvent
 
+/**
+ * A class subclassing [Region], it is identical for the most part but allows the use of independent
+ * mouse and keyboard actions.
+ *
+ * @constructor Main constructor
+ * @param xPos x coordinate of the top left corner of the region.
+ * @param yPos y coordinate of the top left corner of the region.
+ * @param width Width of the region.
+ * @param height Height of the region.
+ */
 open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Region(), ISikuliRegion {
+    /**
+     * Region constructor
+     *
+     * @param region Region to inherit from.
+     * @param screen Screen that this region should belong to.
+     */
     constructor(region: Region, screen: SKryptonScreen) : this(region.x, region.y, region.w, region.h, screen)
+
+    /**
+     * Rectangle constructor
+     *
+     * @param rect Uses the rectangles dimensions to construct this region.
+     * @param screen Screen that this region should belong to.
+     */
     constructor(rect: Rectangle, screen: SKryptonScreen) : this(rect.x, rect.y, rect.width, rect.height, screen)
+
+    /**
+     * Like main constructor but has additional screen param.
+     *
+     * @param xPos x coordinate of the top left corner of the region.
+     * @param yPos y coordinate of the top left corner of the region.
+     * @param width Width of the region.
+     * @param height Height of the region.
+     * @param screen Screen that this region should belong to.
+     */
     constructor(xPos: Int, yPos: Int, width: Int, height: Int, screen: SKryptonScreen) : this(xPos, yPos, width, height) {
         this.screen = screen
     }
@@ -48,6 +81,9 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     private val mouse by lazy { skryptonScreen().mouse }
     private val keyboard by lazy { skryptonScreen().keyboard }
 
+    /**
+     * Gets the screen this region belongs to as a [SKryptonScreen]
+     */
     fun skryptonScreen() = screen as SKryptonScreen
 
     override fun setLocation(loc: Location): SKryptonRegion {

@@ -37,7 +37,7 @@ import java.awt.Rectangle
 import java.util.concurrent.CountDownLatch
 
 /**
- * A class representing a [org.sikuli.script.IScreen] that uses the given web view as its view port.
+ * A class representing a [IScreen] that uses the given web view as its view port.
  *
  * @property webView The web view that the screen is using as its view port.
  * @constructor Main constructor

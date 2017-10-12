@@ -24,8 +24,10 @@
 
 package com.waicool20.skrypton.enums
 
+import com.waicool20.skrypton.jni.objects.SKryptonWebSettings
+
 /**
- * Represents different kinds of settings for a [com.waicool20.skrypton.jni.objects.SKryptonWebSettings]
+ * Represents different kinds of settings for a [SKryptonWebSettings]
  * to use, see [here](http://doc.qt.io/qt-5/qwebenginesettings.html#WebAttribute-enum) for more
  * information.
  */

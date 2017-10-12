@@ -26,5 +26,13 @@ package com.waicool20.skrypton.sikulix
 
 import org.sikuli.script.Match
 
+/**
+ * A class subclassing [Match], it is identical for the most part but allows the use of independent
+ * mouse and keyboard actions.
+ *
+ * @constructor Main constructor
+ * @param match Match to inherit from.
+ * @param screen Screen that this match should belong to.
+ */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
 class SKryptonMatch(match: Match, screen: SKryptonScreen) : Match(match), ISikuliRegion by SKryptonRegion(match, screen)
