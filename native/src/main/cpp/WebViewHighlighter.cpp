@@ -13,10 +13,9 @@ Java_com_waicool20_skrypton_jni_objects_WebViewHighlighter_00024Companion_initia
     if (ref) {
         SKryptonWebViewContainer* container = ref.value();
         WebViewHighlighter* highlighter = nullptr;
-        SKryptonApp::runOnMainThreadAsync([&] {
+        SKryptonApp::runOnMainThread([&] {
             highlighter = new WebViewHighlighter(container, x, y, width, height, fillColor, red, green, blue);
         });
-        while (!highlighter) {}
         return (jlong) highlighter;
     }
     ThrowNewError(env, LOG_PREFIX + "Could not get container ref");
