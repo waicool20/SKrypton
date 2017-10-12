@@ -99,6 +99,7 @@ apply plugin: 'org.jetbrains.dokka'
 dokka {
     outputFormat = 'html'
     outputDirectory = "$buildDir/javadoc"
+    includes = ['docs/packages.md']
 }
 
 shadowJar {
