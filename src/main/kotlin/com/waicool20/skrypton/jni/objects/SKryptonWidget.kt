@@ -30,19 +30,53 @@ import com.waicool20.skrypton.jni.NativeInterface
 import java.awt.Dimension
 import java.awt.Rectangle
 
+/**
+ * A class representing a user interface element.
+ */
 abstract class SKryptonWidget : NativeInterface() {
+    /**
+     * The geometry of the widget. (x-y coordinates, width and height)
+     */
     var geometry: Rectangle
         get() = getGeometry_N()
         set(value) = setGeometry_N(value.x, value.y, value.width, value.height)
 
+    /**
+     * Dimension of the widget. (Width and height only)
+     */
     var size: Dimension
         get() = geometry.let { Dimension(it.width, it.height) }
         set(value) = resize_N(value.width, value.height)
 
+    /**
+     * Makes the widget visible.
+     */
     fun show() = show_N()
+
+    /**
+     * Hides the widget.
+     */
     fun hide() = hide_N()
+
+    /**
+     * Returns true if the widget is hidden.
+     */
     fun isHidden() = isHidden_N()
+
+    /**
+     * Moves the widget to the given coordinates.
+     *
+     * @param x New x coordinate.
+     * @param y New y coordinate.
+     */
     fun move(x: Int, y: Int) = move_N(x, y)
+
+    /**
+     * Resizes the widget.
+     *
+     * @param width New width.
+     * @param height New height.
+     */
     fun resize(width: Int, height: Int) = resize_N(width, height)
 
     //<editor-fold desc="Mouse listener">
@@ -52,10 +86,21 @@ abstract class SKryptonWidget : NativeInterface() {
         onMouseEventListeners.filterKeys { it == MouseEventType.getForId(type) }.values.forEach { it(event) }
     }
 
+    /**
+     * Adds a listener for when a mouse event occurs on this widget.
+     *
+     * @param listener Listener used to receive this event. This lambda receives a variable
+     * `event` which contains event details.
+     */
     fun addOnMouseEventListener(type: MouseEventType, listener: (event: SKryptonMouseEvent) -> Unit) {
         onMouseEventListeners.put(type, listener)
     }
 
+    /**
+     * Removes given onMouseEvent listener.
+     *
+     * @param listener Listener used to receive this event.
+     */
     fun removeOnMouseEventListener(type: MouseEventType, listener: (event: SKryptonMouseEvent) -> Unit) {
         onMouseEventListeners.remove(type, listener)
     }
@@ -69,10 +114,21 @@ abstract class SKryptonWidget : NativeInterface() {
         onWheelEventListeners.forEach { it(event) }
     }
 
+    /**
+     * Adds a listener for when a mouse wheel event occurs on this widget.
+     *
+     * @param listener Listener used to receive this event. This lambda receives a variable
+     * `event` which contains event details.
+     */
     fun addOnWheelEventListener(listener: (event: SKryptonWheelEvent) -> Unit) {
         onWheelEventListeners.add(listener)
     }
 
+    /**
+     * Removes given onWheelEvent listener.
+     *
+     * @param listener Listener used to receive this event.
+     */
     fun removeOnWheelEventListener(listener: (event: SKryptonWheelEvent) -> Unit) {
         onWheelEventListeners.remove(listener)
     }
@@ -86,10 +142,21 @@ abstract class SKryptonWidget : NativeInterface() {
         onKeyEventListeners.filterKeys { it == KeyEventType.getForId(type) }.values.forEach { it(event) }
     }
 
+    /**
+     * Adds a listener for when a key event occurs on this widget.
+     *
+     * @param listener Listener used to receive this event. This lambda receives a variable
+     * `event` which contains event details.
+     */
     fun addOnKeyEventListener(type: KeyEventType, listener: (event: SKryptonKeyEvent) -> Unit) {
         onKeyEventListeners.put(type, listener)
     }
 
+    /**
+     * Removes given onKeyEvent listener.
+     *
+     * @param listener Listener used to receive this event.
+     */
     fun removeOnKeyEventListener(type: KeyEventType, listener: (event: SKryptonKeyEvent) -> Unit) {
         onKeyEventListeners.remove(type, listener)
     }
@@ -103,10 +170,21 @@ abstract class SKryptonWidget : NativeInterface() {
         onResizeEventListeners.forEach { it(event) }
     }
 
+    /**
+     * Adds a listener for when a resize event occurs on this widget.
+     *
+     * @param listener Listener used to receive this event. This lambda receives a variable
+     * `event` which contains event details.
+     */
     fun addOnResizeEventListener(listener: (event: SKryptonResizeEvent) -> Unit) {
         onResizeEventListeners.add(listener)
     }
 
+    /**
+     * Removes given onResizeEvent listener.
+     *
+     * @param listener Listener used to receive this event.
+     */
     fun removeOnResizeEventListener(listener: (event: SKryptonResizeEvent) -> Unit) {
         onResizeEventListeners.remove(listener)
     }
@@ -127,5 +205,8 @@ abstract class SKryptonWidget : NativeInterface() {
 
     //</editor-fold>
 
+    /**
+     * Hides and closes this widget.
+     */
     override fun close() = dispose_N()
 }

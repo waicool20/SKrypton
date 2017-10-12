@@ -26,6 +26,13 @@ package com.waicool20.skrypton.jni
 
 import com.waicool20.skrypton.util.loggerFor
 
+/**
+ * Represents a native pointer.
+ *
+ * @property value Holds the numerical value of the native pointer.
+ * @constructor Main constructor
+ * @param value Numerical value of the native pointer.
+ */
 data class CPointer(val value: Long) {
     private val logger = loggerFor<CPointer>()
 
@@ -34,7 +41,17 @@ data class CPointer(val value: Long) {
     }
 }
 
+/**
+ * Base class for classes that have native components.
+ */
 abstract class NativeInterface : AutoCloseable {
+    /**
+     * Native pointer
+     */
     abstract val handle: CPointer
+
+    /**
+     * Disposes this object, usually same action as [close]
+     */
     fun dispose() = close()
 }

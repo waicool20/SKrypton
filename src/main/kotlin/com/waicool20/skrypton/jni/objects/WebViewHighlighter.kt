@@ -30,6 +30,9 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.schedule
 
+/**
+ * A class that provides a colored rectangle overlay to highlight certain areas of a web view.
+ */
 class WebViewHighlighter private constructor(override val handle: CPointer) : SKryptonWidget() {
     private val timer = Timer()
 
@@ -43,6 +46,17 @@ class WebViewHighlighter private constructor(override val handle: CPointer) : SK
         ): Long
     }
 
+    /**
+     * Main constructor
+     *
+     * @param view Web view to use this highlighter with.
+     * @param x x coordinates where top left corner of the highlighter should begin.
+     * @param y y coordinates where top left corner of the highlighter should begin.
+     * @param width Width of the highlighter rectangle.
+     * @param height Height of the highlighter rectangle.
+     * @param fillColor Whether or not the highlight should filled or just a border.
+     * @param color Color of the highlight.
+     */
     constructor(
             view: SKryptonWebView,
             x: Int, y: Int,
@@ -54,16 +68,41 @@ class WebViewHighlighter private constructor(override val handle: CPointer) : SK
             fillColor, color.red, color.green, color.blue
     )))
 
+    /**
+     * Color of the highlight.
+     */
     var color: Color
         get() = getColor_N()
         set(value) = setColor_N(value.red, value.green, value.blue)
 
+    /**
+     * Whether or not the highlight should filled or just a border.
+     */
     var fillColor: Boolean
         get() = isFillColor_N()
         set(value) = setFillColor_N(value)
 
+    /**
+     * Shows the highlight for a given duration.
+     *
+     * @param seconds Duration to show this highlight for in seconds.
+     * @param callback Called when the highlight is done showing.
+     */
     fun showFor(seconds: Float, callback: () -> Unit = {}) = showFor(seconds.toDouble(), callback)
+    /**
+     * Shows the highlight for a given duration.
+     *
+     * @param seconds Duration to show this highlight for in seconds.
+     * @param callback Called when the highlight is done showing.
+     */
     fun showFor(seconds: Double, callback: () -> Unit = {}) = showFor((seconds * 1000).toLong(), TimeUnit.MILLISECONDS, callback)
+    /**
+     * Shows the highlight for a given duration.
+     *
+     * @param duration Duration to show this highlight for.
+     * @param unit Unit of the duration.
+     * @param callback Called when the highlight is done showing.
+     */
     fun showFor(duration: Long, unit: TimeUnit = TimeUnit.SECONDS, callback: () -> Unit = {}) {
         show()
         timer.schedule(unit.toMillis(duration)) {
@@ -72,8 +111,27 @@ class WebViewHighlighter private constructor(override val handle: CPointer) : SK
         }
     }
 
+    /**
+     * Same as [showFor] but disposes the highlighter before calling the callback.
+     *
+     * @param seconds Duration to show this highlight for in seconds.
+     * @param callback Called when the highlight is done showing.
+     */
     fun showForAndDispose(seconds: Float, callback: () -> Unit = {}) = showForAndDispose(seconds.toDouble(), callback)
+    /**
+     * Same as [showFor] but disposes the highlighter before calling the callback.
+     *
+     * @param seconds Duration to show this highlight for in seconds.
+     * @param callback Called when the highlight is done showing.
+     */
     fun showForAndDispose(seconds: Double, callback: () -> Unit = {}) = showForAndDispose((seconds * 1000).toLong(), TimeUnit.MILLISECONDS, callback)
+    /**
+     * Same as [showFor] but disposes the highlighter before calling the callback.
+     *
+     * @param duration Duration to show this highlight for.
+     * @param unit Unit of the duration.
+     * @param callback Called when the highlight is done showing.
+     */
     fun showForAndDispose(duration: Long, unit: TimeUnit = TimeUnit.SECONDS, callback: () -> Unit = {}) {
         show()
         timer.schedule(unit.toMillis(duration)) {
@@ -82,6 +140,9 @@ class WebViewHighlighter private constructor(override val handle: CPointer) : SK
         }
     }
 
+    /**
+     * Toggles the visibility of the highlighter.
+     */
     fun toggle() {
         if (isHidden()) {
             show()

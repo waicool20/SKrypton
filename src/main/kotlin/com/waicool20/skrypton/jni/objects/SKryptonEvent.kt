@@ -28,7 +28,7 @@ import com.waicool20.skrypton.jni.CPointer
 import com.waicool20.skrypton.jni.NativeInterface
 
 /**
- * Class that represents an event originating from SKrypton
+ * Class that represents an event originating from SKrypton.
  *
  * @constructor Main constructor
  * @param pointer Native pointer value
