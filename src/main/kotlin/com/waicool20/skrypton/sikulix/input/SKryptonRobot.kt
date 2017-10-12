@@ -43,7 +43,16 @@ import java.awt.event.KeyEvent
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-
+/**
+ * A class representing a [org.sikuli.script.IRobot] that can be used to control a [SKryptonScreen],
+ * not recommended for normal use as this is not thread safe, any actions generated will be
+ * unpredictable behaviour. It is recommended to use [SKryptonKeyboard] and [SKryptonMouse] as
+ * a thread safe wrapper to control this robot.
+ *
+ * @property screen [SKryptonScreen] that is bound to this robot.
+ * @constructor Main constructor
+ * @param screen [SKryptonScreen] to use this robot on.
+ */
 class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
     private var autoDelay = 100
     private var heldButtons = 0
@@ -53,6 +62,12 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
 
     //<editor-fold desc="Mouse stuff">
 
+    /**
+     * Releases mouse buttons.
+     *
+     * @param buttons Mouse buttons to release.
+     * @return The currently held buttons.
+     */
     override fun mouseUp(buttons: Int): Int {
         heldButtons = if (buttons == 0) {
             generateMouseEvent(MouseEventType.MouseButtonRelease, heldButtons)
@@ -64,15 +79,31 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
         return heldButtons
     }
 
+    /**
+     * Presses mouse buttons.
+     *
+     * @param buttons Mouse buttons to press.
+     */
     override fun mouseDown(buttons: Int) {
         heldButtons = if (heldButtons == 0) buttons else heldButtons or buttons
         generateMouseEvent(MouseEventType.MouseButtonPress, heldButtons)
     }
 
+    /**
+     * Moves the mouse to the coordinates instantly.
+     *
+     * @param x x coordinate to move the mouse to.
+     * @param y y coordinate to move the mouse to.
+     */
     override fun mouseMove(x: Int, y: Int) {
         generateMouseEvent(MouseEventType.MouseMove, 0, Point(x, y))
     }
 
+    /**
+     * Spins the mouse wheel.
+     *
+     * @param wheelAmt Amount of steps to spin the wheel, can be negative to change direction.
+     */
     override fun mouseWheel(wheelAmt: Int) {
         webView.sendEvent(SKryptonWheelEvent(
                 wheelAmt * 16 + rng.nextInt(2) - 1, // Just some variance
@@ -80,9 +111,21 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
         ))
     }
 
+    /**
+     * Moves the mouse to the destination in a smooth fashion.
+     *
+     * @param dest Location to move the mouse to.
+     */
     override fun smoothMove(dest: Location) =
             smoothMove(Location(webView.cursorX, webView.cursorY), dest, (Settings.MoveMouseDelay * 1000).toLong())
 
+    /**
+     * Moves the mouse from a source to the destination in a smooth fashion.
+     *
+     * @param src Location to move the mouse from
+     * @param dest Location to move the mouse to.
+     * @param ms Length of time to complete this action within in milliseconds.
+     */
     override fun smoothMove(src: Location, dest: Location, ms: Long) {
         if (ms < 1) {
             mouseMove(dest.x, dest.y)
@@ -98,6 +141,9 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
         }
     }
 
+    /**
+     * Resets the mouse state. Mouse is moved to (0, 0) and all buttons are released.
+     */
     override fun mouseReset() {
         mouseMove(0, 0)
         mouseUp(Mouse.LEFT and Mouse.MIDDLE and Mouse.RIGHT)
@@ -107,17 +153,46 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
 
     //<editor-fold desc="Keyboard stuff">
 
+    /**
+     * Releases all keys.
+     */
     override fun keyUp() = heldKeys.forEach { keyUp(it) }
+    /**
+     * Releases key with the given code.
+     *
+     * @param code Key to release.
+     */
     override fun keyUp(code: Int) = generateKeyEvent(KeyEventType.KeyRelease, code)
+    /**
+     * Releases keys specified in a string
+     *
+     * @param keys Keys to release.
+     */
     override fun keyUp(keys: String) = keys.toCharArray().forEach {
         webView.sendEvent(SKryptonKeyEvent(KeyEventType.KeyRelease, it))
     }
 
+    /**
+     * Presses key with the given code.
+     *
+     * @param code Key to press.
+     */
     override fun keyDown(code: Int) = generateKeyEvent(KeyEventType.KeyPress, code)
+    /**
+     * Presses keys specified in a string.
+     *
+     * @param keys Keys to press.
+     */
     override fun keyDown(keys: String) = keys.toCharArray().forEach {
         webView.sendEvent(SKryptonKeyEvent(KeyEventType.KeyPress, it))
     }
 
+    /**
+     * Types a given character.
+     *
+     * @param character Character to type.
+     * @param mode Mode to type the character with.
+     */
     override fun typeChar(character: Char, mode: IRobot.KeyMode) = when (mode) {
         IRobot.KeyMode.PRESS_ONLY -> webView.sendEvent(SKryptonKeyEvent(KeyEventType.KeyPress, character))
         IRobot.KeyMode.PRESS_RELEASE -> {
@@ -127,11 +202,21 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
         IRobot.KeyMode.RELEASE_ONLY -> webView.sendEvent(SKryptonKeyEvent(KeyEventType.KeyRelease, character))
     }
 
+    /**
+     * Types a given key.
+     *
+     * @param key Key to type.
+     */
     override fun typeKey(key: Int) {
         keyUp(key)
         keyDown(key)
     }
 
+    /**
+     * Presses key modifiers.
+     *
+     * @param modifiers The key modifiers to press.
+     */
     override fun pressModifiers(modifiers: Int) {
         if (modifiers and KeyModifier.SHIFT != 0) keyDown(KeyEvent.VK_SHIFT)
         if (modifiers and KeyModifier.CTRL != 0) keyDown(KeyEvent.VK_CONTROL)
@@ -145,6 +230,11 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
         }
     }
 
+    /**
+     * Releases key modifiers.
+     *
+     * @param modifiers The key modifiers to release.
+     */
     override fun releaseModifiers(modifiers: Int) {
         if (modifiers and KeyModifier.SHIFT != 0) keyUp(KeyEvent.VK_SHIFT)
         if (modifiers and KeyModifier.CTRL != 0) keyUp(KeyEvent.VK_CONTROL)
@@ -162,31 +252,77 @@ class SKryptonRobot(val screen: SKryptonScreen) : IRobot {
 
     //<editor-fold desc="Misc">
 
+    /**
+     * Sets the auto delay for this robot.
+     */
     override fun setAutoDelay(ms: Int) {
         autoDelay = ms
     }
 
+    /**
+     * Returns whether or not the robot is controlling a remote screen. Always true.
+     */
     override fun isRemote() = true
 
+    /**
+     * Sleeps the current thread for a duration
+     *
+     * @param ms Time to sleep in milliseconds.
+     */
     override fun delay(ms: Int) = TimeUnit.MILLISECONDS.sleep(ms.toLong())
 
     //</editor-fold>
 
     //<editor-fold desc="Screen Stuff">
 
+    /**
+     * Takes a screenshot of the screen bound to this robot
+     *
+     * @param screenRect Sub-region to capture.
+     * @return the captured image.
+     */
     override fun captureScreen(screenRect: Rectangle): ScreenImage = screen.capture(screenRect)
+
+    /**
+     * Gets the bound screen instance.
+     */
     override fun getScreen(): IScreen = screen
+
+    /**
+     * Gets the color of the pixel at coordinates.
+     *
+     * @param x x coordinate of the pixel.
+     * @param y y coordinate of the pixel.
+     */
     override fun getColorAt(x: Int, y: Int): Color = Color((screen.lastScreenImage ?: screen.capture()).image.getRGB(x, y))
 
     //</editor-fold>
 
     //<editor-fold desc="Stuff that does Nothing">
 
+    /**
+     * Does nothing, ignore.
+     */
     override fun cleanup() = Unit
+    /**
+     * Does nothing, ignore.
+     */
     override fun clickStarts() = Unit
+    /**
+     * Does nothing, ignore.
+     */
     override fun clickEnds() = Unit
+    /**
+     * Does nothing, ignore.
+     */
     override fun typeStarts() = Unit
+    /**
+     * Does nothing, ignore.
+     */
     override fun typeEnds() = Unit
+    /**
+     * Does nothing, ignore.
+     */
     override fun waitForIdle() = Unit
 
     //</editor-fold>

@@ -36,11 +36,27 @@ import java.awt.Point
 import java.awt.Rectangle
 import java.util.concurrent.CountDownLatch
 
+/**
+ * A class representing a [org.sikuli.script.IScreen] that uses the given web view as its view port.
+ *
+ * @property webView The web view that the screen is using as its view port.
+ * @constructor Main constructor
+ * @param webView The web view that the screen is using as its view port.
+ */
 class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webView.size.width, webView.size.height), IScreen {
     private val logger = loggerFor<SKryptonScreen>()
     private val robot = SKryptonRobot(this)
+    /**
+     * Independent virtual mouse bound to this screen.
+     */
     val mouse = SKryptonMouse(robot)
+    /**
+     * Independent virtual keyboard bound to this screen.
+     */
     val keyboard = SKryptonKeyboard(robot)
+    /**
+     * Independent clipboard bound to this screen.
+     */
     var clipboard = ""
 
     init {
@@ -51,6 +67,11 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
         }
     }
 
+    /**
+     * Highlights the given target.
+     *
+     * @param location Target to highlight.
+     */
     override fun showTarget(location: Location) {
         val width = 50
         val height = 50
@@ -59,10 +80,31 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
         WebViewHighlighter(webView, x, y, width, height).showForAndDispose(Settings.SlowMotionDelay)
     }
 
+    /**
+     * Gets the ID of a given point. Always 0 for a [SKryptonScreen]
+     *
+     * @param srcx x coordinate of point.
+     * @param srcy y coordinate of point.
+     */
     override fun getIdFromPoint(srcx: Int, srcy: Int): Int = 0
 
+    /**
+     * Gets the underlying robot instance used to control this screen.
+     */
     override fun getRobot(): IRobot = robot
 
+    /**
+     * Same as `userCapture(null)` (Use default prompt string)
+     */
+    fun userCapture() = userCapture(null)
+    /**
+     * Shows a user prompt using a JavaScript alert. User will be required to click two separate
+     * locations. First click will be the top left corner of the image. Second click will be the
+     * bottom right. Selected area will be showing with a highlight to aid users.
+     *
+     * @param string Prompt string to show. Can be `null` to show default.
+     * @return The captured image.
+     */
     override fun userCapture(string: String?): ScreenImage {
         val message = string ?:
                 """
@@ -122,22 +164,71 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
         return image
     }
 
+    /**
+     * Returns the ID of the screen, in this case returns the underlying web view native pointer value.
+     */
     override fun getID(): Int = webView.handle.value.toInt()
 
+    /**
+     * Returns the geometry of the underlying web view.
+     */
     override fun getBounds(): Rectangle = webView.geometry
 
+    /**
+     * Takes a screenshot of the whole screen.
+     *
+     * @return the captured image.
+     */
     override fun capture(): ScreenImage = capture(rect)
+    /**
+     * Takes a screenshot of the screen.
+     *
+     * @param region Sub-region to capture.
+     * @return the captured image.
+     */
     override fun capture(region: Region): ScreenImage = capture(region.x, region.y, region.w, region.h)
+    /**
+     * Takes a screenshot of the screen.
+     *
+     * @param x x coordinate of the sub-region.
+     * @param y y coordinate of the sub-region.
+     * @param width width of the sub-region.
+     * @param height height of the sub-region.
+     * @return the captured image.
+     */
     override fun capture(x: Int, y: Int, width: Int, height: Int): ScreenImage = capture(Rectangle(x, y, width, height))
+    /**
+     * Takes a screenshot of the screen.
+     *
+     * @param rect Sub-region to capture.
+     * @return the captured image.
+     */
     override fun capture(rect: Rectangle): ScreenImage = with(webView.takeScreenshot()) {
         ScreenImage(Rectangle(0, 0, this.width, this.height), this).getSub(rect)
     }
 
+    /**
+     * Returns the last saved screen image.
+     */
     override fun getLastScreenImageFromScreen(): ScreenImage? = lastScreenImage
 
+    /**
+     * Gets the current position of the virtual mouse.
+     */
     fun currentMousePosition() = Location(webView.cursorX, webView.cursorY)
 }
 
+/**
+ * Creates a [SKryptonScreen] under this [SKryptonApp] instance
+ *
+ * @receiver [SKryptonApp]
+ * @param url URL string to load initially.
+ * @param showCursor Whether or not to show the virtual cursor on web view.
+ * @param width Initial width of the web view.
+ * @param height Initial height of the web view.
+ * @param action Lambda function with created screen as its receiver.
+ * @return Created [SKryptonScreen]
+ */
 fun SKryptonApp.screen(url: String,
                        showCursor: Boolean = true,
                        width: Int = 1280,
@@ -152,6 +243,13 @@ fun SKryptonApp.screen(url: String,
     return webView.screen { action() }
 }
 
+/**
+ * Creates a [SKryptonScreen] under this [SKryptonWebView] instance
+ *
+ * @receiver [SKryptonWebView]
+ * @param action Lambda function with created screen as its receiver.
+ * @return Created [SKryptonScreen]
+ */
 fun SKryptonWebView.screen(action: SKryptonScreen.() -> Unit = {}): SKryptonScreen {
     return SKryptonScreen(this).apply { action() }
 }

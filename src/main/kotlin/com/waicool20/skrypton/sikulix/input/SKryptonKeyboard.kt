@@ -29,8 +29,23 @@ import org.sikuli.script.Key
 import org.sikuli.script.KeyModifier
 import org.sikuli.script.Location
 
+/**
+ * Class representing a virtual keyboard for a [com.waicool20.skrypton.sikulix.SKryptonScreen]
+ * This class is also in charge of coordinating keyboard actions between threads, unlike [SKryptonRobot]
+ * all functions are synchronized and thus only one thread may have access to keyboard actions.
+ *
+ * @property robot [SKryptonRobot] used for generating actions.
+ * @constructor Main constructor
+ * @param robot [SKryptonRobot] to use for generating actions.
+ */
 class SKryptonKeyboard(val robot: SKryptonRobot) {
     companion object {
+        /**
+         * Parses the given modifiers string and returns corresponding [KeyModifier].
+         *
+         * @param modifiers String of modifiers.
+         * @return Corresponding [KeyModifier].
+         */
         fun parseModifiers(modifiers: String): Int {
             var mods = 0
             modifiers.toCharArray().forEach {
@@ -48,6 +63,13 @@ class SKryptonKeyboard(val robot: SKryptonRobot) {
         }
     }
 
+    /**
+     * Types text at a given location
+     *
+     * @param location Location to type to, can be null to just type directly into the screen.
+     * @param text The text to type.
+     * @param modifiers Key modifiers to press during typing.
+     */
     @Synchronized
     fun type(location: Location?, text: String, modifiers: Int) = synchronized(this) {
         if (location != null) robot.screen.click(location)
@@ -60,20 +82,51 @@ class SKryptonKeyboard(val robot: SKryptonRobot) {
         Settings.TypeDelay = 0.0
     }
 
+    /**
+     * Releases all keys
+     */
     @Synchronized
     fun keyUp() = synchronized(this) { robot.keyUp() }
 
+    /**
+     * Releases a specific key.
+     *
+     * @param keycode The key to release.
+     */
     @Synchronized
     fun keyUp(keycode: Int) = synchronized(this) { robot.keyUp(keycode) }
 
+    /**
+     * Releases the keys specified by the string.
+     *
+     * @param keys Keys to be released.
+     */
     @Synchronized
     fun keyUp(keys: String) = synchronized(this) { robot.keyUp(keys) }
 
+    /**
+     * Presses a specific key.
+     *
+     * @param keycode The key to press.
+     */
     @Synchronized
     fun keyDown(keycode: Int) = synchronized(this) { robot.keyDown(keycode) }
 
+    /**
+     * Presses the keys specified by the string.
+     *
+     * @param keys Keys to be pressed.
+     */
     @Synchronized
     fun keyDown(keys: String) = synchronized(this) { robot.keyDown(keys) }
 
+    /**
+     * Executes an action atomically while keeping the synchronized lock to this object.
+     * Useful if you want to do multiple actions in one go without the possibility of a thread
+     * stealing ownership.
+     *
+     * @param action Action to execute while keeping the lock this object.
+     * @return Result of [action]
+     */
     @Synchronized inline fun <T> atomicAction(action: () -> T): T = synchronized(this) { action() }
 }

@@ -287,11 +287,12 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
 }
 
 /**
- * Creates a web view under this [SKryptonApp] instance.
+ * Creates a [SKryptonWebView] under this [SKryptonApp] instance.
  *
  * @receiver [SKryptonApp]
  * @param url URL string to load initially.
  * @param action Lambda function with created web view as its receiver.
+ * @return The created [SKryptonWebView]
  */
 fun SKryptonApp.webView(url: String, action: SKryptonWebView.() -> Unit = {}): SKryptonWebView {
     return SKryptonWebView(url).apply { action() }
