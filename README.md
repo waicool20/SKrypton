@@ -11,6 +11,11 @@ SKrypton) Each SKryptonScreen instance has its own virtual mouse, keyboard and c
 each can be controlled independently from each other and the desktop. To aid debugging, a virtual 
 mouse indicator (Visibility can be toggled) has been added.
 
+The name SKrypton comes from combining Script and Krypton, why Krypton? Because it's an element 
+two Atomic Numbers away from [Selenium](http://www.seleniumhq.org/) another well-known browser
+automation tool named after an element. SKrypton can support control from Selenium if remote debug 
+port is enabled.
+
 [Here's a small clip to see it in action](https://streamable.com/t1oiu)
 
 [This is the file being showcased](src/test/kotlin/com/waicool20/skrypton/SKryptonGithub.kt)
