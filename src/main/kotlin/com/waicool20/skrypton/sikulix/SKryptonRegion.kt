@@ -76,7 +76,7 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     override fun getLastMatches() =
             super.getLastMatches().asSequence().map { SKryptonMatch(it, skryptonScreen()) }.iterator()
 
-    override fun offset(loc: Location?) = SKryptonRegion(super.offset(loc), skryptonScreen())
+    override fun offset(loc: Location) = SKryptonRegion(super.offset(loc), skryptonScreen())
     override fun grow(l: Int, r: Int, t: Int, b: Int) = SKryptonRegion(super.grow(l, r, t, b), skryptonScreen())
     override fun grow(w: Int, h: Int) = SKryptonRegion(super.grow(w, h), skryptonScreen())
     override fun grow(range: Int) = SKryptonRegion(super.grow(range), skryptonScreen())
