@@ -11,6 +11,10 @@ SKrypton) Each SKryptonScreen instance has its own virtual mouse, keyboard and c
 each can be controlled independently from each other and the desktop. To aid debugging, a virtual 
 mouse indicator (Visibility can be toggled) has been added.
 
+[Here's a small clip to see it in action](https://streamable.com/t1oiu)
+
+[This is the file being showcased](src/test/kotlin/com/waicool20/skrypton/SKryptonGithub.kt)
+
 # Installation and Usage
 
 ### I just want to run a SKrypton program!:
