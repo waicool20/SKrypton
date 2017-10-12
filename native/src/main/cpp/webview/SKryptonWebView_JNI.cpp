@@ -24,7 +24,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_load_1N(JNIEnv* env, job
     auto url = StringFromJstring(env, jurl);
     if (opt) {
         SKryptonWebView* view = opt.value()->getWebView();
-        SKryptonApp::runOnMainThreadAsync([&] { view->load(QUrl { url.c_str() }); });
+        SKryptonApp::runOnMainThread([&] { view->load(QUrl { url.c_str() }); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to load url " + url);
     }
@@ -35,7 +35,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_back_1N(JNIEnv* env, job
     auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value()->getWebView();
-        SKryptonApp::runOnMainThreadAsync([&] { view->back(); });
+        SKryptonApp::runOnMainThread([&] { view->back(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to go back");
     }
@@ -46,7 +46,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_forward_1N(JNIEnv* env, 
     auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value()->getWebView();
-        SKryptonApp::runOnMainThreadAsync([&] { view->forward(); });
+        SKryptonApp::runOnMainThread([&] { view->forward(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to go forward");
     }
@@ -57,7 +57,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_reload_1N(JNIEnv* env, j
     auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value()->getWebView();
-        SKryptonApp::runOnMainThreadAsync([&] { view->reload(); });
+        SKryptonApp::runOnMainThread([&] { view->reload(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to reload");
     }
@@ -68,7 +68,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_stop_1N(JNIEnv* env, job
     auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value()->getWebView();
-        SKryptonApp::runOnMainThreadAsync([&] { view->stop(); });
+        SKryptonApp::runOnMainThread([&] { view->stop(); });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to stop");
     }
@@ -93,7 +93,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_setZoomFactor_1N(JNIEnv*
     auto opt = PointerFromCPointer<SKryptonWebViewContainer>(env, obj);
     if (opt) {
         SKryptonWebView* view = opt.value()->getWebView();
-        SKryptonApp::runOnMainThreadAsync([&] { view->setZoomFactor(factor); });
+        SKryptonApp::runOnMainThread([&] { view->setZoomFactor(factor); });
     }
     ThrowNewError(env, LOG_PREFIX + "Failed to set zoom factor to " + to_string(factor));
 
@@ -203,7 +203,7 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebView_loadHtml_1N(JNIEnv* env,
         SKryptonWebView* view = opt.value()->getWebView();
         auto qContent = QString::fromStdString(StringFromJstring(env, content));
         auto qBaseUrl = QString::fromStdString(StringFromJstring(env, baseUrl));
-        SKryptonApp::runOnMainThreadAsync([&] {
+        SKryptonApp::runOnMainThread([&] {
             view->setHtml(qContent, qBaseUrl);
         });
     } else {
