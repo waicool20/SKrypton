@@ -208,7 +208,7 @@ open class SKryptonRegion(xPos: Int, yPos: Int, width: Int, height: Int) : Regio
     override fun type(text: String): Int = type(text, 0)
     override fun type(text: String, modifiers: String): Int = type(text, SKryptonKeyboard.parseModifiers(modifiers))
     override fun type(text: String, modifiers: Int): Int {
-        keyboard.type(center, text, modifiers)
+        keyboard.type(null, text, modifiers)
         return 1
     }
 
