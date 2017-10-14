@@ -217,16 +217,12 @@ bintray {
 
 if (version.toString().endsWith("SNAPSHOT")) {
     if (publishApiKey == null || publishApiKey.isEmpty()) {
-        tasks.findAll { it.group == 'publishing' }.each {
-            it.enabled = false
-        }
+        tasks.artifactoryPublish.enabled = false
     }
     publish.dependsOn 'artifactoryPublish'
 } else {
     if (bintrayKey == null || bintrayKey.isEmpty()) {
-        tasks.findAll { it.group == 'publishing' }.each {
-            it.enabled = false
-        }
+        tasks.bintrayUpload.enabled = false
     }
     publish.dependsOn 'bintrayUpload'
 }
