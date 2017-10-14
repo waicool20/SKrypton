@@ -222,6 +222,7 @@ bintray {
         vcsUrl = 'https://github.com/waicool20/SKrypton.git'
         version {
             name = rootProject.version
+            released = new Date()
         }
     }
 }
