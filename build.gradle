@@ -111,12 +111,33 @@ dokka {
     externalDocumentationLink { url = new URL("https://www.slf4j.org/api/") }
 }
 
+build.finalizedBy shadowJar, ':skrypton-native:nativeJarRelease'
+
+task buildAll {
+    group 'build'
+    dependsOn 'build', 'testJar', ':skrypton-native:nativeJarDebug'
+}
+
+//<editor-fold desc="Artifacts">
+
 shadowJar {
     classifier ""
     archiveName "${rootProject.name}.jar"
     dependencies {
         include(dependency("com.sikulix:sikulixlibs.*"))
     }
+}
+
+task docJar(type: ShadowJar) {
+    classifier "javadoc"
+    archiveName "${rootProject.name}-javadoc.jar"
+    from dokka.outputDirectory
+}
+
+task srcJar(type: ShadowJar) {
+    classifier "sources"
+    archiveName "${rootProject.name}-sources.jar"
+    from sourceSets.main.allSource
 }
 
 task testJar(type: ShadowJar) {
@@ -129,19 +150,9 @@ task testJar(type: ShadowJar) {
     }
 }
 
-task srcJar(type: ShadowJar) {
-    classifier "sources"
-    archiveName "${rootProject.name}-sources.jar"
-    from sourceSets.main.allSource
-}
-
 jar.enabled = false
-build.finalizedBy shadowJar, ':skrypton-native:nativeJarRelease'
 
-task buildAll {
-    group 'build'
-    dependsOn 'build', 'testJar', ':skrypton-native:nativeJarDebug'
-}
+//</editor-fold>
 
 //<editor-fold desc="Publishing">
 
@@ -156,6 +167,7 @@ publishing {
         SKryptonAPI(MavenPublication) {
             artifact shadowJar
             artifact srcJar
+            artifact docJar
             pom.withXml {
                 asNode().children().last() + {
                     resolveStrategy = Closure.DELEGATE_FIRST
@@ -167,6 +179,7 @@ publishing {
                         license {
                             name "The MIT License (MIT)"
                             url "http://opensource.org/licenses/MIT"
+                            distribution "repo"
                         }
                     }
                     developers {
@@ -228,7 +241,7 @@ artifactory {
     clientConfig.info.setBuildName('SKrypton-API')
 }
 
-artifactoryPublish.dependsOn 'srcJar'
+artifactoryPublish.dependsOn 'shadowJar', 'srcJar', 'docJar'
 publish.dependsOn 'artifactoryPublish'
 
 //</editor-fold>

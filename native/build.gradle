@@ -183,6 +183,7 @@ publishing {
                         license {
                             name "The MIT License (MIT)"
                             url "http://opensource.org/licenses/MIT"
+                            distribution "repo"
                         }
                     }
                     developers {
