@@ -1,4 +1,4 @@
-# SKrypton [![Build Status](https://travis-ci.org/waicool20/SKrypton.svg?branch=master)](https://travis-ci.org/waicool20/SKrypton) [![Build status](https://ci.appveyor.com/api/projects/status/ymrghyv7oas5q2iu?svg=true)](https://ci.appveyor.com/project/waicool20/skrypton)
+# SKrypton [![Build Status](https://travis-ci.org/waicool20/SKrypton.svg?branch=master)](https://travis-ci.org/waicool20/SKrypton) [![Build status](https://ci.appveyor.com/api/projects/status/ymrghyv7oas5q2iu?svg=true)](https://ci.appveyor.com/project/waicool20/skrypton) [ ![Download](https://api.bintray.com/packages/waicool20/SKrypton/skrypton-api/images/download.svg) ](https://bintray.com/waicool20/SKrypton/skrypton-api/_latestVersion)
 
 A browser automation library that uses the SikuliX framework but doesn't grab the mouse.
 
@@ -26,16 +26,35 @@ port is enabled.
 
 - Requires [Java JRE 8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) installed
 - SKrypton Native components (Installable Jar, just double click and follow instructions)
-    - [Windows 64-bit](https://oss.jfrog.org/artifactory/oss-snapshot-local/com/waicool20/skrypton/skrypton-native-windows64)
-    - [Linux 64-bit](https://oss.jfrog.org/artifactory/oss-snapshot-local/com/waicool20/skrypton/skrypton-native-linux64)
+    - [Windows 64-bit](https://bintray.com/waicool20/SKrypton/skrypton-native-windows64#files)
+    - [Linux 64-bit](https://bintray.com/waicool20/SKrypton/skrypton-native-linux64#files)
     - I don't own a Mac, so no builds for it yet sorry.
 
 ### Developing with the API:
 
-No official build has been released yet, [but snapshots are available here](https://oss.jfrog.org/artifactory/oss-snapshot-local/com/waicool20/skrypton/skrypton-api) 
+#### Official builds
 
-To include the library API in your project you can add this snippet to your `build.gradle` file,
-replace `DATE_AND_BUILD` with a specific snapshot (Take a look in the link above and get the latest one)
+SKrypton is available on the jcenter repository, replace `VERSION` with the version specified by the
+badge above or your own choosing.
+
+```
+repositories {
+    // For resolving SKrypton artifacts
+    jcenter()
+    // For resolving SikuliX artifacts
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+}
+dependencies {
+    compile group: 'com.waicool20.skrypton', name: 'skrypton-api', version: 'VERSION'
+}
+```
+
+#### Snapshots
+
+[Snapshots for api jar are available here](https://oss.jfrog.org/artifactory/oss-snapshot-local/com/waicool20/skrypton/skrypton-api) 
+
+To include the library API snapshot in your project you can add this snippet to your `build.gradle` file,
+replace `VERSION` with a specific snapshot (Take a look in the link above and get the latest one)
 
 ```
 repositories {
@@ -45,11 +64,13 @@ repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 dependencies {
-    compile group: 'com.waicool20.skrypton', name: 'skrypton-api', version: '1.0.0-DATE_AND_BUILD'
+    compile group: 'com.waicool20.skrypton', name: 'skrypton-api', version: 'VERSION'
 }
 ```
 
-Quick start (Kotlin API):
+[Snapshots for the installers are also available in the group directory](https://oss.jfrog.org/artifactory/oss-snapshot-local/com/waicool20/skrypton/)
+
+#### Quick start (Kotlin API):
 
 ```kotlin
 fun main(args: Array<String>) {
