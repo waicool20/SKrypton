@@ -24,12 +24,6 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
  * THE SOFTWARE.
  */
 
-apply from: '../common.gradle'
-apply plugin: 'kotlin'
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'com.jfrog.artifactory'
-apply plugin: 'maven-publish'
-
 group 'com.waicool20.skrypton'
 version '1.0.0-SNAPSHOT'
 
@@ -173,36 +167,11 @@ publishing {
             artifactId artifactName
             artifact nativeJarRelease
             pom.withXml {
-                asNode().children().last() + {
-                    resolveStrategy = Closure.DELEGATE_FIRST
-                    name artifactName
-                    description "A browser automation library that uses SikuliX and doesn't grab grab your mouse"
-                    url "https://github.com/waicool20/SKrypton"
-                    packaging "jar"
-                    licenses {
-                        license {
-                            name "The MIT License (MIT)"
-                            url "http://opensource.org/licenses/MIT"
-                            distribution "repo"
-                        }
-                    }
-                    developers {
-                        developer {
-                            name "waicool20"
-                            email "waicool20@gmail.com"
-                            organization "waicool20"
-                            organizationUrl "https://www.waicool20.com"
-                        }
-                    }
-                    scm {
-                        url "https://github.com/waicool20/SKrypton"
-                        connection "scm:git:git://github.com/waicool20/SKrypton.git"
-                        developerConnection "scm:git:ssh://github.com/waicool20/SKrypton.git"
-                    }
-                }
+                asNode().appendNode('name', artifactName)
+                asNode().children().last() + commonPom
                 def deps = asNode().appendNode('dependencies')
                 configurations.compile.dependencies.each {
-                    if((it.group != null) && (it.name != null) && (it.version != null)) {
+                    if ((it.group != null) && (it.name != null) && (it.version != null)) {
                         def dep = deps.appendNode('dependency')
                         dep.appendNode('groupId', it.group)
                         dep.appendNode('artifactId', it.name)
@@ -231,6 +200,35 @@ artifactory {
     clientConfig.info.setBuildName('SKrypton-Native')
 }
 
-publish.dependsOn 'artifactoryPublish'
+bintray {
+    user = 'waicool20'
+    key = bintrayKey
+    publications = ['nativeReleaseJar']
+    pkg {
+        repo = 'SKrypton'
+        name = artifactName
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/waicool20/SKrypton.git'
+        version {
+            name = project.version
+        }
+    }
+}
+
+if (version.toString().endsWith("SNAPSHOT")) {
+    if (publishApiKey == null || publishApiKey.isEmpty()) {
+        tasks.findAll { it.group == 'publishing' }.each {
+            it.enabled = false
+        }
+    }
+    publish.dependsOn 'artifactoryPublish'
+} else {
+    if (bintrayKey == null || bintrayKey.isEmpty()) {
+        tasks.findAll { it.group == 'publishing' }.each {
+            it.enabled = false
+        }
+    }
+    publish.dependsOn 'bintrayUpload'
+}
 
 //</editor-fold>

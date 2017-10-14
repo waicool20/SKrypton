@@ -5,6 +5,8 @@ environment:
   CMAKE_PREFIX_PATH: C:\Qt\5.9.1\msvc2017_64
   PUBLISH_API_KEY:
     secure: +mjQC37Gn054BdTkcJSxPlzPt5eJ9DRdQuxJOvPJr8paGGSjC890jMM/zHoomRezwPU3WEO1tPF0qdd6/FiNN3Bz702wpCW7zWcWWD4gRRk=
+  BINTRAY_KEY:
+    secure: 87qQgEo+VF9WBRMvuz/IZwfBECwSFf/om58yi1uYmINrAx8DOJed4iJ3MpSrs1B9
 
 build_script:
 - cmd: .\gradlew.bat build

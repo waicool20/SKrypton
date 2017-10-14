@@ -49,6 +49,40 @@ static String getPublishAPIKey() {
     return key
 }
 
+static String getBintrayKey() {
+    String key = System.getenv("BINTRAY_KEY")
+    if (key == null) println("Bintray key not found, it might not be set.")
+    return key
+}
+
+def commonPom = {
+    resolveStrategy = Closure.DELEGATE_FIRST
+    description "A browser automation library that uses SikuliX and doesn't grab grab your mouse"
+    url "https://github.com/waicool20/SKrypton"
+    packaging "jar"
+    licenses {
+        license {
+            name "The MIT License (MIT)"
+            url "http://opensource.org/licenses/MIT"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            name "waicool20"
+            email "waicool20@gmail.com"
+            organization "waicool20"
+            organizationUrl "https://www.waicool20.com"
+        }
+    }
+    scm {
+        url "https://github.com/waicool20/SKrypton"
+        connection "scm:git:git://github.com/waicool20/SKrypton.git"
+        developerConnection "scm:git:ssh://github.com/waicool20/SKrypton.git"
+    }
+}
+
+
 ext {
     ext.isLinux = currentOS.isLinux()
     ext.isWindows = currentOS.isWindows()
@@ -57,11 +91,13 @@ ext {
     ext.is32Bit = is32Bit()
     ext.is64Bit = is64Bit()
     ext.commandExists = this.&commandExists
+    ext.commonPom = commonPom
 
     ext.cmakeBuildDebugDir = 'cmake-build-debug'
     ext.cmakeBuildReleaseDir = 'cmake-build-release'
 
     ext.publishApiKey = getPublishAPIKey()
+    ext.bintrayKey = getBintrayKey()
 
     if (currentOS.isLinux()) {
         ext.osName = "Linux"
