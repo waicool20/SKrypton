@@ -40,7 +40,7 @@ buildscript {
 
 plugins {
     id 'com.github.johnrengelman.shadow' version '1.2.4'
-    id "com.jfrog.artifactory" version "4.5.2"
+    id "com.jfrog.artifactory" version "4.5.4"
 }
 
 allprojects {
@@ -151,7 +151,6 @@ task testJar(type: ShadowJar) {
 }
 
 jar.enabled = false
-
 //</editor-fold>
 
 //<editor-fold desc="Publishing">
@@ -230,13 +229,8 @@ artifactory {
         }
         defaults {
             publications('SKryptonAPI')
-            publishArtifacts = true
             properties = ['qa.level': 'basic', 'dev.team': 'core']
-            publishPom = true
         }
-    }
-    resolve {
-        repoKey = 'jcenter'
     }
     clientConfig.info.setBuildName('SKrypton-API')
 }

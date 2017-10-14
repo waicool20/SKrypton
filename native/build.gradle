@@ -225,13 +225,8 @@ artifactory {
         }
         defaults {
             publications('nativeReleaseJar')
-            publishArtifacts = true
             properties = ['qa.level': 'basic', 'dev.team': 'core']
-            publishPom = true
         }
-    }
-    resolve {
-        repoKey = 'jcenter'
     }
     clientConfig.info.setBuildName('SKrypton-Native')
 }
