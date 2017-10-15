@@ -152,6 +152,21 @@ refreshCMakeRelease.dependsOn copyKotlinStdLib
 build.finalizedBy nativeJarRelease
 jar.enabled = false
 
+task docJar(type: ShadowJar) {
+    classifier "javadoc"
+    archiveName "${artifactName}-javadoc.jar"
+    def file = new File("$projectDir/build/tmp/README")
+    file.createNewFile()
+    file.text = "No documentation is available for skrypton-native components."
+    from file
+}
+
+task srcJar(type: ShadowJar) {
+    classifier "sources"
+    archiveName "${artifactName}-sources.jar"
+    from sourceSets.main.allSource
+}
+
 //<editor-fold  desc="Publishing">
 
 // Skip publish task if api key is not provided
@@ -163,9 +178,11 @@ if (publishApiKey == null || publishApiKey.isEmpty()) {
 
 publishing {
     publications {
-        nativeReleaseJar(MavenPublication) {
+        SKryptonNative(MavenPublication) {
             artifactId artifactName
             artifact nativeJarRelease
+            artifact srcJar
+            artifact docJar
             pom.withXml {
                 asNode().appendNode('name', artifactName)
                 asNode().children().last() + commonPom
@@ -193,21 +210,25 @@ artifactory {
             maven = true
         }
         defaults {
-            publications('nativeReleaseJar')
+            publications('SKryptonNative')
             properties = ['qa.level': 'basic', 'dev.team': 'core']
         }
     }
     clientConfig.info.setBuildName('SKrypton-Native')
 }
 
+artifactoryPublish.dependsOn 'nativeJarRelease', 'srcJar', 'docJar'
+
 bintray {
     user = 'waicool20'
     key = bintrayKey
-    publications = ['nativeReleaseJar']
+    publications = ['SKryptonNative']
     pkg {
         repo = 'SKrypton'
         name = artifactName
         licenses = ['MIT']
+        websiteUrl = 'https://github.com/waicool20/SKrypton'
+        issueTrackerUrl = 'https://github.com/waicool20/SKrypton/issues'
         vcsUrl = 'https://github.com/waicool20/SKrypton.git'
         version {
             name = project.version
@@ -215,6 +236,8 @@ bintray {
         }
     }
 }
+
+bintrayUpload.dependsOn 'nativeJarRelease', 'srcJar', 'docJar'
 
 if (version.toString().endsWith("SNAPSHOT")) {
     if (publishApiKey == null || publishApiKey.isEmpty()) {

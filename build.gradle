@@ -120,7 +120,8 @@ build.finalizedBy shadowJar, ':skrypton-native:nativeJarRelease'
 
 task buildAll {
     group 'build'
-    dependsOn 'build', 'testJar', ':skrypton-native:nativeJarDebug'
+    dependsOn 'shadowJar', 'srcJar', 'docJar', 'testJar', ':skrypton-native:shadowJar',
+            ':skrypton-native:nativeJarDebug', ':skrypton-native:srcJar', ':skrypton-native:docJar'
 }
 
 //<editor-fold desc="Artifacts">
@@ -219,6 +220,8 @@ bintray {
         repo = 'SKrypton'
         name = 'skrypton-api'
         licenses = ['MIT']
+        websiteUrl = 'https://github.com/waicool20/SKrypton'
+        issueTrackerUrl = 'https://github.com/waicool20/SKrypton/issues'
         vcsUrl = 'https://github.com/waicool20/SKrypton.git'
         version {
             name = rootProject.version
@@ -226,6 +229,8 @@ bintray {
         }
     }
 }
+
+bintrayUpload.dependsOn 'shadowJar', 'srcJar', 'docJar'
 
 if (version.toString().endsWith("SNAPSHOT")) {
     if (publishApiKey == null || publishApiKey.isEmpty()) {
