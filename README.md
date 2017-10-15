@@ -25,9 +25,9 @@ port is enabled.
 ### I just want to run a SKrypton program!:
 
 - Requires [Java JRE 8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) installed
-- SKrypton Native components (Installable Jar, just double click and follow instructions)
-    - [Windows 64-bit](https://bintray.com/waicool20/SKrypton/skrypton-native-windows64#files)
-    - [Linux 64-bit](https://bintray.com/waicool20/SKrypton/skrypton-native-linux64#files)
+- SKrypton Native components (Installable Jar under Downloads, just double click and follow instructions)
+    - [Windows 64-bit](https://bintray.com/waicool20/SKrypton/skrypton-native-windows64#)
+    - [Linux 64-bit](https://bintray.com/waicool20/SKrypton/skrypton-native-linux64#)
     - I don't own a Mac, so no builds for it yet sorry.
 
 ### Developing with the API:
