@@ -65,7 +65,7 @@ apply from: "common.gradle"
 apply plugin: 'java'
 
 group 'com.waicool20.skrypton'
-version '1.0.0-alpha'
+version '1.0.1-SNAPSHOT'
 
 sourceCompatibility = 1.8
 

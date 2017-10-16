@@ -57,7 +57,7 @@ static String getBintrayKey() {
 
 def commonPom = {
     resolveStrategy = Closure.DELEGATE_FIRST
-    description "A browser automation library that uses SikuliX and doesn't grab grab your mouse"
+    description "A browser automation library that uses SikuliX and doesn't grab your mouse."
     url "https://github.com/waicool20/SKrypton"
     packaging "jar"
     licenses {
