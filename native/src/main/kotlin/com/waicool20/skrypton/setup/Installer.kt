@@ -75,8 +75,8 @@ object Installer {
     }
 
     private fun copyResources(rootPath: Path,
-                      dropElements: Int,
-                      callback: (file: String, index: Int, total: Int) -> Unit) {
+                              dropElements: Int,
+                              callback: (file: String, index: Int, total: Int) -> Unit) {
         val jobs = Files.walk(rootPath).filter { it.nameCount > dropElements && !Files.isDirectory(it) }
                 .map { it to skryptonAppDir.resolve("${it.subpath(dropElements, it.nameCount)}") }.toList()
 

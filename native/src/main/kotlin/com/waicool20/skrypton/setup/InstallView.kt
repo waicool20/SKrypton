@@ -25,22 +25,17 @@
 package com.waicool20.skrypton.setup
 
 import javafx.application.Platform
+import javafx.scene.control.Button
 import javafx.scene.control.ProgressBar
 import javafx.scene.control.TextArea
 import javafx.scene.layout.GridPane
 import javafx.scene.text.Text
-import org.sikuli.script.ImagePath
-import org.slf4j.LoggerFactory
 import tornadofx.*
-import java.io.InputStream
 import java.io.OutputStream
 import java.io.PrintStream
-import java.net.URI
-import java.nio.file.*
-import java.nio.file.attribute.PosixFilePermission
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
-import kotlin.streams.toList
+import kotlin.system.exitProcess
 
 class InstallView : View() {
     override val root by fxml<GridPane>("/install.fxml")
@@ -48,6 +43,7 @@ class InstallView : View() {
     private val progressText by fxid<Text>()
     private val progressTextArea by fxid<TextArea>()
     private val progressBar by fxid<ProgressBar>()
+    private val closeButton by fxid<Button>()
 
     init {
         title = "SKrypton Native components installer"
@@ -68,6 +64,7 @@ class InstallView : View() {
             }
         }
         System.setOut(PrintStream(TeeOutputStream(System.out, textOutputStream)))
+        closeButton.setOnAction { exitProcess(0) }
         thread {
             TimeUnit.MILLISECONDS.sleep(300)
             startInstall()
@@ -90,5 +87,6 @@ class InstallView : View() {
         Installer.installSikuliXLibs()
         Platform.runLater { progressText.text = "All done!" }
         Installer.cleanup()
+        closeButton.isVisible = true
     }
 }
