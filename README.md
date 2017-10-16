@@ -34,13 +34,13 @@ port is enabled.
 
 #### Official builds
 
-SKrypton is available on the jcenter repository, replace `VERSION` with the version specified by the
-badge above or your own choosing.
+SKrypton is available on the jcenter and maven central repository, replace `VERSION` with the 
+version specified by the badge above or a version of your own choosing.
 
 ```
 repositories {
     // For resolving SKrypton artifacts
-    jcenter()
+    jcenter()       // or mavenCentral()
     // For resolving SikuliX artifacts
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
@@ -158,4 +158,4 @@ Native component Jars are generated under:
 
 # License
 
-This project is licensed under the MIT license. See LICENSE.md for more details.
+This project is licensed under the MIT license. See [LICENSE.md](LICENSE.md) for more details.
