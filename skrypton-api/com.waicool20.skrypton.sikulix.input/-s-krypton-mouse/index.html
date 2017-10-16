@@ -1,0 +1,142 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SKryptonMouse - skrypton-api</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href="../index.html">com.waicool20.skrypton.sikulix.input</a>&nbsp;/&nbsp;<a href=".">SKryptonMouse</a><br/>
+<br/>
+<h1>SKryptonMouse</h1>
+<code><span class="keyword">class </span><span class="identifier">SKryptonMouse</span></code>
+<p>Class representing a virtual mouse for a <a href="../../com.waicool20.skrypton.sikulix/-s-krypton-screen/index.html">com.waicool20.skrypton.sikulix.SKryptonScreen</a>
+This class is also in charge of coordinating mouse actions between threads, unlike <a href="../-s-krypton-robot/index.html">SKryptonRobot</a>
+all functions are synchronized and thus only one thread may have access to keyboard actions.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SKryptonMouse</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$<init>(com.waicool20.skrypton.sikulix.input.SKryptonRobot)/robot">robot</span><span class="symbol">:</span>&nbsp;<a href="../-s-krypton-robot/index.html"><span class="identifier">SKryptonRobot</span></a><span class="symbol">)</span></code>
+<p>Main constructor</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="robot.html">robot</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">robot</span><span class="symbol">: </span><a href="../-s-krypton-robot/index.html"><span class="identifier">SKryptonRobot</span></a></code>
+<p><a href="../-s-krypton-robot/index.html">SKryptonRobot</a> used for generating actions.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="atomic-action.html">atomicAction</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">atomicAction</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$atomicAction(kotlin.Function0((com.waicool20.skrypton.sikulix.input.SKryptonMouse.atomicAction.T)))/action">action</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code>
+<p>Executes an action atomically while keeping the synchronized lock to this object.
+Useful if you want to do multiple actions in one go without the possibility of a thread
+stealing ownership.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="click.html">click</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">click</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$click(org.sikuli.script.Location, kotlin.Int, kotlin.Int)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$click(org.sikuli.script.Location, kotlin.Int, kotlin.Int)/buttons">buttons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$click(org.sikuli.script.Location, kotlin.Int, kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Sends a click at a given location</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="double-click.html">doubleClick</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">doubleClick</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$doubleClick(org.sikuli.script.Location, kotlin.Int, kotlin.Int)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$doubleClick(org.sikuli.script.Location, kotlin.Int, kotlin.Int)/buttons">buttons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$doubleClick(org.sikuli.script.Location, kotlin.Int, kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Sends a double click at a given location</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="drag.html">drag</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">drag</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$drag(org.sikuli.script.Location, kotlin.Boolean)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$drag(org.sikuli.script.Location, kotlin.Boolean)/resetDelays">resetDelays</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Initiates a mouse drag action. (Moves mouse to a location and presses without releasing)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="drag-drop.html">dragDrop</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">dragDrop</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$dragDrop(org.sikuli.script.Location, org.sikuli.script.Location)/loc1">loc1</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$dragDrop(org.sikuli.script.Location, org.sikuli.script.Location)/loc2">loc2</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Same as calling <a href="drag.html">drag</a> with <a href="drag-drop.html#com.waicool20.skrypton.sikulix.input.SKryptonMouse$dragDrop(org.sikuli.script.Location, org.sikuli.script.Location)/loc1">loc1</a> then <a href="drop-at.html">dropAt</a> with <a href="drag-drop.html#com.waicool20.skrypton.sikulix.input.SKryptonMouse$dragDrop(org.sikuli.script.Location, org.sikuli.script.Location)/loc2">loc2</a> but does this all at once while
+keeping the lock to this object.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="drop-at.html">dropAt</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">dropAt</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$dropAt(org.sikuli.script.Location, kotlin.Boolean)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$dropAt(org.sikuli.script.Location, kotlin.Boolean)/resetDelays">resetDelays</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Ends a mouse drop action. (Moves mouse to a location and releases the button)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mouse-down.html">mouseDown</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">mouseDown</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$mouseDown(kotlin.Int)/buttons">buttons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Presses mouse buttons.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mouse-up.html">mouseUp</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">mouseUp</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$mouseUp(kotlin.Int)/buttons">buttons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Releases mouse buttons.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="move-to.html">moveTo</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">moveTo</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$moveTo(org.sikuli.script.Location)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Moves the mouse cursor to a given location.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="spin-wheel.html">spinWheel</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">spinWheel</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$spinWheel(org.sikuli.script.Location, kotlin.Int, kotlin.Int, kotlin.Int)/location">location</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$spinWheel(org.sikuli.script.Location, kotlin.Int, kotlin.Int, kotlin.Int)/direction">direction</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$spinWheel(org.sikuli.script.Location, kotlin.Int, kotlin.Int, kotlin.Int)/steps">steps</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonMouse$spinWheel(org.sikuli.script.Location, kotlin.Int, kotlin.Int, kotlin.Int)/stepDelay">stepDelay</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Spins the mouse wheel.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

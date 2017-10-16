@@ -1,0 +1,274 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SKryptonRobot - skrypton-api</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href="../index.html">com.waicool20.skrypton.sikulix.input</a>&nbsp;/&nbsp;<a href=".">SKryptonRobot</a><br/>
+<br/>
+<h1>SKryptonRobot</h1>
+<code><span class="keyword">class </span><span class="identifier">SKryptonRobot</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/IRobot.html"><span class="identifier">IRobot</span></a></code>
+<p>A class representing a <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/IRobot.html">org.sikuli.script.IRobot</a> that can be used to control a <a href="../../com.waicool20.skrypton.sikulix/-s-krypton-screen/index.html">SKryptonScreen</a>,
+not recommended for normal use as this is not thread safe, any actions generated will be
+unpredictable behaviour. It is recommended to use <a href="../-s-krypton-keyboard/index.html">SKryptonKeyboard</a> and <a href="../-s-krypton-mouse/index.html">SKryptonMouse</a> as
+a thread safe wrapper to control this robot.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SKryptonRobot</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$<init>(com.waicool20.skrypton.sikulix.SKryptonScreen)/screen">screen</span><span class="symbol">:</span>&nbsp;<a href="../../com.waicool20.skrypton.sikulix/-s-krypton-screen/index.html"><span class="identifier">SKryptonScreen</span></a><span class="symbol">)</span></code>
+<p>Main constructor</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="screen.html">screen</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">screen</span><span class="symbol">: </span><a href="../../com.waicool20.skrypton.sikulix/-s-krypton-screen/index.html"><span class="identifier">SKryptonScreen</span></a></code>
+<p><a href="../../com.waicool20.skrypton.sikulix/-s-krypton-screen/index.html">SKryptonScreen</a> that is bound to this robot.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="capture-screen.html">captureScreen</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">captureScreen</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$captureScreen(java.awt.Rectangle)/screenRect">screenRect</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html"><span class="identifier">Rectangle</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/ScreenImage.html"><span class="identifier">ScreenImage</span></a></code>
+<p>Takes a screenshot of the screen bound to this robot</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="cleanup.html">cleanup</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">cleanup</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Does nothing, ignore.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="click-ends.html">clickEnds</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clickEnds</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Does nothing, ignore.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="click-starts.html">clickStarts</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">clickStarts</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Does nothing, ignore.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="delay.html">delay</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">delay</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$delay(kotlin.Int)/ms">ms</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Sleeps the current thread for a duration</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-color-at.html">getColorAt</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getColorAt</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$getColorAt(kotlin.Int, kotlin.Int)/x">x</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$getColorAt(kotlin.Int, kotlin.Int)/y">y</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html"><span class="identifier">Color</span></a></code>
+<p>Gets the color of the pixel at coordinates.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-screen.html">getScreen</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getScreen</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/IScreen.html"><span class="identifier">IScreen</span></a></code>
+<p>Gets the bound screen instance.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-remote.html">isRemote</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isRemote</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Returns whether or not the robot is controlling a remote screen. Always true.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="key-down.html">keyDown</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">keyDown</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$keyDown(kotlin.Int)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Presses key with the given code.</p>
+<code><span class="keyword">fun </span><span class="identifier">keyDown</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$keyDown(kotlin.String)/keys">keys</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Presses keys specified in a string.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="key-up.html">keyUp</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">keyUp</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases all keys.</p>
+<code><span class="keyword">fun </span><span class="identifier">keyUp</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$keyUp(kotlin.Int)/code">code</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases key with the given code.</p>
+<code><span class="keyword">fun </span><span class="identifier">keyUp</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$keyUp(kotlin.String)/keys">keys</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases keys specified in a string</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mouse-down.html">mouseDown</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">mouseDown</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$mouseDown(kotlin.Int)/buttons">buttons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Presses mouse buttons.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mouse-move.html">mouseMove</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">mouseMove</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$mouseMove(kotlin.Int, kotlin.Int)/x">x</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$mouseMove(kotlin.Int, kotlin.Int)/y">y</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Moves the mouse to the coordinates instantly.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mouse-reset.html">mouseReset</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">mouseReset</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Resets the mouse state. Mouse is moved to (0, 0) and all buttons are released.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mouse-up.html">mouseUp</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">mouseUp</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$mouseUp(kotlin.Int)/buttons">buttons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Releases mouse buttons.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mouse-wheel.html">mouseWheel</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">mouseWheel</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$mouseWheel(kotlin.Int)/wheelAmt">wheelAmt</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Spins the mouse wheel.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="press-modifiers.html">pressModifiers</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">pressModifiers</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$pressModifiers(kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Presses key modifiers.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="release-modifiers.html">releaseModifiers</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">releaseModifiers</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$releaseModifiers(kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases key modifiers.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-auto-delay.html">setAutoDelay</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">setAutoDelay</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$setAutoDelay(kotlin.Int)/ms">ms</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Sets the auto delay for this robot.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="smooth-move.html">smoothMove</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">smoothMove</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$smoothMove(org.sikuli.script.Location)/dest">dest</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Moves the mouse to the destination in a smooth fashion.</p>
+<code><span class="keyword">fun </span><span class="identifier">smoothMove</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$smoothMove(org.sikuli.script.Location, org.sikuli.script.Location, kotlin.Long)/src">src</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$smoothMove(org.sikuli.script.Location, org.sikuli.script.Location, kotlin.Long)/dest">dest</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$smoothMove(org.sikuli.script.Location, org.sikuli.script.Location, kotlin.Long)/ms">ms</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Moves the mouse from a source to the destination in a smooth fashion.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="type-char.html">typeChar</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">typeChar</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$typeChar(kotlin.Char, org.sikuli.script.IRobot.KeyMode)/character">character</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char/index.html"><span class="identifier">Char</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$typeChar(kotlin.Char, org.sikuli.script.IRobot.KeyMode)/mode">mode</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/IRobot/KeyMode.html"><span class="identifier">KeyMode</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Types a given character.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="type-ends.html">typeEnds</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">typeEnds</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Does nothing, ignore.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="type-key.html">typeKey</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">typeKey</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.input.SKryptonRobot$typeKey(kotlin.Int)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Types a given key.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="type-starts.html">typeStarts</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">typeStarts</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Does nothing, ignore.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="wait-for-idle.html">waitForIdle</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">waitForIdle</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Does nothing, ignore.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

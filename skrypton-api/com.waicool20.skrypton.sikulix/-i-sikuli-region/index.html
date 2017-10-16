@@ -1,0 +1,479 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ISikuliRegion - skrypton-api</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href="../index.html">com.waicool20.skrypton.sikulix</a>&nbsp;/&nbsp;<a href=".">ISikuliRegion</a><br/>
+<br/>
+<h1>ISikuliRegion</h1>
+<code><span class="keyword">interface </span><span class="identifier">ISikuliRegion</span></code>
+<p>Interfaces that copies most of the <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html">Region</a> APIs
+Mainly used for allowing easy delegation of <a href="../-s-krypton-match/index.html">SKryptonMatch</a> functions to <a href="../-s-krypton-region/index.html">SKryptonRegion</a>.
+See <a href="http://doc.sikuli.org/region.html">here</a> for more information.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="above.html">above</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">above</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Gets the region above the top side with same width, the new region extends to the top screen
+border.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">above</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$above(kotlin.Int)/height">height</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Gets the region above the top side with same width, the new region extends by <code>height</code> pixels.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="below.html">below</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">below</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Gets the region below the bottom side with same width, the new region extends to the bottom
+screen border.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">below</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$below(kotlin.Int)/height">height</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Gets the region below the bottom side with same width, the new region extends by <code>height</code> pixels.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="click.html">click</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">click</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Left click at the region's last successful match, uses center if there is no last match.
+If region is a match, click targetOffset.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">click</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$click(com.waicool20.skrypton.sikulix.ISikuliRegion.click.PFRML)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Attempts to find the target and click it.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">click</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$click(com.waicool20.skrypton.sikulix.ISikuliRegion.click.PFRML, kotlin.Int)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$click(com.waicool20.skrypton.sikulix.ISikuliRegion.click.PFRML, kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Attempts to find the target and click it with modifiers.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="compare-to.html">compareTo</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">compareTo</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$compareTo(org.sikuli.script.Region)/region">region</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html"><span class="identifier">Region</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Compares the regions in terms of area.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="double-click.html">doubleClick</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">doubleClick</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">doubleClick</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$doubleClick(com.waicool20.skrypton.sikulix.ISikuliRegion.doubleClick.PFRML)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">doubleClick</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$doubleClick(com.waicool20.skrypton.sikulix.ISikuliRegion.doubleClick.PFRML, kotlin.Int)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$doubleClick(com.waicool20.skrypton.sikulix.ISikuliRegion.doubleClick.PFRML, kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Like <a href="click.html">click</a> but double that.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="drag.html">drag</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">drag</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$drag(com.waicool20.skrypton.sikulix.ISikuliRegion.drag.PFRML)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Initiates a mouse drag action. (Moves mouse to a location and presses without releasing)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="drag-drop.html">dragDrop</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">dragDrop</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$dragDrop(com.waicool20.skrypton.sikulix.ISikuliRegion.dragDrop.PFRML)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Drags from region's last match and drop at given target using left mouse button.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">dragDrop</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$dragDrop(com.waicool20.skrypton.sikulix.ISikuliRegion.dragDrop.PFRML, com.waicool20.skrypton.sikulix.ISikuliRegion.dragDrop.PFRML)/t1">t1</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$dragDrop(com.waicool20.skrypton.sikulix.ISikuliRegion.dragDrop.PFRML, com.waicool20.skrypton.sikulix.ISikuliRegion.dragDrop.PFRML)/t2">t2</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Drag from a position and drop to another using left mouse button.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="drop-at.html">dropAt</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">dropAt</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$dropAt(com.waicool20.skrypton.sikulix.ISikuliRegion.dropAt.PFRML)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Ends a mouse drop action. (Moves mouse to a location and releases the button)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="exists.html">exists</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PSI</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">exists</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$exists(com.waicool20.skrypton.sikulix.ISikuliRegion.exists.PSI)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PSI</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-match/index.html"><span class="identifier">SKryptonMatch</span></a><span class="symbol">?</span></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PSI</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">exists</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$exists(com.waicool20.skrypton.sikulix.ISikuliRegion.exists.PSI, kotlin.Double)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PSI</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$exists(com.waicool20.skrypton.sikulix.ISikuliRegion.exists.PSI, kotlin.Double)/timeout">timeout</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-match/index.html"><span class="identifier">SKryptonMatch</span></a><span class="symbol">?</span></code>
+<p>Check if target exists (with the default autoWaitTimeout)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="find.html">find</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PSI</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">find</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$find(com.waicool20.skrypton.sikulix.ISikuliRegion.find.PSI)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PSI</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-match/index.html"><span class="identifier">SKryptonMatch</span></a></code>
+<p>Finds the given target in the region and returns the best match.
+If AutoWaitTimeout is set, this is equivalent to wait(). Otherwise only one search attempt
+will be done.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="find-all.html">findAll</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PSI</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">findAll</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$findAll(com.waicool20.skrypton.sikulix.ISikuliRegion.findAll.PSI)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PSI</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html"><span class="identifier">Iterator</span></a><span class="symbol">&lt;</span><a href="../-s-krypton-match/index.html"><span class="identifier">SKryptonMatch</span></a><span class="symbol">&gt;</span></code>
+<p>Finds all occurrences of the given target in the region and returns an
+<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html">Iterator</a> of <a href="../-s-krypton-match/index.html">SKryptonMatch</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-bottom-left.html">getBottomLeft</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getBottomLeft</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a></code>
+<p>Gets the bottom left location of the region.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-bottom-right.html">getBottomRight</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getBottomRight</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a></code>
+<p>Gets the bottom right location of the region.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-center.html">getCenter</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getCenter</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a></code>
+<p>Gets the center of the region.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-last-match.html">getLastMatch</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getLastMatch</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-match/index.html"><span class="identifier">SKryptonMatch</span></a><span class="symbol">?</span></code>
+<p>Gets the last match matched in this region.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-last-matches.html">getLastMatches</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getLastMatches</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html"><span class="identifier">Iterator</span></a><span class="symbol">&lt;</span><a href="../-s-krypton-match/index.html"><span class="identifier">SKryptonMatch</span></a><span class="symbol">&gt;</span></code>
+<p>Gets last matches matched in this region.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-location-from-target.html">getLocationFromTarget</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PSIMRL</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">getLocationFromTarget</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$getLocationFromTarget(com.waicool20.skrypton.sikulix.ISikuliRegion.getLocationFromTarget.PSIMRL)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PSIMRL</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a></code>
+<p>Gets the <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html">Location</a> of the target.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-top-left.html">getTopLeft</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getTopLeft</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a></code>
+<p>Gets the top left location of the region.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-top-right.html">getTopRight</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getTopRight</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a></code>
+<p>Gets the top right location of the region.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="grow.html">grow</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">grow</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$grow(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)/l">l</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$grow(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)/r">r</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$grow(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)/t">t</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$grow(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)/b">b</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">grow</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$grow(kotlin.Int, kotlin.Int)/w">w</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$grow(kotlin.Int, kotlin.Int)/h">h</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">grow</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$grow(kotlin.Int)/range">range</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Creates a region grown to the given values in pixels. Negative values can be passed to
+shrink instead.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">grow</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Creates a region grown in pixels specified by <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/basics/Settings.html#DefaultPadding">org.sikuli.basics.Settings.DefaultPadding</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="highlight.html">highlight</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">highlight</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Highlights the region.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">highlight</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$highlight(kotlin.String)/color">color</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Highlights the region with the given color</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">highlight</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$highlight(kotlin.Int)/secs">secs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">highlight</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$highlight(kotlin.Float)/secs">secs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Highlights the region for the given duration.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">highlight</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$highlight(kotlin.Int, kotlin.String)/secs">secs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$highlight(kotlin.Int, kotlin.String)/color">color</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">highlight</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$highlight(kotlin.Float, kotlin.String)/secs">secs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$highlight(kotlin.Float, kotlin.String)/color">color</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Highlights the region for the given duration and color.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="hover.html">hover</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">hover</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Move the mouse pointer to region's last successful match, uses center if no last match.
+If region is a match, move to targetOffset. Same as <a href="mouse-move.html">mouseMove</a>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">hover</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$hover(com.waicool20.skrypton.sikulix.ISikuliRegion.hover.PFRML)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Attempts to find the target and move the mouse pointer to it.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="intersection.html">intersection</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">intersection</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$intersection(org.sikuli.script.Region)/region">region</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html"><span class="identifier">Region</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Creates a region that is the intersection of the given regions.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="key-down.html">keyDown</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">keyDown</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$keyDown(kotlin.Int)/keycode">keycode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Presses a specific key.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">keyDown</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$keyDown(kotlin.String)/keys">keys</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Presses the keys specified by the string.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="key-up.html">keyUp</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">keyUp</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases all keys</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">keyUp</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$keyUp(kotlin.Int)/keycode">keycode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases a specific key.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">keyUp</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$keyUp(kotlin.String)/keys">keys</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases the keys specified by the string.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="left.html">left</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">left</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Gets the region left to the left side with same height, the new region extends to the left
+screen border.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">left</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$left(kotlin.Int)/width">width</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Gets the region left to the left side with same height, the new region extends by <code>width</code> pixels.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mouse-down.html">mouseDown</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">mouseDown</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$mouseDown(kotlin.Int)/buttons">buttons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Presses mouse buttons.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mouse-move.html">mouseMove</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">mouseMove</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Moves the mouse pointer to the region's last successful match. Same as <a href="hover.html">hover</a>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">mouseMove</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$mouseMove(kotlin.Int, kotlin.Int)/xoff">xoff</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$mouseMove(kotlin.Int, kotlin.Int)/yoff">yoff</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Moves the mouse from the current position to the offset position.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">mouseMove</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$mouseMove(com.waicool20.skrypton.sikulix.ISikuliRegion.mouseMove.PFRML)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Moves the mouse to the given target.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="mouse-up.html">mouseUp</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">mouseUp</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases all mouse buttons.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">mouseUp</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$mouseUp(kotlin.Int)/buttons">buttons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Releases mouse buttons.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="offset.html">offset</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">offset</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$offset(org.sikuli.script.Location)/loc">loc</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Returns a new Region object, whose upper left corner is relocated adding the location’s x
+and y value to the respective values of the given region. Width and height are the same.
+So this clones a region at a different place.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="paste.html">paste</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">paste</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$paste(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Pastes the given text into the current caret position.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">paste</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$paste(com.waicool20.skrypton.sikulix.ISikuliRegion.paste.PFRML, kotlin.String)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$paste(com.waicool20.skrypton.sikulix.ISikuliRegion.paste.PFRML, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Pastes the given text into the target.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="plus.html">plus</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">plus</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$plus(org.sikuli.script.Region)/region">region</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html"><span class="identifier">Region</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Same as <a href="union.html">union</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="right.html">right</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">right</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Gets the region right to the right side with same height, the new region extends to the right
+screen border.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">right</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$right(kotlin.Int)/width">width</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Gets the region right to the right side with same height, the new region extends by <code>width</code> pixels.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="right-click.html">rightClick</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">rightClick</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">rightClick</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$rightClick(com.waicool20.skrypton.sikulix.ISikuliRegion.rightClick.PFRML)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">rightClick</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$rightClick(com.waicool20.skrypton.sikulix.ISikuliRegion.rightClick.PFRML, kotlin.Int)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$rightClick(com.waicool20.skrypton.sikulix.ISikuliRegion.rightClick.PFRML, kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Like <a href="click.html">click</a> but uses right mouse button instead.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-location.html">setLocation</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setLocation</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$setLocation(org.sikuli.script.Location)/loc">loc</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Location.html"><span class="identifier">Location</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Set location of this region.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="set-r-o-i.html">setROI</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setROI</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setROI</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$setROI(java.awt.Rectangle)/rect">rect</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html"><span class="identifier">Rectangle</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setROI</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$setROI(org.sikuli.script.Region)/region">region</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html"><span class="identifier">Region</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">setROI</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$setROI(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)/X">X</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$setROI(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)/Y">Y</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$setROI(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)/W">W</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$setROI(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Int)/H">H</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Sets the Region of Interest, mainly used to speed up searches.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="type.html">type</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String, kotlin.String)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String, kotlin.Int)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String, kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Types the given text into the current caret position. Only ASCII characters are supported.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.String)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.String)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.Int)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.Int)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Types the given text into the target. Only ASCII characters are supported.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="union.html">union</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">union</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$union(org.sikuli.script.Region)/region">region</span><span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html"><span class="identifier">Region</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a></code>
+<p>Creates a new region containing both regions.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="wait.html">wait</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PSI</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">wait</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wait(com.waicool20.skrypton.sikulix.ISikuliRegion.wait.PSI)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PSI</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-match/index.html"><span class="identifier">SKryptonMatch</span></a></code>
+<p>Waits for the target to appear until the AutoWaitTimeout value is exceeded.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PSI</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">wait</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wait(com.waicool20.skrypton.sikulix.ISikuliRegion.wait.PSI, kotlin.Double)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PSI</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wait(com.waicool20.skrypton.sikulix.ISikuliRegion.wait.PSI, kotlin.Double)/timeout">timeout</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-s-krypton-match/index.html"><span class="identifier">SKryptonMatch</span></a></code>
+<p>Waits for the target to appear or timeout (in second) is passed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="wheel.html">wheel</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">wheel</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wheel(kotlin.Int, kotlin.Int)/direction">direction</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wheel(kotlin.Int, kotlin.Int)/steps">steps</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Spins the mouse wheel.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">wheel</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wheel(com.waicool20.skrypton.sikulix.ISikuliRegion.wheel.PFRML, kotlin.Int, kotlin.Int)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wheel(com.waicool20.skrypton.sikulix.ISikuliRegion.wheel.PFRML, kotlin.Int, kotlin.Int)/direction">direction</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wheel(com.waicool20.skrypton.sikulix.ISikuliRegion.wheel.PFRML, kotlin.Int, kotlin.Int)/steps">steps</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">wheel</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wheel(com.waicool20.skrypton.sikulix.ISikuliRegion.wheel.PFRML, kotlin.Int, kotlin.Int, kotlin.Int)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wheel(com.waicool20.skrypton.sikulix.ISikuliRegion.wheel.PFRML, kotlin.Int, kotlin.Int, kotlin.Int)/direction">direction</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wheel(com.waicool20.skrypton.sikulix.ISikuliRegion.wheel.PFRML, kotlin.Int, kotlin.Int, kotlin.Int)/steps">steps</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$wheel(com.waicool20.skrypton.sikulix.ISikuliRegion.wheel.PFRML, kotlin.Int, kotlin.Int, kotlin.Int)/stepDelay">stepDelay</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Spins the mouse wheel at the given target</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-s-krypton-match/index.html">SKryptonMatch</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonMatch</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Match.html"><span class="identifier">Match</span></a><span class="symbol">, </span><span class="identifier">ISikuliRegion</span></code>
+<p>A class subclassing <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Match.html">Match</a>, it is identical for the most part but allows the use of independent
+mouse and keyboard actions.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-s-krypton-region/index.html">SKryptonRegion</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">SKryptonRegion</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html"><span class="identifier">Region</span></a><span class="symbol">, </span><span class="identifier">ISikuliRegion</span></code>
+<p>A class subclassing <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html">Region</a>, it is identical for the most part but allows the use of independent
+mouse and keyboard actions.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

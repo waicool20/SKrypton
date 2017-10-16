@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.waicool20.skrypton.util - skrypton-api</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href=".">com.waicool20.skrypton.util</a><br/>
+<br/>
+<h2>Package com.waicool20.skrypton.util</h2>
+<p>Utility classes and functions.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-k-logger/index.html">KLogger</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">KLogger</span></code>
+<p>Class that wraps a <a href="https://www.slf4j.org/api/org/slf4j/Logger.html">Logger</a> instance, and adds logging functions which receive lambdas as their
+argument. These functions are lazily evaluated.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-o-s/index.html">OS</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">OS</span></code>
+<p>Operating system related utility functions and checks.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-system-utils/index.html">SystemUtils</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">SystemUtils</span></code>
+<p>System utility functions</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-dispose-fail-exception/index.html">DisposeFailException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DisposeFailException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code>
+<p>Exception thrown when error occurs during the disposal of a native component.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-initialization-error/index.html">InitializationError</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">InitializationError</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code>
+<p>Exception thrown during initialization.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extensions for External Classes</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="java.nio.file.-path/index.html">java.nio.file.Path</a></p>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="logger-for.html">loggerFor</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">loggerFor</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="-k-logger/index.html"><span class="identifier">KLogger</span></a></code>
+<p>Gets a <a href="-k-logger/index.html">KLogger</a> instance for a given class.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.waicool20.skrypton.sikulix.input - skrypton-api</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href=".">com.waicool20.skrypton.sikulix.input</a><br/>
+<br/>
+<h2>Package com.waicool20.skrypton.sikulix.input</h2>
+<p>Contains classes which provide input coordination to the SKryptonScreen.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-s-krypton-keyboard/index.html">SKryptonKeyboard</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonKeyboard</span></code>
+<p>Class representing a virtual keyboard for a <a href="../com.waicool20.skrypton.sikulix/-s-krypton-screen/index.html">com.waicool20.skrypton.sikulix.SKryptonScreen</a>
+This class is also in charge of coordinating keyboard actions between threads, unlike <a href="-s-krypton-robot/index.html">SKryptonRobot</a>
+all functions are synchronized and thus only one thread may have access to keyboard actions.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-s-krypton-mouse/index.html">SKryptonMouse</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonMouse</span></code>
+<p>Class representing a virtual mouse for a <a href="../com.waicool20.skrypton.sikulix/-s-krypton-screen/index.html">com.waicool20.skrypton.sikulix.SKryptonScreen</a>
+This class is also in charge of coordinating mouse actions between threads, unlike <a href="-s-krypton-robot/index.html">SKryptonRobot</a>
+all functions are synchronized and thus only one thread may have access to keyboard actions.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-s-krypton-robot/index.html">SKryptonRobot</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonRobot</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/IRobot.html"><span class="identifier">IRobot</span></a></code>
+<p>A class representing a <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/IRobot.html">org.sikuli.script.IRobot</a> that can be used to control a <a href="../com.waicool20.skrypton.sikulix/-s-krypton-screen/index.html">SKryptonScreen</a>,
+not recommended for normal use as this is not thread safe, any actions generated will be
+unpredictable behaviour. It is recommended to use <a href="-s-krypton-keyboard/index.html">SKryptonKeyboard</a> and <a href="-s-krypton-mouse/index.html">SKryptonMouse</a> as
+a thread safe wrapper to control this robot.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

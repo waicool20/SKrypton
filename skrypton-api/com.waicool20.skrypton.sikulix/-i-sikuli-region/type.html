@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ISikuliRegion.type - skrypton-api</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href="../index.html">com.waicool20.skrypton.sikulix</a>&nbsp;/&nbsp;<a href="index.html">ISikuliRegion</a>&nbsp;/&nbsp;<a href=".">type</a><br/>
+<br/>
+<h1>type</h1>
+<a name="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String)"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Types the given text into the current caret position. Only ASCII characters are supported.</p>
+<h3>Parameters</h3>
+<p><a name="text"></a>
+<code>text</code> - Text to type.</p>
+<p><strong>Return</strong><br/>
+1 if possible, 0 otherwise.</p>
+<a name="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String, kotlin.String)"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String, kotlin.String)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<a name="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String, kotlin.Int)"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String, kotlin.Int)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(kotlin.String, kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Types the given text into the current caret position. Only ASCII characters are supported.</p>
+<h3>Parameters</h3>
+<p><a name="text"></a>
+<code>text</code> - Text to type.</p>
+<p><a name="modifiers"></a>
+<code>modifiers</code> - Modifiers to press while typing.</p>
+<p><strong>Return</strong><br/>
+1 if possible, 0 otherwise.</p>
+<a name="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String)"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Types the given text into the target. Only ASCII characters are supported.</p>
+<h3>Parameters</h3>
+<p><a name="target"></a>
+<code>target</code> - Target to type into</p>
+<p><a name="text"></a>
+<code>text</code> - Text to type.</p>
+<h3>Exceptions</h3>
+<p><a name="FindFailed"></a>
+<code>FindFailed</code> - If the find operation failed.</p>
+<p><strong>Return</strong><br/>
+1 if possible, 0 otherwise.</p>
+<a name="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.String)"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.String)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.String)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.String)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code><br/>
+<a name="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.Int)"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">PFRML</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">type</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.Int)/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">PFRML</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.Int)/text">text</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix.ISikuliRegion$type(com.waicool20.skrypton.sikulix.ISikuliRegion.type.PFRML, kotlin.String, kotlin.Int)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Types the given text into the target. Only ASCII characters are supported.</p>
+<h3>Parameters</h3>
+<p><a name="target"></a>
+<code>target</code> - Target to type into</p>
+<p><a name="text"></a>
+<code>text</code> - Text to type.</p>
+<p><a name="modifiers"></a>
+<code>modifiers</code> - Modifiers to press while typing.</p>
+<h3>Exceptions</h3>
+<p><a name="FindFailed"></a>
+<code>FindFailed</code> - If the find operation failed.</p>
+<p><strong>Return</strong><br/>
+1 if possible, 0 otherwise.</p>
+</BODY>
+</HTML>

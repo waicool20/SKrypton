@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.waicool20.skrypton.sikulix - skrypton-api</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href=".">com.waicool20.skrypton.sikulix</a><br/>
+<br/>
+<h2>Package com.waicool20.skrypton.sikulix</h2>
+<p>Contains SKrypton specific versions of the SikuliX API.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-i-sikuli-region/index.html">ISikuliRegion</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ISikuliRegion</span></code>
+<p>Interfaces that copies most of the <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html">Region</a> APIs
+Mainly used for allowing easy delegation of <a href="-s-krypton-match/index.html">SKryptonMatch</a> functions to <a href="-s-krypton-region/index.html">SKryptonRegion</a>.
+See <a href="http://doc.sikuli.org/region.html">here</a> for more information.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-s-krypton-match/index.html">SKryptonMatch</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonMatch</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Match.html"><span class="identifier">Match</span></a><span class="symbol">, </span><a href="-i-sikuli-region/index.html"><span class="identifier">ISikuliRegion</span></a></code>
+<p>A class subclassing <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Match.html">Match</a>, it is identical for the most part but allows the use of independent
+mouse and keyboard actions.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-s-krypton-region/index.html">SKryptonRegion</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">SKryptonRegion</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html"><span class="identifier">Region</span></a><span class="symbol">, </span><a href="-i-sikuli-region/index.html"><span class="identifier">ISikuliRegion</span></a></code>
+<p>A class subclassing <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/Region.html">Region</a>, it is identical for the most part but allows the use of independent
+mouse and keyboard actions.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-s-krypton-screen/index.html">SKryptonScreen</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonScreen</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-s-krypton-region/index.html"><span class="identifier">SKryptonRegion</span></a><span class="symbol">, </span><a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/IScreen.html"><span class="identifier">IScreen</span></a></code>
+<p>A class representing a <a href="https://raiman.github.io/SikuliX-2014/javadocs/org/sikuli/script/IScreen.html">IScreen</a> that uses the given web view as its view port.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="screen.html">screen</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../com.waicool20.skrypton.jni.objects/-s-krypton-app/index.html"><span class="identifier">SKryptonApp</span></a><span class="symbol">.</span><span class="identifier">screen</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix$screen(com.waicool20.skrypton.jni.objects.SKryptonApp, kotlin.String, kotlin.Boolean, kotlin.Int, kotlin.Int, kotlin.Function1((com.waicool20.skrypton.sikulix.SKryptonScreen, kotlin.Unit)))/url">url</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix$screen(com.waicool20.skrypton.jni.objects.SKryptonApp, kotlin.String, kotlin.Boolean, kotlin.Int, kotlin.Int, kotlin.Function1((com.waicool20.skrypton.sikulix.SKryptonScreen, kotlin.Unit)))/showCursor">showCursor</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix$screen(com.waicool20.skrypton.jni.objects.SKryptonApp, kotlin.String, kotlin.Boolean, kotlin.Int, kotlin.Int, kotlin.Function1((com.waicool20.skrypton.sikulix.SKryptonScreen, kotlin.Unit)))/width">width</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;1280<span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix$screen(com.waicool20.skrypton.jni.objects.SKryptonApp, kotlin.String, kotlin.Boolean, kotlin.Int, kotlin.Int, kotlin.Function1((com.waicool20.skrypton.sikulix.SKryptonScreen, kotlin.Unit)))/height">height</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a>&nbsp;<span class="symbol">=</span>&nbsp;720<span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.sikulix$screen(com.waicool20.skrypton.jni.objects.SKryptonApp, kotlin.String, kotlin.Boolean, kotlin.Int, kotlin.Int, kotlin.Function1((com.waicool20.skrypton.sikulix.SKryptonScreen, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="-s-krypton-screen/index.html"><span class="identifier">SKryptonScreen</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">)</span><span class="symbol">: </span><a href="-s-krypton-screen/index.html"><span class="identifier">SKryptonScreen</span></a></code>
+<p>Creates a <a href="-s-krypton-screen/index.html">SKryptonScreen</a> under this <a href="../com.waicool20.skrypton.jni.objects/-s-krypton-app/index.html">SKryptonApp</a> instance</p>
+<code><span class="keyword">fun </span><a href="../com.waicool20.skrypton.jni.objects/-s-krypton-web-view/index.html"><span class="identifier">SKryptonWebView</span></a><span class="symbol">.</span><span class="identifier">screen</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.sikulix$screen(com.waicool20.skrypton.jni.objects.SKryptonWebView, kotlin.Function1((com.waicool20.skrypton.sikulix.SKryptonScreen, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="-s-krypton-screen/index.html"><span class="identifier">SKryptonScreen</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">)</span><span class="symbol">: </span><a href="-s-krypton-screen/index.html"><span class="identifier">SKryptonScreen</span></a></code>
+<p>Creates a <a href="-s-krypton-screen/index.html">SKryptonScreen</a> under this <a href="../com.waicool20.skrypton.jni.objects/-s-krypton-web-view/index.html">SKryptonWebView</a> instance</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

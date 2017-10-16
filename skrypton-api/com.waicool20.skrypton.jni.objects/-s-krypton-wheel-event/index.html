@@ -1,0 +1,160 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SKryptonWheelEvent - skrypton-api</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href="../index.html">com.waicool20.skrypton.jni.objects</a>&nbsp;/&nbsp;<a href=".">SKryptonWheelEvent</a><br/>
+<br/>
+<h1>SKryptonWheelEvent</h1>
+<code><span class="keyword">class </span><span class="identifier">SKryptonWheelEvent</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-s-krypton-event/index.html"><span class="identifier">SKryptonEvent</span></a></code>
+<p>An event which indicates a mouse wheel event occurred.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SKryptonWheelEvent</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWheelEvent$<init>(kotlin.Int, java.awt.Point, kotlin.collections.List((com.waicool20.skrypton.enums.MouseButton)), com.waicool20.skrypton.enums.KeyboardModifiers, com.waicool20.skrypton.enums.Orientation)/delta">delta</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWheelEvent$<init>(kotlin.Int, java.awt.Point, kotlin.collections.List((com.waicool20.skrypton.enums.MouseButton)), com.waicool20.skrypton.enums.KeyboardModifiers, com.waicool20.skrypton.enums.Orientation)/localPos">localPos</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWheelEvent$<init>(kotlin.Int, java.awt.Point, kotlin.collections.List((com.waicool20.skrypton.enums.MouseButton)), com.waicool20.skrypton.enums.KeyboardModifiers, com.waicool20.skrypton.enums.Orientation)/buttons">buttons</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.waicool20.skrypton.enums/-mouse-button/index.html"><span class="identifier">MouseButton</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;listOf(MouseButton.NoButton)<span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWheelEvent$<init>(kotlin.Int, java.awt.Point, kotlin.collections.List((com.waicool20.skrypton.enums.MouseButton)), com.waicool20.skrypton.enums.KeyboardModifiers, com.waicool20.skrypton.enums.Orientation)/modifiers">modifiers</span><span class="symbol">:</span>&nbsp;<a href="../../com.waicool20.skrypton.enums/-keyboard-modifiers/index.html"><span class="identifier">KeyboardModifiers</span></a>&nbsp;<span class="symbol">=</span>&nbsp;KeyboardModifiers.NoModifier<span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWheelEvent$<init>(kotlin.Int, java.awt.Point, kotlin.collections.List((com.waicool20.skrypton.enums.MouseButton)), com.waicool20.skrypton.enums.KeyboardModifiers, com.waicool20.skrypton.enums.Orientation)/orientation">orientation</span><span class="symbol">:</span>&nbsp;<a href="../../com.waicool20.skrypton.enums/-orientation/index.html"><span class="identifier">Orientation</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Orientation.Vertical<span class="symbol">)</span></code>
+<p>Main constructor</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="buttons.html">buttons</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">buttons</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span class="symbol">&lt;</span><a href="../../com.waicool20.skrypton.enums/-mouse-button/index.html"><span class="identifier">MouseButton</span></a><span class="symbol">&gt;</span></code>
+<p>Buttons involved in this event.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="delta.html">delta</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">delta</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>Amount of steps the mouse wheel was turned. Negative number means wheel UP.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="global-pos.html">globalPos</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">globalPos</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html"><span class="identifier">Point</span></a></code>
+<p>Point object relative to the top-left corner of the screen.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="global-x.html">globalX</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">globalX</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>x coordinates relative to the top-left corner of the screen.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="global-y.html">globalY</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">globalY</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>y coordinates relative to the top-left corner of the screen.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-inverted.html">isInverted</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">isInverted</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Whether or not the value of <a href="delta.html">delta</a> was inverted.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="local-pos.html">localPos</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">localPos</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html"><span class="identifier">Point</span></a></code>
+<p>Point object relative to the top-left corner of the <a href="../-s-krypton-web-view/index.html">SKryptonWebView</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="phase.html">phase</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">phase</span><span class="symbol">: </span><a href="../../com.waicool20.skrypton.enums/-scroll-phase/index.html"><span class="identifier">ScrollPhase</span></a></code>
+<p>Scrolling phase of this wheel event</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="source.html">source</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">source</span><span class="symbol">: </span><a href="../../com.waicool20.skrypton.enums/-mouse-event-source/index.html"><span class="identifier">MouseEventSource</span></a></code>
+<p>Event source.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="x.html">x</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">x</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>x coordinates relative to the top-left corner of the <a href="../-s-krypton-web-view/index.html">SKryptonWebView</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="y.html">y</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">y</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code>
+<p>y coordinates relative to the top-left corner of the <a href="../-s-krypton-web-view/index.html">SKryptonWebView</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-s-krypton-event/handle.html">handle</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">handle</span><span class="symbol">: </span><a href="../../com.waicool20.skrypton.jni/-c-pointer/index.html"><span class="identifier">CPointer</span></a></code>
+<p>Native pointer backing this object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-s-krypton-event/close.html">close</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">close</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Disposes this event.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

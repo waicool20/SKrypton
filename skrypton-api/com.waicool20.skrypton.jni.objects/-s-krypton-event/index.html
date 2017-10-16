@@ -1,0 +1,111 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SKryptonEvent - skrypton-api</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href="../index.html">com.waicool20.skrypton.jni.objects</a>&nbsp;/&nbsp;<a href=".">SKryptonEvent</a><br/>
+<br/>
+<h1>SKryptonEvent</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">SKryptonEvent</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.waicool20.skrypton.jni/-native-interface/index.html"><span class="identifier">NativeInterface</span></a></code>
+<p>Class that represents an event originating from SKrypton.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SKryptonEvent</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonEvent$<init>(kotlin.Long)/pointer">pointer</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">)</span></code>
+<p>Main constructor</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="handle.html">handle</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">handle</span><span class="symbol">: </span><a href="../../com.waicool20.skrypton.jni/-c-pointer/index.html"><span class="identifier">CPointer</span></a></code>
+<p>Native pointer backing this object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="close.html">close</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">close</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Disposes this event.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.waicool20.skrypton.jni/-native-interface/dispose.html">dispose</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">dispose</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Disposes this object, usually same action as <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html#close()">close</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-s-krypton-key-event/index.html">SKryptonKeyEvent</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonKeyEvent</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">SKryptonEvent</span></code>
+<p>An event which indicates that a key action occurred.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-s-krypton-mouse-event/index.html">SKryptonMouseEvent</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonMouseEvent</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">SKryptonEvent</span></code>
+<p>An event which indicates that a mouse action occurred.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-s-krypton-resize-event/index.html">SKryptonResizeEvent</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonResizeEvent</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">SKryptonEvent</span></code>
+<p>An event which indicates that a <a href="../-s-krypton-web-view/index.html">SKryptonWebView</a> has been resized.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-s-krypton-wheel-event/index.html">SKryptonWheelEvent</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonWheelEvent</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">SKryptonEvent</span></code>
+<p>An event which indicates a mouse wheel event occurred.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

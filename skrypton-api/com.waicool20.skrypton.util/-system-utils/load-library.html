@@ -1,0 +1,30 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SystemUtils.loadLibrary - skrypton-api</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href="../index.html">com.waicool20.skrypton.util</a>&nbsp;/&nbsp;<a href="index.html">SystemUtils</a>&nbsp;/&nbsp;<a href=".">loadLibrary</a><br/>
+<br/>
+<h1>loadLibrary</h1>
+<a name="com.waicool20.skrypton.util.SystemUtils$loadLibrary(java.nio.file.Path, kotlin.Boolean)"></a>
+<code><span class="keyword">fun </span><span class="identifier">loadLibrary</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.util.SystemUtils$loadLibrary(java.nio.file.Path, kotlin.Boolean)/path">path</span><span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/Path.html"><span class="identifier">Path</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.util.SystemUtils$loadLibrary(java.nio.file.Path, kotlin.Boolean)/loadDirectly">loadDirectly</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Load a library from a given path.</p>
+<h3>Parameters</h3>
+<p><a name="path"></a>
+<code>path</code> - Path to the library</p>
+<p><a name="loadDirectly"></a>
+<code>loadDirectly</code> - If true, it will attempt to load the library directly using the absolute
+path, otherwise it will attempt to modify the <code>java.library.path</code> variable and load it by name.</p>
+<a name="com.waicool20.skrypton.util.SystemUtils$loadLibrary(kotlin.collections.List((java.nio.file.Path)), kotlin.Boolean)"></a>
+<code><span class="keyword">fun </span><span class="identifier">loadLibrary</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.util.SystemUtils$loadLibrary(kotlin.collections.List((java.nio.file.Path)), kotlin.Boolean)/paths">paths</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/Path.html"><span class="identifier">Path</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.util.SystemUtils$loadLibrary(kotlin.collections.List((java.nio.file.Path)), kotlin.Boolean)/loadDirectly">loadDirectly</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Loads libraries from a given path.</p>
+<h3>Parameters</h3>
+<p><a name="paths"></a>
+<code>paths</code> - List containing path to the libraries</p>
+<p><a name="loadDirectly"></a>
+<code>loadDirectly</code> - If true, it will attempt to load the libraries directly using the absolute
+path, otherwise it will attempt to modify the <code>java.library.path</code> variable and load it by name.</p>
+</BODY>
+</HTML>

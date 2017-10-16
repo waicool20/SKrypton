@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>NativeInterface - skrypton-api</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href="../index.html">com.waicool20.skrypton.jni</a>&nbsp;/&nbsp;<a href=".">NativeInterface</a><br/>
+<br/>
+<h1>NativeInterface</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">NativeInterface</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html"><span class="identifier">AutoCloseable</span></a></code>
+<p>Base class for classes that have native components.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">NativeInterface</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>Base class for classes that have native components.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="handle.html">handle</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">handle</span><span class="symbol">: </span><a href="../-c-pointer/index.html"><span class="identifier">CPointer</span></a></code>
+<p>Native pointer</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="dispose.html">dispose</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">dispose</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Disposes this object, usually same action as <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html#close()">close</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.waicool20.skrypton.jni.objects/-s-krypton-app/index.html">SKryptonApp</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">SKryptonApp</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">NativeInterface</span></code>
+<p>A singleton app instance for this library and is the main entry point for any program that wants
+to use any of the SKrypton APIs. This object is in charge of initializing the native components
+and managing it.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.waicool20.skrypton.jni.objects/-s-krypton-event/index.html">SKryptonEvent</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">SKryptonEvent</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">NativeInterface</span></code>
+<p>Class that represents an event originating from SKrypton.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.waicool20.skrypton.jni.objects/-s-krypton-web-profile/index.html">SKryptonWebProfile</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonWebProfile</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">NativeInterface</span></code>
+<p>A class representing a profile used by the backing web engine.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.waicool20.skrypton.jni.objects/-s-krypton-web-settings/index.html">SKryptonWebSettings</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonWebSettings</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">NativeInterface</span></code>
+<p>A class representing settings used by the backing web engine.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.waicool20.skrypton.jni.objects/-s-krypton-widget/index.html">SKryptonWidget</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">SKryptonWidget</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">NativeInterface</span></code>
+<p>A class representing a user interface element.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

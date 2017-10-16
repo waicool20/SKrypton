@@ -1,0 +1,233 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SKryptonWidget - skrypton-api</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">skrypton-api</a>&nbsp;/&nbsp;<a href="../index.html">com.waicool20.skrypton.jni.objects</a>&nbsp;/&nbsp;<a href=".">SKryptonWidget</a><br/>
+<br/>
+<h1>SKryptonWidget</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">SKryptonWidget</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.waicool20.skrypton.jni/-native-interface/index.html"><span class="identifier">NativeInterface</span></a></code>
+<p>A class representing a user interface element.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">SKryptonWidget</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>A class representing a user interface element.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="geometry.html">geometry</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">geometry</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html"><span class="identifier">Rectangle</span></a></code>
+<p>The geometry of the widget. (x-y coordinates, width and height)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="size.html">size</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">size</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Dimension.html"><span class="identifier">Dimension</span></a></code>
+<p>Dimension of the widget. (Width and height only)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.waicool20.skrypton.jni/-native-interface/handle.html">handle</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">handle</span><span class="symbol">: </span><a href="../../com.waicool20.skrypton.jni/-c-pointer/index.html"><span class="identifier">CPointer</span></a></code>
+<p>Native pointer</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-on-key-event-listener.html">addOnKeyEventListener</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addOnKeyEventListener</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$addOnKeyEventListener(com.waicool20.skrypton.enums.KeyEventType, kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonKeyEvent, kotlin.Unit)))/type">type</span><span class="symbol">:</span>&nbsp;<a href="../../com.waicool20.skrypton.enums/-key-event-type/index.html"><span class="identifier">KeyEventType</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$addOnKeyEventListener(com.waicool20.skrypton.enums.KeyEventType, kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonKeyEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">event</span><span class="symbol">:</span>&nbsp;<a href="../-s-krypton-key-event/index.html"><span class="identifier">SKryptonKeyEvent</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Adds a listener for when a key event occurs on this widget.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="add-on-mouse-event-listener.html">addOnMouseEventListener</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addOnMouseEventListener</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$addOnMouseEventListener(com.waicool20.skrypton.enums.MouseEventType, kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonMouseEvent, kotlin.Unit)))/type">type</span><span class="symbol">:</span>&nbsp;<a href="../../com.waicool20.skrypton.enums/-mouse-event-type/index.html"><span class="identifier">MouseEventType</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$addOnMouseEventListener(com.waicool20.skrypton.enums.MouseEventType, kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonMouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">event</span><span class="symbol">:</span>&nbsp;<a href="../-s-krypton-mouse-event/index.html"><span class="identifier">SKryptonMouseEvent</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Adds a listener for when a mouse event occurs on this widget.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="add-on-resize-event-listener.html">addOnResizeEventListener</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addOnResizeEventListener</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$addOnResizeEventListener(kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonResizeEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">event</span><span class="symbol">:</span>&nbsp;<a href="../-s-krypton-resize-event/index.html"><span class="identifier">SKryptonResizeEvent</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Adds a listener for when a resize event occurs on this widget.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="add-on-wheel-event-listener.html">addOnWheelEventListener</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addOnWheelEventListener</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$addOnWheelEventListener(kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonWheelEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">event</span><span class="symbol">:</span>&nbsp;<a href="../-s-krypton-wheel-event/index.html"><span class="identifier">SKryptonWheelEvent</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Adds a listener for when a mouse wheel event occurs on this widget.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="close.html">close</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">close</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Hides and closes this widget.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="hide.html">hide</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hide</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Hides the widget.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="is-hidden.html">isHidden</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isHidden</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Returns true if the widget is hidden.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="move.html">move</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">move</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$move(kotlin.Int, kotlin.Int)/x">x</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$move(kotlin.Int, kotlin.Int)/y">y</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Moves the widget to the given coordinates.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-on-key-event-listener.html">removeOnKeyEventListener</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeOnKeyEventListener</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$removeOnKeyEventListener(com.waicool20.skrypton.enums.KeyEventType, kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonKeyEvent, kotlin.Unit)))/type">type</span><span class="symbol">:</span>&nbsp;<a href="../../com.waicool20.skrypton.enums/-key-event-type/index.html"><span class="identifier">KeyEventType</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$removeOnKeyEventListener(com.waicool20.skrypton.enums.KeyEventType, kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonKeyEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">event</span><span class="symbol">:</span>&nbsp;<a href="../-s-krypton-key-event/index.html"><span class="identifier">SKryptonKeyEvent</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Removes given onKeyEvent listener.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-on-mouse-event-listener.html">removeOnMouseEventListener</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeOnMouseEventListener</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$removeOnMouseEventListener(com.waicool20.skrypton.enums.MouseEventType, kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonMouseEvent, kotlin.Unit)))/type">type</span><span class="symbol">:</span>&nbsp;<a href="../../com.waicool20.skrypton.enums/-mouse-event-type/index.html"><span class="identifier">MouseEventType</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$removeOnMouseEventListener(com.waicool20.skrypton.enums.MouseEventType, kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonMouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">event</span><span class="symbol">:</span>&nbsp;<a href="../-s-krypton-mouse-event/index.html"><span class="identifier">SKryptonMouseEvent</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Removes given onMouseEvent listener.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-on-resize-event-listener.html">removeOnResizeEventListener</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeOnResizeEventListener</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$removeOnResizeEventListener(kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonResizeEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">event</span><span class="symbol">:</span>&nbsp;<a href="../-s-krypton-resize-event/index.html"><span class="identifier">SKryptonResizeEvent</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Removes given onResizeEvent listener.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="remove-on-wheel-event-listener.html">removeOnWheelEventListener</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeOnWheelEventListener</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$removeOnWheelEventListener(kotlin.Function1((com.waicool20.skrypton.jni.objects.SKryptonWheelEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">event</span><span class="symbol">:</span>&nbsp;<a href="../-s-krypton-wheel-event/index.html"><span class="identifier">SKryptonWheelEvent</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Removes given onWheelEvent listener.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="resize.html">resize</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">resize</span><span class="symbol">(</span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$resize(kotlin.Int, kotlin.Int)/width">width</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.waicool20.skrypton.jni.objects.SKryptonWidget$resize(kotlin.Int, kotlin.Int)/height">height</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Resizes the widget.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="show.html">show</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">show</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Makes the widget visible.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.waicool20.skrypton.jni/-native-interface/dispose.html">dispose</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">dispose</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Disposes this object, usually same action as <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html#close()">close</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-s-krypton-web-view/index.html">SKryptonWebView</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SKryptonWebView</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">SKryptonWidget</span></code>
+<p>A browser window that can be used to view and edit web documents.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-web-view-highlighter/index.html">WebViewHighlighter</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">WebViewHighlighter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">SKryptonWidget</span></code>
+<p>A class that provides a colored rectangle overlay to highlight certain areas of a web view.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
