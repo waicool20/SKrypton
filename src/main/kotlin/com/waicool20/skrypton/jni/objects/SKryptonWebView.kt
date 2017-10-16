@@ -28,6 +28,7 @@ import com.waicool20.skrypton.jni.CPointer
 import java.awt.image.BufferedImage
 import java.net.URL
 import javax.imageio.ImageIO
+import kotlin.concurrent.thread
 
 /**
  * A browser window that can be used to view and edit web documents.
@@ -103,12 +104,14 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
      * @param url URL to load.
      */
     fun load(url: URL) = load(url.toString())
+
     /**
      * Loads the given url.
      *
      * @param url URL string to load.
      */
     fun load(url: String) = load_N(url)
+
     /**
      * Loads raw HTML content into the web view.
      *
@@ -295,5 +298,5 @@ class SKryptonWebView(url: String) : SKryptonWidget() {
  * @return The created [SKryptonWebView]
  */
 fun SKryptonApp.webView(url: String, action: SKryptonWebView.() -> Unit = {}): SKryptonWebView {
-    return SKryptonWebView(url).apply { action() }
+    return SKryptonWebView(url).apply { thread { action() } }
 }

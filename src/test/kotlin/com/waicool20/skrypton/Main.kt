@@ -31,35 +31,32 @@ import org.sikuli.script.Location
 import java.awt.Rectangle
 import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.TimeUnit
-import kotlin.concurrent.thread
 
 fun main(args: Array<String>) {
     SKryptonApp.initialize(args, remoteDebugPort = 8888) {
         screen("http://www.onemotion.com/flash/sketch-paint/") {
             webView.settings.pluginsEnabled = true
-            thread {
-                ImagePath.add(ClassLoader.getSystemClassLoader().getResource("images"))
-                TimeUnit.SECONDS.sleep(8)
-                println("Sending events!")
-                click("ok1.png")
-                TimeUnit.SECONDS.sleep(1)
-                click("ok2.png")
-                TimeUnit.SECONDS.sleep(1)
-                click("size.png")
-                val rng = ThreadLocalRandom.current()
-                val drawingArea = Rectangle(195, 65, 1020, 590)
-                while (true) {
-                    val location1 = Location(
-                            rng.nextInt(drawingArea.x, drawingArea.x + drawingArea.width),
-                            rng.nextInt(drawingArea.y, drawingArea.y + drawingArea.height)
-                    )
-                    val location2 = Location(
-                            rng.nextInt(drawingArea.x, drawingArea.x + drawingArea.width),
-                            rng.nextInt(drawingArea.y, drawingArea.y + drawingArea.height)
-                    )
-                    println("Drawing line from $location1 to $location2")
-                    dragDrop(location1, location2)
-                }
+            ImagePath.add(ClassLoader.getSystemClassLoader().getResource("images"))
+            TimeUnit.SECONDS.sleep(8)
+            println("Sending events!")
+            click("ok1.png")
+            TimeUnit.SECONDS.sleep(1)
+            click("ok2.png")
+            TimeUnit.SECONDS.sleep(1)
+            click("size.png")
+            val rng = ThreadLocalRandom.current()
+            val drawingArea = Rectangle(195, 65, 1020, 590)
+            while (true) {
+                val location1 = Location(
+                        rng.nextInt(drawingArea.x, drawingArea.x + drawingArea.width),
+                        rng.nextInt(drawingArea.y, drawingArea.y + drawingArea.height)
+                )
+                val location2 = Location(
+                        rng.nextInt(drawingArea.x, drawingArea.x + drawingArea.width),
+                        rng.nextInt(drawingArea.y, drawingArea.y + drawingArea.height)
+                )
+                println("Drawing line from $location1 to $location2")
+                dragDrop(location1, location2)
             }
         }
     }.exec(true)

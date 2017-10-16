@@ -28,36 +28,33 @@ import com.waicool20.skrypton.jni.objects.SKryptonApp
 import com.waicool20.skrypton.sikulix.screen
 import org.sikuli.script.ImagePath
 import java.util.concurrent.TimeUnit
-import kotlin.concurrent.thread
 
 fun main(args: Array<String>) {
     SKryptonApp.initialize(args, remoteDebugPort = 8888) {
         screen("https://gist.github.com/") {
-            thread {
-                ImagePath.add(ClassLoader.getSystemClassLoader().getResource("images"))
-                TimeUnit.SECONDS.sleep(4)
-                type(center, "SKrypton is a project that can automate your browser projects/test." +
-                        "\nEverything you're seeing is being automated by SKrypton.\nIt can do more!")
-                webView.runJavaScript("window.onbeforeunload = null;")
-                TimeUnit.SECONDS.sleep(3)
-                webView.load("https://github.com/waicool20/SKrypton")
-                find("issues.png").click()
-                TimeUnit.SECONDS.sleep(1)
-                find("newissue.png").click()
-                TimeUnit.SECONDS.sleep(1)
-                type("SKrypton is awesome!")
-                TimeUnit.SECONDS.sleep(3)
-                find("cross.png").click()
-                TimeUnit.SECONDS.sleep(1)
-                find("star.png").apply {
-                    highlight("green")
-                    hover()
-                    while (true) {
-                        hover(topLeft)
-                        hover(bottomLeft)
-                        hover(bottomRight)
-                        hover(topRight)
-                    }
+            ImagePath.add(ClassLoader.getSystemClassLoader().getResource("images"))
+            TimeUnit.SECONDS.sleep(4)
+            type(center, "SKrypton is a project that can automate your browser projects/test." +
+                    "\nEverything you're seeing is being automated by SKrypton.\nIt can do more!")
+            webView.runJavaScript("window.onbeforeunload = null;")
+            TimeUnit.SECONDS.sleep(3)
+            webView.load("https://github.com/waicool20/SKrypton")
+            find("issues.png").click()
+            TimeUnit.SECONDS.sleep(1)
+            find("newissue.png").click()
+            TimeUnit.SECONDS.sleep(1)
+            type("SKrypton is awesome!")
+            TimeUnit.SECONDS.sleep(3)
+            find("cross.png").click()
+            TimeUnit.SECONDS.sleep(1)
+            find("star.png").apply {
+                highlight("green")
+                hover()
+                while (true) {
+                    hover(topLeft)
+                    hover(bottomLeft)
+                    hover(bottomRight)
+                    hover(topRight)
                 }
             }
         }

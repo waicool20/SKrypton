@@ -35,6 +35,7 @@ import org.sikuli.script.*
 import java.awt.Point
 import java.awt.Rectangle
 import java.util.concurrent.CountDownLatch
+import kotlin.concurrent.thread
 
 /**
  * A class representing a [IScreen] that uses the given web view as its view port.
@@ -226,7 +227,7 @@ class SKryptonScreen(val webView: SKryptonWebView) : SKryptonRegion(0, 0, webVie
  * @param showCursor Whether or not to show the virtual cursor on web view.
  * @param width Initial width of the web view.
  * @param height Initial height of the web view.
- * @param action Lambda function with created screen as its receiver.
+ * @param action Lambda function with created screen as its receiver. Is run on a separate thread.
  * @return Created [SKryptonScreen]
  */
 fun SKryptonApp.screen(url: String,
@@ -240,16 +241,16 @@ fun SKryptonApp.screen(url: String,
         it.resize(width, height)
         it.show()
     }
-    return webView.screen { action() }
+    return webView.screen(action)
 }
 
 /**
  * Creates a [SKryptonScreen] under this [SKryptonWebView] instance
  *
  * @receiver [SKryptonWebView]
- * @param action Lambda function with created screen as its receiver.
+ * @param action Lambda function with created screen as its receiver. Is run on a separate thread.
  * @return Created [SKryptonScreen]
  */
 fun SKryptonWebView.screen(action: SKryptonScreen.() -> Unit = {}): SKryptonScreen {
-    return SKryptonScreen(this).apply { action() }
+    return SKryptonScreen(this).apply { thread { action() } }
 }
