@@ -3,6 +3,7 @@
 
 #include <headers.h>
 #include <jni_utils.h>
+#include <SKryptonApp.h>
 #include <QWebEngineSettings>
 
 #include <com_waicool20_skrypton_jni_objects_SKryptonWebSettings.h>

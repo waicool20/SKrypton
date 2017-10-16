@@ -18,7 +18,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setFontSize_1N(JNIEn
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
-        settings->setFontSize(static_cast<QWebEngineSettings::FontSize>(font), size);
+        SKryptonApp::runOnMainThread([&] {
+            settings->setFontSize(static_cast<QWebEngineSettings::FontSize>(font), size);
+        });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not set font size");
     }
@@ -29,7 +31,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetFontSize_1N(JNI
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
-        settings->resetFontSize(static_cast<QWebEngineSettings::FontSize>(font));
+        SKryptonApp::runOnMainThread([&] {
+            settings->resetFontSize(static_cast<QWebEngineSettings::FontSize>(font));
+        });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not reset font size");
     }
@@ -55,7 +59,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setFontFamily_1N(JNI
     if (opt) {
         QWebEngineSettings* settings = opt.value();
         auto qFamily = QString::fromStdString(StringFromJstring(env, family));
-        settings->setFontFamily(static_cast<QWebEngineSettings::FontFamily>(whichFamily), qFamily);
+        SKryptonApp::runOnMainThread([&] {
+            settings->setFontFamily(static_cast<QWebEngineSettings::FontFamily>(whichFamily), qFamily);
+        });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not set font family");
     }
@@ -66,7 +72,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetFontFamily_1N(J
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
-        settings->resetFontFamily(static_cast<QWebEngineSettings::FontFamily>(family));
+        SKryptonApp::runOnMainThread([&] {
+            settings->resetFontFamily(static_cast<QWebEngineSettings::FontFamily>(family));
+        });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not reset font ");
     }
@@ -101,7 +109,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setDefaultTextEncodi
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
-        settings->setDefaultTextEncoding(QString::fromStdString(StringFromJstring(env, charset)));
+        SKryptonApp::runOnMainThread([&] {
+            settings->setDefaultTextEncoding(QString::fromStdString(StringFromJstring(env, charset)));
+        });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Could not set default charset");
     }
@@ -112,7 +122,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_resetAttribute_1N(JN
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
-        settings->resetAttribute(static_cast<QWebEngineSettings::WebAttribute>(attr));
+        SKryptonApp::runOnMainThread([&] {
+            settings->resetAttribute(static_cast<QWebEngineSettings::WebAttribute>(attr));
+        });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to reset attribute " + to_string(attr));
     }
@@ -124,7 +136,9 @@ Java_com_waicool20_skrypton_jni_objects_SKryptonWebSettings_setAttribute_1N(JNIE
     auto opt = PointerFromCPointer<QWebEngineSettings>(env, obj);
     if (opt) {
         QWebEngineSettings* settings = opt.value();
-        settings->setAttribute(static_cast<QWebEngineSettings::WebAttribute>(attr), enabled);
+        SKryptonApp::runOnMainThread([&] {
+            settings->setAttribute(static_cast<QWebEngineSettings::WebAttribute>(attr), enabled);
+        });
     } else {
         ThrowNewError(env, LOG_PREFIX + "Failed to set attribute " + to_string(attr));
     }
